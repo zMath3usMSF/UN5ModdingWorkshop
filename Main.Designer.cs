@@ -41,6 +41,10 @@
             this.infoADVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractCVMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.makeGzlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblProgress = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -56,10 +60,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractCVMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buildGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.makeGzlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -68,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -124,7 +126,7 @@
             this.changeP1CharacterToolStripMenuItem,
             this.changeP2CharacterToolStripMenuItem});
             this.changeCharacterToolStripMenuItem.Name = "changeCharacterToolStripMenuItem";
-            this.changeCharacterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeCharacterToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.changeCharacterToolStripMenuItem.Text = "Change Character";
             // 
             // changeP1CharacterToolStripMenuItem
@@ -144,14 +146,14 @@
             // addNewCharacterToolStripMenuItem
             // 
             this.addNewCharacterToolStripMenuItem.Name = "addNewCharacterToolStripMenuItem";
-            this.addNewCharacterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNewCharacterToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.addNewCharacterToolStripMenuItem.Text = "Add New Character";
             this.addNewCharacterToolStripMenuItem.Click += new System.EventHandler(this.addNewCharacterToolStripMenuItem_Click);
             // 
             // infoADVToolStripMenuItem
             // 
             this.infoADVToolStripMenuItem.Name = "infoADVToolStripMenuItem";
-            this.infoADVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infoADVToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.infoADVToolStripMenuItem.Text = "Info ADV";
             this.infoADVToolStripMenuItem.Click += new System.EventHandler(this.infoADVToolStripMenuItem_Click);
             // 
@@ -169,6 +171,38 @@
             this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem1.Text = "Options";
             this.optionsToolStripMenuItem1.Visible = false;
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.extractCVMToolStripMenuItem,
+            this.buildGameToolStripMenuItem,
+            this.makeGzlistToolStripMenuItem});
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gameToolStripMenuItem.Text = "Game";
+            this.gameToolStripMenuItem.Click += new System.EventHandler(this.gameToolStripMenuItem_Click);
+            // 
+            // extractCVMToolStripMenuItem
+            // 
+            this.extractCVMToolStripMenuItem.Name = "extractCVMToolStripMenuItem";
+            this.extractCVMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.extractCVMToolStripMenuItem.Text = "Extract Game";
+            this.extractCVMToolStripMenuItem.Click += new System.EventHandler(this.extractCVMToolStripMenuItem_Click_1);
+            // 
+            // buildGameToolStripMenuItem
+            // 
+            this.buildGameToolStripMenuItem.Name = "buildGameToolStripMenuItem";
+            this.buildGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.buildGameToolStripMenuItem.Text = "Build Game";
+            // 
+            // makeGzlistToolStripMenuItem
+            // 
+            this.makeGzlistToolStripMenuItem.Name = "makeGzlistToolStripMenuItem";
+            this.makeGzlistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.makeGzlistToolStripMenuItem.Text = "MakeGzlist";
+            this.makeGzlistToolStripMenuItem.Visible = false;
+            this.makeGzlistToolStripMenuItem.Click += new System.EventHandler(this.makeGzlistToolStripMenuItem_Click_1);
             // 
             // panel1
             // 
@@ -325,47 +359,27 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(863, 402);
             this.tabControl1.TabIndex = 16;
+            this.tabControl1.Visible = false;
             // 
-            // gameToolStripMenuItem
+            // picBackground
             // 
-            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.extractCVMToolStripMenuItem,
-            this.buildGameToolStripMenuItem,
-            this.makeGzlistToolStripMenuItem});
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.gameToolStripMenuItem.Text = "Game";
-            this.gameToolStripMenuItem.Click += new System.EventHandler(this.gameToolStripMenuItem_Click);
-            // 
-            // extractCVMToolStripMenuItem
-            // 
-            this.extractCVMToolStripMenuItem.Name = "extractCVMToolStripMenuItem";
-            this.extractCVMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.extractCVMToolStripMenuItem.Text = "Extract Game";
-            this.extractCVMToolStripMenuItem.Click += new System.EventHandler(this.extractCVMToolStripMenuItem_Click_1);
-            // 
-            // buildGameToolStripMenuItem
-            // 
-            this.buildGameToolStripMenuItem.Name = "buildGameToolStripMenuItem";
-            this.buildGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.buildGameToolStripMenuItem.Text = "Build Game";
-            // 
-            // makeGzlistToolStripMenuItem
-            // 
-            this.makeGzlistToolStripMenuItem.Name = "makeGzlistToolStripMenuItem";
-            this.makeGzlistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.makeGzlistToolStripMenuItem.Text = "MakeGzlist";
-            this.makeGzlistToolStripMenuItem.Visible = false;
-            this.makeGzlistToolStripMenuItem.Click += new System.EventHandler(this.makeGzlistToolStripMenuItem_Click_1);
+            this.picBackground.Image = global::UN5ModdingWorkshop.Properties.Resources.BackgroundImage;
+            this.picBackground.Location = new System.Drawing.Point(0, 22227);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(863, 398);
+            this.picBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBackground.TabIndex = 20;
+            this.picBackground.TabStop = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(863, 438);
+            this.Controls.Add(this.picBackground);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -383,6 +397,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,6 +435,7 @@
         private System.Windows.Forms.ToolStripMenuItem extractCVMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem makeGzlistToolStripMenuItem;
+        public System.Windows.Forms.PictureBox picBackground;
     }
 }
 

@@ -266,23 +266,42 @@ namespace UN5ModdingWorkshop
 
         public static void MakeHostFS()
         {
+            string elfPath = GetELFPathInSystemCNF();
+            if(File.Exists(elfPath))
+            {
+                string[] hostFSPatch = File.ReadAllLines("cheats\\enable_hostfs.pnach");
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(elfPath)))
+                using (BinaryWriter bw = new BinaryWriter(ms))
+                {
+                    foreach (string line in hostFSPatch)
+                    {
+                        bw.BaseStream.Position = Convert.ToUInt32(line.Split(',')[2].Substring(2), 16) - 0xFFE80;
+                        bw.Write(BitConverter.GetBytes(Convert.ToUInt32(line.Split(',')[4], 16)));
+                    }
+                    string path = Path.GetDirectoryName(elfPath);
+                    File.WriteAllBytes(Path.Combine(path, "UN5.ELF"), ms.ToArray());
+                }
+            }
+            else
+            {
+                MessageBox.Show(Path.GetFileName(elfPath) + "not found!");
+            }
+        }
+        public static string GetELFPathInSystemCNF()
+        {
+            string elfPath = "";
             gamePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GAME");
             string systemCNFPath = Path.Combine(gamePath, "SYSTEM.CNF");
             if (File.Exists(systemCNFPath))
             {
                 string[] systemCNF = File.ReadAllLines(systemCNFPath);
-                foreach(string line in systemCNF)
+                foreach (string line in systemCNF)
                 {
-                    if (line.Split('=')[0].Replace(" ","") == "BOOT2")
+                    if (line.Split('=')[0].Replace(" ", "").ToUpper() == "BOOT2")
                     {
-                        string elfPath = line.Split('=')[1].Replace(" ", "");
-                        string elf = elfPath.Replace("cdrom0:\\", "").Replace(";1", "");
-                        byte[] elfData = File.ReadAllBytes(Path.Combine(gamePath, elf));
-                        using(MemoryStream ms = new MemoryStream(elfData))
-                        using (BinaryWriter br = new BinaryWriter(ms))
-                        {
-
-                        }
+                        elfPath = line.Split('=')[1].Replace(" ", "");
+                        elfPath = elfPath.Replace("cdrom0:\\", "").Replace(";1", "");
+                        elfPath = Path.Combine(gamePath, elfPath);
                     }
                 }
             }
@@ -290,6 +309,7 @@ namespace UN5ModdingWorkshop
             {
                 MessageBox.Show("SYSTEM.CNF not found!");
             }
+            return elfPath;
         }
     }
 }

@@ -85,6 +85,8 @@ namespace UN5ModdingWorkshop
 
         public static void ReadMainBTLMemory()
         {
+            Main.instance.picBackground.Visible = false;
+            Main.instance.tabControl1.Visible = true;
             processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, ID);
             if (processHandle != IntPtr.Zero)
             {
@@ -112,7 +114,6 @@ namespace UN5ModdingWorkshop
                     Main.instance.btnEditGeneralParameters.Visible = true;
                     Main.instance.btnEditMovesetParameters.Visible = true;
                     Main.instance.btnEditAwekeningParameters.Visible = true;
-                    Main.instance.btnEditJutsusParameters.Visible = true;
                 }
                 else
                 {

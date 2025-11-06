@@ -283,7 +283,7 @@ namespace UN5ModdingWorkshop
         public static List<int> ReadAllCharSelID(string gamePath)
         {
             List<int> listCharselID = new List<int>();
-            byte[] modData = File.ReadAllBytes(gamePath + "\\Naruto Shippuden Ultimate Ninja 6.ELF");
+            byte[] modData = File.ReadAllBytes(GAME.GetELFPathInSystemCNF());
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
             br.BaseStream.Position = 0x4DD790;
             for (int i = 0; i < 0x54; i++)

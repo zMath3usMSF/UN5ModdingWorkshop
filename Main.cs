@@ -21,10 +21,10 @@ namespace WindowsFormsApp1
         public Main()
         {
             InitializeComponent();
-            GAME.MakeHostFS();
             instance = this;
+            picBackground.Location = new Point(0, 27);
+            lblProgress.Text = "";
             Config.Load(this);
-
             Process[] processes = Process.GetProcesses();
             for (int i = 0; i < processes.Count(); i++)
             {
@@ -78,6 +78,7 @@ namespace WindowsFormsApp1
             selectProcess.ListBox1.Items.Clear();
             selectProcess.Owner = this;
             SelectProcess.GetPCSX2Process();
+            PCSX2Process.ReadMainBTLMemory();
         }
 
         private void openELFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -198,6 +199,7 @@ namespace WindowsFormsApp1
         private void extractCVMToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             GAME.Extract();
+            GAME.MakeHostFS();
         }
 
         private void makeGzlistToolStripMenuItem_Click_1(object sender, EventArgs e)
