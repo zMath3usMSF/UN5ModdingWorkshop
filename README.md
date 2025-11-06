@@ -1,5 +1,13 @@
 ![MainBackground](Resources/BackgroundImage.png)
 # About
-This tool is designed to edit the battle parameters of characters from the game *Naruto Shippuden: Ultimate Ninja 5*. It is only compatible with the European version.
-<br><br>
-You can download it by accessing the **Releases** section of this page. If you find any bugs, please make sure to report them in the **Issues** section.
+Ultimate Ninja 5: Modding Workshop is a tool designed to be a primary tool that allows you to edit the game *Naruto Shippuden: Ultimate Ninja 5* at the code level and in real-time, thus facilitating the development of new mods for the game.
+
+TODO:
+✅ Free Battle: Allow Editing General Character Attributes
+✅ Free Battle: Allow Editing Character Moveset Attributes
+✅ Free Battle: Allow Editing Character Awakening Attributes
+⏳ Free Battle: Allow Editing Character Jutsu Attributes
+⬜ Free Battle: Allow Adding New Characters
+⬜ Free Battle: Allow Adding New Moveset Combos
+⬜ Free Battle: Allow Adding New Awakenings
+⬜ Free Battle: Allow Adding New Jutsus
