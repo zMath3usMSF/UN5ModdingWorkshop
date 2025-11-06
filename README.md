@@ -1,4 +1,4 @@
-![MainBackground](Resources/MainBackground.pn)
+![MainBackground](Resources/MainBackground.png)
 # About
 This tool is designed to edit the battle parameters of characters from the game *Naruto Shippuden: Ultimate Ninja 5*. It is only compatible with the European version.
 <br><br>
