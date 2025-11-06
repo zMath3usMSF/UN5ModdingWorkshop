@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UN5CharPrmEditor;
+using UN5ModdingWorkshop;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp1
@@ -20,7 +20,15 @@ namespace WindowsFormsApp1
         }
         public void VerifyOpenedELF(object sender, EventArgs e)
         {
-            btnSaveELF.Enabled = Main.openedELF;
+            btnSaveELF.Enabled = GAME.openedELF;
+            if (BTL.P1ID != int.Parse(lblCharID2.Text))
+            {
+                btnUpdateP1.Enabled = false;
+            }
+            else
+            {
+                btnUpdateP1.Enabled = true;
+            }
         }
         public void UpdateLabels(string charName, int charID)
         {
@@ -28,8 +36,8 @@ namespace WindowsFormsApp1
             lblCharID2.Text = Convert.ToString(charID);
             Util.VerifyCurrentPlayersIDs();
 
-            btnUpdateP1.Enabled = Main.P1ID == charID ? true : false;
-            btnSaveELF.Enabled = Main.openedELF;
+            btnUpdateP1.Enabled = BTL.P1ID == charID ? true : false;
+            btnSaveELF.Enabled = GAME.openedELF;
         }
 
         private void btnUpdateP1_Click(object sender, EventArgs e)

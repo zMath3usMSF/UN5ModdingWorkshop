@@ -11,18 +11,19 @@ using System.Windows.Forms;
 using WindowsFormsApp1;
 using static CCSFileExplorerWV.CCSFile;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     public class CharSel
     {
-        static List<int> CharSelID = new List<int>();
+        public static int SelectedID = 0;
+        public static List<int> CharSelID = new List<int>();
         static List<Bitmap> charIconPicBoxes = new List<Bitmap>();
         static List<Bitmap> charPicturePicBoxes = new List<Bitmap>();
         static Bitmap selIconImage;
         static PictureBox selIcon = new PictureBox();
         static CCSFile charselFile = new CCSFile(new byte[0], FileVersionEnum.HACK_GU);
         static Main mainF;
-        static int skip = 0;
+
         public static void Create(Main main, string gamePath)
         {
             mainF = main;
@@ -70,7 +71,7 @@ namespace UN5CharPrmEditor
                     offsetX + col * spacingX,
                     yPos
                 );
-                pic.Click += Pic_Click;
+                pic.MouseClick += Pic_Click;
                 pic.Tag = $"Char_{i}";
                 main.tabPage1.Controls.Add(pic);
                 if(i == 1)
@@ -164,9 +165,10 @@ namespace UN5CharPrmEditor
             }
             return CCSFile.CreateImage(pallete, texture);
         }
-        public static void Pic_Click(object sender, EventArgs e)
+        public static void Pic_Click(object sender, MouseEventArgs e)
         {
             CharSelect(sender as PictureBox);
+            if (e.Button == MouseButtons.Right) BTL.UpdateMatch(true, CharSelID[SelectedID], 0);
         }
         static void CharSelect(PictureBox pictureBox)
         {
@@ -174,6 +176,7 @@ namespace UN5CharPrmEditor
             if (charIcon != null)
             {
                 mainF.pictureBox3.Image = charPicturePicBoxes[CharSelID[Convert.ToInt32(charIcon.Tag.ToString().Split('_')[1])]];
+                SelectedID = Convert.ToInt32(charIcon.Tag.ToString().Split('_')[1]);
                 Bitmap teste = MesclarBitmaps(new Bitmap(charIcon.Image), new Bitmap(selIconImage));
                 selIcon.Image = teste;
                 selIcon.Visible = true;
@@ -219,7 +222,7 @@ namespace UN5CharPrmEditor
         public static void ReadAllCharSelIcon(string gamePath)
         {
             Bitmap charselTexture = GetCCSImage(charselFile, "purecharsel10.bmp");
-            byte[] modData = File.ReadAllBytes(gamePath + "PRG\\MOD.BIN");
+            byte[] modData = File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
             br.BaseStream.Position = 0x196A0;
             for (int i = 0; i < 0x79; i++)
@@ -238,7 +241,7 @@ namespace UN5CharPrmEditor
         }
         private static void ReadAllCharSelPic(string gamePath)
         {
-            byte[] modData = File.ReadAllBytes(gamePath + "PRG\\MOD.BIN");
+            byte[] modData = File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
             using (BinaryReader br = new BinaryReader(new MemoryStream(modData)))
             {
                 br.BaseStream.Position = 0x18AA0;
@@ -280,7 +283,7 @@ namespace UN5CharPrmEditor
         public static List<int> ReadAllCharSelID(string gamePath)
         {
             List<int> listCharselID = new List<int>();
-            byte[] modData = File.ReadAllBytes(gamePath + "Naruto Shippuden Ultimate Ninja 6.ELF");
+            byte[] modData = File.ReadAllBytes(gamePath + "\\Naruto Shippuden Ultimate Ninja 6.ELF");
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
             br.BaseStream.Position = 0x4DD790;
             for (int i = 0; i < 0x54; i++)

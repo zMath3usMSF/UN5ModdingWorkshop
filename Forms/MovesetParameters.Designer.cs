@@ -182,6 +182,7 @@
             this.cmbAnmObjectAtk = new System.Windows.Forms.ComboBox();
             this.lblAnmObjectAtk = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numAnmSpeed = new System.Windows.Forms.NumericUpDown();
             this.lblAnmUnk6 = new System.Windows.Forms.Label();
             this.txtAnmUnk6 = new System.Windows.Forms.TextBox();
             this.lblAnmUnk5 = new System.Windows.Forms.Label();
@@ -204,7 +205,6 @@
             this.lblSelectedAtk2 = new System.Windows.Forms.Label();
             this.lblSelectedAtk = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.numAnmSpeed = new System.Windows.Forms.NumericUpDown();
             this.grpAttackParameters.SuspendLayout();
             this.grpAttackFlagGroup3.SuspendLayout();
             this.grpAttackFlagGroup1.SuspendLayout();
@@ -221,11 +221,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmStartHitFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmEndHitFrame)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
@@ -1770,6 +1770,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Parameters:";
             // 
+            // numAnmSpeed
+            // 
+            this.numAnmSpeed.Location = new System.Drawing.Point(267, 17);
+            this.numAnmSpeed.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numAnmSpeed.Name = "numAnmSpeed";
+            this.numAnmSpeed.Size = new System.Drawing.Size(64, 20);
+            this.numAnmSpeed.TabIndex = 34;
+            // 
             // lblAnmUnk6
             // 
             this.lblAnmUnk6.AutoSize = true;
@@ -1976,20 +1988,8 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
-            // 
-            // numAnmSpeed
-            // 
-            this.numAnmSpeed.Location = new System.Drawing.Point(267, 17);
-            this.numAnmSpeed.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numAnmSpeed.Name = "numAnmSpeed";
-            this.numAnmSpeed.Size = new System.Drawing.Size(64, 20);
-            this.numAnmSpeed.TabIndex = 34;
             // 
             // MovesetParameters
             // 
@@ -2042,11 +2042,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmEndHitFrame)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

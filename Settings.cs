@@ -1,4 +1,4 @@
-﻿namespace UN5CharPrmEditor.Properties {
+﻿namespace UN5ModdingWorkshop.Properties {
     
     
     // Esta classe permite que você trate eventos específicos na classe de configurações:

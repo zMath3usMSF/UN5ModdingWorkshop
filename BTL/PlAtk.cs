@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     internal class PlAtk
     {
@@ -239,49 +239,40 @@ namespace UN5CharPrmEditor
         public static void UpdateP1Atk(byte[] resultBytes, int selectedAtk, int charID) //resultbytes is divided into two parts because the 4 bytes of offset 0x1C
                                                                             //change when it goes into memory, which causes a bug if it is changed.
         {
-            IntPtr processHandle = Main.OpenProcess(Main.PROCESS_ALL_ACCESS, false, Main.currentProcessID);
-            if (processHandle != IntPtr.Zero)
-            {
-                int charCurrentP1CharTbl = 0xBD8844 + Main.memoryDif;
-                int P1Offset = Util.ReadProcessMemoryInt32(charCurrentP1CharTbl) + 0xBC;
-                int skipAtks = selectedAtk * 0x54;
+            int P1AtkOffset = Util.BTL_GetPlayer1MemoryOffs() + 0xBC;
+            int skipAtks = selectedAtk * 0x54;
 
-                int P1AtkOffs = Util.ReadProcessMemoryInt32(P1Offset) + skipAtks;
-                byte[] resultBytesPart1 = new byte[0x1C];
-                Array.Copy(resultBytes, 0, resultBytesPart1, 0, resultBytesPart1.Length);
-                Util.WriteProcessMemoryBytes(P1AtkOffs, resultBytesPart1);
+            int P1AtkOffs = Util.ReadProcessMemoryInt32(P1AtkOffset) + skipAtks;
+            byte[] resultBytesPart1 = new byte[0x1C];
+            Array.Copy(resultBytes, 0, resultBytesPart1, 0, resultBytesPart1.Length);
+            Util.WriteProcessMemoryBytes(P1AtkOffs, resultBytesPart1);
 
-                byte[] resultBytesParte2 = new byte[0x30];
-                Array.Copy(resultBytes, 0x20, resultBytesParte2, 0, resultBytesParte2.Length);
-                int P1AtkOffs2 = Util.ReadProcessMemoryInt32(P1Offset) + skipAtks + 0x20;
-                Util.WriteProcessMemoryBytes(P1AtkOffs2, resultBytesParte2);
+            byte[] resultBytesParte2 = new byte[0x30];
+            Array.Copy(resultBytes, 0x20, resultBytesParte2, 0, resultBytesParte2.Length);
+            int P1AtkOffs2 = Util.ReadProcessMemoryInt32(P1AtkOffset) + skipAtks + 0x20;
+            Util.WriteProcessMemoryBytes(P1AtkOffs2, resultBytesParte2);
 
-                //Write Normal in Memory
-                byte[] atkNormalMemoryOffset = PlGen.CharGenPrm[charID].AtkListOffset;
-                P1AtkOffs = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks;
-                Array.Copy(resultBytes, 0, resultBytesPart1, 0, resultBytesPart1.Length);
-                Util.WriteProcessMemoryBytes(P1AtkOffs, resultBytesPart1);
+            //Write Normal in Memory
+            byte[] atkNormalMemoryOffset = PlGen.CharGenPrm[charID].AtkListOffset;
+            P1AtkOffs = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks;
+            Array.Copy(resultBytes, 0, resultBytesPart1, 0, resultBytesPart1.Length);
+            Util.WriteProcessMemoryBytes(P1AtkOffs, resultBytesPart1);
 
-                Array.Copy(resultBytes, 0x20, resultBytesParte2, 0, resultBytesParte2.Length);
-                P1AtkOffs2 = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks + 0x20;
-                Util.WriteProcessMemoryBytes(P1AtkOffs2, resultBytesParte2);
-
-                Main.CloseHandle(processHandle);
-            }
+            Array.Copy(resultBytes, 0x20, resultBytesParte2, 0, resultBytesParte2.Length);
+            P1AtkOffs2 = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks + 0x20;
+            Util.WriteProcessMemoryBytes(P1AtkOffs2, resultBytesParte2);
         }
         public static PlAtk GetCharAtk(int charID, int atkID)
         {
             int atkCount = PlGen.CharGenPrm[charID].AtkCount;
 
-            while (CharAtkPrm.Count <= Main.charCount)
+            while (CharAtkPrm.Count <= GAME.charCount)
             {
                 CharAtkPrm.Add(new List<PlAtk>());
                 CharAtkPrmBkp.Add(new List<PlAtk>());
             }
             if (CharAtkPrm[charID].Count == 0)
             {
-                IntPtr processHandle = Main.OpenProcess(Main.PROCESS_VM_READ, false, Main.currentProcessID);
-
                 byte[] atkListOffsetBytes = PlGen.CharGenPrm[charID].AtkListOffset;
                 int atkListPointer = BitConverter.ToInt32(PlGen.CharGenPrm[charID].AtkListOffset, 0);
 
@@ -307,7 +298,7 @@ namespace UN5CharPrmEditor
         {
             if (comboNameList.Count == 0)
             {
-                for (int i = 0; i < Main.charCount; i++)
+                for (int i = 0; i < GAME.charCount; i++)
                 {
                     List<string> comboName = new List<string>();
                     for (int j = 0; j <= PlGen.CharGenPrm[i].AtkCount; j++)
@@ -323,7 +314,7 @@ namespace UN5CharPrmEditor
                 byte[] generalComboNameOffset = Util.ReadProcessMemoryBytes(charAtkNameTblOffset, 4);
                 int comboOffset = BitConverter.ToInt32(generalComboNameOffset, 0);
 
-                byte[] generalComboNameArea = Util.ReadProcessMemoryBytes(comboOffset, Main.charCount * 4);
+                byte[] generalComboNameArea = Util.ReadProcessMemoryBytes(comboOffset, GAME.charCount * 4);
                 byte[] charComboNameAreaOffsetBytes = new byte[4];
                 Array.Copy(generalComboNameArea, charID * 4, charComboNameAreaOffsetBytes, 0, charComboNameAreaOffsetBytes.Length);
                 int charComboNameAreaOffset = BitConverter.ToInt32(charComboNameAreaOffsetBytes, 0);
@@ -823,13 +814,13 @@ namespace UN5CharPrmEditor
         }
         public static void WriteELFCharAtk(byte[] resultBytes, int charID)
         {
-            if (!File.Exists(Main.caminhoELF))
+            if (!File.Exists(GAME.caminhoELF))
             {
                 MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                using (FileStream fs = new FileStream(Main.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     byte[] charAtkAreaOffsetBytes = PlGen.CharGenPrm[charID].AtkListOffset;
                     charAtkAreaOffsetBytes[3] = 0x0;

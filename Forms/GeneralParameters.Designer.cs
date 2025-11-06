@@ -77,8 +77,18 @@
             this.txtCharDashDistance = new System.Windows.Forms.TextBox();
             this.lblCharDashDistance = new System.Windows.Forms.Label();
             this.grpMovementConfig = new System.Windows.Forms.GroupBox();
+            this.lblRunningStartSpeed = new System.Windows.Forms.Label();
+            this.txtRunningStartSpeed = new System.Windows.Forms.TextBox();
             this.grpGeneralConfig = new System.Windows.Forms.GroupBox();
             this.grpMovementAirConfig = new System.Windows.Forms.GroupBox();
+            this.txtAirAtkYAdjLimit = new System.Windows.Forms.TextBox();
+            this.lblAirAtkYAdjLimit = new System.Windows.Forms.Label();
+            this.txtAirAtkXAdjLimit = new System.Windows.Forms.TextBox();
+            this.lblAirAtkXAdjLimit = new System.Windows.Forms.Label();
+            this.txtWallJmpDistanceLimit = new System.Windows.Forms.TextBox();
+            this.lblWallJmpDistanceLimit = new System.Windows.Forms.Label();
+            this.txtWallJmpRecoilDistance = new System.Windows.Forms.TextBox();
+            this.lblWallJmpRecoilDistance = new System.Windows.Forms.Label();
             this.btnUpdateP1 = new System.Windows.Forms.Button();
             this.btnSaveELF = new System.Windows.Forms.Button();
             this.lblCharName = new System.Windows.Forms.Label();
@@ -87,16 +97,6 @@
             this.lblCharID2 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblRunningStartSpeed = new System.Windows.Forms.Label();
-            this.txtRunningStartSpeed = new System.Windows.Forms.TextBox();
-            this.txtWallJmpRecoilDistance = new System.Windows.Forms.TextBox();
-            this.lblWallJmpRecoilDistance = new System.Windows.Forms.Label();
-            this.txtWallJmpDistanceLimit = new System.Windows.Forms.TextBox();
-            this.lblWallJmpDistanceLimit = new System.Windows.Forms.Label();
-            this.txtAirAtkXAdjLimit = new System.Windows.Forms.TextBox();
-            this.lblAirAtkXAdjLimit = new System.Windows.Forms.Label();
-            this.txtAirAtkYAdjLimit = new System.Windows.Forms.TextBox();
-            this.lblAirAtkYAdjLimit = new System.Windows.Forms.Label();
             this.grpMovementConfig.SuspendLayout();
             this.grpGeneralConfig.SuspendLayout();
             this.grpMovementAirConfig.SuspendLayout();
@@ -542,6 +542,22 @@
             this.grpMovementConfig.Text = "Movement Parameters:";
             this.grpMovementConfig.Visible = false;
             // 
+            // lblRunningStartSpeed
+            // 
+            this.lblRunningStartSpeed.AutoSize = true;
+            this.lblRunningStartSpeed.Location = new System.Drawing.Point(6, 22);
+            this.lblRunningStartSpeed.Name = "lblRunningStartSpeed";
+            this.lblRunningStartSpeed.Size = new System.Drawing.Size(109, 13);
+            this.lblRunningStartSpeed.TabIndex = 39;
+            this.lblRunningStartSpeed.Text = "Running Start Speed:";
+            // 
+            // txtRunningStartSpeed
+            // 
+            this.txtRunningStartSpeed.Location = new System.Drawing.Point(121, 19);
+            this.txtRunningStartSpeed.Name = "txtRunningStartSpeed";
+            this.txtRunningStartSpeed.Size = new System.Drawing.Size(108, 20);
+            this.txtRunningStartSpeed.TabIndex = 40;
+            // 
             // grpGeneralConfig
             // 
             this.grpGeneralConfig.Controls.Add(this.lblCharHeight);
@@ -609,6 +625,70 @@
             this.grpMovementAirConfig.TabStop = false;
             this.grpMovementAirConfig.Text = "Movement (Air) Config:";
             this.grpMovementAirConfig.Visible = false;
+            // 
+            // txtAirAtkYAdjLimit
+            // 
+            this.txtAirAtkYAdjLimit.Location = new System.Drawing.Point(104, 124);
+            this.txtAirAtkYAdjLimit.Name = "txtAirAtkYAdjLimit";
+            this.txtAirAtkYAdjLimit.Size = new System.Drawing.Size(62, 20);
+            this.txtAirAtkYAdjLimit.TabIndex = 48;
+            // 
+            // lblAirAtkYAdjLimit
+            // 
+            this.lblAirAtkYAdjLimit.AutoSize = true;
+            this.lblAirAtkYAdjLimit.Location = new System.Drawing.Point(6, 127);
+            this.lblAirAtkYAdjLimit.Name = "lblAirAtkYAdjLimit";
+            this.lblAirAtkYAdjLimit.Size = new System.Drawing.Size(92, 13);
+            this.lblAirAtkYAdjLimit.TabIndex = 47;
+            this.lblAirAtkYAdjLimit.Text = "Atk Y Adjust Limit:";
+            // 
+            // txtAirAtkXAdjLimit
+            // 
+            this.txtAirAtkXAdjLimit.Location = new System.Drawing.Point(512, 99);
+            this.txtAirAtkXAdjLimit.Name = "txtAirAtkXAdjLimit";
+            this.txtAirAtkXAdjLimit.Size = new System.Drawing.Size(64, 20);
+            this.txtAirAtkXAdjLimit.TabIndex = 46;
+            // 
+            // lblAirAtkXAdjLimit
+            // 
+            this.lblAirAtkXAdjLimit.AutoSize = true;
+            this.lblAirAtkXAdjLimit.Location = new System.Drawing.Point(417, 102);
+            this.lblAirAtkXAdjLimit.Name = "lblAirAtkXAdjLimit";
+            this.lblAirAtkXAdjLimit.Size = new System.Drawing.Size(89, 13);
+            this.lblAirAtkXAdjLimit.TabIndex = 45;
+            this.lblAirAtkXAdjLimit.Text = "Atk X Adjust Limit";
+            // 
+            // txtWallJmpDistanceLimit
+            // 
+            this.txtWallJmpDistanceLimit.Location = new System.Drawing.Point(344, 99);
+            this.txtWallJmpDistanceLimit.Name = "txtWallJmpDistanceLimit";
+            this.txtWallJmpDistanceLimit.Size = new System.Drawing.Size(67, 20);
+            this.txtWallJmpDistanceLimit.TabIndex = 44;
+            // 
+            // lblWallJmpDistanceLimit
+            // 
+            this.lblWallJmpDistanceLimit.AutoSize = true;
+            this.lblWallJmpDistanceLimit.Location = new System.Drawing.Point(216, 102);
+            this.lblWallJmpDistanceLimit.Name = "lblWallJmpDistanceLimit";
+            this.lblWallJmpDistanceLimit.Size = new System.Drawing.Size(122, 13);
+            this.lblWallJmpDistanceLimit.TabIndex = 43;
+            this.lblWallJmpDistanceLimit.Text = "Wall Jmp Distance Limit:";
+            // 
+            // txtWallJmpRecoilDistance
+            // 
+            this.txtWallJmpRecoilDistance.Location = new System.Drawing.Point(144, 99);
+            this.txtWallJmpRecoilDistance.Name = "txtWallJmpRecoilDistance";
+            this.txtWallJmpRecoilDistance.Size = new System.Drawing.Size(66, 20);
+            this.txtWallJmpRecoilDistance.TabIndex = 42;
+            // 
+            // lblWallJmpRecoilDistance
+            // 
+            this.lblWallJmpRecoilDistance.AutoSize = true;
+            this.lblWallJmpRecoilDistance.Location = new System.Drawing.Point(7, 102);
+            this.lblWallJmpRecoilDistance.Name = "lblWallJmpRecoilDistance";
+            this.lblWallJmpRecoilDistance.Size = new System.Drawing.Size(131, 13);
+            this.lblWallJmpRecoilDistance.TabIndex = 41;
+            this.lblWallJmpRecoilDistance.Text = "Wall Jmp Recoil Distance:";
             // 
             // btnUpdateP1
             // 
@@ -683,88 +763,8 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
-            // 
-            // lblRunningStartSpeed
-            // 
-            this.lblRunningStartSpeed.AutoSize = true;
-            this.lblRunningStartSpeed.Location = new System.Drawing.Point(6, 22);
-            this.lblRunningStartSpeed.Name = "lblRunningStartSpeed";
-            this.lblRunningStartSpeed.Size = new System.Drawing.Size(109, 13);
-            this.lblRunningStartSpeed.TabIndex = 39;
-            this.lblRunningStartSpeed.Text = "Running Start Speed:";
-            // 
-            // txtRunningStartSpeed
-            // 
-            this.txtRunningStartSpeed.Location = new System.Drawing.Point(121, 19);
-            this.txtRunningStartSpeed.Name = "txtRunningStartSpeed";
-            this.txtRunningStartSpeed.Size = new System.Drawing.Size(108, 20);
-            this.txtRunningStartSpeed.TabIndex = 40;
-            // 
-            // txtWallJmpRecoilDistance
-            // 
-            this.txtWallJmpRecoilDistance.Location = new System.Drawing.Point(144, 99);
-            this.txtWallJmpRecoilDistance.Name = "txtWallJmpRecoilDistance";
-            this.txtWallJmpRecoilDistance.Size = new System.Drawing.Size(66, 20);
-            this.txtWallJmpRecoilDistance.TabIndex = 42;
-            // 
-            // lblWallJmpRecoilDistance
-            // 
-            this.lblWallJmpRecoilDistance.AutoSize = true;
-            this.lblWallJmpRecoilDistance.Location = new System.Drawing.Point(7, 102);
-            this.lblWallJmpRecoilDistance.Name = "lblWallJmpRecoilDistance";
-            this.lblWallJmpRecoilDistance.Size = new System.Drawing.Size(131, 13);
-            this.lblWallJmpRecoilDistance.TabIndex = 41;
-            this.lblWallJmpRecoilDistance.Text = "Wall Jmp Recoil Distance:";
-            // 
-            // txtWallJmpDistanceLimit
-            // 
-            this.txtWallJmpDistanceLimit.Location = new System.Drawing.Point(344, 99);
-            this.txtWallJmpDistanceLimit.Name = "txtWallJmpDistanceLimit";
-            this.txtWallJmpDistanceLimit.Size = new System.Drawing.Size(67, 20);
-            this.txtWallJmpDistanceLimit.TabIndex = 44;
-            // 
-            // lblWallJmpDistanceLimit
-            // 
-            this.lblWallJmpDistanceLimit.AutoSize = true;
-            this.lblWallJmpDistanceLimit.Location = new System.Drawing.Point(216, 102);
-            this.lblWallJmpDistanceLimit.Name = "lblWallJmpDistanceLimit";
-            this.lblWallJmpDistanceLimit.Size = new System.Drawing.Size(122, 13);
-            this.lblWallJmpDistanceLimit.TabIndex = 43;
-            this.lblWallJmpDistanceLimit.Text = "Wall Jmp Distance Limit:";
-            // 
-            // txtAirAtkXAdjLimit
-            // 
-            this.txtAirAtkXAdjLimit.Location = new System.Drawing.Point(512, 99);
-            this.txtAirAtkXAdjLimit.Name = "txtAirAtkXAdjLimit";
-            this.txtAirAtkXAdjLimit.Size = new System.Drawing.Size(64, 20);
-            this.txtAirAtkXAdjLimit.TabIndex = 46;
-            // 
-            // lblAirAtkXAdjLimit
-            // 
-            this.lblAirAtkXAdjLimit.AutoSize = true;
-            this.lblAirAtkXAdjLimit.Location = new System.Drawing.Point(417, 102);
-            this.lblAirAtkXAdjLimit.Name = "lblAirAtkXAdjLimit";
-            this.lblAirAtkXAdjLimit.Size = new System.Drawing.Size(89, 13);
-            this.lblAirAtkXAdjLimit.TabIndex = 45;
-            this.lblAirAtkXAdjLimit.Text = "Atk X Adjust Limit";
-            // 
-            // txtAirAtkYAdjLimit
-            // 
-            this.txtAirAtkYAdjLimit.Location = new System.Drawing.Point(104, 124);
-            this.txtAirAtkYAdjLimit.Name = "txtAirAtkYAdjLimit";
-            this.txtAirAtkYAdjLimit.Size = new System.Drawing.Size(62, 20);
-            this.txtAirAtkYAdjLimit.TabIndex = 48;
-            // 
-            // lblAirAtkYAdjLimit
-            // 
-            this.lblAirAtkYAdjLimit.AutoSize = true;
-            this.lblAirAtkYAdjLimit.Location = new System.Drawing.Point(6, 127);
-            this.lblAirAtkYAdjLimit.Name = "lblAirAtkYAdjLimit";
-            this.lblAirAtkYAdjLimit.Size = new System.Drawing.Size(92, 13);
-            this.lblAirAtkYAdjLimit.TabIndex = 47;
-            this.lblAirAtkYAdjLimit.Text = "Atk Y Adjust Limit:";
             // 
             // GeneralParameters
             // 

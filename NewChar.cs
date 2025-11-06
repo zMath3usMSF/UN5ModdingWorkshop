@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     public partial class NewChar : Form
     {

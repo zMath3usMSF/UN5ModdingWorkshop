@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     public class PlGen
     {
@@ -95,29 +95,23 @@ namespace UN5CharPrmEditor
         }
         public static void UpdateP1GenPrm(byte[] charGeneralDataBlock, int charID)
         {
-            IntPtr processHandle = Main.OpenProcess(Main.PROCESS_ALL_ACCESS, false, Main.currentProcessID);
-            if (processHandle != IntPtr.Zero)
-            {
-                int charCurrentP1CharTbl = 0xBD8844 + Main.memoryDif;
-                int P1Offs = Util.ReadProcessMemoryInt32(charCurrentP1CharTbl) + 0x8C;
+            int P1AtributtesOffs = Util.BTL_GetPlayer1MemoryOffs() + 0x8C;
 
-                Util.WriteProcessMemoryBytes(P1Offs + 0x58, charGeneralDataBlock);
-                Util.WriteProcessMemoryBytes(Main.charMainAreaOffsets[charID] + 0x58, charGeneralDataBlock);
-                Main.CloseHandle(processHandle);
-            }
+            Util.WriteProcessMemoryBytes(P1AtributtesOffs + 0x58, charGeneralDataBlock);
+            Util.WriteProcessMemoryBytes(BTL.charMainAreaOffsets[charID] + 0x58, charGeneralDataBlock);
         }
         public static void WriteELFCharPrm(byte[] resultBytes, int charID)
         {
-            if (!File.Exists(Main.caminhoELF))
+            if (!File.Exists(GAME.caminhoELF))
             {
                 MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                using (FileStream fs = new FileStream(Main.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     int skipChars = charID * 0x8 + 0x4;
-                    int mainAreaOffset = Main.isUN6 == true ? 0x317E80 : 0x4ACA40;
+                    int mainAreaOffset = GAME.isUN6 == true ? 0x317E80 : 0x4ACA40;
                     fs.Seek(mainAreaOffset + skipChars, SeekOrigin.Begin);
 
                     byte[] charMainPointer = new byte[4];

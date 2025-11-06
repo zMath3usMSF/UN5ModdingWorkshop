@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     public partial class JutsuParameters : Form
     {
@@ -60,13 +60,13 @@ namespace UN5CharPrmEditor
             int.TryParse(charIDForm1, out int CharIDForm2Int);
             Util.VerifyCurrentPlayersIDs();
 
-            p1IDFromForm1 = Main.P1ID;
+            p1IDFromForm1 = BTL.P1ID;
 
             if (p1IDFromForm1 == CharIDForm2Int)
             {
                 btnUpdateP1.Enabled = true;
             }
-            if (Main.openedELF == true)
+            if (GAME.openedELF == true)
             {
                 btnSaveELF.Enabled = true;
             }

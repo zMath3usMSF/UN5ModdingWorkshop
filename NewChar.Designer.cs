@@ -1,4 +1,4 @@
-﻿namespace UN5CharPrmEditor
+﻿namespace UN5ModdingWorkshop
 {
     partial class NewChar
     {

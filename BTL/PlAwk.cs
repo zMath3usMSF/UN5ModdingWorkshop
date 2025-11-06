@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     internal class PlAwk
     {
@@ -139,45 +139,39 @@ namespace UN5CharPrmEditor
             {
                 CharAwkIDList.Add(new List<int>());
             }
-            IntPtr processHandle = Main.OpenProcess(Main.PROCESS_ALL_ACCESS, false, Main.currentProcessID);
-            if (processHandle != IntPtr.Zero)
+            int charAwkIDListOffset = GAME.isUN6 == true ? 0x962170 : 0x5C91B0;
+            int charAwkCountOffset = 0x30EFD0;
+            awkCount = Util.ReadProcessMemoryInt16(charAwkCountOffset);
+
+            byte[] awkIDBytes = new byte[4];
+            for (int i = 0; i <= 93; i++)
             {
-                int charAwkIDListOffset = Main.isUN6 == true ? 0x962170 : 0x5C91B0;
-                int charAwkCountOffset = 0x30EFD0;
-                awkCount = Util.ReadProcessMemoryInt16(charAwkCountOffset);
+                int skipBytes = i * 8;
+                int awkCount = Util.ReadProcessMemoryInt32(charAwkIDListOffset + skipBytes + 4);
 
-                byte[] awkIDBytes = new byte[4];
-                for(int i = 0; i <= 93; i++)
+                if (awkCount > 1)
                 {
-                    int skipBytes = i * 8;
-                    int awkCount = Util.ReadProcessMemoryInt32(charAwkIDListOffset + skipBytes + 4);
+                    int awkIDAreaOffset = Util.ReadProcessMemoryInt32(charAwkIDListOffset + skipBytes);
 
-                    if (awkCount > 1)
+                    for (int j = 0; j < awkCount; j++)
                     {
-                        int awkIDAreaOffset = Util.ReadProcessMemoryInt32(charAwkIDListOffset + skipBytes);
-
-                        for (int j = 0; j < awkCount; j++) 
-                        {
-                            int awkID = Util.ReadProcessMemoryInt16(awkIDAreaOffset + j * 2);
-                            CharAwkIDList[i].Add(awkID);
-                        }
-                    }
-                    else
-                    {
-                        int awkID = Util.ReadProcessMemoryInt32(charAwkIDListOffset + i * 8);
+                        int awkID = Util.ReadProcessMemoryInt16(awkIDAreaOffset + j * 2);
                         CharAwkIDList[i].Add(awkID);
                     }
-
-                    int skipActBytes = i * 4;
-                    int charAwkActOffset = 0x5C8FD0;
-                    int charAwkActSound = Util.ReadProcessMemoryInt16(charAwkActOffset + skipActBytes);
-                    CharAwkActivationSound.Add(charAwkActSound);
-
-                    int charAwkActType = Util.ReadProcessMemoryInt16(charAwkActOffset + skipActBytes + 2);
-                    CharAwkActivationType.Add(charAwkActType);
+                }
+                else
+                {
+                    int awkID = Util.ReadProcessMemoryInt32(charAwkIDListOffset + i * 8);
+                    CharAwkIDList[i].Add(awkID);
                 }
 
-                Main.CloseHandle(processHandle);
+                int skipActBytes = i * 4;
+                int charAwkActOffset = 0x5C8FD0;
+                int charAwkActSound = Util.ReadProcessMemoryInt16(charAwkActOffset + skipActBytes);
+                CharAwkActivationSound.Add(charAwkActSound);
+
+                int charAwkActType = Util.ReadProcessMemoryInt16(charAwkActOffset + skipActBytes + 2);
+                CharAwkActivationType.Add(charAwkActType);
             }
         }
         public static PlAwk GetCharAwk(int selectedAwk, bool reset)
@@ -189,20 +183,14 @@ namespace UN5CharPrmEditor
             }
             if (CharAwkPrm[selectedAwk] == null)
             {
-                IntPtr processHandle = Main.OpenProcess(Main.PROCESS_ALL_ACCESS, false, Main.currentProcessID);
-                if (processHandle != IntPtr.Zero)
-                {
-                    int awkAreaOffset = Main.isUN6 == true ? 0x94A000 : 0x5A8260;
-                    int skipAwk = selectedAwk * 0x64;
-                    byte[] currentAwkBlock = Util.ReadProcessMemoryBytes(awkAreaOffset + skipAwk, 0x64);
+                int awkAreaOffset = GAME.isUN6 == true ? 0x94A000 : 0x5A8260;
+                int skipAwk = selectedAwk * 0x64;
+                byte[] currentAwkBlock = Util.ReadProcessMemoryBytes(awkAreaOffset + skipAwk, 0x64);
 
-                    var ninja = ReadAwkGenPrm(currentAwkBlock);
-                    var clone = (PlAwk)ninja.Clone();
-                    CharAwkPrm[selectedAwk] = ninja;
-                    CharAwkPrmBkp[selectedAwk] = clone;
-
-                    Main.CloseHandle(processHandle);
-                }
+                var ninja = ReadAwkGenPrm(currentAwkBlock);
+                var clone = (PlAwk)ninja.Clone();
+                CharAwkPrm[selectedAwk] = ninja;
+                CharAwkPrmBkp[selectedAwk] = clone;
             }
 
             return reset == true ? CharAwkPrmBkp[selectedAwk] : CharAwkPrm[selectedAwk];
@@ -387,65 +375,60 @@ namespace UN5CharPrmEditor
 
         public static void UpdateP1AwkPrm(byte[] resultBytes, byte[] resultBytes2, int selectedAwk, int charID, int awkPos)
         {
-            IntPtr processHandle = Main.OpenProcess(Main.PROCESS_ALL_ACCESS, false, Main.currentProcessID);
-            if (processHandle != IntPtr.Zero)
+            int skipAwks = selectedAwk * 0x64;
+            int awkAreaOffset = GAME.isUN6 == true ? 0x94A000 + skipAwks : 0x5A8260 + skipAwks;
+            int skipChars = charID * 8;
+            int charAwkIDListOffset = GAME.isUN6 == true ? 0x962170 + skipChars : 0x5C91B0 + skipChars;
+            byte[] awkID = BitConverter.GetBytes(Convert.ToInt16(selectedAwk));
+
+            Util.WriteProcessMemoryBytes(awkAreaOffset, resultBytes);
+            if (CharAwkIDList[charID].Count == 1)
             {
-                int skipAwks = selectedAwk * 0x64;
-                int awkAreaOffset = Main.isUN6 == true ? 0x94A000  + skipAwks : 0x5A8260 + skipAwks;
-                int skipChars = charID * 8;
-                int charAwkIDListOffset = Main.isUN6 == true ? 0x962170 + skipChars : 0x5C91B0 + skipChars;
-                byte[] awkID = BitConverter.GetBytes(Convert.ToInt16(selectedAwk));
-
-                Util.WriteProcessMemoryBytes(awkAreaOffset, resultBytes);
-                if(CharAwkIDList[charID].Count == 1)
-                {
-                    byte[] count = BitConverter.GetBytes(1);
-                    Util.WriteProcessMemoryBytes(charAwkIDListOffset + 4, count);
-                    CharAwkIDList[charID][0] = selectedAwk;
-                    Util.WriteProcessMemoryBytes(charAwkIDListOffset, awkID);
-                }
-                else
-                {
-                    int skipAwk = awkPos * 2;
-                    int charAwkArea = Util.ReadProcessMemoryInt32(charAwkIDListOffset);
-                    Util.WriteProcessMemoryBytes(charAwkArea + skipAwk, awkID);
-                    CharAwkIDList[charID][awkPos] = selectedAwk;
-                }
-
-                int skipActs = charID * 4;
-                int actOffset = 0x5C8FD0 + skipActs;
-                Util.WriteProcessMemoryBytes(actOffset, resultBytes2);
-                Main.CloseHandle(processHandle);
+                byte[] count = BitConverter.GetBytes(1);
+                Util.WriteProcessMemoryBytes(charAwkIDListOffset + 4, count);
+                CharAwkIDList[charID][0] = selectedAwk;
+                Util.WriteProcessMemoryBytes(charAwkIDListOffset, awkID);
             }
+            else
+            {
+                int skipAwk = awkPos * 2;
+                int charAwkArea = Util.ReadProcessMemoryInt32(charAwkIDListOffset);
+                Util.WriteProcessMemoryBytes(charAwkArea + skipAwk, awkID);
+                CharAwkIDList[charID][awkPos] = selectedAwk;
+            }
+
+            int skipActs = charID * 4;
+            int actOffset = 0x5C8FD0 + skipActs;
+            Util.WriteProcessMemoryBytes(actOffset, resultBytes2);
         }
         public static void WriteELFAwkPrm(byte[] resultBytes, byte[] resultBytes2, int selectedAwk, int charID, int awkPos)
         {
-            if(Main.isUN6 == true)
+            if(GAME.isUN6 == true)
             {
                 MessageBox.Show("Ultimate Ninja 6 is not yet supported for this.");
             }
             else
             {
-                if (!File.Exists(Main.caminhoELF))
+                if (!File.Exists(GAME.caminhoELF))
                 {
                     MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
                 }
                 else
                 {
-                    using (FileStream fs = new FileStream(Main.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         int skipAwks = selectedAwk * 0x64;
                         int awkAreaOffset = 0x5A8260 + skipAwks;
                         fs.Seek(awkAreaOffset + skipAwks, SeekOrigin.Begin);
                         int subValue = 0xFFE80;
-                        awkAreaOffset = Main.isUN6 == true ? 0xA000 : awkAreaOffset - subValue;
+                        awkAreaOffset = GAME.isUN6 == true ? 0xA000 : awkAreaOffset - subValue;
 
                         fs.Seek(awkAreaOffset, SeekOrigin.Begin);
                         fs.Write(resultBytes, 0, resultBytes.Length);
 
                         int skipChars = charID * 8;
                         int charAwkOffset = 0x5C91B0 + skipChars;
-                        charAwkOffset = Main.isUN6 == true ? 0x22170 : charAwkOffset - subValue;
+                        charAwkOffset = GAME.isUN6 == true ? 0x22170 : charAwkOffset - subValue;
                         fs.Seek(charAwkOffset + 4, SeekOrigin.Begin);
                         byte[] awkID = BitConverter.GetBytes(Convert.ToInt16(selectedAwk));
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UN5CharPrmEditor;
+using UN5ModdingWorkshop;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp1
@@ -24,7 +24,16 @@ namespace WindowsFormsApp1
         }
         public void VerifyOpenedELF(object sender, EventArgs e)
         {
-            btnSaveELF.Enabled = Main.openedELF;
+            btnSaveELF.Enabled = GAME.openedELF;
+            Util.VerifyCurrentPlayersIDs();
+            if (BTL.P1ID != int.Parse(lblCharID2.Text))
+            {
+                btnUpdateP1.Enabled = false;
+            }
+            else
+            {
+                btnUpdateP1.Enabled = true;
+            }
         }
         public void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -51,13 +60,13 @@ namespace WindowsFormsApp1
             int.TryParse(charIDForm1, out int CharIDForm2Int);
             Util.VerifyCurrentPlayersIDs();
 
-            p1IDFromForm1 = Main.P1ID;
+            p1IDFromForm1 = BTL.P1ID;
 
             if (p1IDFromForm1 == CharIDForm2Int)
             {
                 btnUpdateP1.Enabled = true;
             }
-            if (Main.openedELF == true)
+            if (GAME.openedELF == true)
             {
                 btnSaveELF.Enabled = true;
             }

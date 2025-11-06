@@ -1,95 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
+    public class ConfigData
+    {
+        public string GamePath { get; set; } = string.Empty;
+        public string Language { get; set; } = "en";
+    }
+
     public static class Config
     {
-        public static void ReadConfigFile(Main form)
+        private static readonly string ConfigPath = "config.json";
+        public static ConfigData Data { get; private set; } = new ConfigData();
+
+        public static void Load(Main form)
         {
-            List<string> fileCfg = new List<string>();
-            if (!File.Exists(@"config.txt"))
+            if (File.Exists(ConfigPath))
             {
-                fileCfg.Add("theme=default");
-                File.WriteAllLines(@"config.txt", fileCfg.ToArray());
+                string json = File.ReadAllText(ConfigPath);
+                Data = JsonConvert.DeserializeObject<ConfigData>(json) ?? new ConfigData();
             }
-            fileCfg = File.ReadAllLines(@"config.txt").ToList();
-            foreach (string line in fileCfg)
+
+            form.txtGamePath.Text = Data.GamePath;
+            if(Directory.Exists(Data.GamePath))
             {
-                string parameter = line.Split('=')[0];
-                if (parameter == "theme")
-                {
-                    switch (line.Split('=')[0])
-                    {
-                        case "white":
-                            form.whiteToolStripMenuItem.Checked = true;
-                            break;
-                        case "black":
-                            form.blackToolStripMenuItem.Checked = true;
-                            break;
-                        default:
-                            form.defaultToolStripMenuItem.Checked = true;
-                            break;
-                    }
-                }
+                CharSel.Create(form, Data.GamePath);
+            }
+            else
+            {
+                MessageBox.Show("Game directory not found. Please select it manually. If you haven't extracted it yet, use Game > Extract.");
             }
         }
 
-        public static void ChangedTheme(Main form, string theme)
+        public static void Save()
         {
-            form.defaultToolStripMenuItem.Checked = false;
-            form.whiteToolStripMenuItem.Checked = false;
-            form.blackToolStripMenuItem.Checked = false;
-            switch (theme)
-            {
-                case "white":
-                    form.whiteToolStripMenuItem.Checked = true;
-                    break;
-                case "black":
-                    // Cor base do modo escuro
-                    Color fundoEscuro = Color.FromArgb(30, 30, 30);
-                    Color textoBranco = Color.White;
-
-                    // Formulário inteiro
-                    
-                    form.BackColor = fundoEscuro;
-                    form.ForeColor = textoBranco;
-
-                    // MenuStrip
-                    form.menuStrip1.Renderer = new ToolStripProfessionalRenderer(new DarkColorTable());
-                    form.menuStrip1.BackColor = fundoEscuro;
-                    form.menuStrip1.ForeColor = textoBranco;
-
-                    // Você pode repetir isso para outros controles (opcional)
-                    foreach (Control ctrl in form.Controls)
-                    {
-                        ctrl.BackColor = fundoEscuro;
-                        ctrl.ForeColor = textoBranco;
-                    }
-                    form.blackToolStripMenuItem.Checked = true;
-                    break;
-                default:
-                    form.defaultToolStripMenuItem.Checked = true;
-                    break;
-            }
-        }
-        public class DarkColorTable : ProfessionalColorTable
-        {
-            public override Color MenuBorder => Color.FromArgb(45, 45, 45);
-            public override Color ToolStripDropDownBackground => Color.FromArgb(30, 30, 30);
-            public override Color MenuItemSelected => Color.FromArgb(70, 70, 70);
-            public override Color MenuItemBorder => Color.FromArgb(70, 70, 70);
-            public override Color MenuItemSelectedGradientBegin => Color.FromArgb(60, 60, 60);
-            public override Color MenuItemSelectedGradientEnd => Color.FromArgb(60, 60, 60);
-            public override Color MenuItemPressedGradientBegin => Color.FromArgb(50, 50, 50);
-            public override Color MenuItemPressedGradientEnd => Color.FromArgb(50, 50, 50);
+            string json = JsonConvert.SerializeObject(Data, Formatting.Indented);
+            File.WriteAllText(ConfigPath, json);
         }
     }
 }

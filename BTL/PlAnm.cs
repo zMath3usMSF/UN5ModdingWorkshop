@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     internal class PlAnm
     {
@@ -106,14 +106,14 @@ namespace UN5CharPrmEditor
         {
             int anmCount = PlGen.CharGenPrm[currentCharID].AnmCount;
 
-            while (PlAnmPrm.Count <= Main.charCount)
+            while (PlAnmPrm.Count <= GAME.charCount)
             {
                 PlAnmPrm.Add(new List<PlAnm>());
                 PlAnmPrmBkp.Add(new List<PlAnm>());
             }
             if (PlAnmPrm[currentCharID].Count == 0)
             {
-                IntPtr processHandle = Main.OpenProcess(Main.PROCESS_VM_READ, false, Main.currentProcessID);
+                IntPtr processHandle = PCSX2Process.OpenProcess(PCSX2Process.PROCESS_VM_READ, false, PCSX2Process.ID);
 
                 byte[] anmListOffsetBytes = PlGen.CharGenPrm[currentCharID].AnmListOffset;
                 int anmListPointer = BitConverter.ToInt32(anmListOffsetBytes, 0);
@@ -140,7 +140,7 @@ namespace UN5CharPrmEditor
         }
         public static string GetPlAnmName(int CharIndex, int AnmIndex)
         {
-            while (PlAnmListName.Count <= Main.charCount)
+            while (PlAnmListName.Count <= GAME.charCount)
             {
                 PlAnmListName.Add(new List<string>());
             }
@@ -164,11 +164,10 @@ namespace UN5CharPrmEditor
 
         public static void UpdateP1Anm(byte[] resultBytes, int selectedAnm, int charID)
         {
-            IntPtr processHandle = Main.OpenProcess(Main.PROCESS_ALL_ACCESS, false, Main.currentProcessID);
+            IntPtr processHandle = PCSX2Process.OpenProcess(PCSX2Process.PROCESS_ALL_ACCESS, false, PCSX2Process.ID);
             if (processHandle != IntPtr.Zero)
             {
-                int charCurrentP1CharTbl = 0xBD8844 + Main.memoryDif;
-                int P1Offset = Util.ReadProcessMemoryInt32(charCurrentP1CharTbl) + 0xCC;
+                int P1Offset = Util.BTL_GetPlayer1MemoryOffs() + 0xCC;
 
                 int skipAnms = selectedAnm * 0x4C;
                 int P1AnmPointer = Util.ReadProcessMemoryInt32(P1Offset) + skipAnms;
@@ -179,7 +178,7 @@ namespace UN5CharPrmEditor
                 P1AnmPointer = BitConverter.ToInt32(anmNormalMemoryOffset, 0) + skipAnms;
                 Util.WriteProcessMemoryBytes(P1AnmPointer, resultBytes);
 
-                Main.CloseHandle(processHandle);
+                PCSX2Process.CloseHandle(processHandle);
             }
         }
 
@@ -381,13 +380,13 @@ namespace UN5CharPrmEditor
         }
         public static void WriteELFCharAnm(byte[] resultBytes, int charID)
         {
-            if (!File.Exists(Main.caminhoELF))
+            if (!File.Exists(GAME.caminhoELF))
             {
                 MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                using (FileStream fs = new FileStream(Main.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     byte[] charAnmAreaOffsetBytes = PlGen.CharGenPrm[charID].AnmListOffset;
                     charAnmAreaOffsetBytes[3] = 0x0;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace UN5CharPrmEditor
+namespace UN5ModdingWorkshop
 {
     internal class CharSkl
     {
@@ -67,9 +67,8 @@ namespace UN5CharPrmEditor
         }
         public static void ReadAllJutsuName()
         {
-            IntPtr processHandle = Main.OpenProcess(Main.PROCESS_VM_READ, false, Main.currentProcessID);
             byte[] jutsuNameAreaBuffer = new byte[0xC5 * 0x4];
-            Main.ReadProcessMemory(processHandle, (IntPtr)0x208C2AD0, jutsuNameAreaBuffer, jutsuNameAreaBuffer.Length, out var none2);
+            PCSX2Process.ReadProcessMemory(PCSX2Process.processHandle, (IntPtr)0x208C2AD0, jutsuNameAreaBuffer, jutsuNameAreaBuffer.Length, out var none2);
             for (int i = 0; i < 0xC5; i++)
             {
                 int currentPointer = BitConverter.ToInt32(jutsuNameAreaBuffer, i * 4);
@@ -87,14 +86,12 @@ namespace UN5CharPrmEditor
             }
             if (charSelectedJutsuList[charID2] == 254 && charSelectedJutsuList[charID2 + 1] == 254)
             {
-                IntPtr processHandle = Main.OpenProcess(Main.PROCESS_VM_READ, false, Main.currentProcessID);
-
                 int anmNameAreaPointer = 0x208E2AD0;
 
                 IntPtr anmNameAreaOffset = (IntPtr)anmNameAreaPointer;
 
                 byte[] anmNameAreaBuffer = new byte[charCount * 0x4];
-                Main.ReadProcessMemory(processHandle, anmNameAreaOffset, anmNameAreaBuffer, anmNameAreaBuffer.Length, out var none2);
+                PCSX2Process.ReadProcessMemory(PCSX2Process.processHandle, anmNameAreaOffset, anmNameAreaBuffer, anmNameAreaBuffer.Length, out var none2);
 
                 for (int i = 0; i < 2; i++)
                 {
@@ -118,20 +115,18 @@ namespace UN5CharPrmEditor
             }
             if (CharSklPrm[JutsuIndex].Count == 0)
             {
-                IntPtr processHandle = Main.OpenProcess(Main.PROCESS_VM_READ, false, Main.currentProcessID);
-
                 int jutsuConfigAreaPointer = 0x208C8910;
                 IntPtr jutsuConfigAreaOffset = (IntPtr)jutsuConfigAreaPointer;
 
                 byte[] jutsuConfigArea = new byte[197 * 0x8];
-                Main.ReadProcessMemory(processHandle, jutsuConfigAreaOffset, jutsuConfigArea, jutsuConfigArea.Length, out var none2);
+                PCSX2Process.ReadProcessMemory(PCSX2Process.processHandle, jutsuConfigAreaOffset, jutsuConfigArea, jutsuConfigArea.Length, out var none2);
 
                 int selectedJutsuConfigCount = BitConverter.ToInt32(jutsuConfigArea, JutsuIndex * 0x8);
                 int selectedJutsuConfigPointer = BitConverter.ToInt32(jutsuConfigArea, JutsuIndex * 0x8 + 0x4) + 0x20000000;
                 for (int i = 0; i < selectedJutsuConfigCount; i++)
                 {
                     byte[] jutsuConfigBlock = new byte[0x44];
-                    Main.ReadProcessMemory(processHandle, (IntPtr)selectedJutsuConfigPointer + i * 0x44, jutsuConfigBlock, jutsuConfigBlock.Length, out var none3);
+                    PCSX2Process.ReadProcessMemory(PCSX2Process.processHandle, (IntPtr)selectedJutsuConfigPointer + i * 0x44, jutsuConfigBlock, jutsuConfigBlock.Length, out var none3);
                     CharSklPrm[JutsuIndex].Add(ReadCharSklPrm(jutsuConfigBlock));
                 }
             }
@@ -374,16 +369,14 @@ namespace UN5CharPrmEditor
 
         public static void WriteCharSkl(byte[] sklBlockBytes, int sklID)
         {
-            IntPtr processHandle = Main.OpenProcess(Main.PROCESS_ALL_ACCESS, false, Main.currentProcessID);
-
             IntPtr jutsuConfigAreaOffset = (IntPtr)(sklID * 8) + 0x208C8914;
 
             byte[] jutsuBytes = new byte[4];
-            Main.ReadProcessMemory(processHandle, jutsuConfigAreaOffset, jutsuBytes, 4, out var none2);
+            PCSX2Process.ReadProcessMemory(PCSX2Process.processHandle, jutsuConfigAreaOffset, jutsuBytes, 4, out var none2);
 
 
             IntPtr jutsuOffset = (IntPtr)BitConverter.ToInt32(jutsuBytes, 0) + 0x20000000;
-            Main.WriteProcessMemory(processHandle, (IntPtr)jutsuOffset, sklBlockBytes, (uint)sklBlockBytes.Length, out var wtf);
+            PCSX2Process.WriteProcessMemory(PCSX2Process.processHandle, (IntPtr)jutsuOffset, sklBlockBytes, (uint)sklBlockBytes.Length, out var wtf);
         }
     }
 }
