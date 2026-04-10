@@ -85,8 +85,6 @@ namespace UN5ModdingWorkshop
 
         public static void ReadMainBTLMemory()
         {
-            Main.instance.picBackground.Visible = false;
-            Main.instance.tabControl1.Visible = true;
             processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, ID);
             if (processHandle != IntPtr.Zero)
             {
@@ -96,6 +94,7 @@ namespace UN5ModdingWorkshop
                 GAME.memoryDif = currentMemoryStart - originalMemoryStart;
 
                 GAME.charCount = Util.ReadProcessMemoryInt16(0x1EDA20);
+                GAME.charSelCount = Util.ReadProcessMemoryInt16(0x3CDD80);
                 if (Util.ReadStringWithOffset(0x417CD0, false) == "2nrtbod1.ccs")
                 {
                     BTL.Clear();
@@ -111,6 +110,10 @@ namespace UN5ModdingWorkshop
 
                     BTL.ReadCharNameTbl(processHandle, charStringTblOffset);
 
+                    Config.Load(Main.instance);
+
+                    Main.instance.picBackground.Visible = false;
+                    Main.instance.tabControl1.Visible = true;
                     Main.instance.btnEditGeneralParameters.Visible = true;
                     Main.instance.btnEditMovesetParameters.Visible = true;
                     Main.instance.btnEditAwekeningParameters.Visible = true;

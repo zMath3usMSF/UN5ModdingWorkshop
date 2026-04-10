@@ -60,6 +60,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.picBackground = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -99,14 +103,14 @@
             // pCSX2MemoryProcessToolStripMenuItem
             // 
             this.pCSX2MemoryProcessToolStripMenuItem.Name = "pCSX2MemoryProcessToolStripMenuItem";
-            this.pCSX2MemoryProcessToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pCSX2MemoryProcessToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.pCSX2MemoryProcessToolStripMenuItem.Text = "PCSX2 Process";
             this.pCSX2MemoryProcessToolStripMenuItem.Click += new System.EventHandler(this.pCSX2MemoryProcessToolStripMenuItem_Click);
             // 
             // openELFToolStripMenuItem
             // 
             this.openELFToolStripMenuItem.Name = "openELFToolStripMenuItem";
-            this.openELFToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openELFToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.openELFToolStripMenuItem.Text = "ELF";
             this.openELFToolStripMenuItem.Click += new System.EventHandler(this.openELFToolStripMenuItem_Click);
             // 
@@ -186,20 +190,21 @@
             // extractCVMToolStripMenuItem
             // 
             this.extractCVMToolStripMenuItem.Name = "extractCVMToolStripMenuItem";
-            this.extractCVMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.extractCVMToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.extractCVMToolStripMenuItem.Text = "Extract Game";
             this.extractCVMToolStripMenuItem.Click += new System.EventHandler(this.extractCVMToolStripMenuItem_Click_1);
             // 
             // buildGameToolStripMenuItem
             // 
             this.buildGameToolStripMenuItem.Name = "buildGameToolStripMenuItem";
-            this.buildGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.buildGameToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.buildGameToolStripMenuItem.Text = "Build Game";
+            this.buildGameToolStripMenuItem.Click += new System.EventHandler(this.buildGameToolStripMenuItem_Click);
             // 
             // makeGzlistToolStripMenuItem
             // 
             this.makeGzlistToolStripMenuItem.Name = "makeGzlistToolStripMenuItem";
-            this.makeGzlistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.makeGzlistToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.makeGzlistToolStripMenuItem.Text = "MakeGzlist";
             this.makeGzlistToolStripMenuItem.Visible = false;
             this.makeGzlistToolStripMenuItem.Click += new System.EventHandler(this.makeGzlistToolStripMenuItem_Click_1);
@@ -239,9 +244,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabPage1.Size = new System.Drawing.Size(855, 376);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Character";
+            this.tabPage1.Text = "Free Battle";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnEditJutsusParameters
@@ -354,12 +360,52 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(863, 402);
             this.tabControl1.TabIndex = 16;
             this.tabControl1.Visible = false;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(855, 376);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Master Mode";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(855, 376);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Collection";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(855, 376);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Shop";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(855, 376);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Options";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // picBackground
             // 
@@ -436,6 +482,10 @@
         private System.Windows.Forms.ToolStripMenuItem buildGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem makeGzlistToolStripMenuItem;
         public System.Windows.Forms.PictureBox picBackground;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }
 

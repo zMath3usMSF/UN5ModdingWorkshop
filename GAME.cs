@@ -1,5 +1,4 @@
 ﻿using CCSFileExplorerWV;
-using DiscUtils.Iso9660;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,6 +19,7 @@ namespace UN5ModdingWorkshop
         public static int Global_Pointer = 0x617EF0;
         public static List<int> charInvalid = new List<int> { 0, 8, 9, 20, 21, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 44, 45, 74, 88 };
         public static int charCount = 0;
+        public static int charSelCount = 0;
         public static string caminhoELF;
         public static bool openedELF;
         public static AwakeningParameters awakeningParameters;
@@ -37,27 +37,44 @@ namespace UN5ModdingWorkshop
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() != DialogResult.OK) return Task.Run(() => { });
+
             return Task.Run(() =>
             {
                 Main.instance.Invoke(new Action(() =>
                 {
                     Main.instance.lblProgress.Text = "Extracting ISO...";
                 }));
+
                 string gameFile = ofd.FileName;
                 gamePath = Path.Combine(Path.GetDirectoryName(gameFile), "GAME");
-                using (FileStream isoStream = File.OpenRead(gameFile))
+
+                // Cria pasta de destino, se não existir
+                Directory.CreateDirectory(gamePath);
+
+                // Extrai o conteúdo da ISO usando isoinfo
+                ProcessStartInfo extractIso = new ProcessStartInfo
                 {
-                    CDReader cd = new CDReader(isoStream, true);
-                    ExtractFiles(cd, @"\", gamePath);
-                }
+                    FileName = "7-Zip\\7z.exe",
+                    Arguments = $"x \"{gameFile}\" -o\"{gamePath}\" -y",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                Process processExtractIso = Process.Start(extractIso);
+                processExtractIso.WaitForExit();
 
                 Main.instance.Invoke(new Action(() =>
                 {
                     Main.instance.lblProgress.Text = "Extracting CVM data...";
                 }));
+
                 cvm = Path.Combine(gamePath, "DATA\\DATA.CVM");
                 iso = Path.Combine(gamePath, "DATA\\data.iso");
                 rofs = Path.Combine(gamePath, "DATA\\ROFS");
+
+                // Divide o CVM com o cvm_tool
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = cvm_toolPath,
@@ -69,15 +86,26 @@ namespace UN5ModdingWorkshop
                 Process process = Process.Start(psi);
                 process.WaitForExit();
 
-                using (FileStream isoStream = File.OpenRead(iso))
+                // Extrai o data.iso também com isoinfo
+                Directory.CreateDirectory(rofs);
+
+                ProcessStartInfo extractDataIso = new ProcessStartInfo
                 {
-                    CDReader cd = new CDReader(isoStream, true);
-                    ExtractFiles(cd, @"\", rofs);
-                }
+                    FileName = "7-Zip\\7z.exe",
+                    Arguments = $"x \"{iso}\" -o\"{rofs}\" -y",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                Process processExtractData = Process.Start(extractDataIso);
+                processExtractData.WaitForExit();
 
                 File.Delete(cvm);
                 File.Delete(iso);
 
+                // Descompressão dos arquivos CCS
                 foreach (string file in Directory.GetFiles(rofs, "*.ccs", SearchOption.AllDirectories))
                 {
                     using (FileStream fs = File.OpenRead(file))
@@ -85,15 +113,15 @@ namespace UN5ModdingWorkshop
                         byte[] header = new byte[2];
                         fs.Read(header, 0, 2);
                         if (header[0] != 0x1F || header[1] != 0x8B)
-                        {
                             continue;
-                        }
                     }
 
-                    MemoryStream ms = new MemoryStream();
-                    GZipStream gzipStream = new GZipStream(new MemoryStream(File.ReadAllBytes(file)), CompressionMode.Decompress);
-                    gzipStream.CopyTo(ms);
-                    File.WriteAllBytes(file, ms.ToArray());
+                    using (MemoryStream ms = new MemoryStream())
+                    using (GZipStream gzipStream = new GZipStream(new MemoryStream(File.ReadAllBytes(file)), CompressionMode.Decompress))
+                    {
+                        gzipStream.CopyTo(ms);
+                        File.WriteAllBytes(file, ms.ToArray());
+                    }
 
                     Main.instance.Invoke(new Action(() =>
                     {
@@ -101,40 +129,14 @@ namespace UN5ModdingWorkshop
                     }));
                 }
 
-                MessageBox.Show("Game successfully extracted!");
                 Main.instance.Invoke(new Action(() =>
                 {
                     Main.instance.lblProgress.Text = "";
                 }));
+
+                MakeHostFS();
+                MessageBox.Show("Game successfully extracted!");
             });
-        }
-
-        public static void ExtractFiles(CDReader cd, string cdPath, string destinoBase)
-        {
-            foreach (var dir in cd.GetDirectories(cdPath))
-            {
-                ExtractFiles(cd, dir, destinoBase);
-            }
-
-            foreach (var file in cd.GetFiles(cdPath))
-            {
-                string relativePath = file.TrimStart('\\');
-                if (relativePath.EndsWith(";1"))
-                    relativePath = relativePath.Substring(0, relativePath.Length - 2);
-                string destino = Path.Combine(destinoBase, relativePath);
-
-                Main.instance.Invoke(new Action(() =>
-                {
-                    Main.instance.lblProgress.Text = "Extracting: " + destino;
-                }));
-                Directory.CreateDirectory(Path.GetDirectoryName(destino));
-
-                using (var source = cd.OpenFile(file, FileMode.Open))
-                using (var dest = File.Create(destino))
-                {
-                    source.CopyTo(dest);
-                }
-            }
         }
 
         public static async void Build()
@@ -145,16 +147,16 @@ namespace UN5ModdingWorkshop
 
             string sourceFolder = fbd.SelectedPath;
             string isoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GAME.ISO");
-            string cvm = Path.Combine(sourceFolder, "DATA\\DATA.CVM");
-            string iso = Path.Combine(sourceFolder, "DATA\\data.iso");
-            string rofs = Path.Combine(sourceFolder, "DATA\\ROFS");
+            cvm = Path.Combine(sourceFolder, "DATA\\DATA.CVM");
+            iso = Path.Combine(sourceFolder, "DATA\\data.iso");
+            rofs = Path.Combine(sourceFolder, "DATA\\ROFS");
 
             await MakeGzlist();
 
             var mkcvm = new ProcessStartInfo
             {
                 FileName = cvm_toolPath,
-                Arguments = $"mkcvm \"{cvm}\" \"{iso}\" data.hdr",
+                Arguments = $"mkcvm \"{cvm}\" \"{iso}\" data.hdr -p Iruka",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -290,7 +292,6 @@ namespace UN5ModdingWorkshop
         public static string GetELFPathInSystemCNF()
         {
             string elfPath = "";
-            gamePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GAME");
             string systemCNFPath = Path.Combine(gamePath, "SYSTEM.CNF");
             if (File.Exists(systemCNFPath))
             {

@@ -85,7 +85,7 @@ namespace UN5ModdingWorkshop
         {
             selIcon.Visible = false;
             int selTagID = int.Parse(selIcon.Tag.ToString().Split('_')[1]);
-            selIcon.Tag = $"Char_{(selTagID + 2) % 0x54}";
+            selIcon.Tag = $"Char_{(selTagID + 2) % (GAME.charSelCount * 2)}";
             foreach (Control control in mainF.tabPage1.Controls)
             {
                 PictureBox pic = control as PictureBox;
@@ -97,7 +97,7 @@ namespace UN5ModdingWorkshop
                         string[] partes = tagString.Split('_');
                         if (partes.Length == 2 && int.TryParse(partes[1], out int charID))
                         {
-                            int newIndex = (charID - 2 + 0x54) % 0x54; // faz o wrap reverso
+                            int newIndex = (charID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2); // faz o wrap reverso
                             pic.Tag = $"Char_{newIndex}";
                             if (selIcon.Tag != null && pic.Tag.ToString() == selIcon.Tag.ToString() && selIcon.Location != pic.Location)
                             {
@@ -115,7 +115,7 @@ namespace UN5ModdingWorkshop
         {
             selIcon.Visible = false;
             int selTagID = int.Parse(selIcon.Tag.ToString().Split('_')[1]);
-            selIcon.Tag = $"Char_{(selTagID - 2 + 0x54) % 0x54}";
+            selIcon.Tag = $"Char_{(selTagID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2)}";
             foreach (Control control in mainF.tabPage1.Controls)
             {
                 PictureBox pic = control as PictureBox;
@@ -128,7 +128,7 @@ namespace UN5ModdingWorkshop
                         string[] partes = tagString.Split('_');
                         if (partes.Length == 2 && int.TryParse(partes[1], out int charID))
                         {
-                            int newIndex = (charID + 2) % 0x54;
+                            int newIndex = (charID + 2) % (GAME.charSelCount * 2);
                             pic.Tag = $"Char_{newIndex}";
                             if (selIcon.Tag != null && pic.Tag.ToString() == selIcon.Tag.ToString() && selIcon.Location != pic.Location)
                             {
@@ -222,10 +222,16 @@ namespace UN5ModdingWorkshop
         public static void ReadAllCharSelIcon(string gamePath)
         {
             Bitmap charselTexture = GetCCSImage(charselFile, "purecharsel10.bmp");
-            byte[] modData = File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
+            byte[] modData = GAME.isUN6 != true ? 
+                             File.ReadAllBytes(gamePath + "\\UN5.ELF") : 
+                             File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
+
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
-            br.BaseStream.Position = 0x196A0;
-            for (int i = 0; i < 0x79; i++)
+            br.BaseStream.Position = GAME.isUN6 != true ?
+                                     0x4DC120 :
+                                     0x196A0;
+
+            for (int i = 0; i < GAME.charCount; i++)
             {
                 int x = br.ReadUInt16();
                 int y = br.ReadUInt16();
@@ -241,12 +247,18 @@ namespace UN5ModdingWorkshop
         }
         private static void ReadAllCharSelPic(string gamePath)
         {
-            byte[] modData = File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
+            byte[] modData = GAME.isUN6 != true ?
+                 File.ReadAllBytes(gamePath + "\\UN5.ELF") :
+                 File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
+
             using (BinaryReader br = new BinaryReader(new MemoryStream(modData)))
             {
-                br.BaseStream.Position = 0x18AA0;
+                br.BaseStream.Position = GAME.isUN6 != true ?
+                         0x4DBCA0 :
+                         0x18AA0;
+
                 Dictionary<int, Bitmap> imageCache = new Dictionary<int, Bitmap>();
-                for (int i = 0; i < 0x79; i++)
+                for (int i = 0; i < GAME.charCount; i++)
                 {
                     int pureIndex = br.ReadInt32() + 1;
                     Bitmap purecharsel;
@@ -286,9 +298,11 @@ namespace UN5ModdingWorkshop
             byte[] modData = File.ReadAllBytes(GAME.GetELFPathInSystemCNF());
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
             br.BaseStream.Position = 0x4DD790;
-            for (int i = 0; i < 0x54; i++)
+            for (int i = 0; i < GAME.charSelCount * 2; i++)
             {
-                listCharselID.Add(br.ReadByte());
+                listCharselID.Add(GAME.isUN6 != true ?
+                                  br.ReadInt32() :
+                                  br.ReadByte());
             }
             return listCharselID;
         }

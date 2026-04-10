@@ -1,6 +1,4 @@
 ﻿using CCSFileExplorerWV;
-using DiscUtils.Iscsi;
-using DiscUtils.Iso9660;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +22,6 @@ namespace WindowsFormsApp1
             instance = this;
             picBackground.Location = new Point(0, 27);
             lblProgress.Text = "";
-            Config.Load(this);
             Process[] processes = Process.GetProcesses();
             for (int i = 0; i < processes.Count(); i++)
             {
@@ -158,6 +155,7 @@ namespace WindowsFormsApp1
             if(fbd.ShowDialog() == DialogResult.OK)
             {
                 string gamePath = fbd.SelectedPath;
+                GAME.gamePath = gamePath;
                 txtGamePath.Text = gamePath;
                 CharSel.Create(this, gamePath);
                 Config.Data.GamePath = gamePath;
@@ -199,10 +197,14 @@ namespace WindowsFormsApp1
         private void extractCVMToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             GAME.Extract();
-            GAME.MakeHostFS();
         }
 
         private void makeGzlistToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            GAME.Build();
+        }
+
+        private void buildGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GAME.Build();
         }
