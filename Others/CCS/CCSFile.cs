@@ -173,8 +173,32 @@ namespace CCSFileExplorerWV
 			return result;
 		}
 
-		// Token: 0x04000021 RID: 33
-		public CCSFile.FileVersionEnum FileVersion;
+        public static Bitmap GetCCSImage(CCSFile ccs, string fileName)
+        {
+            byte[] pallete = new byte[0];
+            byte[] texture = new byte[0];
+            for (int i = 0; i < ccs.files.Count; i++)
+            {
+                if (ccs.files[i].name.Contains(fileName) == true)
+                {
+                    for (int j = 0; j < ccs.files[i].objects.Count; j++)
+                    {
+                        if (ccs.files[i].objects[j].blocks[0].BlockID == 0xCCCC0400)
+                        {
+                            pallete = ccs.files[i].objects[j].blocks[0].Data;
+                        }
+                        if (ccs.files[i].objects[j].blocks[0].BlockID == 0xCCCC0300)
+                        {
+                            texture = ccs.files[i].objects[j].blocks[0].Data;
+                        }
+                    }
+                }
+            }
+            return CCSFile.CreateImage(pallete, texture);
+        }
+
+        // Token: 0x04000021 RID: 33
+        public CCSFile.FileVersionEnum FileVersion;
 
 		// Token: 0x04000022 RID: 34
 		public byte[] raw;

@@ -44,7 +44,7 @@ namespace WindowsFormsApp1
             {
                 lblSelectedAtk2.Text = listBox1.SelectedIndex.ToString();
 
-                PlAtk.SendTextAtk(this, PlAtk.GetCharAtk(charID, selectedIndex));
+                PlAtk.SendTextAtk(charID, this, PlAtk.GetCharAtk(charID, selectedIndex));
             }
             else
             {
@@ -100,7 +100,7 @@ namespace WindowsFormsApp1
                 int charID = int.Parse(lblCharID2.Text);
                 int selectedIndex = listBox1.SelectedIndex;
                 var charAtkPrm = PlAtk.CharAtkPrmBkp[charID][selectedIndex];
-                PlAtk.SendTextAtk(this, charAtkPrm);
+                PlAtk.SendTextAtk(charID, this, charAtkPrm);
             }
             else
             {
@@ -170,6 +170,11 @@ namespace WindowsFormsApp1
             string currentCharName = lblCharName2.Text;
             PlAtk.AddCharComboList(this, currentCharID, currentCharName);
             listBox1.SelectedIndex = int.Parse(lblSelectedAtk2.Text);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

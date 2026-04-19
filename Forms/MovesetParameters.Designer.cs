@@ -74,82 +74,16 @@
             this.txtDamage = new System.Windows.Forms.TextBox();
             this.lblChakra = new System.Windows.Forms.Label();
             this.txtChakra = new System.Windows.Forms.TextBox();
-            this.cmbGP3FUnk4 = new System.Windows.Forms.ComboBox();
-            this.cmbGP3FUnk3 = new System.Windows.Forms.ComboBox();
-            this.cmbGP3FWallKB = new System.Windows.Forms.ComboBox();
-            this.cmbGP3FBounce = new System.Windows.Forms.ComboBox();
-            this.cmbGP3FHitFallen = new System.Windows.Forms.ComboBox();
-            this.cmbGP3FUnk1 = new System.Windows.Forms.ComboBox();
-            this.cmbGP3FBreakDef = new System.Windows.Forms.ComboBox();
-            this.cmbGP3FUndefendable = new System.Windows.Forms.ComboBox();
-            this.lblGP3FUnk4 = new System.Windows.Forms.Label();
-            this.lblGP3FUnk3 = new System.Windows.Forms.Label();
-            this.lblGP3FWallKB = new System.Windows.Forms.Label();
-            this.lblGP3FBounce = new System.Windows.Forms.Label();
-            this.lblGP3FUnk1 = new System.Windows.Forms.Label();
-            this.lblGP3FHitFallen = new System.Windows.Forms.Label();
-            this.lblGP3FBreakDef = new System.Windows.Forms.Label();
-            this.lblGP3FUndefendable = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSaveELF = new System.Windows.Forms.Button();
             this.btnUpdateP1 = new System.Windows.Forms.Button();
             this.lblCharID2 = new System.Windows.Forms.Label();
             this.lblCharID = new System.Windows.Forms.Label();
-            this.grpAttackFlagGroup3 = new System.Windows.Forms.GroupBox();
             this.grpAttackFlagGroup1 = new System.Windows.Forms.GroupBox();
-            this.lblGP1FUnk1 = new System.Windows.Forms.Label();
-            this.cmbGP1FUnk8 = new System.Windows.Forms.ComboBox();
-            this.cmbGP1FUnk2 = new System.Windows.Forms.ComboBox();
-            this.lblGP1FUnk2 = new System.Windows.Forms.Label();
-            this.cmbGP1FallingAfterHitting = new System.Windows.Forms.ComboBox();
-            this.cmbGP1FUnk1 = new System.Windows.Forms.ComboBox();
-            this.lblGP1FUnk8 = new System.Windows.Forms.Label();
-            this.lblGP1FUnk3 = new System.Windows.Forms.Label();
-            this.lblGP1FallingAfterHitting = new System.Windows.Forms.Label();
-            this.cmbGP1FUnk6 = new System.Windows.Forms.ComboBox();
-            this.cmbGP1FUnk4 = new System.Windows.Forms.ComboBox();
-            this.lblGP1FUnk4 = new System.Windows.Forms.Label();
-            this.lblGP1FUnk6 = new System.Windows.Forms.Label();
-            this.cmbGP1FUnk5 = new System.Windows.Forms.ComboBox();
-            this.cmbGP1FUnk3 = new System.Windows.Forms.ComboBox();
-            this.lblGP1FUnk5 = new System.Windows.Forms.Label();
-            this.grpAttackFlagGroup2 = new System.Windows.Forms.GroupBox();
-            this.lblGP2FUnk1 = new System.Windows.Forms.Label();
-            this.cmbGP2FUnk7 = new System.Windows.Forms.ComboBox();
-            this.lblGP2FUnk5 = new System.Windows.Forms.Label();
-            this.cmbGP2FUnk2 = new System.Windows.Forms.ComboBox();
-            this.cmbGP2FUnk3 = new System.Windows.Forms.ComboBox();
-            this.lblGP2FUnk2 = new System.Windows.Forms.Label();
-            this.cmbGP2FUnk5 = new System.Windows.Forms.ComboBox();
-            this.lblGP2FUnk6 = new System.Windows.Forms.Label();
-            this.cmbGP2FUnk8 = new System.Windows.Forms.ComboBox();
-            this.lblGP2FUnk7 = new System.Windows.Forms.Label();
-            this.lblGP2AntiCounter = new System.Windows.Forms.Label();
-            this.cmbGP2FUnk1 = new System.Windows.Forms.ComboBox();
-            this.cmbGP2AntiCounter = new System.Windows.Forms.ComboBox();
-            this.lblGP2FUnk3 = new System.Windows.Forms.Label();
-            this.cmbGP2FUnk6 = new System.Windows.Forms.ComboBox();
-            this.lblGP2FUnk8 = new System.Windows.Forms.Label();
-            this.grpAttackFlagGroup4 = new System.Windows.Forms.GroupBox();
-            this.lblGP4FUnk1 = new System.Windows.Forms.Label();
-            this.lblGP4HitFainted = new System.Windows.Forms.Label();
-            this.cmbGP4DamageOnDefense = new System.Windows.Forms.ComboBox();
-            this.lblGP4DamageOnCounterattack = new System.Windows.Forms.Label();
-            this.lblGP4FUnk5 = new System.Windows.Forms.Label();
-            this.cmbGP4Backdash = new System.Windows.Forms.ComboBox();
-            this.cmbGP4FUnk2 = new System.Windows.Forms.ComboBox();
-            this.lblGP4FUnk3 = new System.Windows.Forms.Label();
-            this.cmbGP4FUnk3 = new System.Windows.Forms.ComboBox();
-            this.cmbGP4HitFainted = new System.Windows.Forms.ComboBox();
-            this.lblGP4FUnk2 = new System.Windows.Forms.Label();
-            this.cmbGP4FUnk1 = new System.Windows.Forms.ComboBox();
-            this.cmbGP4FUnk5 = new System.Windows.Forms.ComboBox();
-            this.lblGP4DamageOnDefense = new System.Windows.Forms.Label();
-            this.lblGP4Backdash = new System.Windows.Forms.Label();
-            this.cmbGP4DamageOnCounterattack = new System.Windows.Forms.ComboBox();
             this.btnEditAnmParameters = new System.Windows.Forms.Button();
             this.btnEditAtkParameters = new System.Windows.Forms.Button();
             this.pnlAtkPrm = new System.Windows.Forms.Panel();
+            this.clbFlags = new System.Windows.Forms.CheckedListBox();
             this.pnlAnmPrm = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.numAnmUnk8 = new System.Windows.Forms.NumericUpDown();
@@ -205,11 +139,11 @@
             this.lblSelectedAtk2 = new System.Windows.Forms.Label();
             this.lblSelectedAtk = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.picCommand = new System.Windows.Forms.PictureBox();
+            this.lblNamePanel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.grpAttackParameters.SuspendLayout();
-            this.grpAttackFlagGroup3.SuspendLayout();
-            this.grpAttackFlagGroup1.SuspendLayout();
-            this.grpAttackFlagGroup2.SuspendLayout();
-            this.grpAttackFlagGroup4.SuspendLayout();
             this.pnlAtkPrm.SuspendLayout();
             this.pnlAnmPrm.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -226,6 +160,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCommand)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -315,7 +251,7 @@
             this.grpAttackParameters.Controls.Add(this.txtDamage);
             this.grpAttackParameters.Controls.Add(this.lblChakra);
             this.grpAttackParameters.Controls.Add(this.txtChakra);
-            this.grpAttackParameters.Location = new System.Drawing.Point(0, 9);
+            this.grpAttackParameters.Location = new System.Drawing.Point(0, 105);
             this.grpAttackParameters.Name = "grpAttackParameters";
             this.grpAttackParameters.Size = new System.Drawing.Size(419, 188);
             this.grpAttackParameters.TabIndex = 72;
@@ -636,150 +572,6 @@
             this.txtChakra.Size = new System.Drawing.Size(38, 20);
             this.txtChakra.TabIndex = 0;
             // 
-            // cmbGP3FUnk4
-            // 
-            this.cmbGP3FUnk4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FUnk4.FormattingEnabled = true;
-            this.cmbGP3FUnk4.Location = new System.Drawing.Point(235, 64);
-            this.cmbGP3FUnk4.Name = "cmbGP3FUnk4";
-            this.cmbGP3FUnk4.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FUnk4.TabIndex = 61;
-            // 
-            // cmbGP3FUnk3
-            // 
-            this.cmbGP3FUnk3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FUnk3.FormattingEnabled = true;
-            this.cmbGP3FUnk3.Location = new System.Drawing.Point(79, 70);
-            this.cmbGP3FUnk3.Name = "cmbGP3FUnk3";
-            this.cmbGP3FUnk3.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FUnk3.TabIndex = 60;
-            // 
-            // cmbGP3FWallKB
-            // 
-            this.cmbGP3FWallKB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FWallKB.FormattingEnabled = true;
-            this.cmbGP3FWallKB.Location = new System.Drawing.Point(372, 40);
-            this.cmbGP3FWallKB.Name = "cmbGP3FWallKB";
-            this.cmbGP3FWallKB.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FWallKB.TabIndex = 59;
-            // 
-            // cmbGP3FBounce
-            // 
-            this.cmbGP3FBounce.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FBounce.FormattingEnabled = true;
-            this.cmbGP3FBounce.Location = new System.Drawing.Point(235, 40);
-            this.cmbGP3FBounce.Name = "cmbGP3FBounce";
-            this.cmbGP3FBounce.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FBounce.TabIndex = 58;
-            // 
-            // cmbGP3FHitFallen
-            // 
-            this.cmbGP3FHitFallen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FHitFallen.FormattingEnabled = true;
-            this.cmbGP3FHitFallen.Location = new System.Drawing.Point(372, 16);
-            this.cmbGP3FHitFallen.Name = "cmbGP3FHitFallen";
-            this.cmbGP3FHitFallen.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FHitFallen.TabIndex = 57;
-            // 
-            // cmbGP3FUnk1
-            // 
-            this.cmbGP3FUnk1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FUnk1.FormattingEnabled = true;
-            this.cmbGP3FUnk1.Location = new System.Drawing.Point(79, 43);
-            this.cmbGP3FUnk1.Name = "cmbGP3FUnk1";
-            this.cmbGP3FUnk1.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FUnk1.TabIndex = 56;
-            // 
-            // cmbGP3FBreakDef
-            // 
-            this.cmbGP3FBreakDef.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FBreakDef.FormattingEnabled = true;
-            this.cmbGP3FBreakDef.Location = new System.Drawing.Point(79, 17);
-            this.cmbGP3FBreakDef.Name = "cmbGP3FBreakDef";
-            this.cmbGP3FBreakDef.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FBreakDef.TabIndex = 55;
-            // 
-            // cmbGP3FUndefendable
-            // 
-            this.cmbGP3FUndefendable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP3FUndefendable.FormattingEnabled = true;
-            this.cmbGP3FUndefendable.Location = new System.Drawing.Point(235, 16);
-            this.cmbGP3FUndefendable.Name = "cmbGP3FUndefendable";
-            this.cmbGP3FUndefendable.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP3FUndefendable.TabIndex = 54;
-            // 
-            // lblGP3FUnk4
-            // 
-            this.lblGP3FUnk4.AutoSize = true;
-            this.lblGP3FUnk4.Location = new System.Drawing.Point(152, 72);
-            this.lblGP3FUnk4.Name = "lblGP3FUnk4";
-            this.lblGP3FUnk4.Size = new System.Drawing.Size(42, 13);
-            this.lblGP3FUnk4.TabIndex = 52;
-            this.lblGP3FUnk4.Text = "FUnk4:";
-            // 
-            // lblGP3FUnk3
-            // 
-            this.lblGP3FUnk3.AutoSize = true;
-            this.lblGP3FUnk3.Location = new System.Drawing.Point(6, 72);
-            this.lblGP3FUnk3.Name = "lblGP3FUnk3";
-            this.lblGP3FUnk3.Size = new System.Drawing.Size(42, 13);
-            this.lblGP3FUnk3.TabIndex = 51;
-            this.lblGP3FUnk3.Text = "FUnk3:";
-            // 
-            // lblGP3FWallKB
-            // 
-            this.lblGP3FWallKB.AutoSize = true;
-            this.lblGP3FWallKB.Location = new System.Drawing.Point(278, 43);
-            this.lblGP3FWallKB.Name = "lblGP3FWallKB";
-            this.lblGP3FWallKB.Size = new System.Drawing.Size(88, 13);
-            this.lblGP3FWallKB.TabIndex = 50;
-            this.lblGP3FWallKB.Text = "Without Wall KB:";
-            // 
-            // lblGP3FBounce
-            // 
-            this.lblGP3FBounce.AutoSize = true;
-            this.lblGP3FBounce.Location = new System.Drawing.Point(152, 43);
-            this.lblGP3FBounce.Name = "lblGP3FBounce";
-            this.lblGP3FBounce.Size = new System.Drawing.Size(75, 13);
-            this.lblGP3FBounce.TabIndex = 49;
-            this.lblGP3FBounce.Text = "Don\'t Bounce:";
-            // 
-            // lblGP3FUnk1
-            // 
-            this.lblGP3FUnk1.AutoSize = true;
-            this.lblGP3FUnk1.Location = new System.Drawing.Point(6, 43);
-            this.lblGP3FUnk1.Name = "lblGP3FUnk1";
-            this.lblGP3FUnk1.Size = new System.Drawing.Size(42, 13);
-            this.lblGP3FUnk1.TabIndex = 48;
-            this.lblGP3FUnk1.Text = "FUnk1:";
-            // 
-            // lblGP3FHitFallen
-            // 
-            this.lblGP3FHitFallen.AutoSize = true;
-            this.lblGP3FHitFallen.Location = new System.Drawing.Point(312, 19);
-            this.lblGP3FHitFallen.Name = "lblGP3FHitFallen";
-            this.lblGP3FHitFallen.Size = new System.Drawing.Size(54, 13);
-            this.lblGP3FHitFallen.TabIndex = 47;
-            this.lblGP3FHitFallen.Text = "Hit Fallen:";
-            // 
-            // lblGP3FBreakDef
-            // 
-            this.lblGP3FBreakDef.AutoSize = true;
-            this.lblGP3FBreakDef.Location = new System.Drawing.Point(6, 19);
-            this.lblGP3FBreakDef.Name = "lblGP3FBreakDef";
-            this.lblGP3FBreakDef.Size = new System.Drawing.Size(58, 13);
-            this.lblGP3FBreakDef.TabIndex = 46;
-            this.lblGP3FBreakDef.Text = "Break Def:";
-            // 
-            // lblGP3FUndefendable
-            // 
-            this.lblGP3FUndefendable.AutoSize = true;
-            this.lblGP3FUndefendable.Location = new System.Drawing.Point(152, 19);
-            this.lblGP3FUndefendable.Name = "lblGP3FUndefendable";
-            this.lblGP3FUndefendable.Size = new System.Drawing.Size(77, 13);
-            this.lblGP3FUndefendable.TabIndex = 45;
-            this.lblGP3FUndefendable.Text = "Undefendable:";
-            // 
             // btnReset
             // 
             this.btnReset.Location = new System.Drawing.Point(308, 606);
@@ -831,537 +623,14 @@
             this.lblCharID.TabIndex = 73;
             this.lblCharID.Text = "Char ID:";
             // 
-            // grpAttackFlagGroup3
-            // 
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FBreakDef);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FUnk4);
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FUndefendable);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FUnk3);
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FHitFallen);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FWallKB);
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FUnk1);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FBounce);
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FBounce);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FHitFallen);
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FWallKB);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FUnk1);
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FUnk3);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FBreakDef);
-            this.grpAttackFlagGroup3.Controls.Add(this.lblGP3FUnk4);
-            this.grpAttackFlagGroup3.Controls.Add(this.cmbGP3FUndefendable);
-            this.grpAttackFlagGroup3.Location = new System.Drawing.Point(0, 373);
-            this.grpAttackFlagGroup3.Name = "grpAttackFlagGroup3";
-            this.grpAttackFlagGroup3.Size = new System.Drawing.Size(419, 108);
-            this.grpAttackFlagGroup3.TabIndex = 62;
-            this.grpAttackFlagGroup3.TabStop = false;
-            this.grpAttackFlagGroup3.Text = "Attack Flag Group 3";
-            // 
             // grpAttackFlagGroup1
             // 
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FUnk1);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FUnk8);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FUnk2);
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FUnk2);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FallingAfterHitting);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FUnk1);
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FUnk8);
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FUnk3);
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FallingAfterHitting);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FUnk6);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FUnk4);
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FUnk4);
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FUnk6);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FUnk5);
-            this.grpAttackFlagGroup1.Controls.Add(this.cmbGP1FUnk3);
-            this.grpAttackFlagGroup1.Controls.Add(this.lblGP1FUnk5);
-            this.grpAttackFlagGroup1.Location = new System.Drawing.Point(0, 187);
+            this.grpAttackFlagGroup1.Location = new System.Drawing.Point(0, 283);
             this.grpAttackFlagGroup1.Name = "grpAttackFlagGroup1";
-            this.grpAttackFlagGroup1.Size = new System.Drawing.Size(419, 103);
+            this.grpAttackFlagGroup1.Size = new System.Drawing.Size(419, 292);
             this.grpAttackFlagGroup1.TabIndex = 45;
             this.grpAttackFlagGroup1.TabStop = false;
-            this.grpAttackFlagGroup1.Text = "Attack Flag Group 1";
-            // 
-            // lblGP1FUnk1
-            // 
-            this.lblGP1FUnk1.AutoSize = true;
-            this.lblGP1FUnk1.Location = new System.Drawing.Point(6, 22);
-            this.lblGP1FUnk1.Name = "lblGP1FUnk1";
-            this.lblGP1FUnk1.Size = new System.Drawing.Size(42, 13);
-            this.lblGP1FUnk1.TabIndex = 63;
-            this.lblGP1FUnk1.Text = "FUnk1:";
-            // 
-            // cmbGP1FUnk8
-            // 
-            this.cmbGP1FUnk8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FUnk8.FormattingEnabled = true;
-            this.cmbGP1FUnk8.Location = new System.Drawing.Point(235, 67);
-            this.cmbGP1FUnk8.Name = "cmbGP1FUnk8";
-            this.cmbGP1FUnk8.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP1FUnk8.TabIndex = 77;
-            // 
-            // cmbGP1FUnk2
-            // 
-            this.cmbGP1FUnk2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FUnk2.FormattingEnabled = true;
-            this.cmbGP1FUnk2.Location = new System.Drawing.Point(235, 19);
-            this.cmbGP1FUnk2.Name = "cmbGP1FUnk2";
-            this.cmbGP1FUnk2.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP1FUnk2.TabIndex = 70;
-            // 
-            // lblGP1FUnk2
-            // 
-            this.lblGP1FUnk2.AutoSize = true;
-            this.lblGP1FUnk2.Location = new System.Drawing.Point(152, 22);
-            this.lblGP1FUnk2.Name = "lblGP1FUnk2";
-            this.lblGP1FUnk2.Size = new System.Drawing.Size(42, 13);
-            this.lblGP1FUnk2.TabIndex = 62;
-            this.lblGP1FUnk2.Text = "FUnk2:";
-            // 
-            // cmbGP1FallingAfterHitting
-            // 
-            this.cmbGP1FallingAfterHitting.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FallingAfterHitting.FormattingEnabled = true;
-            this.cmbGP1FallingAfterHitting.Location = new System.Drawing.Point(107, 67);
-            this.cmbGP1FallingAfterHitting.Name = "cmbGP1FallingAfterHitting";
-            this.cmbGP1FallingAfterHitting.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP1FallingAfterHitting.TabIndex = 76;
-            // 
-            // cmbGP1FUnk1
-            // 
-            this.cmbGP1FUnk1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FUnk1.FormattingEnabled = true;
-            this.cmbGP1FUnk1.Location = new System.Drawing.Point(79, 19);
-            this.cmbGP1FUnk1.Name = "cmbGP1FUnk1";
-            this.cmbGP1FUnk1.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP1FUnk1.TabIndex = 71;
-            // 
-            // lblGP1FUnk8
-            // 
-            this.lblGP1FUnk8.AutoSize = true;
-            this.lblGP1FUnk8.Location = new System.Drawing.Point(152, 70);
-            this.lblGP1FUnk8.Name = "lblGP1FUnk8";
-            this.lblGP1FUnk8.Size = new System.Drawing.Size(42, 13);
-            this.lblGP1FUnk8.TabIndex = 69;
-            this.lblGP1FUnk8.Text = "FUnk8:";
-            // 
-            // lblGP1FUnk3
-            // 
-            this.lblGP1FUnk3.AutoSize = true;
-            this.lblGP1FUnk3.Location = new System.Drawing.Point(324, 22);
-            this.lblGP1FUnk3.Name = "lblGP1FUnk3";
-            this.lblGP1FUnk3.Size = new System.Drawing.Size(42, 13);
-            this.lblGP1FUnk3.TabIndex = 64;
-            this.lblGP1FUnk3.Text = "FUnk3:";
-            // 
-            // lblGP1FallingAfterHitting
-            // 
-            this.lblGP1FallingAfterHitting.AutoSize = true;
-            this.lblGP1FallingAfterHitting.Location = new System.Drawing.Point(6, 70);
-            this.lblGP1FallingAfterHitting.Name = "lblGP1FallingAfterHitting";
-            this.lblGP1FallingAfterHitting.Size = new System.Drawing.Size(97, 13);
-            this.lblGP1FallingAfterHitting.TabIndex = 68;
-            this.lblGP1FallingAfterHitting.Text = "Falling after Hitting:";
-            // 
-            // cmbGP1FUnk6
-            // 
-            this.cmbGP1FUnk6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FUnk6.FormattingEnabled = true;
-            this.cmbGP1FUnk6.Location = new System.Drawing.Point(372, 43);
-            this.cmbGP1FUnk6.Name = "cmbGP1FUnk6";
-            this.cmbGP1FUnk6.Size = new System.Drawing.Size(42, 21);
-            this.cmbGP1FUnk6.TabIndex = 75;
-            // 
-            // cmbGP1FUnk4
-            // 
-            this.cmbGP1FUnk4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FUnk4.FormattingEnabled = true;
-            this.cmbGP1FUnk4.Location = new System.Drawing.Point(79, 43);
-            this.cmbGP1FUnk4.Name = "cmbGP1FUnk4";
-            this.cmbGP1FUnk4.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP1FUnk4.TabIndex = 72;
-            // 
-            // lblGP1FUnk4
-            // 
-            this.lblGP1FUnk4.AutoSize = true;
-            this.lblGP1FUnk4.Location = new System.Drawing.Point(6, 46);
-            this.lblGP1FUnk4.Name = "lblGP1FUnk4";
-            this.lblGP1FUnk4.Size = new System.Drawing.Size(42, 13);
-            this.lblGP1FUnk4.TabIndex = 65;
-            this.lblGP1FUnk4.Text = "FUnk4:";
-            // 
-            // lblGP1FUnk6
-            // 
-            this.lblGP1FUnk6.AutoSize = true;
-            this.lblGP1FUnk6.Location = new System.Drawing.Point(324, 46);
-            this.lblGP1FUnk6.Name = "lblGP1FUnk6";
-            this.lblGP1FUnk6.Size = new System.Drawing.Size(42, 13);
-            this.lblGP1FUnk6.TabIndex = 67;
-            this.lblGP1FUnk6.Text = "FUnk6:";
-            // 
-            // cmbGP1FUnk5
-            // 
-            this.cmbGP1FUnk5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FUnk5.FormattingEnabled = true;
-            this.cmbGP1FUnk5.Location = new System.Drawing.Point(235, 43);
-            this.cmbGP1FUnk5.Name = "cmbGP1FUnk5";
-            this.cmbGP1FUnk5.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP1FUnk5.TabIndex = 74;
-            // 
-            // cmbGP1FUnk3
-            // 
-            this.cmbGP1FUnk3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP1FUnk3.FormattingEnabled = true;
-            this.cmbGP1FUnk3.Location = new System.Drawing.Point(372, 16);
-            this.cmbGP1FUnk3.Name = "cmbGP1FUnk3";
-            this.cmbGP1FUnk3.Size = new System.Drawing.Size(42, 21);
-            this.cmbGP1FUnk3.TabIndex = 73;
-            // 
-            // lblGP1FUnk5
-            // 
-            this.lblGP1FUnk5.AutoSize = true;
-            this.lblGP1FUnk5.Location = new System.Drawing.Point(152, 46);
-            this.lblGP1FUnk5.Name = "lblGP1FUnk5";
-            this.lblGP1FUnk5.Size = new System.Drawing.Size(42, 13);
-            this.lblGP1FUnk5.TabIndex = 66;
-            this.lblGP1FUnk5.Text = "FUnk5:";
-            // 
-            // grpAttackFlagGroup2
-            // 
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2FUnk1);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2FUnk7);
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2FUnk5);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2FUnk2);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2FUnk3);
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2FUnk2);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2FUnk5);
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2FUnk6);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2FUnk8);
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2FUnk7);
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2AntiCounter);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2FUnk1);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2AntiCounter);
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2FUnk3);
-            this.grpAttackFlagGroup2.Controls.Add(this.cmbGP2FUnk6);
-            this.grpAttackFlagGroup2.Controls.Add(this.lblGP2FUnk8);
-            this.grpAttackFlagGroup2.Location = new System.Drawing.Point(0, 280);
-            this.grpAttackFlagGroup2.Name = "grpAttackFlagGroup2";
-            this.grpAttackFlagGroup2.Size = new System.Drawing.Size(419, 103);
-            this.grpAttackFlagGroup2.TabIndex = 46;
-            this.grpAttackFlagGroup2.TabStop = false;
-            this.grpAttackFlagGroup2.Text = "Attack Flag Group 2";
-            // 
-            // lblGP2FUnk1
-            // 
-            this.lblGP2FUnk1.AutoSize = true;
-            this.lblGP2FUnk1.Location = new System.Drawing.Point(6, 22);
-            this.lblGP2FUnk1.Name = "lblGP2FUnk1";
-            this.lblGP2FUnk1.Size = new System.Drawing.Size(42, 13);
-            this.lblGP2FUnk1.TabIndex = 79;
-            this.lblGP2FUnk1.Text = "FUnk1:";
-            // 
-            // cmbGP2FUnk7
-            // 
-            this.cmbGP2FUnk7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2FUnk7.FormattingEnabled = true;
-            this.cmbGP2FUnk7.Location = new System.Drawing.Point(235, 67);
-            this.cmbGP2FUnk7.Name = "cmbGP2FUnk7";
-            this.cmbGP2FUnk7.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2FUnk7.TabIndex = 93;
-            // 
-            // lblGP2FUnk5
-            // 
-            this.lblGP2FUnk5.AutoSize = true;
-            this.lblGP2FUnk5.Location = new System.Drawing.Point(152, 46);
-            this.lblGP2FUnk5.Name = "lblGP2FUnk5";
-            this.lblGP2FUnk5.Size = new System.Drawing.Size(42, 13);
-            this.lblGP2FUnk5.TabIndex = 82;
-            this.lblGP2FUnk5.Text = "FUnk5:";
-            // 
-            // cmbGP2FUnk2
-            // 
-            this.cmbGP2FUnk2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2FUnk2.FormattingEnabled = true;
-            this.cmbGP2FUnk2.Location = new System.Drawing.Point(235, 19);
-            this.cmbGP2FUnk2.Name = "cmbGP2FUnk2";
-            this.cmbGP2FUnk2.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2FUnk2.TabIndex = 86;
-            // 
-            // cmbGP2FUnk3
-            // 
-            this.cmbGP2FUnk3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2FUnk3.FormattingEnabled = true;
-            this.cmbGP2FUnk3.Location = new System.Drawing.Point(372, 16);
-            this.cmbGP2FUnk3.Name = "cmbGP2FUnk3";
-            this.cmbGP2FUnk3.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2FUnk3.TabIndex = 89;
-            // 
-            // lblGP2FUnk2
-            // 
-            this.lblGP2FUnk2.AutoSize = true;
-            this.lblGP2FUnk2.Location = new System.Drawing.Point(152, 22);
-            this.lblGP2FUnk2.Name = "lblGP2FUnk2";
-            this.lblGP2FUnk2.Size = new System.Drawing.Size(42, 13);
-            this.lblGP2FUnk2.TabIndex = 78;
-            this.lblGP2FUnk2.Text = "FUnk2:";
-            // 
-            // cmbGP2FUnk5
-            // 
-            this.cmbGP2FUnk5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2FUnk5.FormattingEnabled = true;
-            this.cmbGP2FUnk5.Location = new System.Drawing.Point(235, 43);
-            this.cmbGP2FUnk5.Name = "cmbGP2FUnk5";
-            this.cmbGP2FUnk5.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2FUnk5.TabIndex = 90;
-            // 
-            // lblGP2FUnk6
-            // 
-            this.lblGP2FUnk6.AutoSize = true;
-            this.lblGP2FUnk6.Location = new System.Drawing.Point(324, 46);
-            this.lblGP2FUnk6.Name = "lblGP2FUnk6";
-            this.lblGP2FUnk6.Size = new System.Drawing.Size(42, 13);
-            this.lblGP2FUnk6.TabIndex = 83;
-            this.lblGP2FUnk6.Text = "FUnk6:";
-            // 
-            // cmbGP2FUnk8
-            // 
-            this.cmbGP2FUnk8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2FUnk8.FormattingEnabled = true;
-            this.cmbGP2FUnk8.Location = new System.Drawing.Point(79, 66);
-            this.cmbGP2FUnk8.Name = "cmbGP2FUnk8";
-            this.cmbGP2FUnk8.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2FUnk8.TabIndex = 92;
-            // 
-            // lblGP2FUnk7
-            // 
-            this.lblGP2FUnk7.AutoSize = true;
-            this.lblGP2FUnk7.Location = new System.Drawing.Point(153, 69);
-            this.lblGP2FUnk7.Name = "lblGP2FUnk7";
-            this.lblGP2FUnk7.Size = new System.Drawing.Size(42, 13);
-            this.lblGP2FUnk7.TabIndex = 85;
-            this.lblGP2FUnk7.Text = "FUnk8:";
-            // 
-            // lblGP2AntiCounter
-            // 
-            this.lblGP2AntiCounter.AutoSize = true;
-            this.lblGP2AntiCounter.Location = new System.Drawing.Point(6, 46);
-            this.lblGP2AntiCounter.Name = "lblGP2AntiCounter";
-            this.lblGP2AntiCounter.Size = new System.Drawing.Size(65, 13);
-            this.lblGP2AntiCounter.TabIndex = 81;
-            this.lblGP2AntiCounter.Text = "AntiCounter:";
-            // 
-            // cmbGP2FUnk1
-            // 
-            this.cmbGP2FUnk1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2FUnk1.FormattingEnabled = true;
-            this.cmbGP2FUnk1.Location = new System.Drawing.Point(79, 19);
-            this.cmbGP2FUnk1.Name = "cmbGP2FUnk1";
-            this.cmbGP2FUnk1.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2FUnk1.TabIndex = 87;
-            // 
-            // cmbGP2AntiCounter
-            // 
-            this.cmbGP2AntiCounter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2AntiCounter.FormattingEnabled = true;
-            this.cmbGP2AntiCounter.Location = new System.Drawing.Point(79, 43);
-            this.cmbGP2AntiCounter.Name = "cmbGP2AntiCounter";
-            this.cmbGP2AntiCounter.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2AntiCounter.TabIndex = 88;
-            // 
-            // lblGP2FUnk3
-            // 
-            this.lblGP2FUnk3.AutoSize = true;
-            this.lblGP2FUnk3.Location = new System.Drawing.Point(324, 22);
-            this.lblGP2FUnk3.Name = "lblGP2FUnk3";
-            this.lblGP2FUnk3.Size = new System.Drawing.Size(42, 13);
-            this.lblGP2FUnk3.TabIndex = 80;
-            this.lblGP2FUnk3.Text = "FUnk3:";
-            // 
-            // cmbGP2FUnk6
-            // 
-            this.cmbGP2FUnk6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP2FUnk6.FormattingEnabled = true;
-            this.cmbGP2FUnk6.Location = new System.Drawing.Point(372, 43);
-            this.cmbGP2FUnk6.Name = "cmbGP2FUnk6";
-            this.cmbGP2FUnk6.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP2FUnk6.TabIndex = 91;
-            // 
-            // lblGP2FUnk8
-            // 
-            this.lblGP2FUnk8.AutoSize = true;
-            this.lblGP2FUnk8.Location = new System.Drawing.Point(6, 69);
-            this.lblGP2FUnk8.Name = "lblGP2FUnk8";
-            this.lblGP2FUnk8.Size = new System.Drawing.Size(42, 13);
-            this.lblGP2FUnk8.TabIndex = 84;
-            this.lblGP2FUnk8.Text = "FUnk7:";
-            // 
-            // grpAttackFlagGroup4
-            // 
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4FUnk1);
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4HitFainted);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4DamageOnDefense);
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4DamageOnCounterattack);
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4FUnk5);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4Backdash);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4FUnk2);
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4FUnk3);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4FUnk3);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4HitFainted);
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4FUnk2);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4FUnk1);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4FUnk5);
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4DamageOnDefense);
-            this.grpAttackFlagGroup4.Controls.Add(this.lblGP4Backdash);
-            this.grpAttackFlagGroup4.Controls.Add(this.cmbGP4DamageOnCounterattack);
-            this.grpAttackFlagGroup4.Location = new System.Drawing.Point(0, 469);
-            this.grpAttackFlagGroup4.Name = "grpAttackFlagGroup4";
-            this.grpAttackFlagGroup4.Size = new System.Drawing.Size(419, 101);
-            this.grpAttackFlagGroup4.TabIndex = 47;
-            this.grpAttackFlagGroup4.TabStop = false;
-            this.grpAttackFlagGroup4.Text = "Attack Flag Group 4";
-            // 
-            // lblGP4FUnk1
-            // 
-            this.lblGP4FUnk1.AutoSize = true;
-            this.lblGP4FUnk1.Location = new System.Drawing.Point(6, 24);
-            this.lblGP4FUnk1.Name = "lblGP4FUnk1";
-            this.lblGP4FUnk1.Size = new System.Drawing.Size(42, 13);
-            this.lblGP4FUnk1.TabIndex = 95;
-            this.lblGP4FUnk1.Text = "FUnk1:";
-            // 
-            // lblGP4HitFainted
-            // 
-            this.lblGP4HitFainted.AutoSize = true;
-            this.lblGP4HitFainted.Location = new System.Drawing.Point(6, 48);
-            this.lblGP4HitFainted.Name = "lblGP4HitFainted";
-            this.lblGP4HitFainted.Size = new System.Drawing.Size(61, 13);
-            this.lblGP4HitFainted.TabIndex = 97;
-            this.lblGP4HitFainted.Text = "Hit Fainted:";
-            // 
-            // cmbGP4DamageOnDefense
-            // 
-            this.cmbGP4DamageOnDefense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4DamageOnDefense.FormattingEnabled = true;
-            this.cmbGP4DamageOnDefense.Location = new System.Drawing.Point(372, 71);
-            this.cmbGP4DamageOnDefense.Name = "cmbGP4DamageOnDefense";
-            this.cmbGP4DamageOnDefense.Size = new System.Drawing.Size(42, 21);
-            this.cmbGP4DamageOnDefense.TabIndex = 109;
-            // 
-            // lblGP4DamageOnCounterattack
-            // 
-            this.lblGP4DamageOnCounterattack.AutoSize = true;
-            this.lblGP4DamageOnCounterattack.Location = new System.Drawing.Point(6, 74);
-            this.lblGP4DamageOnCounterattack.Name = "lblGP4DamageOnCounterattack";
-            this.lblGP4DamageOnCounterattack.Size = new System.Drawing.Size(135, 13);
-            this.lblGP4DamageOnCounterattack.TabIndex = 100;
-            this.lblGP4DamageOnCounterattack.Text = "Damage on Counterattack:";
-            // 
-            // lblGP4FUnk5
-            // 
-            this.lblGP4FUnk5.AutoSize = true;
-            this.lblGP4FUnk5.Location = new System.Drawing.Point(152, 48);
-            this.lblGP4FUnk5.Name = "lblGP4FUnk5";
-            this.lblGP4FUnk5.Size = new System.Drawing.Size(42, 13);
-            this.lblGP4FUnk5.TabIndex = 98;
-            this.lblGP4FUnk5.Text = "FUnk5:";
-            // 
-            // cmbGP4Backdash
-            // 
-            this.cmbGP4Backdash.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4Backdash.FormattingEnabled = true;
-            this.cmbGP4Backdash.Location = new System.Drawing.Point(372, 45);
-            this.cmbGP4Backdash.Name = "cmbGP4Backdash";
-            this.cmbGP4Backdash.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP4Backdash.TabIndex = 107;
-            // 
-            // cmbGP4FUnk2
-            // 
-            this.cmbGP4FUnk2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4FUnk2.FormattingEnabled = true;
-            this.cmbGP4FUnk2.Location = new System.Drawing.Point(235, 21);
-            this.cmbGP4FUnk2.Name = "cmbGP4FUnk2";
-            this.cmbGP4FUnk2.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP4FUnk2.TabIndex = 102;
-            // 
-            // lblGP4FUnk3
-            // 
-            this.lblGP4FUnk3.AutoSize = true;
-            this.lblGP4FUnk3.Location = new System.Drawing.Point(324, 24);
-            this.lblGP4FUnk3.Name = "lblGP4FUnk3";
-            this.lblGP4FUnk3.Size = new System.Drawing.Size(42, 13);
-            this.lblGP4FUnk3.TabIndex = 96;
-            this.lblGP4FUnk3.Text = "FUnk3:";
-            // 
-            // cmbGP4FUnk3
-            // 
-            this.cmbGP4FUnk3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4FUnk3.FormattingEnabled = true;
-            this.cmbGP4FUnk3.Location = new System.Drawing.Point(372, 18);
-            this.cmbGP4FUnk3.Name = "cmbGP4FUnk3";
-            this.cmbGP4FUnk3.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP4FUnk3.TabIndex = 105;
-            // 
-            // cmbGP4HitFainted
-            // 
-            this.cmbGP4HitFainted.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4HitFainted.FormattingEnabled = true;
-            this.cmbGP4HitFainted.Location = new System.Drawing.Point(70, 45);
-            this.cmbGP4HitFainted.Name = "cmbGP4HitFainted";
-            this.cmbGP4HitFainted.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP4HitFainted.TabIndex = 104;
-            // 
-            // lblGP4FUnk2
-            // 
-            this.lblGP4FUnk2.AutoSize = true;
-            this.lblGP4FUnk2.Location = new System.Drawing.Point(152, 24);
-            this.lblGP4FUnk2.Name = "lblGP4FUnk2";
-            this.lblGP4FUnk2.Size = new System.Drawing.Size(42, 13);
-            this.lblGP4FUnk2.TabIndex = 94;
-            this.lblGP4FUnk2.Text = "FUnk2:";
-            // 
-            // cmbGP4FUnk1
-            // 
-            this.cmbGP4FUnk1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4FUnk1.FormattingEnabled = true;
-            this.cmbGP4FUnk1.Location = new System.Drawing.Point(70, 21);
-            this.cmbGP4FUnk1.Name = "cmbGP4FUnk1";
-            this.cmbGP4FUnk1.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP4FUnk1.TabIndex = 103;
-            // 
-            // cmbGP4FUnk5
-            // 
-            this.cmbGP4FUnk5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4FUnk5.FormattingEnabled = true;
-            this.cmbGP4FUnk5.Location = new System.Drawing.Point(235, 45);
-            this.cmbGP4FUnk5.Name = "cmbGP4FUnk5";
-            this.cmbGP4FUnk5.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP4FUnk5.TabIndex = 106;
-            // 
-            // lblGP4DamageOnDefense
-            // 
-            this.lblGP4DamageOnDefense.AutoSize = true;
-            this.lblGP4DamageOnDefense.Location = new System.Drawing.Point(233, 74);
-            this.lblGP4DamageOnDefense.Name = "lblGP4DamageOnDefense";
-            this.lblGP4DamageOnDefense.Size = new System.Drawing.Size(108, 13);
-            this.lblGP4DamageOnDefense.TabIndex = 101;
-            this.lblGP4DamageOnDefense.Text = "Damage on Defense:";
-            // 
-            // lblGP4Backdash
-            // 
-            this.lblGP4Backdash.AutoSize = true;
-            this.lblGP4Backdash.Location = new System.Drawing.Point(308, 48);
-            this.lblGP4Backdash.Name = "lblGP4Backdash";
-            this.lblGP4Backdash.Size = new System.Drawing.Size(58, 13);
-            this.lblGP4Backdash.TabIndex = 99;
-            this.lblGP4Backdash.Text = "Backdash:";
-            // 
-            // cmbGP4DamageOnCounterattack
-            // 
-            this.cmbGP4DamageOnCounterattack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGP4DamageOnCounterattack.FormattingEnabled = true;
-            this.cmbGP4DamageOnCounterattack.Location = new System.Drawing.Point(155, 71);
-            this.cmbGP4DamageOnCounterattack.Name = "cmbGP4DamageOnCounterattack";
-            this.cmbGP4DamageOnCounterattack.Size = new System.Drawing.Size(41, 21);
-            this.cmbGP4DamageOnCounterattack.TabIndex = 108;
+            this.grpAttackFlagGroup1.Text = "Attack Flags";
             // 
             // btnEditAnmParameters
             // 
@@ -1386,15 +655,22 @@
             // 
             // pnlAtkPrm
             // 
-            this.pnlAtkPrm.Controls.Add(this.grpAttackFlagGroup4);
-            this.pnlAtkPrm.Controls.Add(this.grpAttackFlagGroup3);
-            this.pnlAtkPrm.Controls.Add(this.grpAttackFlagGroup2);
+            this.pnlAtkPrm.Controls.Add(this.clbFlags);
             this.pnlAtkPrm.Controls.Add(this.grpAttackFlagGroup1);
             this.pnlAtkPrm.Controls.Add(this.grpAttackParameters);
+            this.pnlAtkPrm.Controls.Add(this.panel1);
             this.pnlAtkPrm.Location = new System.Drawing.Point(306, 25);
             this.pnlAtkPrm.Name = "pnlAtkPrm";
             this.pnlAtkPrm.Size = new System.Drawing.Size(419, 574);
             this.pnlAtkPrm.TabIndex = 45;
+            // 
+            // clbFlags
+            // 
+            this.clbFlags.FormattingEnabled = true;
+            this.clbFlags.Location = new System.Drawing.Point(10, 303);
+            this.clbFlags.Name = "clbFlags";
+            this.clbFlags.Size = new System.Drawing.Size(404, 259);
+            this.clbFlags.TabIndex = 80;
             // 
             // pnlAnmPrm
             // 
@@ -1991,17 +1267,59 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
+            // picCommand
+            // 
+            this.picCommand.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.picCommand.Location = new System.Drawing.Point(0, 43);
+            this.picCommand.Name = "picCommand";
+            this.picCommand.Size = new System.Drawing.Size(419, 52);
+            this.picCommand.TabIndex = 81;
+            this.picCommand.TabStop = false;
+            this.picCommand.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // lblNamePanel
+            // 
+            this.lblNamePanel.AutoSize = true;
+            this.lblNamePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblNamePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNamePanel.Location = new System.Drawing.Point(0, 0);
+            this.lblNamePanel.Name = "lblNamePanel";
+            this.lblNamePanel.Size = new System.Drawing.Size(286, 16);
+            this.lblNamePanel.TabIndex = 82;
+            this.lblNamePanel.Text = "Ataque da Sombra Voadora Ascendente";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblInfo);
+            this.panel1.Controls.Add(this.picCommand);
+            this.panel1.Controls.Add(this.lblNamePanel);
+            this.panel1.Location = new System.Drawing.Point(0, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(419, 95);
+            this.panel1.TabIndex = 83;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.ForeColor = System.Drawing.Color.Blue;
+            this.lblInfo.Location = new System.Drawing.Point(0, 16);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(57, 16);
+            this.lblInfo.TabIndex = 83;
+            this.lblInfo.Text = "Charge";
+            // 
             // MovesetParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 633);
+            this.ClientSize = new System.Drawing.Size(728, 633);
+            this.Controls.Add(this.pnlAtkPrm);
             this.Controls.Add(this.lblSelectedAtk2);
             this.Controls.Add(this.lblSelectedAtk);
             this.Controls.Add(this.lblComboCount2);
             this.Controls.Add(this.lblComboCount);
-            this.Controls.Add(this.pnlAnmPrm);
-            this.Controls.Add(this.pnlAtkPrm);
             this.Controls.Add(this.btnEditAnmParameters);
             this.Controls.Add(this.lblCharID2);
             this.Controls.Add(this.lblCharID);
@@ -2012,6 +1330,7 @@
             this.Controls.Add(this.lblCharName);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnEditAtkParameters);
+            this.Controls.Add(this.pnlAnmPrm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -2020,14 +1339,6 @@
             this.Text = "Edit Moveset Parameters:";
             this.grpAttackParameters.ResumeLayout(false);
             this.grpAttackParameters.PerformLayout();
-            this.grpAttackFlagGroup3.ResumeLayout(false);
-            this.grpAttackFlagGroup3.PerformLayout();
-            this.grpAttackFlagGroup1.ResumeLayout(false);
-            this.grpAttackFlagGroup1.PerformLayout();
-            this.grpAttackFlagGroup2.ResumeLayout(false);
-            this.grpAttackFlagGroup2.PerformLayout();
-            this.grpAttackFlagGroup4.ResumeLayout(false);
-            this.grpAttackFlagGroup4.PerformLayout();
             this.pnlAtkPrm.ResumeLayout(false);
             this.pnlAnmPrm.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -2047,6 +1358,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCommand)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2103,74 +1417,7 @@
         public System.Windows.Forms.Label lblDefenseParticle;
         public System.Windows.Forms.Label lblDefenseSound;
         public System.Windows.Forms.TextBox txtDefenseSound;
-        public System.Windows.Forms.Label lblGP3FBreakDef;
-        public System.Windows.Forms.Label lblGP3FUndefendable;
-        public System.Windows.Forms.Label lblGP3FUnk3;
-        public System.Windows.Forms.Label lblGP3FWallKB;
-        public System.Windows.Forms.Label lblGP3FBounce;
-        public System.Windows.Forms.Label lblGP3FUnk1;
-        public System.Windows.Forms.Label lblGP3FHitFallen;
-        public System.Windows.Forms.ComboBox cmbGP3FUnk1;
-        public System.Windows.Forms.ComboBox cmbGP3FBreakDef;
-        public System.Windows.Forms.ComboBox cmbGP3FUndefendable;
-        public System.Windows.Forms.Label lblGP3FUnk4;
-        public System.Windows.Forms.ComboBox cmbGP3FUnk4;
-        public System.Windows.Forms.ComboBox cmbGP3FUnk3;
-        public System.Windows.Forms.ComboBox cmbGP3FWallKB;
-        public System.Windows.Forms.ComboBox cmbGP3FBounce;
-        public System.Windows.Forms.ComboBox cmbGP3FHitFallen;
-        public System.Windows.Forms.GroupBox grpAttackFlagGroup3;
         public System.Windows.Forms.GroupBox grpAttackFlagGroup1;
-        public System.Windows.Forms.Label lblGP1FUnk1;
-        public System.Windows.Forms.ComboBox cmbGP1FUnk8;
-        public System.Windows.Forms.ComboBox cmbGP1FUnk2;
-        public System.Windows.Forms.Label lblGP1FUnk2;
-        public System.Windows.Forms.Label lblGP1FUnk8;
-        public System.Windows.Forms.ComboBox cmbGP1FallingAfterHitting;
-        public System.Windows.Forms.ComboBox cmbGP1FUnk1;
-        public System.Windows.Forms.Label lblGP1FUnk3;
-        public System.Windows.Forms.Label lblGP1FallingAfterHitting;
-        public System.Windows.Forms.ComboBox cmbGP1FUnk6;
-        public System.Windows.Forms.ComboBox cmbGP1FUnk4;
-        public System.Windows.Forms.Label lblGP1FUnk4;
-        public System.Windows.Forms.Label lblGP1FUnk6;
-        public System.Windows.Forms.ComboBox cmbGP1FUnk5;
-        public System.Windows.Forms.ComboBox cmbGP1FUnk3;
-        public System.Windows.Forms.Label lblGP1FUnk5;
-        public System.Windows.Forms.GroupBox grpAttackFlagGroup2;
-        public System.Windows.Forms.GroupBox grpAttackFlagGroup4;
-        public System.Windows.Forms.Label lblGP2FUnk1;
-        public System.Windows.Forms.ComboBox cmbGP2FUnk7;
-        public System.Windows.Forms.Label lblGP2FUnk5;
-        public System.Windows.Forms.ComboBox cmbGP2FUnk2;
-        public System.Windows.Forms.ComboBox cmbGP2FUnk3;
-        public System.Windows.Forms.Label lblGP2FUnk2;
-        public System.Windows.Forms.ComboBox cmbGP2FUnk5;
-        public System.Windows.Forms.Label lblGP2FUnk7;
-        public System.Windows.Forms.Label lblGP2FUnk6;
-        public System.Windows.Forms.ComboBox cmbGP2FUnk8;
-        public System.Windows.Forms.Label lblGP2AntiCounter;
-        public System.Windows.Forms.ComboBox cmbGP2FUnk1;
-        public System.Windows.Forms.ComboBox cmbGP2AntiCounter;
-        public System.Windows.Forms.Label lblGP2FUnk3;
-        public System.Windows.Forms.ComboBox cmbGP2FUnk6;
-        public System.Windows.Forms.Label lblGP2FUnk8;
-        public System.Windows.Forms.Label lblGP4FUnk1;
-        public System.Windows.Forms.Label lblGP4HitFainted;
-        public System.Windows.Forms.ComboBox cmbGP4DamageOnDefense;
-        public System.Windows.Forms.Label lblGP4DamageOnCounterattack;
-        public System.Windows.Forms.Label lblGP4FUnk5;
-        public System.Windows.Forms.ComboBox cmbGP4Backdash;
-        public System.Windows.Forms.ComboBox cmbGP4FUnk2;
-        public System.Windows.Forms.Label lblGP4FUnk3;
-        public System.Windows.Forms.ComboBox cmbGP4FUnk3;
-        public System.Windows.Forms.ComboBox cmbGP4HitFainted;
-        public System.Windows.Forms.Label lblGP4FUnk2;
-        public System.Windows.Forms.ComboBox cmbGP4FUnk1;
-        public System.Windows.Forms.ComboBox cmbGP4FUnk5;
-        public System.Windows.Forms.Label lblGP4DamageOnDefense;
-        public System.Windows.Forms.Label lblGP4Backdash;
-        public System.Windows.Forms.ComboBox cmbGP4DamageOnCounterattack;
         public System.Windows.Forms.Button btnEditAnmParameters;
         public System.Windows.Forms.Button btnEditAtkParameters;
         public System.Windows.Forms.Panel pnlAtkPrm;
@@ -2229,5 +1476,10 @@
         public System.Windows.Forms.TextBox txtAnmHitBoxScale2;
         public System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.NumericUpDown numAnmSpeed;
+        public System.Windows.Forms.CheckedListBox clbFlags;
+        public System.Windows.Forms.PictureBox picCommand;
+        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Label lblNamePanel;
+        public System.Windows.Forms.Label lblInfo;
     }
 }

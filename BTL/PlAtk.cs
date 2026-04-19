@@ -1,11 +1,15 @@
-﻿using System;
+﻿using CCSFileExplorerWV;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
+using static CCSFileExplorerWV.CCSFile;
 
 namespace UN5ModdingWorkshop
 {
@@ -25,12 +29,12 @@ namespace UN5ModdingWorkshop
 
         public short AtkDefenseEffect, AtkHitSpeed, AtkPlSound, AtkSound, AtkDamageParticle, AtkEnemySound, AtkDamageSound, AtkDefenseParticle, AtkDefenseSound;
 
-        public uint AtkPos2;
+        public uint AtkPos2, AtkUnk16;
 
         public UInt16 AtkHitCount, AtkHitEffect, AtkSoundDelay;
 
         public byte[] AtkUnk, AtkUnk1, AtkUnk2, AtkUnk3, AtkUnk4,
-                      AtkUnk15, AtkUnk16;
+                      AtkUnk15;
 
         #endregion
 
@@ -59,7 +63,7 @@ namespace UN5ModdingWorkshop
             AtkDpadFlag = Input.ReadUInt(0x1D, 8),
             AtkButtonFlag = Input.ReadUInt(0x1E, 8),
 
-            AtkUnk16 = Input.ReadBytes(0x1F, 1),
+            AtkUnk16 = Input.ReadUInt(0x1F, 8),
 
             AtkChakra = Input.ReadSingle(0x20),
             AtkDamage = Input.ReadSingle(0x24),
@@ -450,23 +454,133 @@ namespace UN5ModdingWorkshop
             movForm.btnEditAtkParameters.Visible = false;
         }
 
-        public static void SendTextAtk(MovesetParameters movForm, PlAtk charAtkPrm)
+        public static void SendTextAtk(int charID, MovesetParameters movForm, PlAtk charAtkPrm)
         {
-            if (movForm.cmbGP3FUndefendable.Items.Count == 0)
+            int atkType = BitConverter.ToUInt16(charAtkPrm.AtkUnk4, 0);
+            int atkType2 = charAtkPrm.AtkUnk15[2];
+            movForm.lblNamePanel.Text = movForm.listBox1.SelectedItem.ToString().Split(':')[1].Trim();
+            if ((atkType == 0x100 || atkType == 0x200) && ((atkType2 >> 1) & 1) == 1)
             {
-                string[] yesNoOptions = { "No", "Yes" };
-                foreach (var comboBox in new[] {movForm.cmbGP1FUnk1, movForm.cmbGP1FUnk2, movForm.cmbGP1FUnk3, movForm.cmbGP1FUnk4, movForm.cmbGP1FUnk5, movForm.cmbGP1FUnk6, movForm.cmbGP1FallingAfterHitting, movForm.cmbGP1FUnk8,
-                                                movForm.cmbGP2FUnk1, movForm.cmbGP2FUnk2, movForm.cmbGP2FUnk3, movForm.cmbGP2AntiCounter, movForm.cmbGP2FUnk5, movForm.cmbGP2FUnk6, movForm.cmbGP2FUnk7, movForm.cmbGP2FUnk8,
-                                                movForm.cmbGP3FBreakDef, movForm.cmbGP3FUndefendable, movForm.cmbGP3FUnk1, movForm.cmbGP3FHitFallen, movForm.cmbGP3FBounce, movForm.cmbGP3FWallKB, movForm.cmbGP3FUnk3, movForm.cmbGP3FUnk4,
-                                                movForm.cmbGP4FUnk1, movForm.cmbGP4FUnk2, movForm.cmbGP4FUnk3, movForm.cmbGP4HitFainted, movForm.cmbGP4FUnk5, movForm.cmbGP4Backdash, movForm.cmbGP4DamageOnCounterattack, movForm.cmbGP4DamageOnDefense,})
-                {
-                    comboBox.Items.AddRange(yesNoOptions);
-                }
+                movForm.lblInfo.Text = "Ground Throw";
             }
-            VerifyFlagGroup1Bits(movForm, charAtkPrm.AtkFlagGroup1);
-            VerifyFlagGroup2Bits(movForm, charAtkPrm.AtkFlagGroup2);
-            VerifyDefenseFlagBits(movForm, charAtkPrm.AtkDefenseFlag);
-            VerifyFlagGroup4Bits(movForm, charAtkPrm.AtkFlagGroup4);
+            else if ((atkType == 0x100 || atkType == 0x200) && ((atkType2 >> 2) & 1) == 1)
+            {
+                movForm.lblInfo.Text = "Aerial Throw";
+            }
+            else if (atkType == 8 || atkType == 0x10)
+            {
+                movForm.lblInfo.Text = "Charge";
+            }
+            else if (((atkType2 >> 2) & 1) == 1 && atkType == 1)
+            {
+                movForm.lblInfo.Text = "While Jumping";
+            }
+            else
+            {
+                movForm.lblInfo.Text = "";
+            }
+            movForm.clbFlags.Items.Clear();
+            int flagsCount = 1;
+            for (int i = 0; i < 8; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        movForm.clbFlags.Items.Add("Ground", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    case 1:
+                        movForm.clbFlags.Items.Add("Air", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    case 2:
+                        movForm.clbFlags.Items.Add("Follow Up", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    case 3:
+                        movForm.clbFlags.Items.Add("Up", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    case 4:
+                        movForm.clbFlags.Items.Add("Down", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    case 5:
+                        movForm.clbFlags.Items.Add("Front", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    case 6:
+                        movForm.clbFlags.Items.Add("Back", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    case 7:
+                        movForm.clbFlags.Items.Add("Side Extra-Hit", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                    default:
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        break;
+                }
+                flagsCount++;
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        movForm.clbFlags.Items.Add("Down Extra-Hit", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        break;
+                    case 1:
+                        movForm.clbFlags.Items.Add("Up Extra-Hit", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        break;
+                    case 4:
+                        movForm.clbFlags.Items.Add("Anti Counter", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        break;
+                    default:
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        break;
+                }
+                flagsCount++;
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                switch (i)
+                {
+                    case 2:
+                        movForm.clbFlags.Items.Add("Without Wall KB", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        break;
+                    case 3:
+                        movForm.clbFlags.Items.Add("Don't Bounce", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        break;
+                    case 5:
+                        movForm.clbFlags.Items.Add("Hit Fallen", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        break;
+                    case 6:
+                        movForm.clbFlags.Items.Add("Undefendable", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        break;
+                    case 7:
+                        movForm.clbFlags.Items.Add("Break Defense", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        break;
+                    default:
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        break;
+                }
+                flagsCount++;
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                switch (i)
+                {
+                    case 4:
+                        movForm.clbFlags.Items.Add("Hit Fainted", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        break;
+                    case 2:
+                        movForm.clbFlags.Items.Add("Backdash", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        break;
+                    case 1:
+                        movForm.clbFlags.Items.Add("Damage on Counter Attack", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        break;
+                    case 0:
+                        movForm.clbFlags.Items.Add("Damage on Defense", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        break;
+                    default:
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        break;
+                }
+                flagsCount++;
+            }
 
             movForm.txtChakra.Text = ($"{charAtkPrm.AtkChakra}");
             movForm.txtDamage.Text = ($"{charAtkPrm.AtkDamage}");
@@ -501,79 +615,158 @@ namespace UN5ModdingWorkshop
             int currentDefenseParticle = charAtkPrm.AtkDefenseParticle;
             movForm.cmbDefenseParticle.SelectedIndex = currentDefenseParticle < 0 ? currentDefenseParticle + 1 : 0;
             movForm.txtEnemySound.Text = ($"{charAtkPrm.AtkEnemySound}");
-        }
-        public static void VerifyFlagGroup1Bits(MovesetParameters movForm, uint AtkDefenseFlag)
-        {
-            bool[] bits = new bool[8];
-            for (int i = 0; i < 8; i++)
+
+            int currentAtkPrevious = charAtkPrm.AtkPrevious;
+            List<uint> lastButtons = new List<uint>();
+            List<uint> lastDpad = new List<uint>();
+
+            if (atkType == 1 || atkType == 0x100 || atkType == 0x200)
             {
-                bits[i] = (AtkDefenseFlag & (1 << (7 - i))) != 0;
+                // Golpe atual primeiro
+                if((charAtkPrm.AtkUnk16 >> 3) == 0)
+                {
+                    lastDpad.Add(charAtkPrm.AtkDpadFlag);
+                    lastButtons.Add(charAtkPrm.AtkButtonFlag);
+                }
+
+                // Percorre a cadeia até -1
+                while (currentAtkPrevious != 255)
+                {
+                    PlAtk currentAtk = GetCharAtk(charID, currentAtkPrevious);
+                    lastDpad.Add(currentAtk.AtkDpadFlag);
+                    lastButtons.Add(currentAtk.AtkButtonFlag);
+                    currentAtkPrevious = currentAtk.AtkPrevious;
+                }
+            }
+            else
+            {
+                // Golpe simples sem cadeia
+                lastDpad.Add(charAtkPrm.AtkDpadFlag);
+                lastButtons.Add(charAtkPrm.AtkButtonFlag);
+            }
+            lastButtons.Reverse();
+            lastDpad.Reverse();
+
+            // Renderiza no picCommand
+            DrawCommandSequence(movForm.picCommand, lastDpad, lastButtons);
+        }
+        private static readonly Dictionary<uint, int> DpadIconMap = new Dictionary<uint, int>()
+{
+    { 0x01, 0 }, // Up
+    { 0x02, 1 }, // Down
+    { 0x04, 2 }, // Right
+    { 0x03, 3 }, // Left
+    { 0x05, 3 }, // Left (Hold)
+    { 0x06, 2 }, // Right
+    { 0x07, 3 }, // Left
+};
+
+        private static readonly Dictionary<uint, int> ButtonIconMap = new Dictionary<uint, int>()
+{
+    { 0x20, 4 }, // Circle
+    { 0x10, 5 }, // Triangle
+    { 0x80, 6 }, // Square
+    { 0x40, 7 }, // Cross
+    { 0x08, 8 }, // Plus
+};
+
+        public static void DrawCommandSequence(PictureBox pic, List<uint> dpads, List<uint> buttons)
+        {
+            const int iconSize = 24;
+            const int padding = 2;
+            const int sepWidth = 0;
+
+            int count = dpads.Count;
+
+            // Tamanho base (antes da escala)
+            int baseWidth = padding;
+            for (int i = 0; i < count; i++)
+            {
+                if (dpads[i] != 0) baseWidth += iconSize + padding;
+                baseWidth += iconSize + padding;
+                if (i < count - 1) baseWidth += sepWidth;
+            }
+            baseWidth = Math.Max(baseWidth, 10);
+
+            int baseHeight = iconSize + padding * 2;
+
+            // Calcula escala baseada no PictureBox
+            float scaleX = (float)pic.Width / baseWidth;
+            float scaleY = (float)pic.Height / baseHeight;
+            float scale = Math.Min(scaleX, scaleY);
+
+            int finalWidth = (int)(baseWidth * scale);
+            int finalHeight = (int)(baseHeight * scale);
+
+            Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.Transparent);
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+
+                // Centralizar
+                int offsetX = 0;
+                int offsetY = 0; // mantém centralizado só na vertical (opcional)
+
+                float x = padding;
+
+                for (int i = 0; i < count; i++)
+                {
+                    // Direcional
+                    if (dpads[i] != 0)
+                    {
+                        uint v = dpads[i] & ~1u;
+
+                        if (v != 0)
+                        {
+                            int bitIndex = (int)(Math.Log(v) / Math.Log(2));
+
+                            if (DpadIconMap.TryGetValue((uint)bitIndex, out int dpadIdx))
+                            {
+                                Rectangle destRect = new Rectangle(
+                                    offsetX + (int)(x * scale),
+                                    offsetY + (int)(padding * scale),
+                                    (int)(iconSize * scale),
+                                    (int)(iconSize * scale)
+                                );
+
+                                g.DrawImage(CharSel.xCommandIcons[dpadIdx], destRect);
+                                x += iconSize + padding;
+                            }
+                        }
+                    }
+
+                    // Botão
+                    if (ButtonIconMap.TryGetValue(buttons[i], out int btnIdx))
+                    {
+                        Rectangle destRect = new Rectangle(
+                            offsetX + (int)(x * scale),
+                            offsetY + (int)(padding * scale),
+                            (int)(iconSize * scale),
+                            (int)(iconSize * scale)
+                        );
+
+                        g.DrawImage(CharSel.xCommandIcons[4], destRect); // <-- volta isso
+                    }
+
+                    x += iconSize + padding;
+
+                    if (i < count - 1)
+                        x += sepWidth;
+                }
             }
 
-            movForm.cmbGP1FUnk1.SelectedIndex = bits[0] ? 1 : 0;
-            movForm.cmbGP1FUnk2.SelectedIndex = bits[1] ? 1 : 0;
-            movForm.cmbGP1FUnk3.SelectedIndex = bits[2] ? 1 : 0;
-            movForm.cmbGP1FUnk4.SelectedIndex = bits[3] ? 1 : 0;
-            movForm.cmbGP1FUnk5.SelectedIndex = bits[4] ? 1 : 0;
-            movForm.cmbGP1FUnk6.SelectedIndex = bits[5] ? 1 : 0;
-            movForm.cmbGP1FallingAfterHitting.SelectedIndex = bits[6] ? 1 : 0;
-            movForm.cmbGP1FUnk8.SelectedIndex = bits[7] ? 1 : 0;
+            Image old = pic.Image;
+            pic.Image = bmp;
+
+            // Pode manter StretchImage agora sem distorcer
+            pic.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            old?.Dispose();
         }
-
-        public static void VerifyFlagGroup2Bits(MovesetParameters movForm, uint AtkDefenseFlag)
-        {
-            bool[] bits = new bool[8];
-            for (int i = 0; i < 8; i++)
-            {
-                bits[i] = (AtkDefenseFlag & (1 << (7 - i))) != 0;
-            }
-
-            movForm.cmbGP2FUnk1.SelectedIndex = bits[0] ? 1 : 0;
-            movForm.cmbGP2FUnk2.SelectedIndex = bits[1] ? 1 : 0;
-            movForm.cmbGP2FUnk3.SelectedIndex = bits[2] ? 1 : 0;
-            movForm.cmbGP2AntiCounter.SelectedIndex = bits[3] ? 1 : 0;
-            movForm.cmbGP2FUnk5.SelectedIndex = bits[4] ? 1 : 0;
-            movForm.cmbGP2FUnk6.SelectedIndex = bits[5] ? 1 : 0;
-            movForm.cmbGP2FUnk7.SelectedIndex = bits[6] ? 1 : 0;
-            movForm.cmbGP2FUnk8.SelectedIndex = bits[7] ? 1 : 0;
-        }
-
-        public static void VerifyDefenseFlagBits(MovesetParameters movForm, uint AtkDefenseFlag)
-        {
-            bool[] bits = new bool[8];
-            for (int i = 0; i < 8; i++)
-            {
-                bits[i] = (AtkDefenseFlag & (1 << (7 - i))) != 0;
-            }
-
-            movForm.cmbGP3FBreakDef.SelectedIndex = bits[0] ? 1 : 0;
-            movForm.cmbGP3FUndefendable.SelectedIndex = bits[1] ? 1 : 0;
-            movForm.cmbGP3FHitFallen.SelectedIndex = bits[2] ? 1 : 0;
-            movForm.cmbGP3FUnk1.SelectedIndex = bits[3] ? 1 : 0;
-            movForm.cmbGP3FBounce.SelectedIndex = bits[4] ? 1 : 0;
-            movForm.cmbGP3FWallKB.SelectedIndex = bits[5] ? 1 : 0;
-            movForm.cmbGP3FUnk3.SelectedIndex = bits[6] ? 1 : 0;
-            movForm.cmbGP3FUnk4.SelectedIndex = bits[7] ? 1 : 0;
-        }
-
-        public static void VerifyFlagGroup4Bits(MovesetParameters movForm, uint AtkDefenseFlag)
-        {
-            bool[] bits = new bool[8];
-            for (int i = 0; i < 8; i++)
-            {
-                bits[i] = (AtkDefenseFlag & (1 << (7 - i))) != 0;
-            }
-
-            movForm.cmbGP4FUnk1.SelectedIndex = bits[0] ? 1 : 0;
-            movForm.cmbGP4FUnk2.SelectedIndex = bits[1] ? 1 : 0;
-            movForm.cmbGP4FUnk3.SelectedIndex = bits[2] ? 1 : 0;
-            movForm.cmbGP4HitFainted.SelectedIndex = bits[3] ? 1 : 0;
-            movForm.cmbGP4FUnk5.SelectedIndex = bits[4] ? 1 : 0;
-            movForm.cmbGP4Backdash.SelectedIndex = bits[5] ? 1 : 0;
-            movForm.cmbGP4DamageOnCounterattack.SelectedIndex = bits[6] ? 1 : 0;
-            movForm.cmbGP4DamageOnDefense.SelectedIndex = bits[7] ? 1 : 0;
-        }
-
         public static byte[] UpdateCharAtkPrm(MovesetParameters movForm, int charID, int atkID)
         {
             var ninjaCharsAtk = CharAtkPrm[charID][atkID];
@@ -586,55 +779,44 @@ namespace UN5ModdingWorkshop
             atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk3);
             atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk4);
 
+            int flagsCount = 0;
             int[] bitsGroupFlag1 = new int[8];
-            bitsGroupFlag1[7] = movForm.cmbGP1FUnk1.SelectedIndex;
-            bitsGroupFlag1[6] = movForm.cmbGP1FUnk2.SelectedIndex;
-            bitsGroupFlag1[5] = movForm.cmbGP1FUnk3.SelectedIndex;
-            bitsGroupFlag1[4] = movForm.cmbGP1FUnk4.SelectedIndex;
-            bitsGroupFlag1[3] = movForm.cmbGP1FUnk5.SelectedIndex;
-            bitsGroupFlag1[2] = movForm.cmbGP1FUnk6.SelectedIndex;
-            bitsGroupFlag1[1] = movForm.cmbGP1FallingAfterHitting.SelectedIndex;
-            bitsGroupFlag1[0] = movForm.cmbGP1FUnk8.SelectedIndex;
+            for(int i = 0; i < 8; i++)
+            {
+                bitsGroupFlag1[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
+                flagsCount++;
+            }
             byte byteGroupFlag1 = Util.FormarByte(bitsGroupFlag1);
             atkBlockBytes.Add(byteGroupFlag1);
             ninjaCharsAtk.AtkFlagGroup1 = byteGroupFlag1;
 
             int[] bitsGroupFlag2 = new int[8];
-            bitsGroupFlag2[7] = movForm.cmbGP2FUnk1.SelectedIndex;
-            bitsGroupFlag2[6] = movForm.cmbGP2FUnk2.SelectedIndex;
-            bitsGroupFlag2[5] = movForm.cmbGP2FUnk3.SelectedIndex;
-            bitsGroupFlag2[4] = movForm.cmbGP2AntiCounter.SelectedIndex;
-            bitsGroupFlag2[3] = movForm.cmbGP2FUnk5.SelectedIndex;
-            bitsGroupFlag2[2] = movForm.cmbGP2FUnk6.SelectedIndex;
-            bitsGroupFlag2[1] = movForm.cmbGP2FUnk7.SelectedIndex;
-            bitsGroupFlag2[0] = movForm.cmbGP2FUnk8.SelectedIndex;
+            for (int i = 0; i < 8; i++)
+            {
+                bitsGroupFlag2[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
+                flagsCount++;
+            }
             byte byteGroupFlag2 = Util.FormarByte(bitsGroupFlag2);
             atkBlockBytes.Add(byteGroupFlag2);
             ninjaCharsAtk.AtkFlagGroup2 = byteGroupFlag2;
 
-            int[] valoresSelecionados = new int[8];
-            valoresSelecionados[7] = movForm.cmbGP3FBreakDef.SelectedIndex;
-            valoresSelecionados[6] = movForm.cmbGP3FUndefendable.SelectedIndex;
-            valoresSelecionados[5] = movForm.cmbGP3FHitFallen.SelectedIndex;
-            valoresSelecionados[4] = movForm.cmbGP3FUnk1.SelectedIndex;
-            valoresSelecionados[3] = movForm.cmbGP3FBounce.SelectedIndex;
-            valoresSelecionados[2] = movForm.cmbGP3FWallKB.SelectedIndex;
-            valoresSelecionados[1] = movForm.cmbGP3FUnk3.SelectedIndex;
-            valoresSelecionados[0] = movForm.cmbGP3FUnk4.SelectedIndex;
-            byte resultado = Util.FormarByte(valoresSelecionados);
+            int[] bitsGroupFlag3 = new int[8];
+            for (int i = 0; i < 8; i++)
+            {
+                bitsGroupFlag3[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
+                flagsCount++;
+            }
+            byte resultado = Util.FormarByte(bitsGroupFlag3);
 
             atkBlockBytes.Add(resultado);
             ninjaCharsAtk.AtkDefenseFlag = resultado;
 
             int[] bitsGroupFlag4 = new int[8];
-            bitsGroupFlag4[7] = movForm.cmbGP4FUnk1.SelectedIndex;
-            bitsGroupFlag4[6] = movForm.cmbGP4FUnk2.SelectedIndex;
-            bitsGroupFlag4[5] = movForm.cmbGP4FUnk3.SelectedIndex;
-            bitsGroupFlag4[4] = movForm.cmbGP4HitFainted.SelectedIndex;
-            bitsGroupFlag4[3] = movForm.cmbGP4FUnk5.SelectedIndex;
-            bitsGroupFlag4[2] = movForm.cmbGP4Backdash.SelectedIndex;
-            bitsGroupFlag4[1] = movForm.cmbGP4DamageOnCounterattack.SelectedIndex;
-            bitsGroupFlag4[0] = movForm.cmbGP4DamageOnDefense.SelectedIndex;
+            for (int i = 0; i < 8; i++)
+            {
+                bitsGroupFlag4[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
+                flagsCount++;
+            }
             byte byteGroupFlag4 = Util.FormarByte(bitsGroupFlag4);
             atkBlockBytes.Add(byteGroupFlag4);
             ninjaCharsAtk.AtkFlagGroup4 = byteGroupFlag4;
@@ -649,7 +831,7 @@ namespace UN5ModdingWorkshop
             atkBlockBytes.Add(atkDpadFlag);
             byte atkButtonFlag = (byte)ninjaCharsAtk.AtkButtonFlag;
             atkBlockBytes.Add(atkButtonFlag);
-            atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk16);
+            atkBlockBytes.Add((byte)ninjaCharsAtk.AtkUnk16);
             atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtChakra.Text)));
             ninjaCharsAtk.AtkChakra = Convert.ToSingle(movForm.txtChakra.Text);
             atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtDamage.Text)));
@@ -787,7 +969,7 @@ namespace UN5ModdingWorkshop
                 atkBlockBytes.Add((byte)ninjaCharsAtk.AtkDpadFlag);
                 byte atkButtonFlag = (byte)ninjaCharsAtk.AtkButtonFlag;
                 atkBlockBytes.Add(atkButtonFlag);
-                atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk16);
+                atkBlockBytes.Add((byte)ninjaCharsAtk.AtkUnk16);
                 atkBlockBytes.AddRange(BitConverter.GetBytes(ninjaCharsAtk.AtkChakra));
                 atkBlockBytes.AddRange(BitConverter.GetBytes(ninjaCharsAtk.AtkDamage));
                 atkBlockBytes.AddRange(BitConverter.GetBytes(ninjaCharsAtk.AtkKnockBack));

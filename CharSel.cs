@@ -19,6 +19,7 @@ namespace UN5ModdingWorkshop
         public static List<int> CharSelID = new List<int>();
         static List<Bitmap> charIconPicBoxes = new List<Bitmap>();
         static List<Bitmap> charPicturePicBoxes = new List<Bitmap>();
+        public static List<Bitmap> xCommandIcons = new List<Bitmap>();
         static Bitmap selIconImage;
         static PictureBox selIcon = new PictureBox();
         static CCSFile charselFile = new CCSFile(new byte[0], FileVersionEnum.HACK_GU);
@@ -78,6 +79,35 @@ namespace UN5ModdingWorkshop
                 {
                     CharSelect(pic);
                 }
+            }
+            CreateCommandImages();
+        }
+
+        private static void CreateCommandImages()
+        {
+            CCSFile gaugeFile = new CCSFile(File.ReadAllBytes(Path.Combine(GAME.gamePath, "DATA\\ROFS\\CMN\\GAUGE.CCS")), FileVersionEnum.HACK_GU);
+            Bitmap xCommandTexture = GetCCSImage(gaugeFile, "xcommand.bmp");
+
+            //D-Pad
+            for (int i = 0; i < 4; i++)
+            {
+                var icon = new Bitmap(32, 32);
+                var g = Graphics.FromImage(icon);
+                var srcRect = new Rectangle(i * 32, 0, 32, 32);
+                g.DrawImage(xCommandTexture, 0, 0, srcRect, GraphicsUnit.Pixel);
+                xCommandIcons.Add(icon);
+                g.Dispose();
+            }
+
+            //Buttons
+            for (int i = 0; i < 5; i++)
+            {
+                var icon = new Bitmap(24, 32);
+                var g = Graphics.FromImage(icon);
+                var srcRect = new Rectangle(i * 24, 32, 24, 32);
+                g.DrawImage(xCommandTexture, 0, 0, srcRect, GraphicsUnit.Pixel);
+                xCommandIcons.Add(icon);
+                g.Dispose();
             }
         }
 
@@ -142,29 +172,6 @@ namespace UN5ModdingWorkshop
             }
         }
 
-        static Bitmap GetCCSImage(CCSFile ccs, string fileName)
-        {
-            byte[] pallete = new byte[0];
-            byte[] texture = new byte[0];
-            for (int i = 0; i < ccs.files.Count; i++)
-            {
-                if (ccs.files[i].name.Contains(fileName) == true)
-                {
-                    for (int j = 0; j < ccs.files[i].objects.Count; j++)
-                    {
-                        if (ccs.files[i].objects[j].blocks[0].BlockID == 0xCCCC0400)
-                        {
-                            pallete = ccs.files[i].objects[j].blocks[0].Data;
-                        }
-                        if (ccs.files[i].objects[j].blocks[0].BlockID == 0xCCCC0300)
-                        {
-                            texture = ccs.files[i].objects[j].blocks[0].Data;
-                        }
-                    }
-                }
-            }
-            return CCSFile.CreateImage(pallete, texture);
-        }
         public static void Pic_Click(object sender, MouseEventArgs e)
         {
             CharSelect(sender as PictureBox);

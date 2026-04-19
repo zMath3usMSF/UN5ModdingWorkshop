@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace UN5ModdingWorkshop
         public static ulong eeAddress;
         public static int lastSelectedID = 0;
         public static string cvm_toolPath = @"CVM Tool\cvm_tool.exe";
+        public static string cvm_hdrPath = @"CVM Tool\data.hdr";
         public static string cvm;
         public static string iso;
         public static string rofs;
@@ -47,23 +49,14 @@ namespace UN5ModdingWorkshop
 
                 string gameFile = ofd.FileName;
                 gamePath = Path.Combine(Path.GetDirectoryName(gameFile), "GAME");
-
-                // Cria pasta de destino, se não existir
                 Directory.CreateDirectory(gamePath);
 
-                // Extrai o conteúdo da ISO usando isoinfo
-                ProcessStartInfo extractIso = new ProcessStartInfo
+                // Extrai o conteúdo da ISO usando DiscUtils
+                using (FileStream isoStream = File.OpenRead(gameFile))
                 {
-                    FileName = "7-Zip\\7z.exe",
-                    Arguments = $"x \"{gameFile}\" -o\"{gamePath}\" -y",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                Process processExtractIso = Process.Start(extractIso);
-                processExtractIso.WaitForExit();
+                    var cdReader = new DiscUtils.Iso9660.CDReader(isoStream, joliet: false);
+                    ExtractDirectory(cdReader.Root, gamePath);
+                }
 
                 Main.instance.Invoke(new Action(() =>
                 {
@@ -78,7 +71,7 @@ namespace UN5ModdingWorkshop
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = cvm_toolPath,
-                    Arguments = $"split \"{cvm}\" \"{iso}\" data.hdr -p cc2fuku",
+                    Arguments = $"split \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p cc2fuku",
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -86,21 +79,14 @@ namespace UN5ModdingWorkshop
                 Process process = Process.Start(psi);
                 process.WaitForExit();
 
-                // Extrai o data.iso também com isoinfo
+                // Extrai o data.iso usando DiscUtils também
                 Directory.CreateDirectory(rofs);
 
-                ProcessStartInfo extractDataIso = new ProcessStartInfo
+                using (FileStream dataIsoStream = File.OpenRead(iso))
                 {
-                    FileName = "7-Zip\\7z.exe",
-                    Arguments = $"x \"{iso}\" -o\"{rofs}\" -y",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                Process processExtractData = Process.Start(extractDataIso);
-                processExtractData.WaitForExit();
+                    var cdReader = new DiscUtils.Iso9660.CDReader(dataIsoStream, joliet: false);
+                    ExtractDirectory(cdReader.Root, rofs);
+                }
 
                 File.Delete(cvm);
                 File.Delete(iso);
@@ -117,7 +103,8 @@ namespace UN5ModdingWorkshop
                     }
 
                     using (MemoryStream ms = new MemoryStream())
-                    using (GZipStream gzipStream = new GZipStream(new MemoryStream(File.ReadAllBytes(file)), CompressionMode.Decompress))
+                    using (GZipStream gzipStream = new GZipStream(
+                        new MemoryStream(File.ReadAllBytes(file)), CompressionMode.Decompress))
                     {
                         gzipStream.CopyTo(ms);
                         File.WriteAllBytes(file, ms.ToArray());
@@ -138,42 +125,213 @@ namespace UN5ModdingWorkshop
                 MessageBox.Show("Game successfully extracted!");
             });
         }
-
-        public static async void Build()
+        // Extrai recursivamente todos os arquivos e pastas de um diretório DiscUtils
+        private static void ExtractDirectory(DiscUtils.DiscDirectoryInfo dir, string destPath)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() != DialogResult.OK)
-                return;
+            Directory.CreateDirectory(destPath);
 
-            string sourceFolder = fbd.SelectedPath;
-            string isoPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GAME.ISO");
-            cvm = Path.Combine(sourceFolder, "DATA\\DATA.CVM");
-            iso = Path.Combine(sourceFolder, "DATA\\data.iso");
-            rofs = Path.Combine(sourceFolder, "DATA\\ROFS");
-
-            await MakeGzlist();
-
-            var mkcvm = new ProcessStartInfo
+            // Arquivos
+            foreach (var file in dir.GetFiles())
             {
-                FileName = cvm_toolPath,
-                Arguments = $"mkcvm \"{cvm}\" \"{iso}\" data.hdr -p Iruka",
+                // Remove o sufixo ";1" que o ISO9660 adiciona
+                string cleanName = file.Name.Contains(";")
+                    ? file.Name.Substring(0, file.Name.LastIndexOf(';'))
+                    : file.Name;
+
+                string destFile = Path.Combine(destPath, cleanName);
+
+                using (Stream src = file.OpenRead())
+                using (FileStream dst = File.Create(destFile))
+                    src.CopyTo(dst);
+
+                // Preserva data de modificação
+                File.SetLastWriteTime(destFile, file.LastWriteTime);
+                File.SetCreationTime(destFile, file.LastWriteTime);
+            }
+
+            // Subpastas recursivo
+            foreach (var subDir in dir.GetDirectories())
+            {
+                string destSub = Path.Combine(destPath, subDir.Name);
+                ExtractDirectory(subDir, destSub);
+            }
+        }
+        public static async Task Build()
+        {
+            string sourceFolder = null;
+
+            using (var fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() != DialogResult.OK) return;
+                sourceFolder = fbd.SelectedPath;
+            }
+
+            await Task.Run(async () =>
+            {
+                cvm = Path.Combine(sourceFolder, @"DATA\DATA.CVM");
+                iso = Path.Combine(sourceFolder, @"DATA\data.iso");
+                rofs = Path.Combine(sourceFolder, @"DATA\ROFS");
+
+                // ── 1. Comprime CCS e gera gzlist ──────────────────────────
+                await MakeGzlist();
+
+                // ── 2. Cria data.iso a partir do ROFS ──────────────────────
+                Main.instance.Invoke(new Action(() =>
+                    Main.instance.lblProgress.Text = "Criando DATA.ISO..."));
+
+                await Task.Run(() =>
+                {
+                    ISO9660.BuildISO(
+                        isofolder: rofs,
+                        outputpath: iso,
+                        VolumeID: "GAME",
+                        Author: "",
+                        Data: "",
+                        VolumeName: "GAME",
+                        AplicationName: "PLAYSTATION",
+                        CopyrightName: "",
+                        Resumo: "",
+                        Bibliographic: "",
+                        Hidden: false,
+                        UDF: false,
+                        tamanhosetor: 0x800,
+                        first16Sectors: null,
+                        executable: ""
+                    );
+                });
+
+                // ── 3. Empacota data.iso no DATA.CVM ───────────────────────
+                Main.instance.Invoke(new Action(() =>
+                    Main.instance.lblProgress.Text = "Convertendo DATA.ISO para DATA.CVM..."));
+
+                await RunProcessAsync(
+                    cvm_toolPath,
+                    $"mkcvm \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p cc2fuku",
+                    "Erro ao criar CVM"
+                );
+
+                // Limpa temporários do ROFS
+                if (Directory.Exists(rofs)) Directory.Delete(rofs, true);
+                if (File.Exists(iso)) File.Delete(iso);
+
+                // ── 4. Cria a ISO final do jogo (sem UN5.ELF) ──────────────
+                Main.instance.Invoke(new Action(() =>
+                    Main.instance.lblProgress.Text = "Criando ISO final do jogo..."));
+
+                // Arquivos a ignorar na ISO final
+                var excludeFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "UN5.ELF"
+        };
+
+                string tempFolder = Path.Combine(sourceFolder, "_iso_temp");
+                if (Directory.Exists(tempFolder)) Directory.Delete(tempFolder, true);
+
+                await Task.Run(() =>
+                {
+                    foreach (string file in Directory.EnumerateFiles(
+                        sourceFolder, "*.*", SearchOption.AllDirectories))
+                    {
+                        if (file.StartsWith(tempFolder, StringComparison.OrdinalIgnoreCase))
+                            continue;
+
+                        if (excludeFiles.Contains(Path.GetFileName(file)))
+                            continue;
+
+                        if (file.Equals(iso, StringComparison.OrdinalIgnoreCase))
+                            continue;
+
+                        string relativePath = file.Substring(sourceFolder.Length).TrimStart('\\', '/');
+                        string destFile = Path.Combine(tempFolder, relativePath);
+
+                        Directory.CreateDirectory(Path.GetDirectoryName(destFile));
+                        File.Copy(file, destFile, overwrite: true);
+                    }
+
+                    string elfName = "";
+                    string sysCNF = Path.Combine(tempFolder, "SYSTEM.CNF");
+                    if (File.Exists(sysCNF))
+                    {
+                        foreach (string line in File.ReadAllLines(sysCNF))
+                        {
+                            if (line.Replace(" ", "").ToUpper().StartsWith("BOOT2="))
+                            {
+                                elfName = line.Split('=')[1].Trim()
+                                    .Replace("cdrom0:\\", "")
+                                    .Replace(";1", "")
+                                    .Trim();
+                                break;
+                            }
+                        }
+                    }
+
+                    string finalISO = Path.Combine(
+                        Path.GetDirectoryName(sourceFolder),
+                        Path.GetFileName(sourceFolder) + "_output.iso");
+
+                    ISO9660.BuildISO(
+                        isofolder: tempFolder,
+                        outputpath: finalISO,
+                        VolumeID: "GAME",
+                        Author: "",
+                        Data: "",
+                        VolumeName: "GAME",
+                        AplicationName: "PLAYSTATION",
+                        CopyrightName: "",
+                        Resumo: "",
+                        Bibliographic: "",
+                        Hidden: false,
+                        UDF: true,
+                        tamanhosetor: 0x800,
+                        first16Sectors: null,
+                        executable: elfName
+                    );
+                });
+
+                if (Directory.Exists(tempFolder)) Directory.Delete(tempFolder, true);
+
+                Main.instance.Invoke(new Action(() =>
+                    Main.instance.lblProgress.Text = ""));
+
+                MessageBox.Show("Build concluído!");
+            });
+        }
+
+        // Método auxiliar que resolve o deadlock lendo stdout/stderr em paralelo
+        private static async Task RunProcessAsync(string fileName, string arguments, string errorPrefix)
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = fileName,
+                Arguments = arguments,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
                 CreateNoWindow = true
             };
 
-            using (var CVMTool = Process.Start(mkcvm))
+            using (var process = Process.Start(psi))
             {
-                string output = await CVMTool.StandardOutput.ReadToEndAsync();
-                string error = await CVMTool.StandardError.ReadToEndAsync();
-                CVMTool.WaitForExit();
-            }
+                if (process == null)
+                    throw new Exception($"{errorPrefix}: falha ao iniciar o processo.");
 
-            Directory.Delete(rofs);
-            Directory.Delete(iso);
-            Main.instance.lblProgress.Text = "";
+                var stdout = new StringBuilder();
+                var stderr = new StringBuilder();
+
+                // Lê em paralelo via eventos — mais seguro que ReadToEndAsync
+                process.OutputDataReceived += (s, e) => { if (e.Data != null) stdout.AppendLine(e.Data); };
+                process.ErrorDataReceived += (s, e) => { if (e.Data != null) stderr.AppendLine(e.Data); };
+
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+
+                await Task.Run(() => process.WaitForExit());
+
+                if (process.ExitCode != 0)
+                    throw new Exception($"{errorPrefix} (exit {process.ExitCode}):\n{stderr}");
+            }
         }
+
         public static Task MakeGzlist()
         {
             return Task.Run(() =>

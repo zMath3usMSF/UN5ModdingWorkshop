@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
         {
             GeneralParameters genForm = new GeneralParameters();
             int charID = CharSel.CharSelID[CharSel.SelectedID];
-            string charName = BTL.charNameList[charID];
+            string charName = "";
 
             MovesetParameters movForm = new MovesetParameters();
             movForm.timer1.Enabled = true;
