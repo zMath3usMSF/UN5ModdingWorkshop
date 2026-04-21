@@ -17,7 +17,7 @@ namespace UN5ModdingWorkshop
     {
         public static int SelectedID = 0;
         public static List<int> CharSelID = new List<int>();
-        static List<Bitmap> charIconPicBoxes = new List<Bitmap>();
+        static List<Bitmap> CharIcons = new List<Bitmap>();
         static List<Bitmap> charPicturePicBoxes = new List<Bitmap>();
         public static List<Bitmap> xCommandIcons = new List<Bitmap>();
         static Bitmap selIconImage;
@@ -51,36 +51,42 @@ namespace UN5ModdingWorkshop
             main.picArrowRight.DoubleClick += PicArrowRight_Click;
             main.picArrowLeft.Click += PicArrowLeft_Click;
             main.picArrowLeft.DoubleClick += PicArrowLeft_Click;
+
+            CreateCharPicBoxes();
+            CreateCommandImages();
+        }
+        private static void CreateCharPicBoxes()
+        {
             for (int i = 0; i < 44; i++)
             {
-                PictureBox pic = Clone(main.pictureBox2);
-                pic.Image = charIconPicBoxes[CharSelID[i]];
-                int rows = 2;  // duas fileiras
-                int spacingX = 38;  // espaçamento horizontal
-                int spacingY = 46;  // altura da imagem + espaçamento vertical
+                PictureBox pic = Clone(mainF.pictureBox2);
+                pic.Image = CharIcons[CharSelID[i]];
+                int rows = 2;  // two rows
+                int spacingX = 38;  // horizontal spacing
+                int spacingY = 46;  // image height + vertical spacing
 
-                int offsetX = pic.Location.X;  // posição base horizontal
-                int offsetY = pic.Location.Y;  // posição base vertical (fileira de baixo)
+                int offsetX = pic.Location.X;  // base horizontal position
+                int offsetY = pic.Location.Y;  // base vertical position (bottom row)
 
-                int col = i / rows;      // coluna cresce a cada par de imagens
-                int row = i % rows;      // linha 0 ou 1, alternando
+                int col = i / rows;      // column increases every pair of images
+                int row = i % rows;      // row 0 or 1, alternating
 
-                // Calcula Y para fileira de cima ficar acima da fileira de baixo
+                // Calculates Y so the top row stays above the bottom row
                 int yPos = (row == 0) ? offsetY : offsetY - spacingY;
 
                 pic.Location = new Point(
                     offsetX + col * spacingX,
                     yPos
                 );
+
+                // Add event, character ID, and add to TabPage
                 pic.MouseClick += Pic_Click;
                 pic.Tag = $"Char_{i}";
-                main.tabPage1.Controls.Add(pic);
-                if(i == 1)
-                {
-                    CharSelect(pic);
-                }
+                mainF.tabPage1.Controls.Add(pic);
+
+                // If i == Naruto TS, select the character by default
+                if (i == 10) CharSelect(pic);
             }
-            CreateCommandImages();
         }
 
         private static void CreateCommandImages()
@@ -111,41 +117,15 @@ namespace UN5ModdingWorkshop
             }
         }
 
-        private static void PicArrowLeft_Click(object sender, EventArgs e)
-        {
-            selIcon.Visible = false;
-            int selTagID = int.Parse(selIcon.Tag.ToString().Split('_')[1]);
-            selIcon.Tag = $"Char_{(selTagID + 2) % (GAME.charSelCount * 2)}";
-            foreach (Control control in mainF.tabPage1.Controls)
-            {
-                PictureBox pic = control as PictureBox;
-                if (pic != null && pic.Tag != null)
-                {
-                    string tagString = pic.Tag.ToString();
-                    if (tagString.StartsWith("Char_"))
-                    {
-                        string[] partes = tagString.Split('_');
-                        if (partes.Length == 2 && int.TryParse(partes[1], out int charID))
-                        {
-                            int newIndex = (charID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2); // faz o wrap reverso
-                            pic.Tag = $"Char_{newIndex}";
-                            if (selIcon.Tag != null && pic.Tag.ToString() == selIcon.Tag.ToString() && selIcon.Location != pic.Location)
-                            {
-                                selIcon.Location = new Point(pic.Location.X, pic.Location.Y);
-                                CharSelect(selIcon);
-                            }
-                            pic.Image = charIconPicBoxes[CharSelID[newIndex]];
-                        }
-                    }
-                }
-            }
-        }
+        private static void PicArrowLeft_Click(object sender, EventArgs e) => ArrowRightLeftClick(true);
 
-        private static void PicArrowRight_Click(object sender, EventArgs e)
+        private static void PicArrowRight_Click(object sender, EventArgs e) => ArrowRightLeftClick(false);
+
+        private static void ArrowRightLeftClick(bool direction)
         {
             selIcon.Visible = false;
             int selTagID = int.Parse(selIcon.Tag.ToString().Split('_')[1]);
-            selIcon.Tag = $"Char_{(selTagID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2)}";
+            selIcon.Tag = $"Char_{(direction == true ? (selTagID + 2) : selTagID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2)}";
             foreach (Control control in mainF.tabPage1.Controls)
             {
                 PictureBox pic = control as PictureBox;
@@ -154,22 +134,22 @@ namespace UN5ModdingWorkshop
                     string tagString = pic.Tag.ToString();
                     if (tagString.StartsWith("Char_"))
                     {
-                        // Tenta extrair o ID numérico da tag
                         string[] partes = tagString.Split('_');
                         if (partes.Length == 2 && int.TryParse(partes[1], out int charID))
                         {
-                            int newIndex = (charID + 2) % (GAME.charSelCount * 2);
+                            int newIndex = direction == true ? (charID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2) : (charID + 2) % (GAME.charSelCount * 2);
                             pic.Tag = $"Char_{newIndex}";
                             if (selIcon.Tag != null && pic.Tag.ToString() == selIcon.Tag.ToString() && selIcon.Location != pic.Location)
                             {
                                 selIcon.Location = new Point(pic.Location.X, pic.Location.Y);
                                 CharSelect(selIcon);
                             }
-                            pic.Image = charIconPicBoxes[CharSelID[newIndex]];
+                            pic.Image = CharIcons[CharSelID[newIndex]];
                         }
                     }
                 }
             }
+
         }
 
         public static void Pic_Click(object sender, MouseEventArgs e)
@@ -249,7 +229,7 @@ namespace UN5ModdingWorkshop
                     width = 1;
                     height = 1;
                 }
-                charIconPicBoxes.Add(charselTexture.Clone(new Rectangle(x, y, width, height), charselTexture.PixelFormat));
+                CharIcons.Add(charselTexture.Clone(new Rectangle(x, y, width, height), charselTexture.PixelFormat));
             }
         }
         private static void ReadAllCharSelPic(string gamePath)

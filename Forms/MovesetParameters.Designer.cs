@@ -84,6 +84,10 @@
             this.btnEditAtkParameters = new System.Windows.Forms.Button();
             this.pnlAtkPrm = new System.Windows.Forms.Panel();
             this.clbFlags = new System.Windows.Forms.CheckedListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.picCommand = new System.Windows.Forms.PictureBox();
+            this.lblNamePanel = new System.Windows.Forms.Label();
             this.pnlAnmPrm = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.numAnmUnk8 = new System.Windows.Forms.NumericUpDown();
@@ -139,12 +143,11 @@
             this.lblSelectedAtk2 = new System.Windows.Forms.Label();
             this.lblSelectedAtk = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.picCommand = new System.Windows.Forms.PictureBox();
-            this.lblNamePanel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblInfo = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.grpAttackParameters.SuspendLayout();
             this.pnlAtkPrm.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCommand)).BeginInit();
             this.pnlAnmPrm.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk8)).BeginInit();
@@ -160,8 +163,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCommand)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -671,6 +672,50 @@
             this.clbFlags.Name = "clbFlags";
             this.clbFlags.Size = new System.Drawing.Size(404, 259);
             this.clbFlags.TabIndex = 80;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.lblInfo);
+            this.panel1.Controls.Add(this.picCommand);
+            this.panel1.Controls.Add(this.lblNamePanel);
+            this.panel1.Location = new System.Drawing.Point(0, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(419, 95);
+            this.panel1.TabIndex = 83;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.ForeColor = System.Drawing.Color.Blue;
+            this.lblInfo.Location = new System.Drawing.Point(0, 16);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(57, 16);
+            this.lblInfo.TabIndex = 83;
+            this.lblInfo.Text = "Charge";
+            // 
+            // picCommand
+            // 
+            this.picCommand.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.picCommand.Location = new System.Drawing.Point(0, 43);
+            this.picCommand.Name = "picCommand";
+            this.picCommand.Size = new System.Drawing.Size(419, 52);
+            this.picCommand.TabIndex = 81;
+            this.picCommand.TabStop = false;
+            this.picCommand.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // lblNamePanel
+            // 
+            this.lblNamePanel.AutoSize = true;
+            this.lblNamePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblNamePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNamePanel.Location = new System.Drawing.Point(0, 0);
+            this.lblNamePanel.Name = "lblNamePanel";
+            this.lblNamePanel.Size = new System.Drawing.Size(286, 16);
+            this.lblNamePanel.TabIndex = 82;
+            this.lblNamePanel.Text = "Ataque da Sombra Voadora Ascendente";
             // 
             // pnlAnmPrm
             // 
@@ -1267,48 +1312,14 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
-            // picCommand
+            // comboBox1
             // 
-            this.picCommand.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.picCommand.Location = new System.Drawing.Point(0, 43);
-            this.picCommand.Name = "picCommand";
-            this.picCommand.Size = new System.Drawing.Size(419, 52);
-            this.picCommand.TabIndex = 81;
-            this.picCommand.TabStop = false;
-            this.picCommand.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // lblNamePanel
-            // 
-            this.lblNamePanel.AutoSize = true;
-            this.lblNamePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNamePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNamePanel.Location = new System.Drawing.Point(0, 0);
-            this.lblNamePanel.Name = "lblNamePanel";
-            this.lblNamePanel.Size = new System.Drawing.Size(286, 16);
-            this.lblNamePanel.TabIndex = 82;
-            this.lblNamePanel.Text = "Ataque da Sombra Voadora Ascendente";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lblInfo);
-            this.panel1.Controls.Add(this.picCommand);
-            this.panel1.Controls.Add(this.lblNamePanel);
-            this.panel1.Location = new System.Drawing.Point(0, 14);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(419, 95);
-            this.panel1.TabIndex = 83;
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.ForeColor = System.Drawing.Color.Blue;
-            this.lblInfo.Location = new System.Drawing.Point(0, 16);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(57, 16);
-            this.lblInfo.TabIndex = 83;
-            this.lblInfo.Text = "Charge";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(292, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 84;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // MovesetParameters
             // 
@@ -1340,6 +1351,9 @@
             this.grpAttackParameters.ResumeLayout(false);
             this.grpAttackParameters.PerformLayout();
             this.pnlAtkPrm.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCommand)).EndInit();
             this.pnlAnmPrm.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -1358,9 +1372,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCommand)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1481,5 +1492,6 @@
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Label lblNamePanel;
         public System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
