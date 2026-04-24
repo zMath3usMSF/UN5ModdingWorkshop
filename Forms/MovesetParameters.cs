@@ -83,6 +83,7 @@ namespace WindowsFormsApp1
                 byte[] resultBytes = PlAtk.UpdateCharAtkPrm(this, charID, atkID);
                 int selectedAtk = listBox1.SelectedIndex;
                 PlAtk.UpdateP1Atk(resultBytes, selectedAtk, charID);
+                PlAtk.SendTextAtk(charID, this, PlAtk.GetCharAtk(charID, selectedAtk));
             }
             else
             {
@@ -178,6 +179,10 @@ namespace WindowsFormsApp1
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void lblDpad_Click(object sender, EventArgs e)
         {
 
         }

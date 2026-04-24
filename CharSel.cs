@@ -30,13 +30,13 @@ namespace UN5ModdingWorkshop
             mainF = main;
             charselFile = new CCSFile(File.ReadAllBytes(Path.Combine(gamePath, "DATA\\ROFS\\CHARSEL1.CCS")), FileVersionEnum.HACK_GU);
             Bitmap charselTexture = GetCCSImage(charselFile, "purecharsel10.bmp");
-            ReadAllCharSelIcon(gamePath);
+            ReadAllCharIcon(gamePath);
             CharSelID = ReadAllCharSelID(gamePath);
             Bitmap purecharsel01 = GetCCSImage(charselFile, "purecharsel01.bmp");
             Bitmap nrtImage = purecharsel01.Clone(new Rectangle(0, 0, 168, 168), purecharsel01.PixelFormat);
             main.pictureBox3.Image = nrtImage;
             main.tabPage1.Controls.Add(selIcon);
-            ReadAllCharSelPic(gamePath);
+            ReadAllCharRender(gamePath);
             selIconImage = charselTexture.Clone(new Rectangle(202, 468, 36, 40), charselTexture.PixelFormat);
             selIcon.SizeMode = PictureBoxSizeMode.CenterImage;
             selIcon.Image = selIconImage;
@@ -85,7 +85,7 @@ namespace UN5ModdingWorkshop
                 mainF.tabPage1.Controls.Add(pic);
 
                 // If i == Naruto TS, select the character by default
-                if (i == 10) CharSelect(pic);
+                if (i == 1) CharSelect(pic);
             }
         }
 
@@ -206,7 +206,7 @@ namespace UN5ModdingWorkshop
             clonePic.Location = new Point(pic.Location.X, pic.Location.Y);
             return clonePic;
         }
-        public static void ReadAllCharSelIcon(string gamePath)
+        public static void ReadAllCharIcon(string gamePath)
         {
             Bitmap charselTexture = GetCCSImage(charselFile, "purecharsel10.bmp");
             byte[] modData = GAME.isUN6 != true ? 
@@ -232,7 +232,7 @@ namespace UN5ModdingWorkshop
                 CharIcons.Add(charselTexture.Clone(new Rectangle(x, y, width, height), charselTexture.PixelFormat));
             }
         }
-        private static void ReadAllCharSelPic(string gamePath)
+        private static void ReadAllCharRender(string gamePath)
         {
             byte[] modData = GAME.isUN6 != true ?
                  File.ReadAllBytes(gamePath + "\\UN5.ELF") :

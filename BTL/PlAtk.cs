@@ -1,4 +1,5 @@
 ﻿using CCSFileExplorerWV;
+using DiscUtils.Btrfs.Base.Items;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -21,6 +22,17 @@ namespace UN5ModdingWorkshop
 
         #region Atk Attributes
 
+        uint NameOffs1 = 0x6105C0; //Unused
+        uint NameOffs2 = 0x6105C0; //Unused
+
+        uint Index = 0x0;
+
+        uint ComboNameTableIdx = 0x0;
+        uint UseComboNameTableFlag = 0x80;
+        uint ComboNameTableIdx2 = 0x0;
+
+        uint UnkFlag44 = 0x1;
+
         public float AtkChakra, AtkDamage, AtkKnockBack, AtkSummonDistance1, AtkSummonDistance2, AtkKnockBackDirection;
 
         public uint AtkFlagGroup1, AtkFlagGroup2, AtkDefenseFlag, AtkFlagGroup4, AtkPos, AtkDpadFlag, AtkButtonFlag, AtkDamageEffect;
@@ -33,17 +45,24 @@ namespace UN5ModdingWorkshop
 
         public UInt16 AtkHitCount, AtkHitEffect, AtkSoundDelay;
 
-        public byte[] AtkUnk, AtkUnk1, AtkUnk2, AtkUnk3, AtkUnk4,
+        public byte[] AtkUnk2, AtkUnk3, AtkUnk4,
                       AtkUnk15;
 
         #endregion
 
         internal static PlAtk ReadCharAtkPrm(byte[] Input) => new PlAtk
         {
-            AtkUnk = Input.ReadBytes(0x0, 4),
-            AtkUnk1 = Input.ReadBytes(0x4, 4),
-            AtkUnk2 = Input.ReadBytes(0x8, 4),
-            AtkUnk3 = Input.ReadBytes(0xC, 4),
+            NameOffs1 = Input.ReadUInt(0x0, 32),
+            NameOffs2 = Input.ReadUInt(0x4, 32),
+
+            Index = Input.ReadUInt(0x8, 16),
+
+            ComboNameTableIdx = Input.ReadUInt(0xA, 8),
+            UseComboNameTableFlag = Input.ReadUInt(0xB, 8),
+            ComboNameTableIdx2 = Input.ReadUInt(0xC, 16),
+
+            UnkFlag44 = Input.ReadUInt(0xE, 16),
+
             AtkUnk4 = Input.ReadBytes(0x10, 4),
 
             AtkFlagGroup1 = Input.ReadUInt(0x14, 8),
@@ -240,31 +259,22 @@ namespace UN5ModdingWorkshop
             return this.MemberwiseClone();
         }
 
-        public static void UpdateP1Atk(byte[] resultBytes, int selectedAtk, int charID) //resultbytes is divided into two parts because the 4 bytes of offset 0x1C
+        public static void UpdateP1Atk(byte[] atkData, int selectedAtk, int charID) //resultbytes is divided into two parts because the 4 bytes of offset 0x1C
                                                                             //change when it goes into memory, which causes a bug if it is changed.
         {
             int P1AtkOffset = Util.BTL_GetPlayer1MemoryOffs() + 0xBC;
+            byte[] atkDataPart = new byte[0x50];
             int skipAtks = selectedAtk * 0x54;
 
             int P1AtkOffs = Util.ReadProcessMemoryInt32(P1AtkOffset) + skipAtks;
-            byte[] resultBytesPart1 = new byte[0x1C];
-            Array.Copy(resultBytes, 0, resultBytesPart1, 0, resultBytesPart1.Length);
-            Util.WriteProcessMemoryBytes(P1AtkOffs, resultBytesPart1);
-
-            byte[] resultBytesParte2 = new byte[0x30];
-            Array.Copy(resultBytes, 0x20, resultBytesParte2, 0, resultBytesParte2.Length);
-            int P1AtkOffs2 = Util.ReadProcessMemoryInt32(P1AtkOffset) + skipAtks + 0x20;
-            Util.WriteProcessMemoryBytes(P1AtkOffs2, resultBytesParte2);
+            Array.Copy(atkData, 0, atkDataPart, 0, atkDataPart.Length);
+            Util.WriteProcessMemoryBytes(P1AtkOffs, atkDataPart);
 
             //Write Normal in Memory
             byte[] atkNormalMemoryOffset = PlGen.CharGenPrm[charID].AtkListOffset;
-            P1AtkOffs = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks;
-            Array.Copy(resultBytes, 0, resultBytesPart1, 0, resultBytesPart1.Length);
-            Util.WriteProcessMemoryBytes(P1AtkOffs, resultBytesPart1);
 
-            Array.Copy(resultBytes, 0x20, resultBytesParte2, 0, resultBytesParte2.Length);
-            P1AtkOffs2 = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks + 0x20;
-            Util.WriteProcessMemoryBytes(P1AtkOffs2, resultBytesParte2);
+            P1AtkOffs = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks;
+            Util.WriteProcessMemoryBytes(P1AtkOffs, atkDataPart);
         }
         public static PlAtk GetCharAtk(int charID, int atkID)
         {
@@ -616,62 +626,54 @@ namespace UN5ModdingWorkshop
             movForm.cmbDefenseParticle.SelectedIndex = currentDefenseParticle < 0 ? currentDefenseParticle + 1 : 0;
             movForm.txtEnemySound.Text = ($"{charAtkPrm.AtkEnemySound}");
 
+            SetDpadFlagGroupToCmbBox((int)charAtkPrm.AtkDpadFlag, movForm.cmbDpad);
+
+            DrawCommandSequence(movForm.picCommand, charAtkPrm, charID);
+        }
+
+        private static readonly Dictionary<uint, int> ButtonIconMap = new Dictionary<uint, int>()
+        {
+            { 0x20, 4 }, // Circle
+            { 0x10, 5 }, // Triangle
+            { 0x80, 6 }, // Square
+            { 0x40, 7 }, // Cross
+            { 0x08, 8 }, // Plus
+        };
+
+        public static void DrawCommandSequence(PictureBox pic, PlAtk charAtkPrm, int charID)
+        {
+            int atkType = BitConverter.ToUInt16(charAtkPrm.AtkUnk4, 0);
             int currentAtkPrevious = charAtkPrm.AtkPrevious;
-            List<uint> lastButtons = new List<uint>();
-            List<uint> lastDpad = new List<uint>();
+            List<uint> buttons = new List<uint>();
+            List<uint> dpads = new List<uint>();
 
             if (atkType == 1 || atkType == 0x100 || atkType == 0x200)
             {
                 // Golpe atual primeiro
-                if((charAtkPrm.AtkUnk16 >> 3) == 0)
+                if ((charAtkPrm.AtkUnk16 >> 3) == 0)
                 {
-                    lastDpad.Add(charAtkPrm.AtkDpadFlag);
-                    lastButtons.Add(charAtkPrm.AtkButtonFlag);
+                    dpads.Add(charAtkPrm.AtkDpadFlag);
+                    buttons.Add(charAtkPrm.AtkButtonFlag);
                 }
 
                 // Percorre a cadeia até -1
                 while (currentAtkPrevious != 255)
                 {
                     PlAtk currentAtk = GetCharAtk(charID, currentAtkPrevious);
-                    lastDpad.Add(currentAtk.AtkDpadFlag);
-                    lastButtons.Add(currentAtk.AtkButtonFlag);
+                    dpads.Add(currentAtk.AtkDpadFlag);
+                    buttons.Add(currentAtk.AtkButtonFlag);
                     currentAtkPrevious = currentAtk.AtkPrevious;
                 }
             }
             else
             {
                 // Golpe simples sem cadeia
-                lastDpad.Add(charAtkPrm.AtkDpadFlag);
-                lastButtons.Add(charAtkPrm.AtkButtonFlag);
+                dpads.Add(charAtkPrm.AtkDpadFlag);
+                buttons.Add(charAtkPrm.AtkButtonFlag);
             }
-            lastButtons.Reverse();
-            lastDpad.Reverse();
+            buttons.Reverse();
+            dpads.Reverse();
 
-            // Renderiza no picCommand
-            DrawCommandSequence(movForm.picCommand, lastDpad, lastButtons);
-        }
-        private static readonly Dictionary<uint, int> DpadIconMap = new Dictionary<uint, int>()
-{
-    { 0x01, 0 }, // Up
-    { 0x02, 1 }, // Down
-    { 0x04, 2 }, // Right
-    { 0x03, 3 }, // Left
-    { 0x05, 3 }, // Left (Hold)
-    { 0x06, 2 }, // Right
-    { 0x07, 3 }, // Left
-};
-
-        private static readonly Dictionary<uint, int> ButtonIconMap = new Dictionary<uint, int>()
-{
-    { 0x20, 4 }, // Circle
-    { 0x10, 5 }, // Triangle
-    { 0x80, 6 }, // Square
-    { 0x40, 7 }, // Cross
-    { 0x08, 8 }, // Plus
-};
-
-        public static void DrawCommandSequence(PictureBox pic, List<uint> dpads, List<uint> buttons)
-        {
             const int iconSize = 24;
             const int padding = 2;
             const int sepWidth = 0;
@@ -716,27 +718,18 @@ namespace UN5ModdingWorkshop
                 for (int i = 0; i < count; i++)
                 {
                     // Direcional
-                    if (dpads[i] != 0)
+                    if (dpads[i] >= 2)
                     {
-                        uint v = dpads[i] & ~1u;
+                        Rectangle destRect = new Rectangle(
+                            offsetX + (int)(x * scale),
+                            offsetY + (int)(padding * scale),
+                            (int)(iconSize * scale),
+                            (int)(iconSize * scale)
+                        );
 
-                        if (v != 0)
-                        {
-                            int bitIndex = (int)(Math.Log(v) / Math.Log(2));
-
-                            if (DpadIconMap.TryGetValue((uint)bitIndex, out int dpadIdx))
-                            {
-                                Rectangle destRect = new Rectangle(
-                                    offsetX + (int)(x * scale),
-                                    offsetY + (int)(padding * scale),
-                                    (int)(iconSize * scale),
-                                    (int)(iconSize * scale)
-                                );
-
-                                g.DrawImage(CharSel.xCommandIcons[dpadIdx], destRect);
-                                x += iconSize + padding;
-                            }
-                        }
+                        int dpadIdx = GetDpadIcon((int)dpads[i]);
+                        g.DrawImage(CharSel.xCommandIcons[dpadIdx], destRect);
+                        x += iconSize + padding;
                     }
 
                     // Botão
@@ -767,16 +760,120 @@ namespace UN5ModdingWorkshop
 
             old?.Dispose();
         }
+        
+        public static void SetDpadFlagGroupToCmbBox(int dpad, ComboBox cmbDpad)
+        {
+            if (dpad == 0)
+            {
+                cmbDpad.SelectedIndex = 0;
+            } //None
+            else if ((dpad & 0x01) != 0)
+            {
+                cmbDpad.SelectedIndex = 1;
+            } //None
+            else if ((dpad & 0x02) != 0)
+            {
+                cmbDpad.SelectedIndex = 2;
+            } //Up
+            else if ((dpad & 0x04) != 0)
+            {
+                cmbDpad.SelectedIndex = 3;
+            } //Down
+            else if ((dpad & 0x10) != 0)
+            {
+                cmbDpad.SelectedIndex = 4;
+            } //Right (Solo)
+            else if ((dpad & 0x40) != 0)
+            {
+                cmbDpad.SelectedIndex = 5;
+            } //Right
+            else if ((dpad & 0x20) != 0)
+            {
+                cmbDpad.SelectedIndex = 6;
+            } //Left (Solo)
+            else if ((dpad & 0x80) != 0)
+            {
+                cmbDpad.SelectedIndex = 7;
+            } //Left
+
+        }
+
+        public static int GetDpadFlagGroupFromCmbBox(ComboBox cmbDpad)
+        {
+            int dpadFlagGroup = 0;
+            int cmbBoxSelectedIndex = cmbDpad.SelectedIndex;
+            
+            if(cmbBoxSelectedIndex == 1)
+            {
+                dpadFlagGroup = dpadFlagGroup | 0x1;
+            }
+            else if(cmbBoxSelectedIndex == 2)
+            {
+                dpadFlagGroup = dpadFlagGroup | 0x2;
+            }
+            else if(cmbBoxSelectedIndex == 3)
+            {
+                dpadFlagGroup = dpadFlagGroup | 0x4;
+            }
+            else if(cmbBoxSelectedIndex == 4)
+            {
+                dpadFlagGroup = dpadFlagGroup | 0x10;
+            }
+            else if(cmbBoxSelectedIndex == 5)
+            {
+                dpadFlagGroup = dpadFlagGroup | 0x40;
+            }
+            else if(cmbBoxSelectedIndex == 6)
+            {
+                dpadFlagGroup = dpadFlagGroup | 0x20;
+            }
+            else if(cmbBoxSelectedIndex == 7)
+            {
+                dpadFlagGroup = dpadFlagGroup | 0x80;
+            }
+
+            return dpadFlagGroup;
+        }
+
+        public static int GetDpadIcon(int dpad)
+        {
+            int dpadIconIdx = 0;
+            if((dpad & 0x02) != 0)
+            {
+                dpadIconIdx = 0; //Up
+            }
+            else if((dpad & 0x04) != 0)
+            {
+                dpadIconIdx = 1; //Right
+            }
+            else if((dpad & 0x50) != 0)
+            {
+                dpadIconIdx = 2; //Down
+            }
+            else if((dpad & 0xA0) != 0)
+            {
+                dpadIconIdx = 3; //Left
+            }
+            return dpadIconIdx;
+        }
+
         public static byte[] UpdateCharAtkPrm(MovesetParameters movForm, int charID, int atkID)
         {
             var ninjaCharsAtk = CharAtkPrm[charID][atkID];
 
             List<byte> atkBlockBytes = new List<byte>();
 
-            atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk);
-            atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk1);
-            atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk2);
-            atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk3);
+            atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt32(ninjaCharsAtk.NameOffs1)));
+            atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt32(ninjaCharsAtk.NameOffs1)));
+
+            atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.Index)));
+
+            atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.ComboNameTableIdx));
+            atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.UseComboNameTableFlag));
+            atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.ComboNameTableIdx2)));
+
+            atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.UnkFlag44)));
+
             atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk4);
 
             int flagsCount = 0;
@@ -827,7 +924,8 @@ namespace UN5ModdingWorkshop
             atkBlockBytes.Add(atkPos);
             ninjaCharsAtk.AtkPos = atkPos;
             atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk15);
-            byte atkDpadFlag = (byte)ninjaCharsAtk.AtkDpadFlag;
+            byte atkDpadFlag = (byte)GetDpadFlagGroupFromCmbBox(movForm.cmbDpad);
+            ninjaCharsAtk.AtkDpadFlag = atkDpadFlag;
             atkBlockBytes.Add(atkDpadFlag);
             byte atkButtonFlag = (byte)ninjaCharsAtk.AtkButtonFlag;
             atkBlockBytes.Add(atkButtonFlag);
@@ -953,11 +1051,24 @@ namespace UN5ModdingWorkshop
             {
                 var ninjaCharsAtk = CharAtkPrm[charID][i];
 
-                atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk);
-                atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk1);
-                atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk2);
-                atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk3);
+                atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt32(ninjaCharsAtk.NameOffs1)));
+                atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt32(ninjaCharsAtk.NameOffs1)));
+
+                atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.Index)));
+
+                atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.ComboNameTableIdx));
+                atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.UseComboNameTableFlag));
+                atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.ComboNameTableIdx2)));
+
+                atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.UnkFlag44)));
+
                 atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk4);
+
+                atkBlockBytes.AddRange(BitConverter.GetBytes((short)ninjaCharsAtk.ComboNameTableIdx));
+                atkBlockBytes.AddRange(BitConverter.GetBytes((byte)ninjaCharsAtk.UseComboNameTableFlag));
+                atkBlockBytes.AddRange(BitConverter.GetBytes((short)ninjaCharsAtk.ComboNameTableIdx2));
+
+                atkBlockBytes.AddRange(BitConverter.GetBytes((short)ninjaCharsAtk.UnkFlag44));
 
                 atkBlockBytes.Add((byte)ninjaCharsAtk.AtkFlagGroup1);
                 atkBlockBytes.Add((byte)ninjaCharsAtk.AtkFlagGroup2);

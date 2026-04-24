@@ -85,6 +85,7 @@
             this.pnlAtkPrm = new System.Windows.Forms.Panel();
             this.clbFlags = new System.Windows.Forms.CheckedListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbDpad = new System.Windows.Forms.ComboBox();
             this.lblInfo = new System.Windows.Forms.Label();
             this.picCommand = new System.Windows.Forms.PictureBox();
             this.lblNamePanel = new System.Windows.Forms.Label();
@@ -143,7 +144,7 @@
             this.lblSelectedAtk2 = new System.Windows.Forms.Label();
             this.lblSelectedAtk = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.lblDpad = new System.Windows.Forms.Label();
             this.grpAttackParameters.SuspendLayout();
             this.pnlAtkPrm.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -675,7 +676,8 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.lblDpad);
+            this.panel1.Controls.Add(this.cmbDpad);
             this.panel1.Controls.Add(this.lblInfo);
             this.panel1.Controls.Add(this.picCommand);
             this.panel1.Controls.Add(this.lblNamePanel);
@@ -683,6 +685,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(419, 95);
             this.panel1.TabIndex = 83;
+            // 
+            // cmbDpad
+            // 
+            this.cmbDpad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDpad.FormattingEnabled = true;
+            this.cmbDpad.Items.AddRange(new object[] {
+            "None (Base)",
+            "None",
+            "Up",
+            "Down",
+            "Right (Solo)",
+            "Right",
+            "Left (Solo)",
+            "Left"});
+            this.cmbDpad.Location = new System.Drawing.Point(359, 0);
+            this.cmbDpad.Name = "cmbDpad";
+            this.cmbDpad.Size = new System.Drawing.Size(54, 21);
+            this.cmbDpad.TabIndex = 84;
+            this.cmbDpad.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // lblInfo
             // 
@@ -1312,14 +1333,15 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
-            // comboBox1
+            // lblDpad
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(292, 0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 84;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.lblDpad.AutoSize = true;
+            this.lblDpad.Location = new System.Drawing.Point(317, 3);
+            this.lblDpad.Name = "lblDpad";
+            this.lblDpad.Size = new System.Drawing.Size(36, 13);
+            this.lblDpad.TabIndex = 86;
+            this.lblDpad.Text = "Dpad:";
+            this.lblDpad.Click += new System.EventHandler(this.lblDpad_Click);
             // 
             // MovesetParameters
             // 
@@ -1492,6 +1514,7 @@
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Label lblNamePanel;
         public System.Windows.Forms.Label lblInfo;
-        private System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.ComboBox cmbDpad;
+        private System.Windows.Forms.Label lblDpad;
     }
 }
