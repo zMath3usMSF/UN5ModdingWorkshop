@@ -19,11 +19,12 @@ namespace UN5ModdingWorkshop
         public static List<int> CharSelID = new List<int>();
         static List<Bitmap> CharIcons = new List<Bitmap>();
         static List<Bitmap> charPicturePicBoxes = new List<Bitmap>();
-        public static List<Bitmap> xCommandIcons = new List<Bitmap>();
+        public static List<Bitmap> CommandIcons = new List<Bitmap>();
         static Bitmap selIconImage;
         static PictureBox selIcon = new PictureBox();
         static CCSFile charselFile = new CCSFile(new byte[0], FileVersionEnum.HACK_GU);
         static Main mainF;
+        static PictureBox charIcon = null;
 
         public static void Create(Main main, string gamePath)
         {
@@ -54,7 +55,70 @@ namespace UN5ModdingWorkshop
 
             CreateCharPicBoxes();
             CreateCommandImages();
+
+            CCSFile gaugeFile = new CCSFile(File.ReadAllBytes(Path.Combine(GAME.gamePath, "DATA\\ROFS\\CMN\\GAUGE.CCS")), FileVersionEnum.HACK_GU);
+            Bitmap xCommandTexture = GetCCSImage(gaugeFile, "xcommand02.bmp");
+
+            //L1/L2
+            for (int i = 0; i < 2; i++)
+            {
+                var icon = new Bitmap(32, 20);
+                var g = Graphics.FromImage(icon);
+                var srcRect = new Rectangle(0, i * 20, 32, 20);
+                g.DrawImage(xCommandTexture, 0, 0, srcRect, GraphicsUnit.Pixel);
+                CommandIcons.Add(icon);
+                g.Dispose();
+            }
+
+            //R1/R2
+            for (int i = 0; i < 2; i++)
+            {
+                var icon = new Bitmap(32, 20);
+                var g = Graphics.FromImage(icon);
+                var srcRect = new Rectangle(32, i * 20, 32, 20);
+                g.DrawImage(xCommandTexture, 0, 0, srcRect, GraphicsUnit.Pixel);
+                CommandIcons.Add(icon);
+                g.Dispose();
+            }
+
+            main.picR1.Image = CommandIcons[11];
+            main.picR1.Click += PicR1_Click;
+            main.picR1.DoubleClick += PicR1_Click;
         }
+
+        static Dictionary<int, int> charTransformation = new Dictionary<int, int>()
+        {
+            { 0x1, 0x2F },
+            { 0x2, 0x30 },
+            { 0x3, 0x31 },
+            { 0x4, 0x32 },
+            { 0xE, 0x33 },
+            { 0x22, 0x34 },
+            { 0x23, 0x35 },
+            { 0x24, 0x36 },
+            { 0x25, 0x37 },
+            { 0x26, 0x38 },
+            { 0x39, 0x49 },
+            { 0x3F, 0x4B }
+        };
+
+        private static void PicR1_Click(object sender, EventArgs e)
+        {
+            if (charTransformation.TryGetValue(CharSelID[SelectedID], out int transformedID))
+            {
+                CharSelID[SelectedID] = transformedID;
+                CharSelect(charIcon);
+
+                int originalKey = CharSelID[SelectedID] == transformedID //Invert Value
+                    ? charTransformation.First(x => x.Value == transformedID).Key
+                    : transformedID;
+
+                charTransformation.Remove(originalKey); //Remove
+                charTransformation[transformedID] = originalKey; //Add New Key and Value
+                mainF.picR1.Visible = true;
+            }
+        }
+
         private static void CreateCharPicBoxes()
         {
             for (int i = 0; i < 44; i++)
@@ -101,7 +165,7 @@ namespace UN5ModdingWorkshop
                 var g = Graphics.FromImage(icon);
                 var srcRect = new Rectangle(i * 32, 0, 32, 32);
                 g.DrawImage(xCommandTexture, 0, 0, srcRect, GraphicsUnit.Pixel);
-                xCommandIcons.Add(icon);
+                CommandIcons.Add(icon);
                 g.Dispose();
             }
 
@@ -112,7 +176,7 @@ namespace UN5ModdingWorkshop
                 var g = Graphics.FromImage(icon);
                 var srcRect = new Rectangle(i * 24, 32, 24, 32);
                 g.DrawImage(xCommandTexture, 0, 0, srcRect, GraphicsUnit.Pixel);
-                xCommandIcons.Add(icon);
+                CommandIcons.Add(icon);
                 g.Dispose();
             }
         }
@@ -159,10 +223,11 @@ namespace UN5ModdingWorkshop
         }
         static void CharSelect(PictureBox pictureBox)
         {
-            PictureBox charIcon = pictureBox;
+            charIcon = pictureBox;
             if (charIcon != null)
             {
                 mainF.pictureBox3.Image = charPicturePicBoxes[CharSelID[Convert.ToInt32(charIcon.Tag.ToString().Split('_')[1])]];
+                charIcon.Image = CharIcons[CharSelID[Convert.ToInt32(charIcon.Tag.ToString().Split('_')[1])]];
                 SelectedID = Convert.ToInt32(charIcon.Tag.ToString().Split('_')[1]);
                 Bitmap teste = MesclarBitmaps(new Bitmap(charIcon.Image), new Bitmap(selIconImage));
                 selIcon.Image = teste;
@@ -171,6 +236,8 @@ namespace UN5ModdingWorkshop
                 selIcon.Location = new Point(charIcon.Location.X, charIcon.Location.Y);
                 selIcon.Tag = charIcon.Tag;
                 selIcon.BringToFront();
+
+                mainF.picR1.Visible = charTransformation.ContainsKey(CharSelID[SelectedID]) == true ? true : false;
             }
         }
         static Bitmap MesclarBitmaps(Bitmap background, Bitmap foreground)

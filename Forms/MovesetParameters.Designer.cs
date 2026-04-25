@@ -85,6 +85,8 @@
             this.pnlAtkPrm = new System.Windows.Forms.Panel();
             this.clbFlags = new System.Windows.Forms.CheckedListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTest = new System.Windows.Forms.Label();
+            this.lblDpad = new System.Windows.Forms.Label();
             this.cmbDpad = new System.Windows.Forms.ComboBox();
             this.lblInfo = new System.Windows.Forms.Label();
             this.picCommand = new System.Windows.Forms.PictureBox();
@@ -144,7 +146,6 @@
             this.lblSelectedAtk2 = new System.Windows.Forms.Label();
             this.lblSelectedAtk = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblDpad = new System.Windows.Forms.Label();
             this.grpAttackParameters.SuspendLayout();
             this.pnlAtkPrm.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -676,6 +677,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblTest);
             this.panel1.Controls.Add(this.lblDpad);
             this.panel1.Controls.Add(this.cmbDpad);
             this.panel1.Controls.Add(this.lblInfo);
@@ -685,6 +687,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(419, 95);
             this.panel1.TabIndex = 83;
+            // 
+            // lblTest
+            // 
+            this.lblTest.AutoSize = true;
+            this.lblTest.Location = new System.Drawing.Point(285, 23);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(35, 13);
+            this.lblTest.TabIndex = 87;
+            this.lblTest.Text = "label1";
+            // 
+            // lblDpad
+            // 
+            this.lblDpad.AutoSize = true;
+            this.lblDpad.Location = new System.Drawing.Point(317, 3);
+            this.lblDpad.Name = "lblDpad";
+            this.lblDpad.Size = new System.Drawing.Size(36, 13);
+            this.lblDpad.TabIndex = 86;
+            this.lblDpad.Text = "Dpad:";
+            this.lblDpad.Click += new System.EventHandler(this.lblDpad_Click);
             // 
             // cmbDpad
             // 
@@ -1333,16 +1354,6 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
-            // lblDpad
-            // 
-            this.lblDpad.AutoSize = true;
-            this.lblDpad.Location = new System.Drawing.Point(317, 3);
-            this.lblDpad.Name = "lblDpad";
-            this.lblDpad.Size = new System.Drawing.Size(36, 13);
-            this.lblDpad.TabIndex = 86;
-            this.lblDpad.Text = "Dpad:";
-            this.lblDpad.Click += new System.EventHandler(this.lblDpad_Click);
-            // 
             // MovesetParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1516,5 +1527,6 @@
         public System.Windows.Forms.Label lblInfo;
         public System.Windows.Forms.ComboBox cmbDpad;
         private System.Windows.Forms.Label lblDpad;
+        public System.Windows.Forms.Label lblTest;
     }
 }

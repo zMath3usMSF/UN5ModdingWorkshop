@@ -31,11 +31,21 @@ namespace UN5ModdingWorkshop
         uint UseComboNameTableFlag = 0x80;
         uint ComboNameTableIdx2 = 0x0;
 
-        uint UnkFlag44 = 0x1;
+        uint JutsuIdx = 0x1;
+
+        uint SpecialFlag = 0x1;
+        uint ThrowFlag = 0x0;
+        uint JutsuFlag = 0x0;
+        uint JanKenPonFlag = 0x0;
+
+        uint DirectionFlag = 0x0;
+        uint OtherFlag1 = 0x0;
+        uint DefenseFlag = 0x0;
+        uint OtherFlag2 = 0x0;
 
         public float AtkChakra, AtkDamage, AtkKnockBack, AtkSummonDistance1, AtkSummonDistance2, AtkKnockBackDirection;
 
-        public uint AtkFlagGroup1, AtkFlagGroup2, AtkDefenseFlag, AtkFlagGroup4, AtkPos, AtkDpadFlag, AtkButtonFlag, AtkDamageEffect;
+        public uint AtkPos, AtkDpadFlag, AtkButtonFlag, AtkDamageEffect;
 
         public short AtkPrevious, AtkAnm;
 
@@ -45,8 +55,7 @@ namespace UN5ModdingWorkshop
 
         public UInt16 AtkHitCount, AtkHitEffect, AtkSoundDelay;
 
-        public byte[] AtkUnk2, AtkUnk3, AtkUnk4,
-                      AtkUnk15;
+        public byte[] AtkUnk2, AtkUnk3, AtkUnk15;
 
         #endregion
 
@@ -61,17 +70,17 @@ namespace UN5ModdingWorkshop
             UseComboNameTableFlag = Input.ReadUInt(0xB, 8),
             ComboNameTableIdx2 = Input.ReadUInt(0xC, 16),
 
-            UnkFlag44 = Input.ReadUInt(0xE, 16),
+            JutsuIdx = Input.ReadUInt(0xE, 16),
 
-            AtkUnk4 = Input.ReadBytes(0x10, 4),
+            SpecialFlag = Input.ReadUInt(0x10, 8),
+            ThrowFlag = Input.ReadUInt(0x11, 8),
+            JutsuFlag = Input.ReadUInt(0x12, 8),
+            JanKenPonFlag = Input.ReadUInt(0x13, 8),
 
-            AtkFlagGroup1 = Input.ReadUInt(0x14, 8),
-
-            AtkFlagGroup2 = Input.ReadUInt(0x15, 8),
-
-            AtkDefenseFlag = Input.ReadUInt(0x16, 8),
-
-            AtkFlagGroup4 = Input.ReadUInt(0x17, 8),
+            DirectionFlag = Input.ReadUInt(0x14, 8),
+            OtherFlag1 = Input.ReadUInt(0x15, 8),
+            DefenseFlag = Input.ReadUInt(0x16, 8),
+            OtherFlag2 = Input.ReadUInt(0x17, 8),
 
             AtkPrevious = (short)Input.ReadUInt(0x18, 8),
 
@@ -390,31 +399,31 @@ namespace UN5ModdingWorkshop
                         movForm.listBox1.Items.Add($"{i}: (Ultimate Jutsu 3 Buff)");
                         break;
                     case 10:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Up 1)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Side 1)");
                         break;
                     case 11:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Down 1)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Up 1)");
                         break;
                     case 12:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Sides 1)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Down 1)");
                         break;
                     case 13:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Up 2)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Side 2)");
                         break;
                     case 14:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Down 2)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Up 2)");
                         break;
                     case 15:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Sides 2)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Down 2)");
                         break;
                     case 16:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Up 3)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Side 3)");
                         break;
                     case 17:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Down 3)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Up 3)");
                         break;
                     case 18:
-                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Sides 3)");
+                        movForm.listBox1.Items.Add($"{i}: (Extra-Hit Down 3)");
                         break;
                     case 19:
                         movForm.listBox1.Items.Add($"{i}: (Dash)");
@@ -464,26 +473,49 @@ namespace UN5ModdingWorkshop
             movForm.btnEditAtkParameters.Visible = false;
         }
 
-        public static void SendTextAtk(int charID, MovesetParameters movForm, PlAtk charAtkPrm)
+        public static void SendTextAtk(int charID, MovesetParameters movForm, PlAtk Atk)
         {
-            int atkType = BitConverter.ToUInt16(charAtkPrm.AtkUnk4, 0);
-            int atkType2 = charAtkPrm.AtkUnk15[2];
+            int atkType2 = Atk.AtkUnk15[2];
             movForm.lblNamePanel.Text = movForm.listBox1.SelectedItem.ToString().Split(':')[1].Trim();
-            if ((atkType == 0x100 || atkType == 0x200) && ((atkType2 >> 1) & 1) == 1)
+            if ((Atk.ThrowFlag == 1 || Atk.ThrowFlag == 2) && ((atkType2 >> 1) & 1) == 1)
             {
                 movForm.lblInfo.Text = "Ground Throw";
             }
-            else if ((atkType == 0x100 || atkType == 0x200) && ((atkType2 >> 2) & 1) == 1)
+            else if ((Atk.ThrowFlag == 1 || Atk.ThrowFlag == 2) && ((atkType2 >> 2) & 1) == 1)
             {
                 movForm.lblInfo.Text = "Aerial Throw";
             }
-            else if (atkType == 8 || atkType == 0x10)
+            else if (Atk.SpecialFlag == 0x4)
+            {
+                movForm.lblInfo.Text = "Combo";
+            }
+            else if (Atk.SpecialFlag == 0x8 ||Atk.SpecialFlag == 0x10)
             {
                 movForm.lblInfo.Text = "Charge";
             }
-            else if (((atkType2 >> 2) & 1) == 1 && atkType == 1)
+            else if (((atkType2 >> 2) & 1) == 1 && Atk.SpecialFlag == 1)
             {
                 movForm.lblInfo.Text = "While Jumping";
+            }
+            else if (Atk.Index >= 0x0 && Atk.Index <= 0x3)
+            {
+                movForm.lblInfo.Text = "Jutsu";
+            }
+            else if(Atk.Index >= 0x4 && Atk.Index <= 0x9)
+            {
+                movForm.lblInfo.Text = "Ultimate Jutsu";
+            }
+            else if (Atk.Index >= 0xA && Atk.Index <= 0x12)
+            {
+                movForm.lblInfo.Text = "Extra-Hit";
+            }
+            else if (Atk.Index == 0x13)
+            {
+                movForm.lblInfo.Text = "Dash";
+            }
+            else if (Atk.Index == 0x14)
+            {
+                movForm.lblInfo.Text = "Jan-Ken-Pon";
             }
             else
             {
@@ -496,31 +528,31 @@ namespace UN5ModdingWorkshop
                 switch (i)
                 {
                     case 0:
-                        movForm.clbFlags.Items.Add("Ground", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Ground", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     case 1:
-                        movForm.clbFlags.Items.Add("Air", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Air", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     case 2:
-                        movForm.clbFlags.Items.Add("Follow Up", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Follow Up", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     case 3:
-                        movForm.clbFlags.Items.Add("Up", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Up", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     case 4:
-                        movForm.clbFlags.Items.Add("Down", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Down", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     case 5:
-                        movForm.clbFlags.Items.Add("Front", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Front", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     case 6:
-                        movForm.clbFlags.Items.Add("Back", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Back", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     case 7:
-                        movForm.clbFlags.Items.Add("Side Extra-Hit", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Side Extra-Hit", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                     default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkFlagGroup1 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.DirectionFlag >> i) & 1) == 1);
                         break;
                 }
                 flagsCount++;
@@ -530,16 +562,16 @@ namespace UN5ModdingWorkshop
                 switch (i)
                 {
                     case 0:
-                        movForm.clbFlags.Items.Add("Down Extra-Hit", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Down Extra-Hit", ((Atk.OtherFlag1 >> i) & 1) == 1);
                         break;
                     case 1:
-                        movForm.clbFlags.Items.Add("Up Extra-Hit", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Up Extra-Hit", ((Atk.OtherFlag1 >> i) & 1) == 1);
                         break;
                     case 4:
-                        movForm.clbFlags.Items.Add("Anti Counter", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Anti Counter", ((Atk.OtherFlag1 >> i) & 1) == 1);
                         break;
                     default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkFlagGroup2 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.OtherFlag1 >> i) & 1) == 1);
                         break;
                 }
                 flagsCount++;
@@ -549,22 +581,22 @@ namespace UN5ModdingWorkshop
                 switch (i)
                 {
                     case 2:
-                        movForm.clbFlags.Items.Add("Without Wall KB", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Without Wall KB", ((Atk.DefenseFlag >> i) & 1) == 1);
                         break;
                     case 3:
-                        movForm.clbFlags.Items.Add("Don't Bounce", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Don't Bounce", ((Atk.DefenseFlag >> i) & 1) == 1);
                         break;
                     case 5:
-                        movForm.clbFlags.Items.Add("Hit Fallen", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Hit Fallen", ((Atk.DefenseFlag >> i) & 1) == 1);
                         break;
                     case 6:
-                        movForm.clbFlags.Items.Add("Undefendable", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Undefendable", ((Atk.DefenseFlag >> i) & 1) == 1);
                         break;
                     case 7:
-                        movForm.clbFlags.Items.Add("Break Defense", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Break Defense", ((Atk.DefenseFlag >> i) & 1) == 1);
                         break;
                     default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkDefenseFlag >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.DefenseFlag >> i) & 1) == 1);
                         break;
                 }
                 flagsCount++;
@@ -574,61 +606,61 @@ namespace UN5ModdingWorkshop
                 switch (i)
                 {
                     case 4:
-                        movForm.clbFlags.Items.Add("Hit Fainted", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Hit Fainted", ((Atk.OtherFlag2 >> i) & 1) == 1);
                         break;
                     case 2:
-                        movForm.clbFlags.Items.Add("Backdash", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Backdash", ((Atk.OtherFlag2 >> i) & 1) == 1);
                         break;
                     case 1:
-                        movForm.clbFlags.Items.Add("Damage on Counter Attack", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Damage on Counter Attack", ((Atk.OtherFlag2 >> i) & 1) == 1);
                         break;
                     case 0:
-                        movForm.clbFlags.Items.Add("Damage on Defense", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add("Damage on Defense", ((Atk.OtherFlag2 >> i) & 1) == 1);
                         break;
                     default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((charAtkPrm.AtkFlagGroup4 >> i) & 1) == 1);
+                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.OtherFlag2 >> i) & 1) == 1);
                         break;
                 }
                 flagsCount++;
             }
 
-            movForm.txtChakra.Text = ($"{charAtkPrm.AtkChakra}");
-            movForm.txtDamage.Text = ($"{charAtkPrm.AtkDamage}");
-            movForm.txtKnockBack.Text = ($"{charAtkPrm.AtkKnockBack}");
+            movForm.txtChakra.Text = ($"{Atk.AtkChakra}");
+            movForm.txtDamage.Text = ($"{Atk.AtkDamage}");
+            movForm.txtKnockBack.Text = ($"{Atk.AtkKnockBack}");
 
             movForm.cmbDmgEffect.Items.AddRange(movForm.cmbDmgEffect.Items.Count == 0 ? DamageEffectList.Values.ToArray() : new object[0]);
-            int currentDmgEffect = (int)charAtkPrm.AtkDamageEffect;
+            int currentDmgEffect = (int)Atk.AtkDamageEffect;
             movForm.cmbDmgEffect.SelectedIndex = Math.Min(currentDmgEffect, 31);
 
             movForm.cmbDefenseEffect.Items.AddRange(movForm.cmbDefenseEffect.Items.Count == 0 ? PlAtk.DefenseEffectList.Values.ToArray() : new object[0]);
-            int currentDefenseEffect = charAtkPrm.AtkDefenseEffect;
+            int currentDefenseEffect = Atk.AtkDefenseEffect;
             movForm.cmbDefenseEffect.SelectedIndex = currentDefenseEffect == 255 ? 0 : currentDefenseEffect + 1;
 
-            movForm.txtHitCount.Text = ($"{charAtkPrm.AtkHitCount}");
-            movForm.txtHitSpeed.Text = ($"{charAtkPrm.AtkHitSpeed}");
-            movForm.txtHitEffect.Text = ($"{charAtkPrm.AtkHitEffect}");
-            movForm.txtSummonDistance1.Text = $"{charAtkPrm.AtkSummonDistance1}";
-            movForm.txtSummonDistance2.Text = $"{charAtkPrm.AtkSummonDistance2}";
-            movForm.txtKnockBackDirection.Text = $"{charAtkPrm.AtkKnockBackDirection}";
-            movForm.txtAtkSound.Text = ($"{charAtkPrm.AtkSound}");
+            movForm.txtHitCount.Text = ($"{Atk.AtkHitCount}");
+            movForm.txtHitSpeed.Text = ($"{Atk.AtkHitSpeed}");
+            movForm.txtHitEffect.Text = ($"{Atk.AtkHitEffect}");
+            movForm.txtSummonDistance1.Text = $"{Atk.AtkSummonDistance1}";
+            movForm.txtSummonDistance2.Text = $"{Atk.AtkSummonDistance2}";
+            movForm.txtKnockBackDirection.Text = $"{Atk.AtkKnockBackDirection}";
+            movForm.txtAtkSound.Text = ($"{Atk.AtkSound}");
 
             movForm.cmbPLSound.Items.AddRange(movForm.cmbPLSound.Items.Count == 0 ? PLSoundList.Values.ToArray() : new object[0]);
-            int currentPLSound = (int)charAtkPrm.AtkPlSound;
+            int currentPLSound = (int)Atk.AtkPlSound;
             movForm.cmbPLSound.SelectedIndex = currentPLSound == -4 ? 0 : currentPLSound == -3 ? 1 : currentPLSound == -2 ? 2 : currentPLSound == -1 ? 3 : currentPLSound > 34 ? 0 : currentPLSound + 4;
-            movForm.txtSoundDelay.Text = ($"{charAtkPrm.AtkSoundDelay}");
-            movForm.txtDmgSound.Text = ($"{charAtkPrm.AtkDamageSound}");
+            movForm.txtSoundDelay.Text = ($"{Atk.AtkSoundDelay}");
+            movForm.txtDmgSound.Text = ($"{Atk.AtkDamageSound}");
             movForm.cmbDmgParticle.Items.AddRange(movForm.cmbDmgParticle.Items.Count == 0 ? DamageParticleList.Values.ToArray() : new object[0]);
-            int currentDmgParticle = (int)charAtkPrm.AtkDamageParticle;
+            int currentDmgParticle = (int)Atk.AtkDamageParticle;
             movForm.cmbDmgParticle.SelectedIndex = currentDmgParticle > 24 || currentDmgParticle == -1 ? 0 : currentDmgParticle + 1;
-            movForm.txtDefenseSound.Text = ($"{charAtkPrm.AtkDefenseSound}");
+            movForm.txtDefenseSound.Text = ($"{Atk.AtkDefenseSound}");
             movForm.cmbDefenseParticle.Items.AddRange(movForm.cmbDefenseParticle.Items.Count == 0 ? DefenseParticleList.Values.ToArray() : new object[0]);
-            int currentDefenseParticle = charAtkPrm.AtkDefenseParticle;
+            int currentDefenseParticle = Atk.AtkDefenseParticle;
             movForm.cmbDefenseParticle.SelectedIndex = currentDefenseParticle < 0 ? currentDefenseParticle + 1 : 0;
-            movForm.txtEnemySound.Text = ($"{charAtkPrm.AtkEnemySound}");
+            movForm.txtEnemySound.Text = ($"{Atk.AtkEnemySound}");
 
-            SetDpadFlagGroupToCmbBox((int)charAtkPrm.AtkDpadFlag, movForm.cmbDpad);
+            SetDpadFlagGroupToCmbBox((int)Atk.AtkDpadFlag, movForm.cmbDpad);
 
-            DrawCommandSequence(movForm.picCommand, charAtkPrm, charID);
+            DrawCommandSequence(movForm.picCommand, Atk, charID);
         }
 
         private static readonly Dictionary<uint, int> ButtonIconMap = new Dictionary<uint, int>()
@@ -640,20 +672,19 @@ namespace UN5ModdingWorkshop
             { 0x08, 8 }, // Plus
         };
 
-        public static void DrawCommandSequence(PictureBox pic, PlAtk charAtkPrm, int charID)
+        public static void DrawCommandSequence(PictureBox pic, PlAtk Atk, int charID)
         {
-            int atkType = BitConverter.ToUInt16(charAtkPrm.AtkUnk4, 0);
-            int currentAtkPrevious = charAtkPrm.AtkPrevious;
+            int currentAtkPrevious = Atk.AtkPrevious;
             List<uint> buttons = new List<uint>();
             List<uint> dpads = new List<uint>();
 
-            if (atkType == 1 || atkType == 0x100 || atkType == 0x200)
+            if (Atk.SpecialFlag == 0x1 || Atk.SpecialFlag == 0x4 || Atk.ThrowFlag == 0x1 || Atk.ThrowFlag == 0x2)
             {
                 // Golpe atual primeiro
-                if ((charAtkPrm.AtkUnk16 >> 3) == 0)
+                if ((Atk.AtkUnk16 >> 3) == 0)
                 {
-                    dpads.Add(charAtkPrm.AtkDpadFlag);
-                    buttons.Add(charAtkPrm.AtkButtonFlag);
+                    dpads.Add(Atk.AtkDpadFlag);
+                    buttons.Add(Atk.AtkButtonFlag);
                 }
 
                 // Percorre a cadeia até -1
@@ -668,99 +699,231 @@ namespace UN5ModdingWorkshop
             else
             {
                 // Golpe simples sem cadeia
-                dpads.Add(charAtkPrm.AtkDpadFlag);
-                buttons.Add(charAtkPrm.AtkButtonFlag);
+                dpads.Add(Atk.AtkDpadFlag);
+                buttons.Add(Atk.AtkButtonFlag);
             }
             buttons.Reverse();
             dpads.Reverse();
 
-            const int iconSize = 24;
-            const int padding = 2;
-            const int sepWidth = 0;
-
-            int count = dpads.Count;
-
-            // Tamanho base (antes da escala)
-            int baseWidth = padding;
-            for (int i = 0; i < count; i++)
+            if (Atk.Index == 0x0 || Atk.Index == 0x1)
             {
-                if (dpads[i] != 0) baseWidth += iconSize + padding;
-                baseWidth += iconSize + padding;
-                if (i < count - 1) baseWidth += sepWidth;
-            }
-            baseWidth = Math.Max(baseWidth, 10);
+                const int iconSize = 24;
+                const int padding = 2;
 
-            int baseHeight = iconSize + padding * 2;
+                // Up Up + Ball: 3 ícones fixos
+                int baseWidth = Math.Max(padding + 3 * (iconSize + padding), 10);
+                int baseHeight = iconSize + padding * 2;
 
-            // Calcula escala baseada no PictureBox
-            float scaleX = (float)pic.Width / baseWidth;
-            float scaleY = (float)pic.Height / baseHeight;
-            float scale = Math.Min(scaleX, scaleY);
+                float scale = Math.Min((float)pic.Width / baseWidth, (float)pic.Height / baseHeight);
+                int scaledIcon = (int)(iconSize * scale);
+                int scaledPad = (int)(padding * scale);
 
-            int finalWidth = (int)(baseWidth * scale);
-            int finalHeight = (int)(baseHeight * scale);
-
-            Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.Transparent);
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
-
-                // Centralizar
-                int offsetX = 0;
-                int offsetY = 0; // mantém centralizado só na vertical (opcional)
-
-                float x = padding;
-
-                for (int i = 0; i < count; i++)
+                Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    // Direcional
-                    if (dpads[i] >= 2)
+                    g.Clear(Color.Transparent);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+
+                    int[] icons = { 0, 0, 4 }; // DpadCima, DpadCima, Bola
+                    int x = scaledPad;
+                    foreach (int idx in icons)
                     {
-                        Rectangle destRect = new Rectangle(
-                            offsetX + (int)(x * scale),
-                            offsetY + (int)(padding * scale),
-                            (int)(iconSize * scale),
-                            (int)(iconSize * scale)
-                        );
-
-                        int dpadIdx = GetDpadIcon((int)dpads[i]);
-                        g.DrawImage(CharSel.xCommandIcons[dpadIdx], destRect);
-                        x += iconSize + padding;
+                        g.DrawImage(CharSel.CommandIcons[idx],
+                            new Rectangle(x, scaledPad, scaledIcon, scaledIcon));
+                        x += scaledIcon + scaledPad;
                     }
-
-                    // Botão
-                    if (ButtonIconMap.TryGetValue(buttons[i], out int btnIdx))
-                    {
-                        Rectangle destRect = new Rectangle(
-                            offsetX + (int)(x * scale),
-                            offsetY + (int)(padding * scale),
-                            (int)(iconSize * scale),
-                            (int)(iconSize * scale)
-                        );
-
-                        g.DrawImage(CharSel.xCommandIcons[4], destRect); // <-- volta isso
-                    }
-
-                    x += iconSize + padding;
-
-                    if (i < count - 1)
-                        x += sepWidth;
                 }
+
+                pic.Image?.Dispose();
+                pic.Image = bmp;
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+            else if (Atk.Index == 0x2 || Atk.Index == 0x3)
+            {
+                const int iconSize = 24;
+                const int padding = 2;
 
-            Image old = pic.Image;
-            pic.Image = bmp;
+                // Up Up + Ball: 3 ícones fixos
+                int baseWidth = Math.Max(padding + 3 * (iconSize + padding), 10);
+                int baseHeight = iconSize + padding * 2;
 
-            // Pode manter StretchImage agora sem distorcer
-            pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                float scale = Math.Min((float)pic.Width / baseWidth, (float)pic.Height / baseHeight);
+                int scaledIcon = (int)(iconSize * scale);
+                int scaledPad = (int)(padding * scale);
 
-            old?.Dispose();
+                Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.Clear(Color.Transparent);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+
+                    int[] icons = { 1, 1, 4 }; // DpadCima, DpadCima, Bola
+                    int x = scaledPad;
+                    foreach (int idx in icons)
+                    {
+                        g.DrawImage(CharSel.CommandIcons[idx],
+                            new Rectangle(x, scaledPad, scaledIcon, scaledIcon));
+                        x += scaledIcon + scaledPad;
+                    }
+                }
+
+                pic.Image?.Dispose();
+                pic.Image = bmp;
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else if (Atk.Index >= 0x4 && Atk.Index <= 0x9)
+            {
+                const int iconSize = 24;
+                const int padding = 2;
+
+                // Up Up + Ball: 3 ícones fixos
+                int baseWidth = Math.Max(padding + 3 * (iconSize + padding), 10);
+                int baseHeight = iconSize + padding * 2;
+
+                float scale = Math.Min((float)pic.Width / baseWidth, (float)pic.Height / baseHeight);
+                int scaledIcon = (int)(iconSize * scale);
+                int scaledPad = (int)(padding * scale);
+
+                Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.Clear(Color.Transparent);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+
+                    int[] icons = { 5, 4 };
+                    int x = scaledPad;
+                    foreach (int idx in icons)
+                    {
+                        g.DrawImage(CharSel.CommandIcons[idx],
+                            new Rectangle(x, scaledPad, scaledIcon, scaledIcon));
+                        x += scaledIcon + scaledPad;
+                    }
+                }
+
+                pic.Image?.Dispose();
+                pic.Image = bmp;
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else if (Atk.Index == 0x13)
+            {
+                const int iconSize = 24;
+                const int padding = 2;
+
+                // Up Up + Ball: 3 ícones fixos
+                int baseWidth = Math.Max(padding + 3 * (iconSize + padding), 10);
+                int baseHeight = iconSize + padding * 2;
+
+                float scale = Math.Min((float)pic.Width / baseWidth, (float)pic.Height / baseHeight);
+                int scaledIcon = (int)(iconSize * scale);
+                int scaledPad = (int)(padding * scale);
+
+                Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.Clear(Color.Transparent);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+
+                    int[] icons = { 7, 7, 7 };
+                    int x = scaledPad;
+                    foreach (int idx in icons)
+                    {
+                        g.DrawImage(CharSel.CommandIcons[idx],
+                            new Rectangle(x, scaledPad, scaledIcon, scaledIcon));
+                        x += scaledIcon + scaledPad;
+                    }
+                }
+
+                pic.Image?.Dispose();
+                pic.Image = bmp;
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else if (Atk.Index == 0x14)
+            {
+                const int iconSize = 24;
+                const int padding = 2;
+
+                int baseWidth = Math.Max(padding + 3 * (iconSize + padding), 10);
+                int baseHeight = iconSize + padding * 2;
+
+                float scale = Math.Min((float)pic.Width / baseWidth, (float)pic.Height / baseHeight);
+                int scaledIcon = (int)(iconSize * scale);
+                int scaledPad = (int)(padding * scale);
+
+                Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.Clear(Color.Transparent);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+
+                    int[] icons = { 6, 5, 4 };
+                    int x = scaledPad;
+                    foreach (int idx in icons)
+                    {
+                        g.DrawImage(CharSel.CommandIcons[idx],
+                            new Rectangle(x, scaledPad, scaledIcon, scaledIcon));
+                        x += scaledIcon + scaledPad;
+                    }
+                }
+
+                pic.Image?.Dispose();
+                pic.Image = bmp;
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else if ((Atk.SpecialFlag != 0 || Atk.ThrowFlag != 0x0) && Atk.SpecialFlag != 0x2)
+            {
+                const int iconSize = 24;
+                const int padding = 2;
+                int count = dpads.Count;
+
+                // Conta ícones visíveis: dpad (se >= 2) + botão por entrada
+                int totalIcons = count + dpads.Count(d => d >= 2);
+                int baseWidth = Math.Max(padding + totalIcons * (iconSize + padding), 10);
+                int baseHeight = iconSize + padding * 2;
+
+                float scale = Math.Min((float)pic.Width / baseWidth, (float)pic.Height / baseHeight);
+                int scaledIcon = (int)(iconSize * scale);
+                int scaledPad = (int)(padding * scale);
+
+                Bitmap bmp = new Bitmap(pic.Width, pic.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.Clear(Color.Transparent);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+
+                    int x = scaledPad;
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (dpads[i] >= 2)
+                        {
+                            g.DrawImage(CharSel.CommandIcons[GetDpadIcon((int)dpads[i])],
+                                new Rectangle(x, scaledPad, scaledIcon, scaledIcon));
+                            x += scaledIcon + scaledPad;
+                        }
+
+                        g.DrawImage(CharSel.CommandIcons[4],
+                            new Rectangle(x, scaledPad, scaledIcon, scaledIcon));
+                        x += scaledIcon + scaledPad;
+                    }
+                }
+
+                pic.Image?.Dispose();
+                pic.Image = bmp;
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
-        
+
         public static void SetDpadFlagGroupToCmbBox(int dpad, ComboBox cmbDpad)
         {
             if (dpad == 0)
@@ -872,9 +1035,12 @@ namespace UN5ModdingWorkshop
             atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.UseComboNameTableFlag));
             atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.ComboNameTableIdx2)));
 
-            atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.UnkFlag44)));
+            atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.JutsuIdx)));
 
-            atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk4);
+            atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.SpecialFlag));
+            atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.ThrowFlag));
+            atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.JutsuFlag));
+            atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.JanKenPonFlag));
 
             int flagsCount = 0;
             int[] bitsGroupFlag1 = new int[8];
@@ -885,7 +1051,7 @@ namespace UN5ModdingWorkshop
             }
             byte byteGroupFlag1 = Util.FormarByte(bitsGroupFlag1);
             atkBlockBytes.Add(byteGroupFlag1);
-            ninjaCharsAtk.AtkFlagGroup1 = byteGroupFlag1;
+            ninjaCharsAtk.DirectionFlag = byteGroupFlag1;
 
             int[] bitsGroupFlag2 = new int[8];
             for (int i = 0; i < 8; i++)
@@ -895,7 +1061,7 @@ namespace UN5ModdingWorkshop
             }
             byte byteGroupFlag2 = Util.FormarByte(bitsGroupFlag2);
             atkBlockBytes.Add(byteGroupFlag2);
-            ninjaCharsAtk.AtkFlagGroup2 = byteGroupFlag2;
+            ninjaCharsAtk.OtherFlag1 = byteGroupFlag2;
 
             int[] bitsGroupFlag3 = new int[8];
             for (int i = 0; i < 8; i++)
@@ -906,7 +1072,7 @@ namespace UN5ModdingWorkshop
             byte resultado = Util.FormarByte(bitsGroupFlag3);
 
             atkBlockBytes.Add(resultado);
-            ninjaCharsAtk.AtkDefenseFlag = resultado;
+            ninjaCharsAtk.DefenseFlag = resultado;
 
             int[] bitsGroupFlag4 = new int[8];
             for (int i = 0; i < 8; i++)
@@ -916,7 +1082,7 @@ namespace UN5ModdingWorkshop
             }
             byte byteGroupFlag4 = Util.FormarByte(bitsGroupFlag4);
             atkBlockBytes.Add(byteGroupFlag4);
-            ninjaCharsAtk.AtkFlagGroup4 = byteGroupFlag4;
+            ninjaCharsAtk.OtherFlag2 = byteGroupFlag4;
 
             byte atkPrevious = (byte)ninjaCharsAtk.AtkPrevious;
             atkBlockBytes.Add(atkPrevious);
@@ -1060,20 +1226,23 @@ namespace UN5ModdingWorkshop
                 atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.UseComboNameTableFlag));
                 atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.ComboNameTableIdx2)));
 
-                atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.UnkFlag44)));
+                atkBlockBytes.AddRange(BitConverter.GetBytes(Convert.ToUInt16(ninjaCharsAtk.JutsuIdx)));
 
-                atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk4);
+                atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.SpecialFlag));
+                atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.ThrowFlag));
+                atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.JutsuFlag));
+                atkBlockBytes.Add(Convert.ToByte(ninjaCharsAtk.JanKenPonFlag));
 
                 atkBlockBytes.AddRange(BitConverter.GetBytes((short)ninjaCharsAtk.ComboNameTableIdx));
                 atkBlockBytes.AddRange(BitConverter.GetBytes((byte)ninjaCharsAtk.UseComboNameTableFlag));
                 atkBlockBytes.AddRange(BitConverter.GetBytes((short)ninjaCharsAtk.ComboNameTableIdx2));
 
-                atkBlockBytes.AddRange(BitConverter.GetBytes((short)ninjaCharsAtk.UnkFlag44));
+                atkBlockBytes.AddRange(BitConverter.GetBytes((short)ninjaCharsAtk.JutsuIdx));
 
-                atkBlockBytes.Add((byte)ninjaCharsAtk.AtkFlagGroup1);
-                atkBlockBytes.Add((byte)ninjaCharsAtk.AtkFlagGroup2);
-                atkBlockBytes.Add((byte)ninjaCharsAtk.AtkDefenseFlag);
-                atkBlockBytes.Add((byte)ninjaCharsAtk.AtkFlagGroup4);
+                atkBlockBytes.Add((byte)ninjaCharsAtk.DirectionFlag);
+                atkBlockBytes.Add((byte)ninjaCharsAtk.OtherFlag1);
+                atkBlockBytes.Add((byte)ninjaCharsAtk.DefenseFlag);
+                atkBlockBytes.Add((byte)ninjaCharsAtk.OtherFlag2);
                 atkBlockBytes.Add((byte)ninjaCharsAtk.AtkPrevious);
                 atkBlockBytes.Add((byte)ninjaCharsAtk.AtkPos);
                 atkBlockBytes.AddRange(ninjaCharsAtk.AtkUnk15);

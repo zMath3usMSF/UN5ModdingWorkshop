@@ -65,6 +65,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.picBackground = new System.Windows.Forms.PictureBox();
+            this.picR1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -74,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picR1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -230,6 +232,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.picR1);
             this.tabPage1.Controls.Add(this.btnEditJutsusParameters);
             this.tabPage1.Controls.Add(this.btnEditAwekeningParameters);
             this.tabPage1.Controls.Add(this.btnEditMovesetParameters);
@@ -417,6 +420,17 @@
             this.picBackground.TabIndex = 20;
             this.picBackground.TabStop = false;
             // 
+            // picR1
+            // 
+            this.picR1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picR1.Location = new System.Drawing.Point(804, 34);
+            this.picR1.Name = "picR1";
+            this.picR1.Size = new System.Drawing.Size(48, 23);
+            this.picR1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picR1.TabIndex = 21;
+            this.picR1.TabStop = false;
+            this.picR1.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +458,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picR1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,6 +501,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        public System.Windows.Forms.PictureBox picR1;
     }
 }
 
