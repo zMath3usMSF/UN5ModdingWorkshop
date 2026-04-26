@@ -71,7 +71,7 @@ namespace UN5ModdingWorkshop
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = cvm_toolPath,
-                    Arguments = $"split \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p cc2fuku",
+                    Arguments = $"split \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p Iruka",
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -206,7 +206,7 @@ namespace UN5ModdingWorkshop
 
                 await RunProcessAsync(
                     cvm_toolPath,
-                    $"mkcvm \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p cc2fuku",
+                    $"mkcvm \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p Iruka",
                     "Erro ao criar CVM"
                 );
 

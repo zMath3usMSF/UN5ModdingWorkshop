@@ -492,6 +492,37 @@ public static class IOextent
 
     #region Leitores de Inteiros
     /// <summary>
+    /// Lê um Inteiro com sinal do array de bytes[buffer].
+    /// </summary>
+    /// <param name="offset">Posição para ler o inteiro.</param>
+    /// <param name="bits">Quantia de bits a serem lidos.</param>
+    /// <param name="bigendian">Usar codificação BigEndian ao invés de LittleEndian padrão.</param>
+    /// <returns>Inteiro com sinal(int)</returns>
+    public static int ReadInt(this byte[] array, int offset, int bits, bool bigendian = false)
+    {
+        var reader = new BinaryReader(new MemoryStream(array));
+        reader.BaseStream.Position = offset;
+        int result = 0;
+        switch (bits)
+        {
+            case 8:
+                result = (sbyte)reader.ReadByte();
+                break;
+
+            case 16:
+                result = reader.ReadInt16();
+                break;
+
+            case 32:
+                result = reader.ReadInt32();
+                break;
+        }
+        reader.Close();
+        result = bigendian ? BitConverter.ToInt32(BitConverter.GetBytes(result).Reverse().ToArray(), 0) : BitConverter.ToInt32(BitConverter.GetBytes(result), 0);
+        return result;
+    }
+
+    /// <summary>
     /// Lê um Inteiro sem sinal do array de bytes[buffer].
     /// </summary>
     /// <param name="offset">Posição para ler o inteiro.</param>

@@ -146,6 +146,8 @@
             this.lblSelectedAtk2 = new System.Windows.Forms.Label();
             this.lblSelectedAtk = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbKawarimi = new System.Windows.Forms.ComboBox();
             this.grpAttackParameters.SuspendLayout();
             this.pnlAtkPrm.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -216,6 +218,8 @@
             // 
             // grpAttackParameters
             // 
+            this.grpAttackParameters.Controls.Add(this.label1);
+            this.grpAttackParameters.Controls.Add(this.cmbKawarimi);
             this.grpAttackParameters.Controls.Add(this.txtDefenseSound);
             this.grpAttackParameters.Controls.Add(this.cmbDefenseParticle);
             this.grpAttackParameters.Controls.Add(this.lblDefenseParticle);
@@ -256,14 +260,14 @@
             this.grpAttackParameters.Controls.Add(this.txtChakra);
             this.grpAttackParameters.Location = new System.Drawing.Point(0, 105);
             this.grpAttackParameters.Name = "grpAttackParameters";
-            this.grpAttackParameters.Size = new System.Drawing.Size(419, 188);
+            this.grpAttackParameters.Size = new System.Drawing.Size(419, 282);
             this.grpAttackParameters.TabIndex = 72;
             this.grpAttackParameters.TabStop = false;
             this.grpAttackParameters.Text = "Attack Parameters";
             // 
             // txtDefenseSound
             // 
-            this.txtDefenseSound.Location = new System.Drawing.Point(215, 125);
+            this.txtDefenseSound.Location = new System.Drawing.Point(215, 147);
             this.txtDefenseSound.Name = "txtDefenseSound";
             this.txtDefenseSound.Size = new System.Drawing.Size(32, 20);
             this.txtDefenseSound.TabIndex = 44;
@@ -272,7 +276,7 @@
             // 
             this.cmbDefenseParticle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDefenseParticle.FormattingEnabled = true;
-            this.cmbDefenseParticle.Location = new System.Drawing.Point(318, 125);
+            this.cmbDefenseParticle.Location = new System.Drawing.Point(318, 147);
             this.cmbDefenseParticle.Name = "cmbDefenseParticle";
             this.cmbDefenseParticle.Size = new System.Drawing.Size(81, 21);
             this.cmbDefenseParticle.TabIndex = 43;
@@ -280,7 +284,7 @@
             // lblDefenseParticle
             // 
             this.lblDefenseParticle.AutoSize = true;
-            this.lblDefenseParticle.Location = new System.Drawing.Point(253, 129);
+            this.lblDefenseParticle.Location = new System.Drawing.Point(253, 151);
             this.lblDefenseParticle.Name = "lblDefenseParticle";
             this.lblDefenseParticle.Size = new System.Drawing.Size(65, 13);
             this.lblDefenseParticle.TabIndex = 42;
@@ -289,7 +293,7 @@
             // lblDefenseSound
             // 
             this.lblDefenseSound.AutoSize = true;
-            this.lblDefenseSound.Location = new System.Drawing.Point(153, 128);
+            this.lblDefenseSound.Location = new System.Drawing.Point(153, 150);
             this.lblDefenseSound.Name = "lblDefenseSound";
             this.lblDefenseSound.Size = new System.Drawing.Size(61, 13);
             this.lblDefenseSound.TabIndex = 40;
@@ -297,7 +301,7 @@
             // 
             // txtKnockBackDirection
             // 
-            this.txtKnockBackDirection.Location = new System.Drawing.Point(306, 151);
+            this.txtKnockBackDirection.Location = new System.Drawing.Point(306, 173);
             this.txtKnockBackDirection.Name = "txtKnockBackDirection";
             this.txtKnockBackDirection.Size = new System.Drawing.Size(43, 20);
             this.txtKnockBackDirection.TabIndex = 39;
@@ -305,7 +309,7 @@
             // lblKnockBackDirection
             // 
             this.lblKnockBackDirection.AutoSize = true;
-            this.lblKnockBackDirection.Location = new System.Drawing.Point(260, 154);
+            this.lblKnockBackDirection.Location = new System.Drawing.Point(260, 176);
             this.lblKnockBackDirection.Name = "lblKnockBackDirection";
             this.lblKnockBackDirection.Size = new System.Drawing.Size(40, 13);
             this.lblKnockBackDirection.TabIndex = 38;
@@ -313,7 +317,7 @@
             // 
             // txtSummonDistance2
             // 
-            this.txtSummonDistance2.Location = new System.Drawing.Point(211, 151);
+            this.txtSummonDistance2.Location = new System.Drawing.Point(211, 173);
             this.txtSummonDistance2.Name = "txtSummonDistance2";
             this.txtSummonDistance2.Size = new System.Drawing.Size(43, 20);
             this.txtSummonDistance2.TabIndex = 37;
@@ -321,7 +325,7 @@
             // lblSummonDistance2
             // 
             this.lblSummonDistance2.AutoSize = true;
-            this.lblSummonDistance2.Location = new System.Drawing.Point(133, 155);
+            this.lblSummonDistance2.Location = new System.Drawing.Point(133, 177);
             this.lblSummonDistance2.Name = "lblSummonDistance2";
             this.lblSummonDistance2.Size = new System.Drawing.Size(72, 13);
             this.lblSummonDistance2.TabIndex = 36;
@@ -329,7 +333,7 @@
             // 
             // txtSummonDistance1
             // 
-            this.txtSummonDistance1.Location = new System.Drawing.Point(84, 152);
+            this.txtSummonDistance1.Location = new System.Drawing.Point(84, 174);
             this.txtSummonDistance1.Name = "txtSummonDistance1";
             this.txtSummonDistance1.Size = new System.Drawing.Size(43, 20);
             this.txtSummonDistance1.TabIndex = 35;
@@ -337,7 +341,7 @@
             // lblSummonDistance1
             // 
             this.lblSummonDistance1.AutoSize = true;
-            this.lblSummonDistance1.Location = new System.Drawing.Point(6, 155);
+            this.lblSummonDistance1.Location = new System.Drawing.Point(6, 177);
             this.lblSummonDistance1.Name = "lblSummonDistance1";
             this.lblSummonDistance1.Size = new System.Drawing.Size(72, 13);
             this.lblSummonDistance1.TabIndex = 34;
@@ -346,7 +350,7 @@
             // lblDefenseEffect
             // 
             this.lblDefenseEffect.AutoSize = true;
-            this.lblDefenseEffect.Location = new System.Drawing.Point(6, 129);
+            this.lblDefenseEffect.Location = new System.Drawing.Point(6, 151);
             this.lblDefenseEffect.Name = "lblDefenseEffect";
             this.lblDefenseEffect.Size = new System.Drawing.Size(58, 13);
             this.lblDefenseEffect.TabIndex = 33;
@@ -356,7 +360,7 @@
             // 
             this.cmbDefenseEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDefenseEffect.FormattingEnabled = true;
-            this.cmbDefenseEffect.Location = new System.Drawing.Point(69, 125);
+            this.cmbDefenseEffect.Location = new System.Drawing.Point(69, 147);
             this.cmbDefenseEffect.Name = "cmbDefenseEffect";
             this.cmbDefenseEffect.Size = new System.Drawing.Size(78, 21);
             this.cmbDefenseEffect.TabIndex = 32;
@@ -365,7 +369,7 @@
             // 
             this.cmbDmgParticle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDmgParticle.FormattingEnabled = true;
-            this.cmbDmgParticle.Location = new System.Drawing.Point(79, 74);
+            this.cmbDmgParticle.Location = new System.Drawing.Point(79, 96);
             this.cmbDmgParticle.Name = "cmbDmgParticle";
             this.cmbDmgParticle.Size = new System.Drawing.Size(115, 21);
             this.cmbDmgParticle.TabIndex = 29;
@@ -374,7 +378,7 @@
             // 
             this.cmbPLSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPLSound.FormattingEnabled = true;
-            this.cmbPLSound.Location = new System.Drawing.Point(174, 101);
+            this.cmbPLSound.Location = new System.Drawing.Point(174, 123);
             this.cmbPLSound.Name = "cmbPLSound";
             this.cmbPLSound.Size = new System.Drawing.Size(118, 21);
             this.cmbPLSound.TabIndex = 28;
@@ -383,14 +387,14 @@
             // 
             this.cmbDmgEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDmgEffect.FormattingEnabled = true;
-            this.cmbDmgEffect.Location = new System.Drawing.Point(70, 47);
+            this.cmbDmgEffect.Location = new System.Drawing.Point(70, 69);
             this.cmbDmgEffect.Name = "cmbDmgEffect";
             this.cmbDmgEffect.Size = new System.Drawing.Size(138, 21);
             this.cmbDmgEffect.TabIndex = 27;
             // 
             // txtEnemySound
             // 
-            this.txtEnemySound.Location = new System.Drawing.Point(385, 102);
+            this.txtEnemySound.Location = new System.Drawing.Point(385, 124);
             this.txtEnemySound.Name = "txtEnemySound";
             this.txtEnemySound.Size = new System.Drawing.Size(25, 20);
             this.txtEnemySound.TabIndex = 25;
@@ -398,7 +402,7 @@
             // lblEnemySound
             // 
             this.lblEnemySound.AutoSize = true;
-            this.lblEnemySound.Location = new System.Drawing.Point(302, 105);
+            this.lblEnemySound.Location = new System.Drawing.Point(302, 127);
             this.lblEnemySound.Name = "lblEnemySound";
             this.lblEnemySound.Size = new System.Drawing.Size(76, 13);
             this.lblEnemySound.TabIndex = 24;
@@ -407,7 +411,7 @@
             // lblDmgParticle
             // 
             this.lblDmgParticle.AutoSize = true;
-            this.lblDmgParticle.Location = new System.Drawing.Point(6, 77);
+            this.lblDmgParticle.Location = new System.Drawing.Point(6, 99);
             this.lblDmgParticle.Name = "lblDmgParticle";
             this.lblDmgParticle.Size = new System.Drawing.Size(70, 13);
             this.lblDmgParticle.TabIndex = 22;
@@ -415,7 +419,7 @@
             // 
             // txtDmgSound
             // 
-            this.txtDmgSound.Location = new System.Drawing.Point(383, 74);
+            this.txtDmgSound.Location = new System.Drawing.Point(383, 96);
             this.txtDmgSound.Name = "txtDmgSound";
             this.txtDmgSound.Size = new System.Drawing.Size(29, 20);
             this.txtDmgSound.TabIndex = 21;
@@ -423,7 +427,7 @@
             // lblDmgSound
             // 
             this.lblDmgSound.AutoSize = true;
-            this.lblDmgSound.Location = new System.Drawing.Point(319, 77);
+            this.lblDmgSound.Location = new System.Drawing.Point(319, 99);
             this.lblDmgSound.Name = "lblDmgSound";
             this.lblDmgSound.Size = new System.Drawing.Size(66, 13);
             this.lblDmgSound.TabIndex = 20;
@@ -431,7 +435,7 @@
             // 
             // txtSoundDelay
             // 
-            this.txtSoundDelay.Location = new System.Drawing.Point(288, 74);
+            this.txtSoundDelay.Location = new System.Drawing.Point(288, 96);
             this.txtSoundDelay.Name = "txtSoundDelay";
             this.txtSoundDelay.Size = new System.Drawing.Size(24, 20);
             this.txtSoundDelay.TabIndex = 19;
@@ -439,7 +443,7 @@
             // lblSoundDelay
             // 
             this.lblSoundDelay.AutoSize = true;
-            this.lblSoundDelay.Location = new System.Drawing.Point(212, 77);
+            this.lblSoundDelay.Location = new System.Drawing.Point(212, 99);
             this.lblSoundDelay.Name = "lblSoundDelay";
             this.lblSoundDelay.Size = new System.Drawing.Size(71, 13);
             this.lblSoundDelay.TabIndex = 18;
@@ -448,7 +452,7 @@
             // lblPLSound
             // 
             this.lblPLSound.AutoSize = true;
-            this.lblPLSound.Location = new System.Drawing.Point(112, 104);
+            this.lblPLSound.Location = new System.Drawing.Point(112, 126);
             this.lblPLSound.Name = "lblPLSound";
             this.lblPLSound.Size = new System.Drawing.Size(57, 13);
             this.lblPLSound.TabIndex = 16;
@@ -456,7 +460,7 @@
             // 
             // txtAtkSound
             // 
-            this.txtAtkSound.Location = new System.Drawing.Point(67, 101);
+            this.txtAtkSound.Location = new System.Drawing.Point(67, 123);
             this.txtAtkSound.Name = "txtAtkSound";
             this.txtAtkSound.Size = new System.Drawing.Size(33, 20);
             this.txtAtkSound.TabIndex = 15;
@@ -464,7 +468,7 @@
             // lblAtkSound
             // 
             this.lblAtkSound.AutoSize = true;
-            this.lblAtkSound.Location = new System.Drawing.Point(6, 104);
+            this.lblAtkSound.Location = new System.Drawing.Point(6, 126);
             this.lblAtkSound.Name = "lblAtkSound";
             this.lblAtkSound.Size = new System.Drawing.Size(60, 13);
             this.lblAtkSound.TabIndex = 14;
@@ -473,7 +477,7 @@
             // lblHitEffect
             // 
             this.lblHitEffect.AutoSize = true;
-            this.lblHitEffect.Location = new System.Drawing.Point(319, 50);
+            this.lblHitEffect.Location = new System.Drawing.Point(319, 72);
             this.lblHitEffect.Name = "lblHitEffect";
             this.lblHitEffect.Size = new System.Drawing.Size(54, 13);
             this.lblHitEffect.TabIndex = 13;
@@ -481,7 +485,7 @@
             // 
             // txtHitEffect
             // 
-            this.txtHitEffect.Location = new System.Drawing.Point(376, 47);
+            this.txtHitEffect.Location = new System.Drawing.Point(376, 69);
             this.txtHitEffect.Name = "txtHitEffect";
             this.txtHitEffect.Size = new System.Drawing.Size(38, 20);
             this.txtHitEffect.TabIndex = 12;
@@ -489,7 +493,7 @@
             // lblHitSpeed
             // 
             this.lblHitSpeed.AutoSize = true;
-            this.lblHitSpeed.Location = new System.Drawing.Point(212, 50);
+            this.lblHitSpeed.Location = new System.Drawing.Point(212, 72);
             this.lblHitSpeed.Name = "lblHitSpeed";
             this.lblHitSpeed.Size = new System.Drawing.Size(57, 13);
             this.lblHitSpeed.TabIndex = 11;
@@ -497,7 +501,7 @@
             // 
             // txtHitSpeed
             // 
-            this.txtHitSpeed.Location = new System.Drawing.Point(275, 47);
+            this.txtHitSpeed.Location = new System.Drawing.Point(275, 69);
             this.txtHitSpeed.Name = "txtHitSpeed";
             this.txtHitSpeed.Size = new System.Drawing.Size(38, 20);
             this.txtHitSpeed.TabIndex = 10;
@@ -505,7 +509,7 @@
             // lblHitCount
             // 
             this.lblHitCount.AutoSize = true;
-            this.lblHitCount.Location = new System.Drawing.Point(319, 24);
+            this.lblHitCount.Location = new System.Drawing.Point(319, 46);
             this.lblHitCount.Name = "lblHitCount";
             this.lblHitCount.Size = new System.Drawing.Size(54, 13);
             this.lblHitCount.TabIndex = 9;
@@ -513,7 +517,7 @@
             // 
             // txtHitCount
             // 
-            this.txtHitCount.Location = new System.Drawing.Point(376, 21);
+            this.txtHitCount.Location = new System.Drawing.Point(376, 43);
             this.txtHitCount.Name = "txtHitCount";
             this.txtHitCount.Size = new System.Drawing.Size(38, 20);
             this.txtHitCount.TabIndex = 8;
@@ -521,7 +525,7 @@
             // lblDmgEffect
             // 
             this.lblDmgEffect.AutoSize = true;
-            this.lblDmgEffect.Location = new System.Drawing.Point(6, 50);
+            this.lblDmgEffect.Location = new System.Drawing.Point(6, 72);
             this.lblDmgEffect.Name = "lblDmgEffect";
             this.lblDmgEffect.Size = new System.Drawing.Size(63, 13);
             this.lblDmgEffect.TabIndex = 6;
@@ -530,7 +534,7 @@
             // lblKnockBack
             // 
             this.lblKnockBack.AutoSize = true;
-            this.lblKnockBack.Location = new System.Drawing.Point(203, 24);
+            this.lblKnockBack.Location = new System.Drawing.Point(203, 46);
             this.lblKnockBack.Name = "lblKnockBack";
             this.lblKnockBack.Size = new System.Drawing.Size(66, 13);
             this.lblKnockBack.TabIndex = 5;
@@ -538,7 +542,7 @@
             // 
             // txtKnockBack
             // 
-            this.txtKnockBack.Location = new System.Drawing.Point(275, 21);
+            this.txtKnockBack.Location = new System.Drawing.Point(275, 43);
             this.txtKnockBack.Name = "txtKnockBack";
             this.txtKnockBack.Size = new System.Drawing.Size(38, 20);
             this.txtKnockBack.TabIndex = 4;
@@ -546,7 +550,7 @@
             // lblDamage
             // 
             this.lblDamage.AutoSize = true;
-            this.lblDamage.Location = new System.Drawing.Point(100, 24);
+            this.lblDamage.Location = new System.Drawing.Point(100, 46);
             this.lblDamage.Name = "lblDamage";
             this.lblDamage.Size = new System.Drawing.Size(50, 13);
             this.lblDamage.TabIndex = 3;
@@ -554,7 +558,7 @@
             // 
             // txtDamage
             // 
-            this.txtDamage.Location = new System.Drawing.Point(156, 21);
+            this.txtDamage.Location = new System.Drawing.Point(156, 43);
             this.txtDamage.Name = "txtDamage";
             this.txtDamage.Size = new System.Drawing.Size(38, 20);
             this.txtDamage.TabIndex = 2;
@@ -562,7 +566,7 @@
             // lblChakra
             // 
             this.lblChakra.AutoSize = true;
-            this.lblChakra.Location = new System.Drawing.Point(6, 24);
+            this.lblChakra.Location = new System.Drawing.Point(6, 46);
             this.lblChakra.Name = "lblChakra";
             this.lblChakra.Size = new System.Drawing.Size(44, 13);
             this.lblChakra.TabIndex = 1;
@@ -570,7 +574,7 @@
             // 
             // txtChakra
             // 
-            this.txtChakra.Location = new System.Drawing.Point(56, 21);
+            this.txtChakra.Location = new System.Drawing.Point(56, 43);
             this.txtChakra.Name = "txtChakra";
             this.txtChakra.Size = new System.Drawing.Size(38, 20);
             this.txtChakra.TabIndex = 0;
@@ -628,9 +632,9 @@
             // 
             // grpAttackFlagGroup1
             // 
-            this.grpAttackFlagGroup1.Location = new System.Drawing.Point(0, 283);
+            this.grpAttackFlagGroup1.Location = new System.Drawing.Point(0, 367);
             this.grpAttackFlagGroup1.Name = "grpAttackFlagGroup1";
-            this.grpAttackFlagGroup1.Size = new System.Drawing.Size(419, 292);
+            this.grpAttackFlagGroup1.Size = new System.Drawing.Size(419, 208);
             this.grpAttackFlagGroup1.TabIndex = 45;
             this.grpAttackFlagGroup1.TabStop = false;
             this.grpAttackFlagGroup1.Text = "Attack Flags";
@@ -670,9 +674,9 @@
             // clbFlags
             // 
             this.clbFlags.FormattingEnabled = true;
-            this.clbFlags.Location = new System.Drawing.Point(10, 303);
+            this.clbFlags.Location = new System.Drawing.Point(10, 393);
             this.clbFlags.Name = "clbFlags";
-            this.clbFlags.Size = new System.Drawing.Size(404, 259);
+            this.clbFlags.Size = new System.Drawing.Size(404, 169);
             this.clbFlags.TabIndex = 80;
             // 
             // panel1
@@ -1354,6 +1358,32 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 89;
+            this.label1.Text = "Kawarimi Interval:";
+            // 
+            // cmbKawarimi
+            // 
+            this.cmbKawarimi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbKawarimi.FormattingEnabled = true;
+            this.cmbKawarimi.Items.AddRange(new object[] {
+            "-3",
+            "-2",
+            "-1",
+            "0",
+            "1",
+            "2",
+            "3"});
+            this.cmbKawarimi.Location = new System.Drawing.Point(102, 18);
+            this.cmbKawarimi.Name = "cmbKawarimi";
+            this.cmbKawarimi.Size = new System.Drawing.Size(115, 21);
+            this.cmbKawarimi.TabIndex = 88;
+            // 
             // MovesetParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1528,5 +1558,7 @@
         public System.Windows.Forms.ComboBox cmbDpad;
         private System.Windows.Forms.Label lblDpad;
         public System.Windows.Forms.Label lblTest;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.ComboBox cmbKawarimi;
     }
 }

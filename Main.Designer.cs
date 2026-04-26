@@ -48,6 +48,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblProgress = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.picR1 = new System.Windows.Forms.PictureBox();
             this.btnEditJutsusParameters = new System.Windows.Forms.Button();
             this.btnEditAwekeningParameters = new System.Windows.Forms.Button();
             this.btnEditMovesetParameters = new System.Windows.Forms.Button();
@@ -65,17 +66,16 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.picBackground = new System.Windows.Forms.PictureBox();
-            this.picR1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picR1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picArrowRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picArrowLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picR1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -253,6 +253,17 @@
             this.tabPage1.Text = "Free Battle";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // picR1
+            // 
+            this.picR1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picR1.Location = new System.Drawing.Point(804, 34);
+            this.picR1.Name = "picR1";
+            this.picR1.Size = new System.Drawing.Size(48, 23);
+            this.picR1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picR1.TabIndex = 21;
+            this.picR1.TabStop = false;
+            this.picR1.Visible = false;
+            // 
             // btnEditJutsusParameters
             // 
             this.btnEditJutsusParameters.Location = new System.Drawing.Point(83, 121);
@@ -420,17 +431,6 @@
             this.picBackground.TabIndex = 20;
             this.picBackground.TabStop = false;
             // 
-            // picR1
-            // 
-            this.picR1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picR1.Location = new System.Drawing.Point(804, 34);
-            this.picR1.Name = "picR1";
-            this.picR1.Size = new System.Drawing.Size(48, 23);
-            this.picR1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picR1.TabIndex = 21;
-            this.picR1.TabStop = false;
-            this.picR1.Visible = false;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -452,13 +452,13 @@
             this.panel1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picR1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picArrowRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picArrowLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picR1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
