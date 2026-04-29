@@ -56,12 +56,17 @@ namespace UN5ModdingWorkshop
 
         public short AtkAnm;
 
-        public short AtkDefenseEffect, AtkHitSpeed, AtkPlSound, AtkSound, AtkDamageParticle, AtkEnemySound, AtkDamageSound, AtkDefenseParticle, AtkDefenseSound;
+        public short AtkDefenseEffect, AtkPlSound, AtkSound, AtkDamageParticle, AtkEnemySound, AtkDamageSound, AtkDefenseParticle, AtkDefenseSound;
 
         public uint AtkPos2, AtkUnk16;
 
-        public UInt16 AtkHitCount, AtkHitEffect, AtkSoundDelay;
+        public UInt16 AtkSoundDelay;
 
+        int HitSpeed = 0;
+
+        int HitCount = 0;
+
+        int HitStun = 0;
         public byte[] AtkUnk2, AtkUnk3;
 
         #endregion
@@ -108,9 +113,9 @@ namespace UN5ModdingWorkshop
 
             AtkDefenseEffect = (short)Input.ReadUInt(0x2D, 8),
 
-            AtkHitCount = (UInt16)Input.ReadUInt(0x2E, 16),
-            AtkHitSpeed = (short)Input.ReadUInt(0x30, 16),
-            AtkHitEffect = (UInt16)Input.ReadUInt(0x32, 16),
+            HitCount = Input.ReadInt(0x2E, 16),
+            HitStun = Input.ReadInt(0x30, 16),
+            HitSpeed = Input.ReadInt(0x32, 16),
 
             AtkSummonDistance1 = Input.ReadSingle(0x34),
             AtkSummonDistance2 = Input.ReadSingle(0x38),
@@ -293,6 +298,7 @@ namespace UN5ModdingWorkshop
             P1AtkOffs = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks;
             Util.WriteProcessMemoryBytes(P1AtkOffs, atkDataPart);
         }
+        
         public static PlAtk GetCharAtk(int charID, int atkID)
         {
             int atkCount = PlGen.CharGenPrm[charID].AtkCount;
@@ -325,6 +331,7 @@ namespace UN5ModdingWorkshop
             }
             return CharAtkPrm[charID][atkID];
         }
+        
         public static string GetCharComboName(int charID, int comboNameID)
         {
             if (comboNameList.Count == 0)
@@ -364,6 +371,7 @@ namespace UN5ModdingWorkshop
             }
             return comboNameList[charID][comboNameID];
         }
+        
         public static void AddCharComboList(MovesetParameters movForm, int charID, string txtCharNameForm)
         {
             movForm.lblCharName2.Text = txtCharNameForm;
@@ -483,7 +491,7 @@ namespace UN5ModdingWorkshop
 
         public static void SendTextAtk(int charID, MovesetParameters movForm, PlAtk Atk)
         {
-            movForm.cmbKawarimi.SelectedIndex = Convert.ToInt16(Atk.KawarimiDificulty + 3);
+            movForm.numKawarimi.Value = Convert.ToInt16(Atk.KawarimiDificulty);
             int atkType2 = (int)Atk.Unk15;
             movForm.lblNamePanel.Text = movForm.listBox1.SelectedItem.ToString().Split(':')[1].Trim();
             if ((Atk.ThrowFlag == 1 || Atk.ThrowFlag == 2) && ((atkType2 >> 1) & 1) == 1)
@@ -633,9 +641,9 @@ namespace UN5ModdingWorkshop
                 flagsCount++;
             }
 
-            movForm.txtChakra.Text = ($"{Atk.AtkChakra}");
-            movForm.txtDamage.Text = ($"{Atk.AtkDamage}");
-            movForm.txtKnockBack.Text = ($"{Atk.AtkKnockBack}");
+            movForm.numChakra.Value = (decimal)Atk.AtkChakra;
+            movForm.numDamage.Value = (decimal)Atk.AtkDamage;
+            movForm.numKnockBack.Value = (decimal)Atk.AtkKnockBack;
 
             movForm.cmbDmgEffect.Items.AddRange(movForm.cmbDmgEffect.Items.Count == 0 ? DamageEffectList.Values.ToArray() : new object[0]);
             int currentDmgEffect = (int)Atk.AtkDamageEffect;
@@ -645,9 +653,10 @@ namespace UN5ModdingWorkshop
             int currentDefenseEffect = Atk.AtkDefenseEffect;
             movForm.cmbDefenseEffect.SelectedIndex = currentDefenseEffect == 255 ? 0 : currentDefenseEffect + 1;
 
-            movForm.txtHitCount.Text = ($"{Atk.AtkHitCount}");
-            movForm.txtHitSpeed.Text = ($"{Atk.AtkHitSpeed}");
-            movForm.txtHitEffect.Text = ($"{Atk.AtkHitEffect}");
+            movForm.numHitCount.Value = Convert.ToInt16(Atk.HitCount);
+            movForm.numHitStun.Value = Convert.ToInt16(Atk.HitStun);
+            movForm.numHitSpeed.Value = Convert.ToInt16(Atk.HitSpeed);
+
             movForm.txtSummonDistance1.Text = $"{Atk.AtkSummonDistance1}";
             movForm.txtSummonDistance2.Text = $"{Atk.AtkSummonDistance2}";
             movForm.txtKnockBackDirection.Text = $"{Atk.AtkKnockBackDirection}";
@@ -1097,8 +1106,8 @@ namespace UN5ModdingWorkshop
 
             AtkData.Add((byte)Atk.PreviousIdx);
             AtkData.Add((byte)Atk.SequenceIdx);
-            Atk.KawarimiDificulty = (sbyte)(movForm.cmbKawarimi.SelectedIndex - 3);
-            AtkData.Add((byte)(movForm.cmbKawarimi.SelectedIndex - 3));
+            Atk.KawarimiDificulty = (sbyte)(movForm.numKawarimi.Value);
+            AtkData.Add((byte)Atk.KawarimiDificulty);
             AtkData.Add((byte)0);
 
             AtkData.Add((byte)Atk.Unk15);
@@ -1109,24 +1118,24 @@ namespace UN5ModdingWorkshop
             byte atkButtonFlag = (byte)Atk.AtkButtonFlag;
             AtkData.Add(atkButtonFlag);
             AtkData.Add((byte)Atk.AtkUnk16);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtChakra.Text)));
-            Atk.AtkChakra = Convert.ToSingle(movForm.txtChakra.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtDamage.Text)));
-            Atk.AtkDamage = Convert.ToSingle(movForm.txtDamage.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtKnockBack.Text)));
-            Atk.AtkKnockBack = Convert.ToSingle(movForm.txtKnockBack.Text);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numChakra.Value)));
+            Atk.AtkChakra = Convert.ToSingle(movForm.numChakra.Value);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numDamage.Value)));
+            Atk.AtkDamage = Convert.ToSingle(movForm.numDamage.Value);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numKnockBack.Value)));
+            Atk.AtkKnockBack = Convert.ToSingle(movForm.numKnockBack.Value);
             byte currentDmgEffect = (byte)movForm.cmbDmgEffect.SelectedIndex;
             AtkData.Add(currentDmgEffect);
             Atk.AtkDamageEffect = currentDmgEffect;
             byte currentDefenseEffect = (byte)(movForm.cmbDefenseEffect.SelectedIndex - 1);
             AtkData.Add(currentDefenseEffect);
             Atk.AtkDefenseEffect = currentDefenseEffect;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(movForm.txtHitCount.Text)));
-            Atk.AtkHitCount = Convert.ToUInt16(movForm.txtHitCount.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.txtHitSpeed.Text)));
-            Atk.AtkHitSpeed = Convert.ToInt16(movForm.txtHitSpeed.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(movForm.txtHitEffect.Text)));
-            Atk.AtkHitEffect = Convert.ToUInt16(movForm.txtHitEffect.Text);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.numHitCount.Value)));
+            Atk.HitCount = Convert.ToInt16(movForm.numHitCount.Value);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(movForm.numHitStun.Value)));
+            Atk.HitStun = Convert.ToInt16(movForm.numHitStun.Value);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.numHitSpeed.Value)));
+            Atk.HitSpeed = Convert.ToInt16(movForm.numHitSpeed.Value);
             AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtSummonDistance1.Text)));
             Atk.AtkSummonDistance1 = Convert.ToSingle(movForm.txtSummonDistance1.Text);
             AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtSummonDistance2.Text)));
@@ -1258,7 +1267,7 @@ namespace UN5ModdingWorkshop
                 AtkData.Add((byte)Atk.OtherFlag2);
 
                 AtkData.Add((byte)Atk.PreviousIdx);
-                AtkData.Add((byte)(movForm.cmbKawarimi.SelectedIndex - 3));
+                AtkData.Add((byte)(movForm.numKawarimi.Value));
                 AtkData.Add((byte)Atk.KawarimiDificulty);
                 AtkData.Add((byte)0);
 
@@ -1272,9 +1281,9 @@ namespace UN5ModdingWorkshop
                 AtkData.AddRange(BitConverter.GetBytes(Atk.AtkKnockBack));
                 AtkData.Add((byte)Atk.AtkDamageEffect);
                 AtkData.Add((byte)Atk.AtkDefenseEffect);
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkHitCount));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkHitSpeed));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkHitEffect));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.HitCount));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.HitSpeed));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.HitStun));
                 AtkData.AddRange(BitConverter.GetBytes(Atk.AtkSummonDistance1));
                 AtkData.AddRange(BitConverter.GetBytes(Atk.AtkSummonDistance2));
                 AtkData.AddRange(BitConverter.GetBytes(Atk.AtkKnockBackDirection));

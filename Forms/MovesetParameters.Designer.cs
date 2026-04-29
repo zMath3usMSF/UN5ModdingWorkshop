@@ -36,6 +36,15 @@
             this.lblCharName2 = new System.Windows.Forms.Label();
             this.lblCharName = new System.Windows.Forms.Label();
             this.grpAttackParameters = new System.Windows.Forms.GroupBox();
+            this.chkHitCount = new System.Windows.Forms.CheckBox();
+            this.numHitStun = new System.Windows.Forms.NumericUpDown();
+            this.numHitSpeed = new System.Windows.Forms.NumericUpDown();
+            this.numHitCount = new System.Windows.Forms.NumericUpDown();
+            this.numDamage = new System.Windows.Forms.NumericUpDown();
+            this.numChakra = new System.Windows.Forms.NumericUpDown();
+            this.numKnockBack = new System.Windows.Forms.NumericUpDown();
+            this.numKawarimi = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtDefenseSound = new System.Windows.Forms.TextBox();
             this.cmbDefenseParticle = new System.Windows.Forms.ComboBox();
             this.lblDefenseParticle = new System.Windows.Forms.Label();
@@ -61,19 +70,13 @@
             this.lblPLSound = new System.Windows.Forms.Label();
             this.txtAtkSound = new System.Windows.Forms.TextBox();
             this.lblAtkSound = new System.Windows.Forms.Label();
-            this.lblHitEffect = new System.Windows.Forms.Label();
-            this.txtHitEffect = new System.Windows.Forms.TextBox();
-            this.lblHitSpeed = new System.Windows.Forms.Label();
-            this.txtHitSpeed = new System.Windows.Forms.TextBox();
+            this.lblHitStop = new System.Windows.Forms.Label();
+            this.lblHitInterval = new System.Windows.Forms.Label();
             this.lblHitCount = new System.Windows.Forms.Label();
-            this.txtHitCount = new System.Windows.Forms.TextBox();
             this.lblDmgEffect = new System.Windows.Forms.Label();
             this.lblKnockBack = new System.Windows.Forms.Label();
-            this.txtKnockBack = new System.Windows.Forms.TextBox();
             this.lblDamage = new System.Windows.Forms.Label();
-            this.txtDamage = new System.Windows.Forms.TextBox();
             this.lblChakra = new System.Windows.Forms.Label();
-            this.txtChakra = new System.Windows.Forms.TextBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSaveELF = new System.Windows.Forms.Button();
             this.btnUpdateP1 = new System.Windows.Forms.Button();
@@ -146,9 +149,18 @@
             this.lblSelectedAtk2 = new System.Windows.Forms.Label();
             this.lblSelectedAtk = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbKawarimi = new System.Windows.Forms.ComboBox();
+            this.chkHitSpeed = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.grpAttackParameters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitStun)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numChakra)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numKnockBack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numKawarimi)).BeginInit();
+            this.grpAttackFlagGroup1.SuspendLayout();
             this.pnlAtkPrm.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCommand)).BeginInit();
@@ -167,6 +179,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -218,8 +231,18 @@
             // 
             // grpAttackParameters
             // 
+            this.grpAttackParameters.Controls.Add(this.checkBox1);
+            this.grpAttackParameters.Controls.Add(this.chkHitSpeed);
+            this.grpAttackParameters.Controls.Add(this.panel1);
+            this.grpAttackParameters.Controls.Add(this.chkHitCount);
+            this.grpAttackParameters.Controls.Add(this.numHitStun);
+            this.grpAttackParameters.Controls.Add(this.numHitSpeed);
+            this.grpAttackParameters.Controls.Add(this.numHitCount);
+            this.grpAttackParameters.Controls.Add(this.numDamage);
+            this.grpAttackParameters.Controls.Add(this.numChakra);
+            this.grpAttackParameters.Controls.Add(this.numKnockBack);
+            this.grpAttackParameters.Controls.Add(this.numKawarimi);
             this.grpAttackParameters.Controls.Add(this.label1);
-            this.grpAttackParameters.Controls.Add(this.cmbKawarimi);
             this.grpAttackParameters.Controls.Add(this.txtDefenseSound);
             this.grpAttackParameters.Controls.Add(this.cmbDefenseParticle);
             this.grpAttackParameters.Controls.Add(this.lblDefenseParticle);
@@ -245,29 +268,135 @@
             this.grpAttackParameters.Controls.Add(this.lblPLSound);
             this.grpAttackParameters.Controls.Add(this.txtAtkSound);
             this.grpAttackParameters.Controls.Add(this.lblAtkSound);
-            this.grpAttackParameters.Controls.Add(this.lblHitEffect);
-            this.grpAttackParameters.Controls.Add(this.txtHitEffect);
-            this.grpAttackParameters.Controls.Add(this.lblHitSpeed);
-            this.grpAttackParameters.Controls.Add(this.txtHitSpeed);
+            this.grpAttackParameters.Controls.Add(this.lblHitStop);
+            this.grpAttackParameters.Controls.Add(this.lblHitInterval);
             this.grpAttackParameters.Controls.Add(this.lblHitCount);
-            this.grpAttackParameters.Controls.Add(this.txtHitCount);
             this.grpAttackParameters.Controls.Add(this.lblDmgEffect);
             this.grpAttackParameters.Controls.Add(this.lblKnockBack);
-            this.grpAttackParameters.Controls.Add(this.txtKnockBack);
             this.grpAttackParameters.Controls.Add(this.lblDamage);
-            this.grpAttackParameters.Controls.Add(this.txtDamage);
             this.grpAttackParameters.Controls.Add(this.lblChakra);
-            this.grpAttackParameters.Controls.Add(this.txtChakra);
-            this.grpAttackParameters.Location = new System.Drawing.Point(0, 105);
+            this.grpAttackParameters.Location = new System.Drawing.Point(0, 0);
             this.grpAttackParameters.Name = "grpAttackParameters";
-            this.grpAttackParameters.Size = new System.Drawing.Size(419, 282);
+            this.grpAttackParameters.Size = new System.Drawing.Size(631, 387);
             this.grpAttackParameters.TabIndex = 72;
             this.grpAttackParameters.TabStop = false;
             this.grpAttackParameters.Text = "Attack Parameters";
+            this.grpAttackParameters.Enter += new System.EventHandler(this.grpAttackParameters_Enter);
+            // 
+            // chkHitCount
+            // 
+            this.chkHitCount.AutoSize = true;
+            this.chkHitCount.Location = new System.Drawing.Point(134, 171);
+            this.chkHitCount.Name = "chkHitCount";
+            this.chkHitCount.Size = new System.Drawing.Size(57, 17);
+            this.chkHitCount.TabIndex = 97;
+            this.chkHitCount.Text = "Infinite";
+            this.chkHitCount.UseVisualStyleBackColor = true;
+            // 
+            // numHitStun
+            // 
+            this.numHitStun.Location = new System.Drawing.Point(304, 170);
+            this.numHitStun.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.numHitStun.Minimum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            -2147483648});
+            this.numHitStun.Name = "numHitStun";
+            this.numHitStun.Size = new System.Drawing.Size(58, 20);
+            this.numHitStun.TabIndex = 96;
+            // 
+            // numHitSpeed
+            // 
+            this.numHitSpeed.Location = new System.Drawing.Point(520, 169);
+            this.numHitSpeed.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.numHitSpeed.Minimum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            -2147483648});
+            this.numHitSpeed.Name = "numHitSpeed";
+            this.numHitSpeed.Size = new System.Drawing.Size(58, 20);
+            this.numHitSpeed.TabIndex = 95;
+            // 
+            // numHitCount
+            // 
+            this.numHitCount.Location = new System.Drawing.Point(70, 169);
+            this.numHitCount.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.numHitCount.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
+            this.numHitCount.Name = "numHitCount";
+            this.numHitCount.Size = new System.Drawing.Size(58, 20);
+            this.numHitCount.TabIndex = 94;
+            // 
+            // numDamage
+            // 
+            this.numDamage.DecimalPlaces = 4;
+            this.numDamage.Location = new System.Drawing.Point(399, 117);
+            this.numDamage.Name = "numDamage";
+            this.numDamage.Size = new System.Drawing.Size(70, 20);
+            this.numDamage.TabIndex = 93;
+            // 
+            // numChakra
+            // 
+            this.numChakra.DecimalPlaces = 4;
+            this.numChakra.Location = new System.Drawing.Point(241, 118);
+            this.numChakra.Name = "numChakra";
+            this.numChakra.Size = new System.Drawing.Size(70, 20);
+            this.numChakra.TabIndex = 92;
+            // 
+            // numKnockBack
+            // 
+            this.numKnockBack.DecimalPlaces = 2;
+            this.numKnockBack.Location = new System.Drawing.Point(575, 117);
+            this.numKnockBack.Name = "numKnockBack";
+            this.numKnockBack.Size = new System.Drawing.Size(48, 20);
+            this.numKnockBack.TabIndex = 91;
+            // 
+            // numKawarimi
+            // 
+            this.numKawarimi.Location = new System.Drawing.Point(109, 117);
+            this.numKawarimi.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numKawarimi.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            -2147483648});
+            this.numKawarimi.Name = "numKawarimi";
+            this.numKawarimi.Size = new System.Drawing.Size(48, 20);
+            this.numKawarimi.TabIndex = 90;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 120);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 89;
+            this.label1.Text = "Kawarimi Window:";
             // 
             // txtDefenseSound
             // 
-            this.txtDefenseSound.Location = new System.Drawing.Point(215, 147);
+            this.txtDefenseSound.Location = new System.Drawing.Point(216, 260);
             this.txtDefenseSound.Name = "txtDefenseSound";
             this.txtDefenseSound.Size = new System.Drawing.Size(32, 20);
             this.txtDefenseSound.TabIndex = 44;
@@ -276,7 +405,7 @@
             // 
             this.cmbDefenseParticle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDefenseParticle.FormattingEnabled = true;
-            this.cmbDefenseParticle.Location = new System.Drawing.Point(318, 147);
+            this.cmbDefenseParticle.Location = new System.Drawing.Point(319, 260);
             this.cmbDefenseParticle.Name = "cmbDefenseParticle";
             this.cmbDefenseParticle.Size = new System.Drawing.Size(81, 21);
             this.cmbDefenseParticle.TabIndex = 43;
@@ -284,7 +413,7 @@
             // lblDefenseParticle
             // 
             this.lblDefenseParticle.AutoSize = true;
-            this.lblDefenseParticle.Location = new System.Drawing.Point(253, 151);
+            this.lblDefenseParticle.Location = new System.Drawing.Point(254, 264);
             this.lblDefenseParticle.Name = "lblDefenseParticle";
             this.lblDefenseParticle.Size = new System.Drawing.Size(65, 13);
             this.lblDefenseParticle.TabIndex = 42;
@@ -293,7 +422,7 @@
             // lblDefenseSound
             // 
             this.lblDefenseSound.AutoSize = true;
-            this.lblDefenseSound.Location = new System.Drawing.Point(153, 150);
+            this.lblDefenseSound.Location = new System.Drawing.Point(154, 263);
             this.lblDefenseSound.Name = "lblDefenseSound";
             this.lblDefenseSound.Size = new System.Drawing.Size(61, 13);
             this.lblDefenseSound.TabIndex = 40;
@@ -301,7 +430,7 @@
             // 
             // txtKnockBackDirection
             // 
-            this.txtKnockBackDirection.Location = new System.Drawing.Point(306, 173);
+            this.txtKnockBackDirection.Location = new System.Drawing.Point(307, 286);
             this.txtKnockBackDirection.Name = "txtKnockBackDirection";
             this.txtKnockBackDirection.Size = new System.Drawing.Size(43, 20);
             this.txtKnockBackDirection.TabIndex = 39;
@@ -309,7 +438,7 @@
             // lblKnockBackDirection
             // 
             this.lblKnockBackDirection.AutoSize = true;
-            this.lblKnockBackDirection.Location = new System.Drawing.Point(260, 176);
+            this.lblKnockBackDirection.Location = new System.Drawing.Point(261, 289);
             this.lblKnockBackDirection.Name = "lblKnockBackDirection";
             this.lblKnockBackDirection.Size = new System.Drawing.Size(40, 13);
             this.lblKnockBackDirection.TabIndex = 38;
@@ -317,7 +446,7 @@
             // 
             // txtSummonDistance2
             // 
-            this.txtSummonDistance2.Location = new System.Drawing.Point(211, 173);
+            this.txtSummonDistance2.Location = new System.Drawing.Point(212, 286);
             this.txtSummonDistance2.Name = "txtSummonDistance2";
             this.txtSummonDistance2.Size = new System.Drawing.Size(43, 20);
             this.txtSummonDistance2.TabIndex = 37;
@@ -325,7 +454,7 @@
             // lblSummonDistance2
             // 
             this.lblSummonDistance2.AutoSize = true;
-            this.lblSummonDistance2.Location = new System.Drawing.Point(133, 177);
+            this.lblSummonDistance2.Location = new System.Drawing.Point(134, 290);
             this.lblSummonDistance2.Name = "lblSummonDistance2";
             this.lblSummonDistance2.Size = new System.Drawing.Size(72, 13);
             this.lblSummonDistance2.TabIndex = 36;
@@ -333,7 +462,7 @@
             // 
             // txtSummonDistance1
             // 
-            this.txtSummonDistance1.Location = new System.Drawing.Point(84, 174);
+            this.txtSummonDistance1.Location = new System.Drawing.Point(85, 287);
             this.txtSummonDistance1.Name = "txtSummonDistance1";
             this.txtSummonDistance1.Size = new System.Drawing.Size(43, 20);
             this.txtSummonDistance1.TabIndex = 35;
@@ -341,7 +470,7 @@
             // lblSummonDistance1
             // 
             this.lblSummonDistance1.AutoSize = true;
-            this.lblSummonDistance1.Location = new System.Drawing.Point(6, 177);
+            this.lblSummonDistance1.Location = new System.Drawing.Point(7, 290);
             this.lblSummonDistance1.Name = "lblSummonDistance1";
             this.lblSummonDistance1.Size = new System.Drawing.Size(72, 13);
             this.lblSummonDistance1.TabIndex = 34;
@@ -350,7 +479,7 @@
             // lblDefenseEffect
             // 
             this.lblDefenseEffect.AutoSize = true;
-            this.lblDefenseEffect.Location = new System.Drawing.Point(6, 151);
+            this.lblDefenseEffect.Location = new System.Drawing.Point(7, 264);
             this.lblDefenseEffect.Name = "lblDefenseEffect";
             this.lblDefenseEffect.Size = new System.Drawing.Size(58, 13);
             this.lblDefenseEffect.TabIndex = 33;
@@ -360,7 +489,7 @@
             // 
             this.cmbDefenseEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDefenseEffect.FormattingEnabled = true;
-            this.cmbDefenseEffect.Location = new System.Drawing.Point(69, 147);
+            this.cmbDefenseEffect.Location = new System.Drawing.Point(70, 260);
             this.cmbDefenseEffect.Name = "cmbDefenseEffect";
             this.cmbDefenseEffect.Size = new System.Drawing.Size(78, 21);
             this.cmbDefenseEffect.TabIndex = 32;
@@ -369,16 +498,16 @@
             // 
             this.cmbDmgParticle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDmgParticle.FormattingEnabled = true;
-            this.cmbDmgParticle.Location = new System.Drawing.Point(79, 96);
+            this.cmbDmgParticle.Location = new System.Drawing.Point(487, 142);
             this.cmbDmgParticle.Name = "cmbDmgParticle";
-            this.cmbDmgParticle.Size = new System.Drawing.Size(115, 21);
+            this.cmbDmgParticle.Size = new System.Drawing.Size(136, 21);
             this.cmbDmgParticle.TabIndex = 29;
             // 
             // cmbPLSound
             // 
             this.cmbPLSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPLSound.FormattingEnabled = true;
-            this.cmbPLSound.Location = new System.Drawing.Point(174, 123);
+            this.cmbPLSound.Location = new System.Drawing.Point(175, 236);
             this.cmbPLSound.Name = "cmbPLSound";
             this.cmbPLSound.Size = new System.Drawing.Size(118, 21);
             this.cmbPLSound.TabIndex = 28;
@@ -387,14 +516,14 @@
             // 
             this.cmbDmgEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDmgEffect.FormattingEnabled = true;
-            this.cmbDmgEffect.Location = new System.Drawing.Point(70, 69);
+            this.cmbDmgEffect.Location = new System.Drawing.Point(96, 142);
             this.cmbDmgEffect.Name = "cmbDmgEffect";
-            this.cmbDmgEffect.Size = new System.Drawing.Size(138, 21);
+            this.cmbDmgEffect.Size = new System.Drawing.Size(227, 21);
             this.cmbDmgEffect.TabIndex = 27;
             // 
             // txtEnemySound
             // 
-            this.txtEnemySound.Location = new System.Drawing.Point(385, 124);
+            this.txtEnemySound.Location = new System.Drawing.Point(386, 237);
             this.txtEnemySound.Name = "txtEnemySound";
             this.txtEnemySound.Size = new System.Drawing.Size(25, 20);
             this.txtEnemySound.TabIndex = 25;
@@ -402,7 +531,7 @@
             // lblEnemySound
             // 
             this.lblEnemySound.AutoSize = true;
-            this.lblEnemySound.Location = new System.Drawing.Point(302, 127);
+            this.lblEnemySound.Location = new System.Drawing.Point(303, 240);
             this.lblEnemySound.Name = "lblEnemySound";
             this.lblEnemySound.Size = new System.Drawing.Size(76, 13);
             this.lblEnemySound.TabIndex = 24;
@@ -411,15 +540,15 @@
             // lblDmgParticle
             // 
             this.lblDmgParticle.AutoSize = true;
-            this.lblDmgParticle.Location = new System.Drawing.Point(6, 99);
+            this.lblDmgParticle.Location = new System.Drawing.Point(393, 145);
             this.lblDmgParticle.Name = "lblDmgParticle";
-            this.lblDmgParticle.Size = new System.Drawing.Size(70, 13);
+            this.lblDmgParticle.Size = new System.Drawing.Size(88, 13);
             this.lblDmgParticle.TabIndex = 22;
-            this.lblDmgParticle.Text = "Dmg Particle:";
+            this.lblDmgParticle.Text = "Damage Particle:";
             // 
             // txtDmgSound
             // 
-            this.txtDmgSound.Location = new System.Drawing.Point(383, 96);
+            this.txtDmgSound.Location = new System.Drawing.Point(384, 209);
             this.txtDmgSound.Name = "txtDmgSound";
             this.txtDmgSound.Size = new System.Drawing.Size(29, 20);
             this.txtDmgSound.TabIndex = 21;
@@ -427,7 +556,7 @@
             // lblDmgSound
             // 
             this.lblDmgSound.AutoSize = true;
-            this.lblDmgSound.Location = new System.Drawing.Point(319, 99);
+            this.lblDmgSound.Location = new System.Drawing.Point(320, 212);
             this.lblDmgSound.Name = "lblDmgSound";
             this.lblDmgSound.Size = new System.Drawing.Size(66, 13);
             this.lblDmgSound.TabIndex = 20;
@@ -435,7 +564,7 @@
             // 
             // txtSoundDelay
             // 
-            this.txtSoundDelay.Location = new System.Drawing.Point(288, 96);
+            this.txtSoundDelay.Location = new System.Drawing.Point(289, 209);
             this.txtSoundDelay.Name = "txtSoundDelay";
             this.txtSoundDelay.Size = new System.Drawing.Size(24, 20);
             this.txtSoundDelay.TabIndex = 19;
@@ -443,7 +572,7 @@
             // lblSoundDelay
             // 
             this.lblSoundDelay.AutoSize = true;
-            this.lblSoundDelay.Location = new System.Drawing.Point(212, 99);
+            this.lblSoundDelay.Location = new System.Drawing.Point(213, 212);
             this.lblSoundDelay.Name = "lblSoundDelay";
             this.lblSoundDelay.Size = new System.Drawing.Size(71, 13);
             this.lblSoundDelay.TabIndex = 18;
@@ -452,7 +581,7 @@
             // lblPLSound
             // 
             this.lblPLSound.AutoSize = true;
-            this.lblPLSound.Location = new System.Drawing.Point(112, 126);
+            this.lblPLSound.Location = new System.Drawing.Point(113, 239);
             this.lblPLSound.Name = "lblPLSound";
             this.lblPLSound.Size = new System.Drawing.Size(57, 13);
             this.lblPLSound.TabIndex = 16;
@@ -460,7 +589,7 @@
             // 
             // txtAtkSound
             // 
-            this.txtAtkSound.Location = new System.Drawing.Point(67, 123);
+            this.txtAtkSound.Location = new System.Drawing.Point(68, 236);
             this.txtAtkSound.Name = "txtAtkSound";
             this.txtAtkSound.Size = new System.Drawing.Size(33, 20);
             this.txtAtkSound.TabIndex = 15;
@@ -468,120 +597,78 @@
             // lblAtkSound
             // 
             this.lblAtkSound.AutoSize = true;
-            this.lblAtkSound.Location = new System.Drawing.Point(6, 126);
+            this.lblAtkSound.Location = new System.Drawing.Point(7, 239);
             this.lblAtkSound.Name = "lblAtkSound";
             this.lblAtkSound.Size = new System.Drawing.Size(60, 13);
             this.lblAtkSound.TabIndex = 14;
             this.lblAtkSound.Text = "Atk Sound:";
             // 
-            // lblHitEffect
+            // lblHitStop
             // 
-            this.lblHitEffect.AutoSize = true;
-            this.lblHitEffect.Location = new System.Drawing.Point(319, 72);
-            this.lblHitEffect.Name = "lblHitEffect";
-            this.lblHitEffect.Size = new System.Drawing.Size(54, 13);
-            this.lblHitEffect.TabIndex = 13;
-            this.lblHitEffect.Text = "Hit Effect:";
+            this.lblHitStop.AutoSize = true;
+            this.lblHitStop.Location = new System.Drawing.Point(250, 173);
+            this.lblHitStop.Name = "lblHitStop";
+            this.lblHitStop.Size = new System.Drawing.Size(48, 13);
+            this.lblHitStop.TabIndex = 13;
+            this.lblHitStop.Text = "Hit Stop:";
             // 
-            // txtHitEffect
+            // lblHitInterval
             // 
-            this.txtHitEffect.Location = new System.Drawing.Point(376, 69);
-            this.txtHitEffect.Name = "txtHitEffect";
-            this.txtHitEffect.Size = new System.Drawing.Size(38, 20);
-            this.txtHitEffect.TabIndex = 12;
-            // 
-            // lblHitSpeed
-            // 
-            this.lblHitSpeed.AutoSize = true;
-            this.lblHitSpeed.Location = new System.Drawing.Point(212, 72);
-            this.lblHitSpeed.Name = "lblHitSpeed";
-            this.lblHitSpeed.Size = new System.Drawing.Size(57, 13);
-            this.lblHitSpeed.TabIndex = 11;
-            this.lblHitSpeed.Text = "Hit Speed:";
-            // 
-            // txtHitSpeed
-            // 
-            this.txtHitSpeed.Location = new System.Drawing.Point(275, 69);
-            this.txtHitSpeed.Name = "txtHitSpeed";
-            this.txtHitSpeed.Size = new System.Drawing.Size(38, 20);
-            this.txtHitSpeed.TabIndex = 10;
+            this.lblHitInterval.AutoSize = true;
+            this.lblHitInterval.Location = new System.Drawing.Point(453, 171);
+            this.lblHitInterval.Name = "lblHitInterval";
+            this.lblHitInterval.Size = new System.Drawing.Size(61, 13);
+            this.lblHitInterval.TabIndex = 11;
+            this.lblHitInterval.Text = "Hit Interval:";
             // 
             // lblHitCount
             // 
             this.lblHitCount.AutoSize = true;
-            this.lblHitCount.Location = new System.Drawing.Point(319, 46);
+            this.lblHitCount.Location = new System.Drawing.Point(10, 171);
             this.lblHitCount.Name = "lblHitCount";
             this.lblHitCount.Size = new System.Drawing.Size(54, 13);
             this.lblHitCount.TabIndex = 9;
             this.lblHitCount.Text = "Hit Count:";
             // 
-            // txtHitCount
-            // 
-            this.txtHitCount.Location = new System.Drawing.Point(376, 43);
-            this.txtHitCount.Name = "txtHitCount";
-            this.txtHitCount.Size = new System.Drawing.Size(38, 20);
-            this.txtHitCount.TabIndex = 8;
-            // 
             // lblDmgEffect
             // 
             this.lblDmgEffect.AutoSize = true;
-            this.lblDmgEffect.Location = new System.Drawing.Point(6, 72);
+            this.lblDmgEffect.Location = new System.Drawing.Point(9, 145);
             this.lblDmgEffect.Name = "lblDmgEffect";
-            this.lblDmgEffect.Size = new System.Drawing.Size(63, 13);
+            this.lblDmgEffect.Size = new System.Drawing.Size(81, 13);
             this.lblDmgEffect.TabIndex = 6;
-            this.lblDmgEffect.Text = "Dmg Effect:";
+            this.lblDmgEffect.Text = "Damage Effect:";
             // 
             // lblKnockBack
             // 
             this.lblKnockBack.AutoSize = true;
-            this.lblKnockBack.Location = new System.Drawing.Point(203, 46);
+            this.lblKnockBack.Location = new System.Drawing.Point(503, 119);
             this.lblKnockBack.Name = "lblKnockBack";
             this.lblKnockBack.Size = new System.Drawing.Size(66, 13);
             this.lblKnockBack.TabIndex = 5;
             this.lblKnockBack.Text = "KnockBack:";
             // 
-            // txtKnockBack
-            // 
-            this.txtKnockBack.Location = new System.Drawing.Point(275, 43);
-            this.txtKnockBack.Name = "txtKnockBack";
-            this.txtKnockBack.Size = new System.Drawing.Size(38, 20);
-            this.txtKnockBack.TabIndex = 4;
-            // 
             // lblDamage
             // 
             this.lblDamage.AutoSize = true;
-            this.lblDamage.Location = new System.Drawing.Point(100, 46);
+            this.lblDamage.Location = new System.Drawing.Point(343, 120);
             this.lblDamage.Name = "lblDamage";
             this.lblDamage.Size = new System.Drawing.Size(50, 13);
             this.lblDamage.TabIndex = 3;
             this.lblDamage.Text = "Damage:";
             // 
-            // txtDamage
-            // 
-            this.txtDamage.Location = new System.Drawing.Point(156, 43);
-            this.txtDamage.Name = "txtDamage";
-            this.txtDamage.Size = new System.Drawing.Size(38, 20);
-            this.txtDamage.TabIndex = 2;
-            // 
             // lblChakra
             // 
             this.lblChakra.AutoSize = true;
-            this.lblChakra.Location = new System.Drawing.Point(6, 46);
+            this.lblChakra.Location = new System.Drawing.Point(190, 120);
             this.lblChakra.Name = "lblChakra";
             this.lblChakra.Size = new System.Drawing.Size(44, 13);
             this.lblChakra.TabIndex = 1;
             this.lblChakra.Text = "Chakra:";
             // 
-            // txtChakra
-            // 
-            this.txtChakra.Location = new System.Drawing.Point(56, 43);
-            this.txtChakra.Name = "txtChakra";
-            this.txtChakra.Size = new System.Drawing.Size(38, 20);
-            this.txtChakra.TabIndex = 0;
-            // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(308, 606);
+            this.btnReset.Location = new System.Drawing.Point(1, 3);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 72;
@@ -592,7 +679,7 @@
             // btnSaveELF
             // 
             this.btnSaveELF.Enabled = false;
-            this.btnSaveELF.Location = new System.Drawing.Point(564, 606);
+            this.btnSaveELF.Location = new System.Drawing.Point(470, 3);
             this.btnSaveELF.Name = "btnSaveELF";
             this.btnSaveELF.Size = new System.Drawing.Size(75, 23);
             this.btnSaveELF.TabIndex = 71;
@@ -603,7 +690,7 @@
             // btnUpdateP1
             // 
             this.btnUpdateP1.Enabled = false;
-            this.btnUpdateP1.Location = new System.Drawing.Point(645, 606);
+            this.btnUpdateP1.Location = new System.Drawing.Point(551, 3);
             this.btnUpdateP1.Name = "btnUpdateP1";
             this.btnUpdateP1.Size = new System.Drawing.Size(75, 23);
             this.btnUpdateP1.TabIndex = 70;
@@ -632,16 +719,17 @@
             // 
             // grpAttackFlagGroup1
             // 
+            this.grpAttackFlagGroup1.Controls.Add(this.clbFlags);
             this.grpAttackFlagGroup1.Location = new System.Drawing.Point(0, 367);
             this.grpAttackFlagGroup1.Name = "grpAttackFlagGroup1";
-            this.grpAttackFlagGroup1.Size = new System.Drawing.Size(419, 208);
+            this.grpAttackFlagGroup1.Size = new System.Drawing.Size(631, 208);
             this.grpAttackFlagGroup1.TabIndex = 45;
             this.grpAttackFlagGroup1.TabStop = false;
             this.grpAttackFlagGroup1.Text = "Attack Flags";
             // 
             // btnEditAnmParameters
             // 
-            this.btnEditAnmParameters.Location = new System.Drawing.Point(389, 605);
+            this.btnEditAnmParameters.Location = new System.Drawing.Point(83, 3);
             this.btnEditAnmParameters.Name = "btnEditAnmParameters";
             this.btnEditAnmParameters.Size = new System.Drawing.Size(121, 23);
             this.btnEditAnmParameters.TabIndex = 75;
@@ -651,7 +739,7 @@
             // 
             // btnEditAtkParameters
             // 
-            this.btnEditAtkParameters.Location = new System.Drawing.Point(389, 605);
+            this.btnEditAtkParameters.Location = new System.Drawing.Point(83, 3);
             this.btnEditAtkParameters.Name = "btnEditAtkParameters";
             this.btnEditAtkParameters.Size = new System.Drawing.Size(121, 23);
             this.btnEditAtkParameters.TabIndex = 76;
@@ -662,21 +750,20 @@
             // 
             // pnlAtkPrm
             // 
-            this.pnlAtkPrm.Controls.Add(this.clbFlags);
             this.pnlAtkPrm.Controls.Add(this.grpAttackFlagGroup1);
             this.pnlAtkPrm.Controls.Add(this.grpAttackParameters);
-            this.pnlAtkPrm.Controls.Add(this.panel1);
             this.pnlAtkPrm.Location = new System.Drawing.Point(306, 25);
             this.pnlAtkPrm.Name = "pnlAtkPrm";
-            this.pnlAtkPrm.Size = new System.Drawing.Size(419, 574);
+            this.pnlAtkPrm.Size = new System.Drawing.Size(631, 574);
             this.pnlAtkPrm.TabIndex = 45;
             // 
             // clbFlags
             // 
+            this.clbFlags.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clbFlags.FormattingEnabled = true;
-            this.clbFlags.Location = new System.Drawing.Point(10, 393);
+            this.clbFlags.Location = new System.Drawing.Point(3, 16);
             this.clbFlags.Name = "clbFlags";
-            this.clbFlags.Size = new System.Drawing.Size(404, 169);
+            this.clbFlags.Size = new System.Drawing.Size(625, 189);
             this.clbFlags.TabIndex = 80;
             // 
             // panel1
@@ -687,15 +774,16 @@
             this.panel1.Controls.Add(this.lblInfo);
             this.panel1.Controls.Add(this.picCommand);
             this.panel1.Controls.Add(this.lblNamePanel);
-            this.panel1.Location = new System.Drawing.Point(0, 14);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(419, 95);
+            this.panel1.Size = new System.Drawing.Size(625, 95);
             this.panel1.TabIndex = 83;
             // 
             // lblTest
             // 
             this.lblTest.AutoSize = true;
-            this.lblTest.Location = new System.Drawing.Point(285, 23);
+            this.lblTest.Location = new System.Drawing.Point(585, 27);
             this.lblTest.Name = "lblTest";
             this.lblTest.Size = new System.Drawing.Size(35, 13);
             this.lblTest.TabIndex = 87;
@@ -704,7 +792,7 @@
             // lblDpad
             // 
             this.lblDpad.AutoSize = true;
-            this.lblDpad.Location = new System.Drawing.Point(317, 3);
+            this.lblDpad.Location = new System.Drawing.Point(516, 3);
             this.lblDpad.Name = "lblDpad";
             this.lblDpad.Size = new System.Drawing.Size(36, 13);
             this.lblDpad.TabIndex = 86;
@@ -724,7 +812,7 @@
             "Right",
             "Left (Solo)",
             "Left"});
-            this.cmbDpad.Location = new System.Drawing.Point(359, 0);
+            this.cmbDpad.Location = new System.Drawing.Point(566, 3);
             this.cmbDpad.Name = "cmbDpad";
             this.cmbDpad.Size = new System.Drawing.Size(54, 21);
             this.cmbDpad.TabIndex = 84;
@@ -747,7 +835,7 @@
             this.picCommand.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.picCommand.Location = new System.Drawing.Point(0, 43);
             this.picCommand.Name = "picCommand";
-            this.picCommand.Size = new System.Drawing.Size(419, 52);
+            this.picCommand.Size = new System.Drawing.Size(625, 52);
             this.picCommand.TabIndex = 81;
             this.picCommand.TabStop = false;
             this.picCommand.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -1358,52 +1446,54 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
-            // label1
+            // chkHitSpeed
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 89;
-            this.label1.Text = "Kawarimi Interval:";
+            this.chkHitSpeed.AutoSize = true;
+            this.chkHitSpeed.Location = new System.Drawing.Point(584, 171);
+            this.chkHitSpeed.Name = "chkHitSpeed";
+            this.chkHitSpeed.Size = new System.Drawing.Size(40, 17);
+            this.chkHitSpeed.TabIndex = 98;
+            this.chkHitSpeed.Text = "No";
+            this.chkHitSpeed.UseVisualStyleBackColor = true;
             // 
-            // cmbKawarimi
+            // checkBox1
             // 
-            this.cmbKawarimi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbKawarimi.FormattingEnabled = true;
-            this.cmbKawarimi.Items.AddRange(new object[] {
-            "-3",
-            "-2",
-            "-1",
-            "0",
-            "1",
-            "2",
-            "3"});
-            this.cmbKawarimi.Location = new System.Drawing.Point(102, 18);
-            this.cmbKawarimi.Name = "cmbKawarimi";
-            this.cmbKawarimi.Size = new System.Drawing.Size(115, 21);
-            this.cmbKawarimi.TabIndex = 88;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(368, 172);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(40, 17);
+            this.checkBox1.TabIndex = 99;
+            this.checkBox1.Text = "No";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnUpdateP1);
+            this.panel2.Controls.Add(this.btnSaveELF);
+            this.panel2.Controls.Add(this.btnReset);
+            this.panel2.Controls.Add(this.btnEditAnmParameters);
+            this.panel2.Controls.Add(this.btnEditAtkParameters);
+            this.panel2.Location = new System.Drawing.Point(305, 599);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(632, 31);
+            this.panel2.TabIndex = 80;
             // 
             // MovesetParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 633);
+            this.ClientSize = new System.Drawing.Size(941, 633);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlAtkPrm);
             this.Controls.Add(this.lblSelectedAtk2);
             this.Controls.Add(this.lblSelectedAtk);
             this.Controls.Add(this.lblComboCount2);
             this.Controls.Add(this.lblComboCount);
-            this.Controls.Add(this.btnEditAnmParameters);
             this.Controls.Add(this.lblCharID2);
             this.Controls.Add(this.lblCharID);
-            this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.btnSaveELF);
-            this.Controls.Add(this.btnUpdateP1);
             this.Controls.Add(this.lblCharName2);
             this.Controls.Add(this.lblCharName);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.btnEditAtkParameters);
             this.Controls.Add(this.pnlAnmPrm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1413,6 +1503,14 @@
             this.Text = "Edit Moveset Parameters:";
             this.grpAttackParameters.ResumeLayout(false);
             this.grpAttackParameters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitStun)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numChakra)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numKnockBack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numKawarimi)).EndInit();
+            this.grpAttackFlagGroup1.ResumeLayout(false);
             this.pnlAtkPrm.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1435,6 +1533,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1448,19 +1547,13 @@
         public System.Windows.Forms.Label lblCharName2;
         public System.Windows.Forms.Label lblCharName;
         public System.Windows.Forms.GroupBox grpAttackParameters;
-        public System.Windows.Forms.TextBox txtChakra;
         public System.Windows.Forms.Label lblChakra;
         public System.Windows.Forms.Label lblKnockBack;
-        public System.Windows.Forms.TextBox txtKnockBack;
         public System.Windows.Forms.Label lblDamage;
-        public System.Windows.Forms.TextBox txtDamage;
         public System.Windows.Forms.Label lblDmgEffect;
-        public System.Windows.Forms.Label lblHitSpeed;
-        public System.Windows.Forms.TextBox txtHitSpeed;
+        public System.Windows.Forms.Label lblHitInterval;
         public System.Windows.Forms.Label lblHitCount;
-        public System.Windows.Forms.TextBox txtHitCount;
-        public System.Windows.Forms.Label lblHitEffect;
-        public System.Windows.Forms.TextBox txtHitEffect;
+        public System.Windows.Forms.Label lblHitStop;
         public System.Windows.Forms.TextBox txtSoundDelay;
         public System.Windows.Forms.Label lblSoundDelay;
         public System.Windows.Forms.Label lblPLSound;
@@ -1559,6 +1652,16 @@
         private System.Windows.Forms.Label lblDpad;
         public System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.ComboBox cmbKawarimi;
+        public System.Windows.Forms.NumericUpDown numKawarimi;
+        public System.Windows.Forms.NumericUpDown numKnockBack;
+        public System.Windows.Forms.NumericUpDown numDamage;
+        public System.Windows.Forms.NumericUpDown numChakra;
+        public System.Windows.Forms.NumericUpDown numHitCount;
+        public System.Windows.Forms.NumericUpDown numHitSpeed;
+        public System.Windows.Forms.NumericUpDown numHitStun;
+        private System.Windows.Forms.CheckBox chkHitCount;
+        private System.Windows.Forms.CheckBox chkHitSpeed;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

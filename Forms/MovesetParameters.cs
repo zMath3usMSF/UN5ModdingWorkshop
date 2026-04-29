@@ -186,5 +186,10 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void grpAttackParameters_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
