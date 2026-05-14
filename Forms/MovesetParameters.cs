@@ -144,7 +144,7 @@ namespace WindowsFormsApp1
             int SelectedAtk = int.Parse(lblSelectedAtk2.Text);
             int currentCharID = int.Parse(lblCharID2.Text);
 
-            int AtkAnmBlock = PlAtk.CharAtkPrm[currentCharID][SelectedAtk].AtkAnm;
+            int AtkAnmBlock = (int)PlAtk.CharAtkPrm[currentCharID][SelectedAtk].AnimationIdx;
             int MaxAnm = PlGen.CharGenPrm[currentCharID].AnmCount;
 
             for (int i = AtkAnmBlock; i < MaxAnm; i++)
@@ -188,6 +188,11 @@ namespace WindowsFormsApp1
         }
 
         private void grpAttackParameters_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numAnmStartHitFrame_ValueChanged(object sender, EventArgs e)
         {
 
         }

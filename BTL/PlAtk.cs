@@ -48,26 +48,37 @@ namespace UN5ModdingWorkshop
         uint SequenceIdx = 0x0;
         int KawarimiDificulty = 0x0;
 
-        uint Unk15 = 0x0;
+        uint Type = 0x0;
+        uint DpadFlag = 0x0;
+        uint ButtonFlag = 0x0;
+        uint AutoExecuteFlag = 0x0;
 
-        public float AtkChakra, AtkDamage, AtkKnockBack, AtkSummonDistance1, AtkSummonDistance2, AtkKnockBackDirection;
+        float Chakra = 0f;
+        float Damage = 0.015f;
+        float Knockback = 1f;
 
-        public uint AtkDpadFlag, AtkButtonFlag, AtkDamageEffect;
+        uint DamageEffect;
+        uint DefenseEffect;
 
-        public short AtkAnm;
-
-        public short AtkDefenseEffect, AtkPlSound, AtkSound, AtkDamageParticle, AtkEnemySound, AtkDamageSound, AtkDefenseParticle, AtkDefenseSound;
-
-        public uint AtkPos2, AtkUnk16;
-
-        public UInt16 AtkSoundDelay;
-
+        int HitCount = 1;
+        int HitStop = 1;
         int HitSpeed = 0;
 
-        int HitCount = 0;
+        float RangeValue1 = 0f;
+        float RangeValue2 = 0f;
 
-        int HitStun = 0;
-        public byte[] AtkUnk2, AtkUnk3;
+        float KnockbackDirection = 1.5f;
+
+        int WhiffSound = 30;
+        int PlayerSound = -4;
+        uint SoundDelay = 0;
+        int HitSound = 48;
+        int DamageParticle = 1;
+        int DefenseSound = 81;
+        int DefenseParticle = -1;
+        int EnemySound = -1;
+
+        public uint AnimationIdx = 0;
 
         #endregion
 
@@ -99,181 +110,36 @@ namespace UN5ModdingWorkshop
             KawarimiDificulty = Input.ReadInt(0x1A, 8),
             //Padding
 
-            Unk15 = Input.ReadUInt(0x1C, 8),
+            Type = Input.ReadUInt(0x1C, 8),
+            DpadFlag = Input.ReadUInt(0x1D, 8),
+            ButtonFlag = Input.ReadUInt(0x1E, 8),
+            AutoExecuteFlag = Input.ReadUInt(0x1F, 8),
 
-            AtkDpadFlag = Input.ReadUInt(0x1D, 8),
-            AtkButtonFlag = Input.ReadUInt(0x1E, 8),
+            Chakra = Input.ReadSingle(0x20),
+            Damage = Input.ReadSingle(0x24),
+            Knockback = Input.ReadSingle(0x28),
 
-            AtkUnk16 = Input.ReadUInt(0x1F, 8),
-
-            AtkChakra = Input.ReadSingle(0x20),
-            AtkDamage = Input.ReadSingle(0x24),
-            AtkKnockBack = Input.ReadSingle(0x28),
-            AtkDamageEffect = Input.ReadUInt(0x2C, 8),
-
-            AtkDefenseEffect = (short)Input.ReadUInt(0x2D, 8),
+            DamageEffect = Input.ReadUInt(0x2C, 8),
+            DefenseEffect = Input.ReadUInt(0x2D, 8),
 
             HitCount = Input.ReadInt(0x2E, 16),
-            HitStun = Input.ReadInt(0x30, 16),
+            HitStop = Input.ReadInt(0x30, 16),
             HitSpeed = Input.ReadInt(0x32, 16),
 
-            AtkSummonDistance1 = Input.ReadSingle(0x34),
-            AtkSummonDistance2 = Input.ReadSingle(0x38),
-            AtkKnockBackDirection = Input.ReadSingle(0x3C),
+            RangeValue1 = Input.ReadSingle(0x34),
+            RangeValue2 = Input.ReadSingle(0x38),
+            KnockbackDirection = Input.ReadSingle(0x3C),
 
-            AtkSound = (short)Input.ReadUInt(0x40, 16),
-            AtkPlSound = (short)Input.ReadUInt(0x42, 16),
-            AtkSoundDelay = (UInt16)Input.ReadUInt(0x44, 16),
-            AtkDamageSound = (short)Input.ReadUInt(0x46, 16),
-            AtkDamageParticle = (short)Input.ReadUInt(0x48, 16),
+            WhiffSound = Input.ReadInt(0x40, 16),
+            PlayerSound = Input.ReadInt(0x42, 16),
+            SoundDelay = Input.ReadUInt(0x44, 16),
+            HitSound = Input.ReadInt(0x46, 16),
+            DamageParticle = Input.ReadInt(0x48, 16),
+            DefenseSound = Input.ReadInt(0x4A, 16),
+            DefenseParticle = Input.ReadInt(0x4C, 16),
+            EnemySound = Input.ReadInt(0x4E, 16),
 
-            AtkDefenseSound = (short)Input.ReadUInt(0x4A, 16),
-            AtkDefenseParticle = (short)Input.ReadUInt(0x4C, 16),
-
-            AtkEnemySound = (short)Input.ReadUInt(0x4E, 16),
-
-            AtkAnm = (short)Input.ReadUInt(0x50, 32),
-        };
-
-        public static Dictionary<int, string> DamageEffectList = new Dictionary<int, string>()
-        {
-          {0, "Normal"},
-          {1, "Normal 1"},
-          {2, "Normal 2"},
-          {3, "Normal 3"},
-          {4, "Normal 4"},
-          {5, "Normal 5"},
-          {6, "Normal 6"},
-          {7, "Normal (Aerial)"},
-          {8, "Normal (Aerial) 1"},
-          {9, "Throw to Diagonal"},
-          {10, "Throw to Diagonal 1"},
-          {11, "Throw to Up"},
-          {12, "Throw to Up (Recovery)"},
-          {13, "Throw to Diagonal (Delay Eff)"},
-          {14, "Throw to Front (Recovery)"},
-          {15, "Throw to Front (Faint)"},
-          {16, "Throw to Diagonal (Faint)"},
-          {17, "Throw to Front (Faint) 1"},
-          {18, "Throw to Front (Faint) 2"},
-          {19, "Super-Throw to Front"},
-          {20, "Throw to Up (Faint)"},
-          {21, "Throw to Down (Faint)"},
-          {22, "Throw to Down (Faint) 2"},
-          {23, "???"},
-          {24, "???"},
-          {25, "???"},
-          {26, "???"},
-          {27, "???"},
-          {28, "???"},
-          {29, "Faint"},
-          {30, "Faint (Flames Eff)"},
-          {31, "Faint (Blue Flames Eff)"}
-        };
-
-        public static Dictionary<int, string> PLSoundList = new Dictionary<int, string>()
-        {
-        {0, "ATK_cmn_vS"},
-        {1, "ATK_cmn_vM"},
-        {2, "ATK_cmn_vL"},
-        {3, "null"},
-        {4, "ATK_cmn_vS_rv0"},
-        {5, "ATK_cmn_vS_rv1"},
-        {6, "ATK_cmn_vS_rv2"},
-        {7, "ATK_cmn_vM_rv0"},
-        {8, "ATK_cmn_vM_rv1"},
-        {9, "ATK_cmn_vM_rv2"},
-        {10, "ATK_cmn_vL_rv0"},
-        {11, "ATK_cmn_vL_rv1"},
-        {12, "ATK_cmn_vL_rv2"},
-        {13, "DMG_cmn_vS_rv0"},
-        {14, "DMG_cmn_vS_rv1"},
-        {15, "DMG_cmn_vS_rv2"},
-        {16, "DMG_cmn_vM_rv0"},
-        {17, "DMG_cmn_vM_rv1"},
-        {18, "DMG_cmn_vM_rv2"},
-        {19, "DMG_cmn_vL_rv0"},
-        {20, "DMG_cmn_vL_rv1"},
-        {21, "DMG_cmn_vL_rv2"},
-        {22, "ATK_death_vL"},
-        {23, "jump"},
-        {24, "jump_double"},
-        {25, "UNK"},
-        {26, "ITM_take"},
-        {27, "null"},
-        {28, "ITM_hpRecover"},
-        {29, "null"},
-        {30, "substitution_rv0"},
-        {31, "substitution_rv1"},
-        {32, "substitution_rv2"},
-        {33, "jump_double"},
-        {34, "provocation"},
-        {35, "ckrCharge"}
-        };
-
-        public static Dictionary<int, string> DamageParticleList = new Dictionary<int, string>()
-        {
-        {0, "Normal Middle"},
-        {1, "Without"},
-        {2, "Normal Small"},
-        {3, "Normal Middle"},
-        {4, "Normal Large"},
-        {5, "Normal Large 1"},
-        {6, "Normal Large 2"},
-        {7, "Normal Small 1"},
-        {8, "Normal Large 3"},
-        {9, "Cut Blue Small"},
-        {10, "Cut Blue Small 1"},
-        {11, "Cut Blue Middle"},
-        {12, "Cut Blue Large"},
-        {13, "Cut Purple Small"},
-        {14, "Cut Purple Small 1"},
-        {15, "Cut Purple Middle"},
-        {16, "Cut Purple Large"},
-        {17, "Normal Small"},
-        {18, "Normal Middle"},
-        {19, "Normal Large"},
-        {20, "Normal Large 1"},
-        {21, "Normal Large 2"},
-        {22, "Normal Small (Red Kanji)"},
-        {23, "null"},
-        {24, "Explosion Small"},
-        {25, "Without (Kanji)"},
-        };
-
-        public Dictionary<int, string> DefenseFlagList = new Dictionary<int, string>()
-        {
-        {0, "Without"},
-        {1, "???"},
-        {2, "??? 2"},
-        {3, "Idefensible"},
-        {4, "Defense Break"}
-        };
-
-        public static Dictionary<int, string> DefenseEffectList = new Dictionary<int, string>()
-        {
-        {0, "???"},
-        {1, "Normal"},
-        {2, "Normal 1"},
-        {3, "Normal 2"},
-        {4, "Normal 3"},
-        {5, "Normal 4"},
-        {6, "Diagonal"},
-        {7, "Diagonal 1"},
-        {8, "Diagonal 2"},
-        {9, "Diagonal 3"},
-        {10, "Diagonal 4"}
-        };
-
-        public static Dictionary<int, string> DefenseParticleList = new Dictionary<int, string>()
-        {
-        {0, "Normal"},
-        {1, "Without"},
-        {2, "Normal"},
-        {3, "Normal 1"},
-        {4, "(Hit, Red Kanji)"},
-        {5, "Without"},
-        {6, "Explosion"}
+            AnimationIdx = Input.ReadUInt(0x50, 32),
         };
 
         public object Clone()
@@ -491,206 +357,142 @@ namespace UN5ModdingWorkshop
 
         public static void SendTextAtk(int charID, MovesetParameters movForm, PlAtk Atk)
         {
-            movForm.numKawarimi.Value = Convert.ToInt16(Atk.KawarimiDificulty);
-            int atkType2 = (int)Atk.Unk15;
-            movForm.lblNamePanel.Text = movForm.listBox1.SelectedItem.ToString().Split(':')[1].Trim();
-            if ((Atk.ThrowFlag == 1 || Atk.ThrowFlag == 2) && ((atkType2 >> 1) & 1) == 1)
+            if(Atk.Index < 0x15)
             {
-                movForm.lblInfo.Text = "Ground Throw";
-            }
-            else if ((Atk.ThrowFlag == 1 || Atk.ThrowFlag == 2) && ((atkType2 >> 2) & 1) == 1)
-            {
-                movForm.lblInfo.Text = "Aerial Throw";
-            }
-            else if (Atk.SpecialFlag == 0x4)
-            {
-                movForm.lblInfo.Text = "Combo";
-            }
-            else if (Atk.SpecialFlag == 0x8 ||Atk.SpecialFlag == 0x10)
-            {
-                movForm.lblInfo.Text = "Charge";
-            }
-            else if (((atkType2 >> 2) & 1) == 1 && Atk.SpecialFlag == 1)
-            {
-                movForm.lblInfo.Text = "While Jumping";
-            }
-            else if (Atk.Index >= 0x0 && Atk.Index <= 0x3)
-            {
-                movForm.lblInfo.Text = "Jutsu";
-            }
-            else if(Atk.Index >= 0x4 && Atk.Index <= 0x9)
-            {
-                movForm.lblInfo.Text = "Ultimate Jutsu";
-            }
-            else if (Atk.Index >= 0xA && Atk.Index <= 0x12)
-            {
-                movForm.lblInfo.Text = "Extra-Hit";
-            }
-            else if (Atk.Index == 0x13)
-            {
-                movForm.lblInfo.Text = "Dash";
-            }
-            else if (Atk.Index == 0x14)
-            {
-                movForm.lblInfo.Text = "Jan-Ken-Pon";
+                movForm.cmbDpad.Enabled = false;
             }
             else
             {
-                movForm.lblInfo.Text = "";
+                movForm.cmbDpad.Enabled = true;
             }
+            // Header
+            movForm.numKawarimi.Value = Convert.ToInt16(Atk.KawarimiDificulty);
+            movForm.txtComboName.Text = movForm.listBox1.SelectedItem.ToString().Split(':')[1].Trim();
+            movForm.lblInfo.Text = GetAttackLabel(Atk);
+
+            // Type dropdown
+            movForm.cmbType.SelectedIndex = Atk.Type switch
+            {
+                0x11 => 0,
+                0x12 => 1,
+                0x14 => 2,
+                _ => movForm.cmbType.SelectedIndex
+            };
+
+            // Flags
             movForm.clbFlags.Items.Clear();
-            int flagsCount = 1;
-            for (int i = 0; i < 8; i++)
+            var flags = new (string name, uint source, int bit)[]
             {
-                switch (i)
-                {
-                    case 0:
-                        movForm.clbFlags.Items.Add("Ground", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    case 1:
-                        movForm.clbFlags.Items.Add("Air", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    case 2:
-                        movForm.clbFlags.Items.Add("Follow Up", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    case 3:
-                        movForm.clbFlags.Items.Add("Up", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    case 4:
-                        movForm.clbFlags.Items.Add("Down", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    case 5:
-                        movForm.clbFlags.Items.Add("Front", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    case 6:
-                        movForm.clbFlags.Items.Add("Back", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    case 7:
-                        movForm.clbFlags.Items.Add("Side Extra-Hit", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                    default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.DirectionFlag >> i) & 1) == 1);
-                        break;
-                }
-                flagsCount++;
-            }
-            for (int i = 0; i < 8; i++)
+                ("Ground",                    Atk.DirectionFlag, 0),
+                ("Air",                       Atk.DirectionFlag, 1),
+                ("Follow Up",                 Atk.DirectionFlag, 2),
+                ("Up",                        Atk.DirectionFlag, 3),
+                ("Down",                      Atk.DirectionFlag, 4),
+                ("Front",                     Atk.DirectionFlag, 5),
+                ("Back",                      Atk.DirectionFlag, 6),
+                ("Side Extra-Hit",            Atk.DirectionFlag, 7),
+                ("Down Extra-Hit",            Atk.OtherFlag1,    0),
+                ("Up Extra-Hit",              Atk.OtherFlag1,    1),
+                (null,                        Atk.OtherFlag1,    2),
+                (null,                        Atk.OtherFlag1,    3),
+                ("Anti Counter",              Atk.OtherFlag1,    4),
+                (null,                        Atk.OtherFlag1,    5),
+                (null,                        Atk.OtherFlag1,    6),
+                (null,                        Atk.OtherFlag1,    7),
+                (null,                        Atk.DefenseFlag,   0),
+                (null,                        Atk.DefenseFlag,   1),
+                ("Without Wall KB",           Atk.DefenseFlag,   2),
+                ("Don't Bounce",              Atk.DefenseFlag,   3),
+                (null,                        Atk.DefenseFlag,   4),
+                ("Hit Fallen",                Atk.DefenseFlag,   5),
+                ("Undefendable",              Atk.DefenseFlag,   6),
+                ("Break Defense",             Atk.DefenseFlag,   7),
+                ("Damage on Defense",         Atk.OtherFlag2,    0),
+                ("Damage on Counter Attack",  Atk.OtherFlag2,    1),
+                ("Backdash",                  Atk.OtherFlag2,    2),
+                (null,                        Atk.OtherFlag2,    3),
+                ("Hit Fainted",               Atk.OtherFlag2,    4),
+                (null,                        Atk.OtherFlag2,    5),
+                (null,                        Atk.OtherFlag2,    6),
+                (null,                        Atk.OtherFlag2,    7),
+            };
+
+            int unkCount = 1;
+            foreach (var (name, source, bit) in flags)
             {
-                switch (i)
-                {
-                    case 0:
-                        movForm.clbFlags.Items.Add("Down Extra-Hit", ((Atk.OtherFlag1 >> i) & 1) == 1);
-                        break;
-                    case 1:
-                        movForm.clbFlags.Items.Add("Up Extra-Hit", ((Atk.OtherFlag1 >> i) & 1) == 1);
-                        break;
-                    case 4:
-                        movForm.clbFlags.Items.Add("Anti Counter", ((Atk.OtherFlag1 >> i) & 1) == 1);
-                        break;
-                    default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.OtherFlag1 >> i) & 1) == 1);
-                        break;
-                }
-                flagsCount++;
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                switch (i)
-                {
-                    case 2:
-                        movForm.clbFlags.Items.Add("Without Wall KB", ((Atk.DefenseFlag >> i) & 1) == 1);
-                        break;
-                    case 3:
-                        movForm.clbFlags.Items.Add("Don't Bounce", ((Atk.DefenseFlag >> i) & 1) == 1);
-                        break;
-                    case 5:
-                        movForm.clbFlags.Items.Add("Hit Fallen", ((Atk.DefenseFlag >> i) & 1) == 1);
-                        break;
-                    case 6:
-                        movForm.clbFlags.Items.Add("Undefendable", ((Atk.DefenseFlag >> i) & 1) == 1);
-                        break;
-                    case 7:
-                        movForm.clbFlags.Items.Add("Break Defense", ((Atk.DefenseFlag >> i) & 1) == 1);
-                        break;
-                    default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.DefenseFlag >> i) & 1) == 1);
-                        break;
-                }
-                flagsCount++;
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                switch (i)
-                {
-                    case 4:
-                        movForm.clbFlags.Items.Add("Hit Fainted", ((Atk.OtherFlag2 >> i) & 1) == 1);
-                        break;
-                    case 2:
-                        movForm.clbFlags.Items.Add("Backdash", ((Atk.OtherFlag2 >> i) & 1) == 1);
-                        break;
-                    case 1:
-                        movForm.clbFlags.Items.Add("Damage on Counter Attack", ((Atk.OtherFlag2 >> i) & 1) == 1);
-                        break;
-                    case 0:
-                        movForm.clbFlags.Items.Add("Damage on Defense", ((Atk.OtherFlag2 >> i) & 1) == 1);
-                        break;
-                    default:
-                        movForm.clbFlags.Items.Add($"Unk{flagsCount}", ((Atk.OtherFlag2 >> i) & 1) == 1);
-                        break;
-                }
-                flagsCount++;
+                bool isSet = ((source >> bit) & 1) == 1;
+                movForm.clbFlags.Items.Add(name ?? $"Unk{unkCount}", isSet);
+                if (name == null) unkCount++;
             }
 
-            movForm.numChakra.Value = (decimal)Atk.AtkChakra;
-            movForm.numDamage.Value = (decimal)Atk.AtkDamage;
-            movForm.numKnockBack.Value = (decimal)Atk.AtkKnockBack;
+            // Numeric fields
+            movForm.numChakra.Value = (decimal)Atk.Chakra;
+            movForm.numDamage.Value = (decimal)Atk.Damage;
+            movForm.numKnockback.Value = (decimal)Atk.Knockback;
+            movForm.numRangeValue1.Value = Atk.RangeValue1 < -100f ? 0 : (decimal)Atk.RangeValue1;
+            movForm.numRangeValue2.Value = Atk.RangeValue2 < -100f ? 0 : (decimal)Atk.RangeValue2;
+            movForm.numKnockbackDirection.Value = (decimal)Atk.KnockbackDirection;
+            movForm.numSoundDelay.Value = Atk.SoundDelay;
+            movForm.numHitSound.Value = Atk.HitSound;
+            movForm.numWhiffSound.Value = Atk.WhiffSound;
+            movForm.numDefenseSound.Value = Atk.DefenseSound;
+            movForm.numEnemySound.Value = Atk.EnemySound;
 
-            movForm.cmbDmgEffect.Items.AddRange(movForm.cmbDmgEffect.Items.Count == 0 ? DamageEffectList.Values.ToArray() : new object[0]);
-            int currentDmgEffect = (int)Atk.AtkDamageEffect;
-            movForm.cmbDmgEffect.SelectedIndex = Math.Min(currentDmgEffect, 31);
+            // Hit fields com flag 0x7FFF
+            SetHitField(movForm.numHitCount, movForm.chkHitCount, Atk.HitCount);
+            SetHitField(movForm.numHitStop, movForm.chkHitStop, Atk.HitStop);
+            SetHitField(movForm.numHitSpeed, movForm.chkHitSpeed, Atk.HitSpeed);
 
-            movForm.cmbDefenseEffect.Items.AddRange(movForm.cmbDefenseEffect.Items.Count == 0 ? PlAtk.DefenseEffectList.Values.ToArray() : new object[0]);
-            int currentDefenseEffect = Atk.AtkDefenseEffect;
-            movForm.cmbDefenseEffect.SelectedIndex = currentDefenseEffect == 255 ? 0 : currentDefenseEffect + 1;
+            // Combos
+            movForm.cmbDmgEffect.SelectedIndex = Math.Min((int)Atk.DamageEffect, 31);
+            movForm.cmbDefenseEffect.SelectedIndex = Atk.DefenseEffect == 255 ? 0 : (int)Atk.DefenseEffect + 1;
+            movForm.cmbDmgParticle.SelectedIndex = Atk.DamageParticle > 24 || Atk.DamageParticle == -1 ? 0 : Atk.DamageParticle + 1;
+            movForm.cmbDefenseParticle.SelectedIndex = Atk.DefenseParticle < 0 ? 0 : Atk.DefenseParticle + 1;
 
-            movForm.numHitCount.Value = Convert.ToInt16(Atk.HitCount);
-            movForm.numHitStun.Value = Convert.ToInt16(Atk.HitStun);
-            movForm.numHitSpeed.Value = Convert.ToInt16(Atk.HitSpeed);
+            int plSound = (int)Atk.PlayerSound;
+            movForm.cmbPLSound.SelectedIndex = plSound switch
+            {
+                -4 => 0,
+                -3 => 1,
+                -2 => 2,
+                -1 => 3,
+                _ when plSound > 34 => 0,
+                _ => plSound + 4
+            };
 
-            movForm.txtSummonDistance1.Text = $"{Atk.AtkSummonDistance1}";
-            movForm.txtSummonDistance2.Text = $"{Atk.AtkSummonDistance2}";
-            movForm.txtKnockBackDirection.Text = $"{Atk.AtkKnockBackDirection}";
-            movForm.txtAtkSound.Text = ($"{Atk.AtkSound}");
-
-            movForm.cmbPLSound.Items.AddRange(movForm.cmbPLSound.Items.Count == 0 ? PLSoundList.Values.ToArray() : new object[0]);
-            int currentPLSound = (int)Atk.AtkPlSound;
-            movForm.cmbPLSound.SelectedIndex = currentPLSound == -4 ? 0 : currentPLSound == -3 ? 1 : currentPLSound == -2 ? 2 : currentPLSound == -1 ? 3 : currentPLSound > 34 ? 0 : currentPLSound + 4;
-            movForm.txtSoundDelay.Text = ($"{Atk.AtkSoundDelay}");
-            movForm.txtDmgSound.Text = ($"{Atk.AtkDamageSound}");
-            movForm.cmbDmgParticle.Items.AddRange(movForm.cmbDmgParticle.Items.Count == 0 ? DamageParticleList.Values.ToArray() : new object[0]);
-            int currentDmgParticle = (int)Atk.AtkDamageParticle;
-            movForm.cmbDmgParticle.SelectedIndex = currentDmgParticle > 24 || currentDmgParticle == -1 ? 0 : currentDmgParticle + 1;
-            movForm.txtDefenseSound.Text = ($"{Atk.AtkDefenseSound}");
-            movForm.cmbDefenseParticle.Items.AddRange(movForm.cmbDefenseParticle.Items.Count == 0 ? DefenseParticleList.Values.ToArray() : new object[0]);
-            int currentDefenseParticle = Atk.AtkDefenseParticle;
-            movForm.cmbDefenseParticle.SelectedIndex = currentDefenseParticle < 0 ? currentDefenseParticle + 1 : 0;
-            movForm.txtEnemySound.Text = ($"{Atk.AtkEnemySound}");
-
-            SetDpadFlagGroupToCmbBox((int)Atk.AtkDpadFlag, movForm.cmbDpad);
-
+            SetDpadFlagGroupToCmbBox((int)Atk.DpadFlag, movForm.cmbDpad);
             DrawCommandSequence(movForm.picCommand, Atk, charID);
-
-            movForm.lblTest.Text = $"{Atk.Unk15}";
         }
 
-        private static readonly Dictionary<uint, int> ButtonIconMap = new Dictionary<uint, int>()
+        private static string GetAttackLabel(PlAtk Atk)
         {
-            { 0x20, 4 }, // Circle
-            { 0x10, 5 }, // Triangle
-            { 0x80, 6 }, // Square
-            { 0x40, 7 }, // Cross
-            { 0x08, 8 }, // Plus
-        };
+            bool isThrow = Atk.ThrowFlag == 1 || Atk.ThrowFlag == 2;
+            if (isThrow && ((Atk.Type >> 1) & 1) == 1) return "Ground Throw";
+            if (isThrow && ((Atk.Type >> 2) & 1) == 1) return "Aerial Throw";
+            if (Atk.SpecialFlag == 0x4) return "Combo";
+            if (Atk.SpecialFlag == 0x8 || Atk.SpecialFlag == 0x10) return "Charge";
+            if (((Atk.Type >> 2) & 1) == 1 && Atk.SpecialFlag == 1) return "While Jumping";
+            if (Atk.Index <= 0x3) return "Jutsu";
+            if (Atk.Index <= 0x9) return "Ultimate Jutsu";
+            if (Atk.Index <= 0x12) return "Extra-Hit";
+            if (Atk.Index == 0x13) return "Dash";
+            if (Atk.Index == 0x14) return "Jan-Ken-Pon";
+            return "";
+        }
+
+        private static void SetHitField(NumericUpDown num, CheckBox chk, int value)
+        {
+            bool isFlag = value == 0x7FFF;
+            num.Value = isFlag ? 0 : value;
+            num.Enabled = !isFlag;
+            chk.Checked = isFlag;
+        }
+
+        private static void InitCombo(ComboBox cmb, object[] items)
+        {
+            if (cmb.Items.Count == 0)
+                cmb.Items.AddRange(items);
+        }
 
         public static void DrawCommandSequence(PictureBox pic, PlAtk Atk, int charID)
         {
@@ -701,26 +503,26 @@ namespace UN5ModdingWorkshop
             if (Atk.SpecialFlag == 0x1 || Atk.SpecialFlag == 0x4 || Atk.ThrowFlag == 0x1 || Atk.ThrowFlag == 0x2)
             {
                 // Golpe atual primeiro
-                if ((Atk.AtkUnk16 >> 3) == 0)
+                if ((Atk.AutoExecuteFlag >> 3) == 0)
                 {
-                    dpads.Add(Atk.AtkDpadFlag);
-                    buttons.Add(Atk.AtkButtonFlag);
+                    dpads.Add(Atk.DpadFlag);
+                    buttons.Add(Atk.ButtonFlag);
                 }
 
                 // Percorre a cadeia até -1
                 while (currentAtkPrevious != 255)
                 {
                     PlAtk currentAtk = GetCharAtk(charID, currentAtkPrevious);
-                    dpads.Add(currentAtk.AtkDpadFlag);
-                    buttons.Add(currentAtk.AtkButtonFlag);
+                    dpads.Add(currentAtk.DpadFlag);
+                    buttons.Add(currentAtk.ButtonFlag);
                     currentAtkPrevious = (int)currentAtk.PreviousIdx;
                 }
             }
             else
             {
                 // Golpe simples sem cadeia
-                dpads.Add(Atk.AtkDpadFlag);
-                buttons.Add(Atk.AtkButtonFlag);
+                dpads.Add(Atk.DpadFlag);
+                buttons.Add(Atk.ButtonFlag);
             }
             buttons.Reverse();
             dpads.Reverse();
@@ -1110,122 +912,111 @@ namespace UN5ModdingWorkshop
             AtkData.Add((byte)Atk.KawarimiDificulty);
             AtkData.Add((byte)0);
 
-            AtkData.Add((byte)Atk.Unk15);
+            byte AtkTypeValue = (byte)movForm.cmbType.SelectedIndex;
+            if (AtkTypeValue == 0)
+            {
+                AtkTypeValue = 0x11;
+            }
+            else if (AtkTypeValue == 1)
+            {
+                AtkTypeValue = 0x12;
+            }
+            else if (AtkTypeValue == 2)
+            {
+                AtkTypeValue = 0x14;
+            }
+            Atk.Type = AtkTypeValue;
+            AtkData.Add(AtkTypeValue);
 
             byte atkDpadFlag = (byte)GetDpadFlagGroupFromCmbBox(movForm.cmbDpad);
-            Atk.AtkDpadFlag = atkDpadFlag;
+            Atk.DpadFlag = atkDpadFlag;
             AtkData.Add(atkDpadFlag);
-            byte atkButtonFlag = (byte)Atk.AtkButtonFlag;
+            byte atkButtonFlag = (byte)Atk.ButtonFlag;
             AtkData.Add(atkButtonFlag);
-            AtkData.Add((byte)Atk.AtkUnk16);
+            AtkData.Add((byte)Atk.AutoExecuteFlag);
             AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numChakra.Value)));
-            Atk.AtkChakra = Convert.ToSingle(movForm.numChakra.Value);
+            Atk.Chakra = Convert.ToSingle(movForm.numChakra.Value);
             AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numDamage.Value)));
-            Atk.AtkDamage = Convert.ToSingle(movForm.numDamage.Value);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numKnockBack.Value)));
-            Atk.AtkKnockBack = Convert.ToSingle(movForm.numKnockBack.Value);
+            Atk.Damage = Convert.ToSingle(movForm.numDamage.Value);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numKnockback.Value)));
+            Atk.Knockback = Convert.ToSingle(movForm.numKnockback.Value);
             byte currentDmgEffect = (byte)movForm.cmbDmgEffect.SelectedIndex;
             AtkData.Add(currentDmgEffect);
-            Atk.AtkDamageEffect = currentDmgEffect;
+            Atk.DamageEffect = currentDmgEffect;
             byte currentDefenseEffect = (byte)(movForm.cmbDefenseEffect.SelectedIndex - 1);
             AtkData.Add(currentDefenseEffect);
-            Atk.AtkDefenseEffect = currentDefenseEffect;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.numHitCount.Value)));
-            Atk.HitCount = Convert.ToInt16(movForm.numHitCount.Value);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(movForm.numHitStun.Value)));
-            Atk.HitStun = Convert.ToInt16(movForm.numHitStun.Value);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.numHitSpeed.Value)));
-            Atk.HitSpeed = Convert.ToInt16(movForm.numHitSpeed.Value);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtSummonDistance1.Text)));
-            Atk.AtkSummonDistance1 = Convert.ToSingle(movForm.txtSummonDistance1.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtSummonDistance2.Text)));
-            Atk.AtkSummonDistance2 = Convert.ToSingle(movForm.txtSummonDistance2.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.txtKnockBackDirection.Text)));
-            Atk.AtkKnockBackDirection = Convert.ToSingle(movForm.txtKnockBackDirection.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.txtAtkSound.Text)));
-            Atk.AtkSound = Convert.ToInt16(movForm.txtAtkSound.Text);
+            Atk.DefenseEffect = currentDefenseEffect;
+
+            Atk.HitCount = movForm.chkHitCount.Checked ? 0x7FFF : (int)movForm.numHitCount.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitCount)));
+            Atk.HitStop = movForm.chkHitStop.Checked ? 0x7FFF : (int)movForm.numHitStop.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitStop)));
+            Atk.HitSpeed = movForm.chkHitSpeed.Checked ? 0x7FFF : (int)movForm.numHitSpeed.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitSpeed)));
+
+            Atk.RangeValue1 = (float)movForm.numRangeValue1.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue1));
+
+            Atk.RangeValue2 = (float)movForm.numRangeValue2.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue2));
+
+            Atk.KnockbackDirection = (float)movForm.numKnockbackDirection.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Atk.KnockbackDirection));           
+
+            Atk.WhiffSound = (int)movForm.numWhiffSound.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.WhiffSound)));
+
             int currentPLSoundIndex = movForm.cmbPLSound.SelectedIndex;
             int currentPLSound = currentPLSoundIndex - 4;
             switch (currentPLSoundIndex)
             {
                 case 0:
-                    AtkData.AddRange(BitConverter.GetBytes((short)-4));
-                    Atk.AtkPlSound = -4;
+                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-4)));
+                    Atk.PlayerSound = -4;
                     break;
                 case 1:
-                    AtkData.AddRange(BitConverter.GetBytes((short)-3));
-                    Atk.AtkPlSound = -3;
+                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-3)));
+                    Atk.PlayerSound = -3;
                     break;
                 case 2:
-                    AtkData.AddRange(BitConverter.GetBytes((short)-2));
-                    Atk.AtkPlSound = -2;
+                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-2)));
+                    Atk.PlayerSound = -2;
                     break;
                 case 3:
-                    AtkData.AddRange(BitConverter.GetBytes((short)-1));
-                    Atk.AtkPlSound = -1;
+                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-1)));
+                    Atk.PlayerSound = -1;
                     break;
                 default:
-                    AtkData.AddRange(BitConverter.GetBytes((short)currentPLSound));
-                    Atk.AtkPlSound = (short)currentPLSound;
+                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(currentPLSound)));
+                    Atk.PlayerSound = (short)currentPLSound;
                     break;
             }
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(movForm.txtSoundDelay.Text)));
-            Atk.AtkSoundDelay = Convert.ToUInt16(movForm.txtSoundDelay.Text);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.txtDmgSound.Text)));
-            Atk.AtkDamageSound = Convert.ToInt16(movForm.txtDmgSound.Text);
+            
+            Atk.SoundDelay = (uint)movForm.numSoundDelay.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.SoundDelay)));
+
+            Atk.HitSound = (int)movForm.numHitSound.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitSound)));
             int currentDmgParticleIndex = movForm.cmbDmgParticle.SelectedIndex;
             int currentDmgParticle = currentDmgParticleIndex - 1;
             if (currentDmgParticleIndex == 0)
             {
-                AtkData.AddRange(BitConverter.GetBytes((short)-1));
-                Atk.AtkDamageParticle = -1;
+                AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-1)));
+                Atk.DamageParticle = -1;
             }
             else
             {
-                AtkData.AddRange(BitConverter.GetBytes((short)currentDmgParticle));
-                Atk.AtkDamageParticle = (short)currentDmgParticle;
+                AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(currentDmgParticle)));
+                Atk.DamageParticle = (short)currentDmgParticle;
             }
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.txtDefenseSound.Text)));
-            Atk.AtkDefenseSound = Convert.ToInt16(movForm.txtDefenseSound.Text);
+            Atk.DefenseSound = (int)movForm.numDefenseSound.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.DefenseSound)));
 
-            int currentDefenseParticle = movForm.cmbDefenseParticle.SelectedIndex;
-            switch (currentDefenseParticle)
-            {
-                case 0:
-                    AtkData.AddRange(BitConverter.GetBytes((short)-1));
-                    Atk.AtkDefenseParticle = -1;
-                    break;
-                case 1:
-                    AtkData.AddRange(BitConverter.GetBytes((short)0));
-                    Atk.AtkDefenseParticle = 0;
-                    break;
-                case 2:
-                    AtkData.AddRange(BitConverter.GetBytes((short)1));
-                    Atk.AtkDefenseParticle = 1;
-                    break;
-                case 3:
-                    AtkData.AddRange(BitConverter.GetBytes((short)2));
-                    Atk.AtkDefenseParticle = 2;
-                    break;
-                case 4:
-                    AtkData.AddRange(BitConverter.GetBytes((short)3));
-                    Atk.AtkDefenseParticle = 3;
-                    break;
-                case 5:
-                    AtkData.AddRange(BitConverter.GetBytes((short)4));
-                    Atk.AtkDefenseParticle = 4;
-                    break;
-                case 6:
-                    AtkData.AddRange(BitConverter.GetBytes((short)5));
-                    Atk.AtkDefenseParticle = 5;
-                    break;
-                default:
-                    break;
-            }
+            Atk.DefenseParticle = (int)(movForm.cmbDefenseParticle.SelectedIndex - 1);
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.DefenseParticle)));
 
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(movForm.txtEnemySound.Text)));
-            Atk.AtkEnemySound = Convert.ToInt16(movForm.txtEnemySound.Text);
-
+            Atk.EnemySound = (int)movForm.numEnemySound.Value;
+            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.EnemySound)));
 
             byte[] resultBytes = AtkData.ToArray();
             return resultBytes;
@@ -1271,31 +1062,31 @@ namespace UN5ModdingWorkshop
                 AtkData.Add((byte)Atk.KawarimiDificulty);
                 AtkData.Add((byte)0);
 
-                AtkData.Add((byte)Atk.Unk15);
-                AtkData.Add((byte)Atk.AtkDpadFlag);
-                byte atkButtonFlag = (byte)Atk.AtkButtonFlag;
+                AtkData.Add((byte)Atk.Type);
+                AtkData.Add((byte)Atk.DpadFlag);
+                byte atkButtonFlag = (byte)Atk.ButtonFlag;
                 AtkData.Add(atkButtonFlag);
-                AtkData.Add((byte)Atk.AtkUnk16);
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkChakra));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkDamage));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkKnockBack));
-                AtkData.Add((byte)Atk.AtkDamageEffect);
-                AtkData.Add((byte)Atk.AtkDefenseEffect);
+                AtkData.Add((byte)Atk.AutoExecuteFlag);
+                AtkData.AddRange(BitConverter.GetBytes(Atk.Chakra));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.Damage));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.Knockback));
+                AtkData.Add((byte)Atk.DamageEffect);
+                AtkData.Add((byte)Atk.DefenseEffect);
                 AtkData.AddRange(BitConverter.GetBytes(Atk.HitCount));
                 AtkData.AddRange(BitConverter.GetBytes(Atk.HitSpeed));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.HitStun));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkSummonDistance1));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkSummonDistance2));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkKnockBackDirection));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkPlSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkSoundDelay));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkDamageSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkDamageParticle));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkDefenseSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkDefenseParticle));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.AtkEnemySound));
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt32(Atk.AtkAnm)));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.HitStop));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue1));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue2));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.KnockbackDirection));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.WhiffSound));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.PlayerSound));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.SoundDelay));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.HitSound));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.DamageParticle));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.DefenseSound));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.DefenseParticle));
+                AtkData.AddRange(BitConverter.GetBytes(Atk.EnemySound));
+                AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt32(Atk.AnimationIdx)));
             }
             byte[] resultBytes = AtkData.ToArray();
             return resultBytes;

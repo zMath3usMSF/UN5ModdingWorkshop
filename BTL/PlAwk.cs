@@ -277,10 +277,6 @@ namespace UN5ModdingWorkshop
                     break;
                 }
             }
-            if (awkForm.cmbPLSound.Items.Count == 0)
-            {
-                awkForm.cmbPLSound.Items.AddRange(PlAtk.PLSoundList.Values.ToArray());
-            }
             int currentPLSound = CharAwkActivationSound[charID];
             awkForm.cmbPLSound.SelectedIndex = currentPLSound == -4 ? 0 : currentPLSound == -3 ? 1 : currentPLSound == -2 ? 2 : currentPLSound == -1 ? 3 : currentPLSound > 34 ? 0 : currentPLSound + 4;
         }

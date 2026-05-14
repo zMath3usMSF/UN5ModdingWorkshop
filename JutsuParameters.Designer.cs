@@ -218,6 +218,14 @@
             // 
             this.cmbDefenseParticle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDefenseParticle.FormattingEnabled = true;
+            this.cmbDefenseParticle.Items.AddRange(new object[] {
+            "Normal",
+            "Without",
+            "Normal",
+            "Normal 1",
+            "(Hit, Red Kanji)",
+            "Without",
+            "Explosion"});
             this.cmbDefenseParticle.Location = new System.Drawing.Point(654, 166);
             this.cmbDefenseParticle.Name = "cmbDefenseParticle";
             this.cmbDefenseParticle.Size = new System.Drawing.Size(81, 21);
@@ -274,6 +282,33 @@
             // 
             this.cmbDmgParticle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDmgParticle.FormattingEnabled = true;
+            this.cmbDmgParticle.Items.AddRange(new object[] {
+            "Normal Middle",
+            "Without",
+            "Normal Small",
+            "Normal Middle",
+            "Normal Large",
+            "Normal Large 1",
+            "Normal Large 2",
+            "Normal Small 1",
+            "Normal Large 3",
+            "Cut Blue Small",
+            "Cut Blue Small 1",
+            "Cut Blue Middle",
+            "Cut Blue Large",
+            "Cut Purple Small",
+            "Cut Purple Small 1",
+            "Cut Purple Middle",
+            "Cut Purple Large",
+            "Normal Small",
+            "Normal Middle",
+            "Normal Large",
+            "Normal Large 1",
+            "Normal Large 2",
+            "Normal Small (Red Kanji)",
+            "null",
+            "Explosion Small",
+            "Without (Kanji)"});
             this.cmbDmgParticle.Location = new System.Drawing.Point(493, 141);
             this.cmbDmgParticle.Name = "cmbDmgParticle";
             this.cmbDmgParticle.Size = new System.Drawing.Size(115, 21);

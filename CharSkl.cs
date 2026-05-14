@@ -225,11 +225,9 @@ namespace UN5ModdingWorkshop
             sklForm.numUnk9.Value = charSklPrm.Unk9;
 
             sklForm.numDmgSound.Value = Convert.ToDecimal(charSklPrm.DamageSound);
-            sklForm.cmbDmgParticle.Items.AddRange(sklForm.cmbDmgParticle.Items.Count == 0 ? PlAtk.DamageParticleList.Values.ToArray() : new object[0]);
             int currentDmgParticle = charSklPrm.DamageParticle;
             sklForm.cmbDmgParticle.SelectedIndex = currentDmgParticle > 24 || currentDmgParticle == -1 ? 0 : currentDmgParticle + 1;
             sklForm.numDefSound.Value = Convert.ToDecimal(charSklPrm.DefenseSound);
-            sklForm.cmbDefenseParticle.Items.AddRange(sklForm.cmbDefenseParticle.Items.Count == 0 ? PlAtk.DefenseParticleList.Values.ToArray() : new object[0]);
             int currentDefenseParticle = charSklPrm.DefenseParticle;
             sklForm.cmbDefenseParticle.SelectedIndex = currentDefenseParticle == -1 ? 0 : currentDefenseParticle + 1;
             sklForm.numEnemySound.Value = Convert.ToDecimal(charSklPrm.EnemySound);

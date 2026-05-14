@@ -595,6 +595,43 @@
             // 
             this.cmbPLSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPLSound.FormattingEnabled = true;
+            this.cmbPLSound.Items.AddRange(new object[] {
+            "ATK_cmn_vS",
+            "ATK_cmn_vM",
+            "ATK_cmn_vL",
+            "null",
+            "ATK_cmn_vS_rv0",
+            "ATK_cmn_vS_rv1",
+            "ATK_cmn_vS_rv2",
+            "ATK_cmn_vM_rv0",
+            "ATK_cmn_vM_rv1",
+            "ATK_cmn_vM_rv2",
+            "ATK_cmn_vL_rv0",
+            "ATK_cmn_vL_rv1",
+            "ATK_cmn_vL_rv2",
+            "DMG_cmn_vS_rv0",
+            "DMG_cmn_vS_rv1",
+            "DMG_cmn_vS_rv2",
+            "DMG_cmn_vM_rv0",
+            "DMG_cmn_vM_rv1",
+            "DMG_cmn_vM_rv2",
+            "DMG_cmn_vL_rv0",
+            "DMG_cmn_vL_rv1",
+            "DMG_cmn_vL_rv2",
+            "ATK_death_vL",
+            "jump",
+            "jump_double",
+            "UNK",
+            "ITM_take",
+            "null",
+            "ITM_hpRecover",
+            "null",
+            "substitution_rv0",
+            "substitution_rv1",
+            "substitution_rv2",
+            "jump_double",
+            "provocation",
+            "ckrCharge"});
             this.cmbPLSound.Location = new System.Drawing.Point(68, 19);
             this.cmbPLSound.Name = "cmbPLSound";
             this.cmbPLSound.Size = new System.Drawing.Size(118, 21);
