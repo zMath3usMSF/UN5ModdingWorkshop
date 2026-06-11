@@ -82,7 +82,7 @@ namespace UN5ModdingWorkshop
 
         #endregion
 
-        internal static PlAtk ReadCharAtkPrm(byte[] Input) => new PlAtk
+        internal static PlAtk Read(byte[] Input) => new PlAtk
         {
             NameOffs1 = Input.ReadUInt(0x0, 32),
             NameOffs2 = Input.ReadUInt(0x4, 32),
@@ -159,15 +159,13 @@ namespace UN5ModdingWorkshop
             Util.WriteProcessMemoryBytes(P1AtkOffs, atkDataPart);
 
             //Write Normal in Memory
-            byte[] atkNormalMemoryOffset = PlGen.CharGenPrm[charID].AtkListOffset;
-
-            P1AtkOffs = BitConverter.ToInt32(atkNormalMemoryOffset, 0) + skipAtks;
+            P1AtkOffs = (int)PlGen.List[charID].AtkListOffset + skipAtks;
             Util.WriteProcessMemoryBytes(P1AtkOffs, atkDataPart);
         }
         
         public static PlAtk GetCharAtk(int charID, int atkID)
         {
-            int atkCount = PlGen.CharGenPrm[charID].AtkCount;
+            uint atkCount = PlGen.List[charID].AtkCount;
 
             while (CharAtkPrm.Count <= GAME.charCount)
             {
@@ -176,8 +174,7 @@ namespace UN5ModdingWorkshop
             }
             if (CharAtkPrm[charID].Count == 0)
             {
-                byte[] atkListOffsetBytes = PlGen.CharGenPrm[charID].AtkListOffset;
-                int atkListPointer = BitConverter.ToInt32(PlGen.CharGenPrm[charID].AtkListOffset, 0);
+                int atkListPointer = (int)PlGen.List[charID].AtkListOffset;
 
                 List<PlAtk> charAtkPrm = new List<PlAtk>();
                 List<PlAtk> charAtkPrmBkp = new List<PlAtk>();
@@ -187,7 +184,7 @@ namespace UN5ModdingWorkshop
                     int currentAtkListPointer = atkListPointer + skipsAtkBlocks;
                     byte[] currentAtkBlock = Util.ReadProcessMemoryBytes(currentAtkListPointer, 0x54);
 
-                    var ninja = ReadCharAtkPrm(currentAtkBlock);
+                    var ninja = Read(currentAtkBlock);
                     var clone = (PlAtk)ninja.Clone();
                     charAtkPrm.Add(ninja);
                     charAtkPrmBkp.Add(clone);
@@ -205,7 +202,7 @@ namespace UN5ModdingWorkshop
                 for (int i = 0; i < GAME.charCount; i++)
                 {
                     List<string> comboName = new List<string>();
-                    for (int j = 0; j <= PlGen.CharGenPrm[i].AtkCount; j++)
+                    for (int j = 0; j <= PlGen.List[i].AtkCount; j++)
                     {
                         comboName.Add("");
                     }
@@ -223,9 +220,9 @@ namespace UN5ModdingWorkshop
                 Array.Copy(generalComboNameArea, charID * 4, charComboNameAreaOffsetBytes, 0, charComboNameAreaOffsetBytes.Length);
                 int charComboNameAreaOffset = BitConverter.ToInt32(charComboNameAreaOffsetBytes, 0);
 
-                byte[] charComboNameArea = Util.ReadProcessMemoryBytes(charComboNameAreaOffset, PlGen.CharGenPrm[charID].AtkCount * 4);
+                byte[] charComboNameArea = Util.ReadProcessMemoryBytes(charComboNameAreaOffset, (int)PlGen.List[charID].AtkCount * 4);
                 List<string> charComboName = new List<string>();
-                for (int j = 0; j < PlGen.CharGenPrm[charID].AtkCount; j++)
+                for (int j = 0; j < PlGen.List[charID].AtkCount; j++)
                 {
                     byte[] charComboNameOffsetBytes = new byte[4];
                     Array.Copy(charComboNameArea, j * 4, charComboNameOffsetBytes, 0, charComboNameOffsetBytes.Length);
@@ -241,7 +238,7 @@ namespace UN5ModdingWorkshop
         public static void AddCharComboList(MovesetParameters movForm, int charID, string txtCharNameForm)
         {
             movForm.lblCharName2.Text = txtCharNameForm;
-            movForm.lblComboCount2.Text = PlGen.CharGenPrm[charID].AtkCount.ToString();
+            movForm.lblComboCount2.Text = PlGen.List[charID].AtkCount.ToString();
             for (int i = 1; i < 94; i++)
             {
                 List<string> comboName = new List<string>();
@@ -258,7 +255,7 @@ namespace UN5ModdingWorkshop
             }
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             File.WriteAllLines(Path.Combine(desktop, "jutsus.txt"), jutsus.ToArray());
-            for (int i = 0; i < PlGen.CharGenPrm[charID].AtkCount; i++)
+            for (int i = 0; i < PlGen.List[charID].AtkCount; i++)
             {
                 switch (i)
                 {
@@ -486,12 +483,6 @@ namespace UN5ModdingWorkshop
             num.Value = isFlag ? 0 : value;
             num.Enabled = !isFlag;
             chk.Checked = isFlag;
-        }
-
-        private static void InitCombo(ComboBox cmb, object[] items)
-        {
-            if (cmb.Items.Count == 0)
-                cmb.Items.AddRange(items);
         }
 
         public static void DrawCommandSequence(PictureBox pic, PlAtk Atk, int charID)
@@ -1026,7 +1017,7 @@ namespace UN5ModdingWorkshop
         {
             List<byte> AtkData = new List<byte>();
 
-            for (int i = 0; i < PlGen.CharGenPrm[charID].AtkCount; i++)
+            for (int i = 0; i < PlGen.List[charID].AtkCount; i++)
             {
                 var Atk = CharAtkPrm[charID][i];
 
@@ -1091,6 +1082,7 @@ namespace UN5ModdingWorkshop
             byte[] resultBytes = AtkData.ToArray();
             return resultBytes;
         }
+        
         public static void WriteELFCharAtk(byte[] resultBytes, int charID)
         {
             if (!File.Exists(GAME.caminhoELF))
@@ -1101,10 +1093,7 @@ namespace UN5ModdingWorkshop
             {
                 using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
-                    byte[] charAtkAreaOffsetBytes = PlGen.CharGenPrm[charID].AtkListOffset;
-                    charAtkAreaOffsetBytes[3] = 0x0;
-                    int subValue = 0xFFE80;
-                    int charAtkAreaOffset = BitConverter.ToInt32(charAtkAreaOffsetBytes, 0) - subValue;
+                    int charAtkAreaOffset = (int)PlGen.List[charID].AtkListOffset - 0xFFE80;
 
                     fs.Seek(charAtkAreaOffset, SeekOrigin.Begin);
 

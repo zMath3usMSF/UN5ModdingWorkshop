@@ -44,42 +44,60 @@
             this.btnEditAtkParameters = new System.Windows.Forms.Button();
             this.pnlAnmPrm = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.numAnmUnk8 = new System.Windows.Forms.NumericUpDown();
+            this.chkHitBoxCharPos2 = new System.Windows.Forms.CheckBox();
+            this.txtHitBone2 = new System.Windows.Forms.TextBox();
+            this.chkLastEndHitFrame2 = new System.Windows.Forms.CheckBox();
+            this.chkNoneEndHitFrame2 = new System.Windows.Forms.CheckBox();
+            this.chkNoneStartHitFrame2 = new System.Windows.Forms.CheckBox();
+            this.chkAnmFlags2 = new System.Windows.Forms.CheckedListBox();
+            this.numHitBoxYPos2 = new System.Windows.Forms.NumericUpDown();
+            this.numHitBoxXPos2 = new System.Windows.Forms.NumericUpDown();
+            this.numAnmHitBoxScale2 = new System.Windows.Forms.NumericUpDown();
             this.lblAnmStartHitFrame2 = new System.Windows.Forms.Label();
-            this.lblAnmUnk8 = new System.Windows.Forms.Label();
-            this.numStartHitFrame2 = new System.Windows.Forms.NumericUpDown();
+            this.numAnmStartHitFrame2 = new System.Windows.Forms.NumericUpDown();
             this.lblAnmObjectAtk2 = new System.Windows.Forms.Label();
-            this.cmbAnmObjectAtk2 = new System.Windows.Forms.ComboBox();
             this.lblAnmEndHitFrame2 = new System.Windows.Forms.Label();
             this.lblAnmHitBoxYPos2 = new System.Windows.Forms.Label();
             this.lblAnmHitBoxXPos2 = new System.Windows.Forms.Label();
             this.numAnmEndHitFrame2 = new System.Windows.Forms.NumericUpDown();
             this.lblAnmHitBoxScale2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numAnmUnk7 = new System.Windows.Forms.NumericUpDown();
+            this.chkHitBoxCharPos1 = new System.Windows.Forms.CheckBox();
+            this.txtHitBone1 = new System.Windows.Forms.TextBox();
+            this.chkLastEndHitFrame1 = new System.Windows.Forms.CheckBox();
+            this.chkNoneEndHitFrame1 = new System.Windows.Forms.CheckBox();
+            this.chkNoneStartHitFrame1 = new System.Windows.Forms.CheckBox();
+            this.chkAnmFlags1 = new System.Windows.Forms.CheckedListBox();
+            this.numHitBoxYPos1 = new System.Windows.Forms.NumericUpDown();
+            this.numHitBoxXPos1 = new System.Windows.Forms.NumericUpDown();
+            this.numHitBoxScale1 = new System.Windows.Forms.NumericUpDown();
             this.lblAnmStartHitFrame = new System.Windows.Forms.Label();
-            this.lblAnmUnk7 = new System.Windows.Forms.Label();
             this.numAnmStartHitFrame1 = new System.Windows.Forms.NumericUpDown();
             this.lblAnmEndHitFrame = new System.Windows.Forms.Label();
             this.lblHitBoxYPos = new System.Windows.Forms.Label();
             this.numAnmEndHitFrame1 = new System.Windows.Forms.NumericUpDown();
             this.lblAnmHitBoxScale = new System.Windows.Forms.Label();
             this.lblHitBoxXPos = new System.Windows.Forms.Label();
-            this.cmbAnmObjectAtk1 = new System.Windows.Forms.ComboBox();
             this.lblAnmObjectAtk = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.numAnmSpeed = new System.Windows.Forms.NumericUpDown();
-            this.lblAnmUnk6 = new System.Windows.Forms.Label();
-            this.txtAnmUnk6 = new System.Windows.Forms.TextBox();
-            this.lblAnmUnk5 = new System.Windows.Forms.Label();
-            this.txtAnmUnk5 = new System.Windows.Forms.TextBox();
-            this.numAnmUnk4 = new System.Windows.Forms.NumericUpDown();
-            this.lblAnmUnk4 = new System.Windows.Forms.Label();
+            this.chkNoneCharStartMoveFrame = new System.Windows.Forms.CheckBox();
+            this.numCharYSlide = new System.Windows.Forms.NumericUpDown();
             this.numAnmUnk3 = new System.Windows.Forms.NumericUpDown();
+            this.numCharXSlide = new System.Windows.Forms.NumericUpDown();
+            this.lblCharYSlide = new System.Windows.Forms.Label();
+            this.lblDuration = new System.Windows.Forms.Label();
+            this.numDuration = new System.Windows.Forms.NumericUpDown();
+            this.cmbDuration = new System.Windows.Forms.ComboBox();
+            this.numCharYDistance = new System.Windows.Forms.NumericUpDown();
+            this.lblCharXSlide = new System.Windows.Forms.Label();
+            this.numCharXDistance = new System.Windows.Forms.NumericUpDown();
+            this.numAnmSpeed = new System.Windows.Forms.NumericUpDown();
+            this.numCharStartMoveFrame = new System.Windows.Forms.NumericUpDown();
             this.lblAnmUnk3 = new System.Windows.Forms.Label();
+            this.lblCharStartMoveFrame = new System.Windows.Forms.Label();
             this.numAnmUnk2 = new System.Windows.Forms.NumericUpDown();
             this.lblAnmUnk2 = new System.Windows.Forms.Label();
-            this.numAnmUnk1 = new System.Windows.Forms.NumericUpDown();
+            this.numStartFrame = new System.Windows.Forms.NumericUpDown();
             this.lblAnmUnk1 = new System.Windows.Forms.Label();
             this.lblPlayAnmID = new System.Windows.Forms.Label();
             this.cmbPlayAnmID = new System.Windows.Forms.ComboBox();
@@ -145,29 +163,30 @@
             this.lblDamage = new System.Windows.Forms.Label();
             this.lblChakra = new System.Windows.Forms.Label();
             this.pnlAtkPrm = new System.Windows.Forms.Panel();
-            this.numCharXDistance = new System.Windows.Forms.NumericUpDown();
-            this.numCharYDistance = new System.Windows.Forms.NumericUpDown();
-            this.numHitBoxScale1 = new System.Windows.Forms.NumericUpDown();
-            this.numAnmHitBoxScale2 = new System.Windows.Forms.NumericUpDown();
-            this.numHitBoxXPos1 = new System.Windows.Forms.NumericUpDown();
-            this.numHitBoxYPos1 = new System.Windows.Forms.NumericUpDown();
-            this.numHitBoxXPos2 = new System.Windows.Forms.NumericUpDown();
-            this.numHitBoxYPos2 = new System.Windows.Forms.NumericUpDown();
             this.pnlAnmPrm.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStartHitFrame2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmHitBoxScale2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmStartHitFrame2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmEndHitFrame2)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxScale1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmStartHitFrame1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmEndHitFrame1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharYSlide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharXSlide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDuration)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharYDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharXDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharStartMoveFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartFrame)).BeginInit();
             this.panel2.SuspendLayout();
             this.grpAttackParameters.SuspendLayout();
             this.grpAttackFlagGroup1.SuspendLayout();
@@ -189,14 +208,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numKnockback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numKawarimi)).BeginInit();
             this.pnlAtkPrm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharXDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharYDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxScale1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmHitBoxScale2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos2)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
@@ -331,43 +342,164 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkHitBoxCharPos2);
+            this.groupBox3.Controls.Add(this.txtHitBone2);
+            this.groupBox3.Controls.Add(this.chkLastEndHitFrame2);
+            this.groupBox3.Controls.Add(this.chkNoneEndHitFrame2);
+            this.groupBox3.Controls.Add(this.chkNoneStartHitFrame2);
+            this.groupBox3.Controls.Add(this.chkAnmFlags2);
             this.groupBox3.Controls.Add(this.numHitBoxYPos2);
             this.groupBox3.Controls.Add(this.numHitBoxXPos2);
             this.groupBox3.Controls.Add(this.numAnmHitBoxScale2);
-            this.groupBox3.Controls.Add(this.numAnmUnk8);
             this.groupBox3.Controls.Add(this.lblAnmStartHitFrame2);
-            this.groupBox3.Controls.Add(this.lblAnmUnk8);
-            this.groupBox3.Controls.Add(this.numStartHitFrame2);
+            this.groupBox3.Controls.Add(this.numAnmStartHitFrame2);
             this.groupBox3.Controls.Add(this.lblAnmObjectAtk2);
-            this.groupBox3.Controls.Add(this.cmbAnmObjectAtk2);
             this.groupBox3.Controls.Add(this.lblAnmEndHitFrame2);
             this.groupBox3.Controls.Add(this.lblAnmHitBoxYPos2);
             this.groupBox3.Controls.Add(this.lblAnmHitBoxXPos2);
             this.groupBox3.Controls.Add(this.numAnmEndHitFrame2);
             this.groupBox3.Controls.Add(this.lblAnmHitBoxScale2);
-            this.groupBox3.Location = new System.Drawing.Point(1, 260);
+            this.groupBox3.Location = new System.Drawing.Point(0, 362);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(631, 111);
+            this.groupBox3.Size = new System.Drawing.Size(632, 213);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Second Hit Group Parameters:";
+            this.groupBox3.Text = "First Hit Box:";
             // 
-            // numAnmUnk8
+            // chkHitBoxCharPos2
             // 
-            this.numAnmUnk8.Location = new System.Drawing.Point(342, 69);
-            this.numAnmUnk8.Maximum = new decimal(new int[] {
-            32767,
+            this.chkHitBoxCharPos2.AutoSize = true;
+            this.chkHitBoxCharPos2.Location = new System.Drawing.Point(559, 44);
+            this.chkHitBoxCharPos2.Name = "chkHitBoxCharPos2";
+            this.chkHitBoxCharPos2.Size = new System.Drawing.Size(69, 17);
+            this.chkHitBoxCharPos2.TabIndex = 46;
+            this.chkHitBoxCharPos2.Text = "Char Pos";
+            this.chkHitBoxCharPos2.UseVisualStyleBackColor = true;
+            // 
+            // txtHitBone2
+            // 
+            this.txtHitBone2.Location = new System.Drawing.Point(408, 42);
+            this.txtHitBone2.MaxLength = 30;
+            this.txtHitBone2.Name = "txtHitBone2";
+            this.txtHitBone2.Size = new System.Drawing.Size(145, 20);
+            this.txtHitBone2.TabIndex = 45;
+            // 
+            // chkLastEndHitFrame2
+            // 
+            this.chkLastEndHitFrame2.AutoSize = true;
+            this.chkLastEndHitFrame2.Location = new System.Drawing.Point(520, 9);
+            this.chkLastEndHitFrame2.Name = "chkLastEndHitFrame2";
+            this.chkLastEndHitFrame2.Size = new System.Drawing.Size(46, 17);
+            this.chkLastEndHitFrame2.TabIndex = 46;
+            this.chkLastEndHitFrame2.Text = "Last";
+            this.chkLastEndHitFrame2.UseVisualStyleBackColor = true;
+            // 
+            // chkNoneEndHitFrame2
+            // 
+            this.chkNoneEndHitFrame2.AutoSize = true;
+            this.chkNoneEndHitFrame2.Location = new System.Drawing.Point(572, 9);
+            this.chkNoneEndHitFrame2.Name = "chkNoneEndHitFrame2";
+            this.chkNoneEndHitFrame2.Size = new System.Drawing.Size(52, 17);
+            this.chkNoneEndHitFrame2.TabIndex = 45;
+            this.chkNoneEndHitFrame2.Text = "None";
+            this.chkNoneEndHitFrame2.UseVisualStyleBackColor = true;
+            // 
+            // chkNoneStartHitFrame2
+            // 
+            this.chkNoneStartHitFrame2.AutoSize = true;
+            this.chkNoneStartHitFrame2.Location = new System.Drawing.Point(157, 17);
+            this.chkNoneStartHitFrame2.Name = "chkNoneStartHitFrame2";
+            this.chkNoneStartHitFrame2.Size = new System.Drawing.Size(52, 17);
+            this.chkNoneStartHitFrame2.TabIndex = 45;
+            this.chkNoneStartHitFrame2.Text = "None";
+            this.chkNoneStartHitFrame2.UseVisualStyleBackColor = true;
+            // 
+            // chkAnmFlags2
+            // 
+            this.chkAnmFlags2.FormattingEnabled = true;
+            this.chkAnmFlags2.Items.AddRange(new object[] {
+            "Flag 1",
+            "Cancelable with Shuriken",
+            "Flag 3",
+            "Flag 4",
+            "Allow Combo Continuation",
+            "Flag 6",
+            "Flag 7",
+            "Flag 8"});
+            this.chkAnmFlags2.Location = new System.Drawing.Point(11, 69);
+            this.chkAnmFlags2.Name = "chkAnmFlags2";
+            this.chkAnmFlags2.Size = new System.Drawing.Size(613, 124);
+            this.chkAnmFlags2.TabIndex = 41;
+            // 
+            // numHitBoxYPos2
+            // 
+            this.numHitBoxYPos2.DecimalPlaces = 2;
+            this.numHitBoxYPos2.Increment = new decimal(new int[] {
+            10,
             0,
             0,
             0});
-            this.numAnmUnk8.Minimum = new decimal(new int[] {
-            32768,
+            this.numHitBoxYPos2.Location = new System.Drawing.Point(280, 43);
+            this.numHitBoxYPos2.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numHitBoxYPos2.Minimum = new decimal(new int[] {
+            1000,
             0,
             0,
             -2147483648});
-            this.numAnmUnk8.Name = "numAnmUnk8";
-            this.numAnmUnk8.Size = new System.Drawing.Size(44, 20);
-            this.numAnmUnk8.TabIndex = 37;
+            this.numHitBoxYPos2.Name = "numHitBoxYPos2";
+            this.numHitBoxYPos2.Size = new System.Drawing.Size(54, 20);
+            this.numHitBoxYPos2.TabIndex = 40;
+            // 
+            // numHitBoxXPos2
+            // 
+            this.numHitBoxXPos2.DecimalPlaces = 2;
+            this.numHitBoxXPos2.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numHitBoxXPos2.Location = new System.Drawing.Point(161, 43);
+            this.numHitBoxXPos2.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numHitBoxXPos2.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numHitBoxXPos2.Name = "numHitBoxXPos2";
+            this.numHitBoxXPos2.Size = new System.Drawing.Size(54, 20);
+            this.numHitBoxXPos2.TabIndex = 40;
+            this.numHitBoxXPos2.ValueChanged += new System.EventHandler(this.numHitBoxXPos2_ValueChanged);
+            // 
+            // numAnmHitBoxScale2
+            // 
+            this.numAnmHitBoxScale2.DecimalPlaces = 2;
+            this.numAnmHitBoxScale2.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numAnmHitBoxScale2.Location = new System.Drawing.Point(52, 43);
+            this.numAnmHitBoxScale2.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAnmHitBoxScale2.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numAnmHitBoxScale2.Name = "numAnmHitBoxScale2";
+            this.numAnmHitBoxScale2.Size = new System.Drawing.Size(54, 20);
+            this.numAnmHitBoxScale2.TabIndex = 38;
             // 
             // lblAnmStartHitFrame2
             // 
@@ -378,142 +510,247 @@
             this.lblAnmStartHitFrame2.TabIndex = 17;
             this.lblAnmStartHitFrame2.Text = "Start of Hit Frame:";
             // 
-            // lblAnmUnk8
+            // numAnmStartHitFrame2
             // 
-            this.lblAnmUnk8.AutoSize = true;
-            this.lblAnmUnk8.Location = new System.Drawing.Point(282, 71);
-            this.lblAnmUnk8.Name = "lblAnmUnk8";
-            this.lblAnmUnk8.Size = new System.Drawing.Size(54, 13);
-            this.lblAnmUnk8.TabIndex = 36;
-            this.lblAnmUnk8.Text = "AnmUnk8";
-            // 
-            // numStartHitFrame2
-            // 
-            this.numStartHitFrame2.Location = new System.Drawing.Point(104, 16);
-            this.numStartHitFrame2.Maximum = new decimal(new int[] {
+            this.numAnmStartHitFrame2.Location = new System.Drawing.Point(104, 16);
+            this.numAnmStartHitFrame2.Maximum = new decimal(new int[] {
             32767,
             0,
             0,
             0});
-            this.numStartHitFrame2.Minimum = new decimal(new int[] {
-            32768,
+            this.numAnmStartHitFrame2.Minimum = new decimal(new int[] {
+            32766,
             0,
             0,
             -2147483648});
-            this.numStartHitFrame2.Name = "numStartHitFrame2";
-            this.numStartHitFrame2.Size = new System.Drawing.Size(47, 20);
-            this.numStartHitFrame2.TabIndex = 18;
+            this.numAnmStartHitFrame2.Name = "numAnmStartHitFrame2";
+            this.numAnmStartHitFrame2.Size = new System.Drawing.Size(47, 20);
+            this.numAnmStartHitFrame2.TabIndex = 18;
             // 
             // lblAnmObjectAtk2
             // 
             this.lblAnmObjectAtk2.AutoSize = true;
-            this.lblAnmObjectAtk2.Location = new System.Drawing.Point(145, 46);
+            this.lblAnmObjectAtk2.Location = new System.Drawing.Point(340, 45);
             this.lblAnmObjectAtk2.Name = "lblAnmObjectAtk2";
-            this.lblAnmObjectAtk2.Size = new System.Drawing.Size(60, 13);
+            this.lblAnmObjectAtk2.Size = new System.Drawing.Size(62, 13);
             this.lblAnmObjectAtk2.TabIndex = 23;
-            this.lblAnmObjectAtk2.Text = "Object Atk:";
-            // 
-            // cmbAnmObjectAtk2
-            // 
-            this.cmbAnmObjectAtk2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAnmObjectAtk2.FormattingEnabled = true;
-            this.cmbAnmObjectAtk2.Location = new System.Drawing.Point(211, 42);
-            this.cmbAnmObjectAtk2.Name = "cmbAnmObjectAtk2";
-            this.cmbAnmObjectAtk2.Size = new System.Drawing.Size(151, 21);
-            this.cmbAnmObjectAtk2.TabIndex = 24;
+            this.lblAnmObjectAtk2.Text = "Base Bone:";
             // 
             // lblAnmEndHitFrame2
             // 
             this.lblAnmEndHitFrame2.AutoSize = true;
-            this.lblAnmEndHitFrame2.Location = new System.Drawing.Point(157, 19);
+            this.lblAnmEndHitFrame2.Location = new System.Drawing.Point(369, 11);
             this.lblAnmEndHitFrame2.Name = "lblAnmEndHitFrame2";
             this.lblAnmEndHitFrame2.Size = new System.Drawing.Size(89, 13);
             this.lblAnmEndHitFrame2.TabIndex = 19;
             this.lblAnmEndHitFrame2.Text = "End of Hit Frame:";
+            this.lblAnmEndHitFrame2.Click += new System.EventHandler(this.lblAnmEndHitFrame2_Click);
             // 
             // lblAnmHitBoxYPos2
             // 
             this.lblAnmHitBoxYPos2.AutoSize = true;
-            this.lblAnmHitBoxYPos2.Location = new System.Drawing.Point(145, 71);
+            this.lblAnmHitBoxYPos2.Location = new System.Drawing.Point(236, 45);
             this.lblAnmHitBoxYPos2.Name = "lblAnmHitBoxYPos2";
-            this.lblAnmHitBoxYPos2.Size = new System.Drawing.Size(72, 13);
+            this.lblAnmHitBoxYPos2.Size = new System.Drawing.Size(38, 13);
             this.lblAnmHitBoxYPos2.TabIndex = 27;
-            this.lblAnmHitBoxYPos2.Text = "HitBox Y Pos:";
+            this.lblAnmHitBoxYPos2.Text = "Y Pos:";
             // 
             // lblAnmHitBoxXPos2
             // 
             this.lblAnmHitBoxXPos2.AutoSize = true;
-            this.lblAnmHitBoxXPos2.Location = new System.Drawing.Point(8, 71);
+            this.lblAnmHitBoxXPos2.Location = new System.Drawing.Point(117, 45);
             this.lblAnmHitBoxXPos2.Name = "lblAnmHitBoxXPos2";
-            this.lblAnmHitBoxXPos2.Size = new System.Drawing.Size(72, 13);
+            this.lblAnmHitBoxXPos2.Size = new System.Drawing.Size(38, 13);
             this.lblAnmHitBoxXPos2.TabIndex = 25;
-            this.lblAnmHitBoxXPos2.Text = "HitBox X Pos:";
+            this.lblAnmHitBoxXPos2.Text = "X Pos:";
+            this.lblAnmHitBoxXPos2.Click += new System.EventHandler(this.lblAnmHitBoxXPos2_Click);
             // 
             // numAnmEndHitFrame2
             // 
-            this.numAnmEndHitFrame2.Location = new System.Drawing.Point(255, 16);
+            this.numAnmEndHitFrame2.Location = new System.Drawing.Point(467, 8);
             this.numAnmEndHitFrame2.Maximum = new decimal(new int[] {
             32767,
             0,
             0,
             0});
             this.numAnmEndHitFrame2.Minimum = new decimal(new int[] {
-            32768,
+            32766,
             0,
             0,
             -2147483648});
             this.numAnmEndHitFrame2.Name = "numAnmEndHitFrame2";
             this.numAnmEndHitFrame2.Size = new System.Drawing.Size(47, 20);
             this.numAnmEndHitFrame2.TabIndex = 20;
+            this.numAnmEndHitFrame2.ValueChanged += new System.EventHandler(this.numAnmEndHitFrame2_ValueChanged);
             // 
             // lblAnmHitBoxScale2
             // 
             this.lblAnmHitBoxScale2.AutoSize = true;
             this.lblAnmHitBoxScale2.Location = new System.Drawing.Point(8, 45);
             this.lblAnmHitBoxScale2.Name = "lblAnmHitBoxScale2";
-            this.lblAnmHitBoxScale2.Size = new System.Drawing.Size(71, 13);
+            this.lblAnmHitBoxScale2.Size = new System.Drawing.Size(37, 13);
             this.lblAnmHitBoxScale2.TabIndex = 21;
-            this.lblAnmHitBoxScale2.Text = "HitBox Scale:";
+            this.lblAnmHitBoxScale2.Text = "Scale:";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkHitBoxCharPos1);
+            this.groupBox2.Controls.Add(this.txtHitBone1);
+            this.groupBox2.Controls.Add(this.chkLastEndHitFrame1);
+            this.groupBox2.Controls.Add(this.chkNoneEndHitFrame1);
+            this.groupBox2.Controls.Add(this.chkNoneStartHitFrame1);
+            this.groupBox2.Controls.Add(this.chkAnmFlags1);
             this.groupBox2.Controls.Add(this.numHitBoxYPos1);
             this.groupBox2.Controls.Add(this.numHitBoxXPos1);
             this.groupBox2.Controls.Add(this.numHitBoxScale1);
-            this.groupBox2.Controls.Add(this.numAnmUnk7);
             this.groupBox2.Controls.Add(this.lblAnmStartHitFrame);
-            this.groupBox2.Controls.Add(this.lblAnmUnk7);
             this.groupBox2.Controls.Add(this.numAnmStartHitFrame1);
             this.groupBox2.Controls.Add(this.lblAnmEndHitFrame);
             this.groupBox2.Controls.Add(this.lblHitBoxYPos);
             this.groupBox2.Controls.Add(this.numAnmEndHitFrame1);
             this.groupBox2.Controls.Add(this.lblAnmHitBoxScale);
             this.groupBox2.Controls.Add(this.lblHitBoxXPos);
-            this.groupBox2.Controls.Add(this.cmbAnmObjectAtk1);
             this.groupBox2.Controls.Add(this.lblAnmObjectAtk);
             this.groupBox2.Location = new System.Drawing.Point(1, 151);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(631, 119);
+            this.groupBox2.Size = new System.Drawing.Size(631, 213);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "First Hit Group Paramters:";
+            this.groupBox2.Text = "First Hit Box:";
             // 
-            // numAnmUnk7
+            // chkHitBoxCharPos1
             // 
-            this.numAnmUnk7.Location = new System.Drawing.Point(342, 70);
-            this.numAnmUnk7.Maximum = new decimal(new int[] {
-            32767,
+            this.chkHitBoxCharPos1.AutoSize = true;
+            this.chkHitBoxCharPos1.Location = new System.Drawing.Point(559, 47);
+            this.chkHitBoxCharPos1.Name = "chkHitBoxCharPos1";
+            this.chkHitBoxCharPos1.Size = new System.Drawing.Size(69, 17);
+            this.chkHitBoxCharPos1.TabIndex = 45;
+            this.chkHitBoxCharPos1.Text = "Char Pos";
+            this.chkHitBoxCharPos1.UseVisualStyleBackColor = true;
+            // 
+            // txtHitBone1
+            // 
+            this.txtHitBone1.Location = new System.Drawing.Point(408, 44);
+            this.txtHitBone1.MaxLength = 30;
+            this.txtHitBone1.Name = "txtHitBone1";
+            this.txtHitBone1.Size = new System.Drawing.Size(145, 20);
+            this.txtHitBone1.TabIndex = 44;
+            // 
+            // chkLastEndHitFrame1
+            // 
+            this.chkLastEndHitFrame1.AutoSize = true;
+            this.chkLastEndHitFrame1.Location = new System.Drawing.Point(519, 12);
+            this.chkLastEndHitFrame1.Name = "chkLastEndHitFrame1";
+            this.chkLastEndHitFrame1.Size = new System.Drawing.Size(46, 17);
+            this.chkLastEndHitFrame1.TabIndex = 43;
+            this.chkLastEndHitFrame1.Text = "Last";
+            this.chkLastEndHitFrame1.UseVisualStyleBackColor = true;
+            // 
+            // chkNoneEndHitFrame1
+            // 
+            this.chkNoneEndHitFrame1.AutoSize = true;
+            this.chkNoneEndHitFrame1.Location = new System.Drawing.Point(571, 13);
+            this.chkNoneEndHitFrame1.Name = "chkNoneEndHitFrame1";
+            this.chkNoneEndHitFrame1.Size = new System.Drawing.Size(52, 17);
+            this.chkNoneEndHitFrame1.TabIndex = 42;
+            this.chkNoneEndHitFrame1.Text = "None";
+            this.chkNoneEndHitFrame1.UseVisualStyleBackColor = true;
+            // 
+            // chkNoneStartHitFrame1
+            // 
+            this.chkNoneStartHitFrame1.AutoSize = true;
+            this.chkNoneStartHitFrame1.Location = new System.Drawing.Point(157, 18);
+            this.chkNoneStartHitFrame1.Name = "chkNoneStartHitFrame1";
+            this.chkNoneStartHitFrame1.Size = new System.Drawing.Size(52, 17);
+            this.chkNoneStartHitFrame1.TabIndex = 41;
+            this.chkNoneStartHitFrame1.Text = "None";
+            this.chkNoneStartHitFrame1.UseVisualStyleBackColor = true;
+            // 
+            // chkAnmFlags1
+            // 
+            this.chkAnmFlags1.FormattingEnabled = true;
+            this.chkAnmFlags1.Items.AddRange(new object[] {
+            "Flag 1",
+            "Cancelable with Shuriken",
+            "Flag 3",
+            "Flag 4",
+            "Allow Combo Continuation",
+            "Flag 6",
+            "Flag 7",
+            "Flag 8"});
+            this.chkAnmFlags1.Location = new System.Drawing.Point(10, 71);
+            this.chkAnmFlags1.Name = "chkAnmFlags1";
+            this.chkAnmFlags1.Size = new System.Drawing.Size(613, 124);
+            this.chkAnmFlags1.TabIndex = 40;
+            // 
+            // numHitBoxYPos1
+            // 
+            this.numHitBoxYPos1.DecimalPlaces = 2;
+            this.numHitBoxYPos1.Increment = new decimal(new int[] {
+            10,
             0,
             0,
             0});
-            this.numAnmUnk7.Minimum = new decimal(new int[] {
-            32768,
+            this.numHitBoxYPos1.Location = new System.Drawing.Point(279, 44);
+            this.numHitBoxYPos1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numHitBoxYPos1.Minimum = new decimal(new int[] {
+            1000,
             0,
             0,
             -2147483648});
-            this.numAnmUnk7.Name = "numAnmUnk7";
-            this.numAnmUnk7.Size = new System.Drawing.Size(44, 20);
-            this.numAnmUnk7.TabIndex = 35;
+            this.numHitBoxYPos1.Name = "numHitBoxYPos1";
+            this.numHitBoxYPos1.Size = new System.Drawing.Size(54, 20);
+            this.numHitBoxYPos1.TabIndex = 39;
+            // 
+            // numHitBoxXPos1
+            // 
+            this.numHitBoxXPos1.DecimalPlaces = 2;
+            this.numHitBoxXPos1.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numHitBoxXPos1.Location = new System.Drawing.Point(160, 45);
+            this.numHitBoxXPos1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numHitBoxXPos1.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numHitBoxXPos1.Name = "numHitBoxXPos1";
+            this.numHitBoxXPos1.Size = new System.Drawing.Size(54, 20);
+            this.numHitBoxXPos1.TabIndex = 38;
+            // 
+            // numHitBoxScale1
+            // 
+            this.numHitBoxScale1.DecimalPlaces = 2;
+            this.numHitBoxScale1.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numHitBoxScale1.Location = new System.Drawing.Point(51, 46);
+            this.numHitBoxScale1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numHitBoxScale1.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numHitBoxScale1.Name = "numHitBoxScale1";
+            this.numHitBoxScale1.Size = new System.Drawing.Size(54, 20);
+            this.numHitBoxScale1.TabIndex = 37;
             // 
             // lblAnmStartHitFrame
             // 
@@ -524,15 +761,6 @@
             this.lblAnmStartHitFrame.TabIndex = 4;
             this.lblAnmStartHitFrame.Text = "Start of Hit Frame:";
             // 
-            // lblAnmUnk7
-            // 
-            this.lblAnmUnk7.AutoSize = true;
-            this.lblAnmUnk7.Location = new System.Drawing.Point(282, 72);
-            this.lblAnmUnk7.Name = "lblAnmUnk7";
-            this.lblAnmUnk7.Size = new System.Drawing.Size(54, 13);
-            this.lblAnmUnk7.TabIndex = 34;
-            this.lblAnmUnk7.Text = "AnmUnk7";
-            // 
             // numAnmStartHitFrame1
             // 
             this.numAnmStartHitFrame1.Location = new System.Drawing.Point(104, 17);
@@ -542,7 +770,7 @@
             0,
             0});
             this.numAnmStartHitFrame1.Minimum = new decimal(new int[] {
-            32768,
+            32766,
             0,
             0,
             -2147483648});
@@ -554,7 +782,7 @@
             // lblAnmEndHitFrame
             // 
             this.lblAnmEndHitFrame.AutoSize = true;
-            this.lblAnmEndHitFrame.Location = new System.Drawing.Point(157, 20);
+            this.lblAnmEndHitFrame.Location = new System.Drawing.Point(371, 14);
             this.lblAnmEndHitFrame.Name = "lblAnmEndHitFrame";
             this.lblAnmEndHitFrame.Size = new System.Drawing.Size(89, 13);
             this.lblAnmEndHitFrame.TabIndex = 6;
@@ -563,22 +791,22 @@
             // lblHitBoxYPos
             // 
             this.lblHitBoxYPos.AutoSize = true;
-            this.lblHitBoxYPos.Location = new System.Drawing.Point(145, 72);
+            this.lblHitBoxYPos.Location = new System.Drawing.Point(235, 48);
             this.lblHitBoxYPos.Name = "lblHitBoxYPos";
-            this.lblHitBoxYPos.Size = new System.Drawing.Size(72, 13);
+            this.lblHitBoxYPos.Size = new System.Drawing.Size(38, 13);
             this.lblHitBoxYPos.TabIndex = 15;
-            this.lblHitBoxYPos.Text = "HitBox Y Pos:";
+            this.lblHitBoxYPos.Text = "Y Pos:";
             // 
             // numAnmEndHitFrame1
             // 
-            this.numAnmEndHitFrame1.Location = new System.Drawing.Point(255, 17);
+            this.numAnmEndHitFrame1.Location = new System.Drawing.Point(466, 11);
             this.numAnmEndHitFrame1.Maximum = new decimal(new int[] {
             32767,
             0,
             0,
             0});
             this.numAnmEndHitFrame1.Minimum = new decimal(new int[] {
-            32768,
+            32766,
             0,
             0,
             -2147483648});
@@ -589,55 +817,50 @@
             // lblAnmHitBoxScale
             // 
             this.lblAnmHitBoxScale.AutoSize = true;
-            this.lblAnmHitBoxScale.Location = new System.Drawing.Point(8, 46);
+            this.lblAnmHitBoxScale.Location = new System.Drawing.Point(9, 49);
             this.lblAnmHitBoxScale.Name = "lblAnmHitBoxScale";
-            this.lblAnmHitBoxScale.Size = new System.Drawing.Size(71, 13);
+            this.lblAnmHitBoxScale.Size = new System.Drawing.Size(37, 13);
             this.lblAnmHitBoxScale.TabIndex = 8;
-            this.lblAnmHitBoxScale.Text = "HitBox Scale:";
+            this.lblAnmHitBoxScale.Text = "Scale:";
             // 
             // lblHitBoxXPos
             // 
             this.lblHitBoxXPos.AutoSize = true;
-            this.lblHitBoxXPos.Location = new System.Drawing.Point(8, 72);
+            this.lblHitBoxXPos.Location = new System.Drawing.Point(116, 50);
             this.lblHitBoxXPos.Name = "lblHitBoxXPos";
-            this.lblHitBoxXPos.Size = new System.Drawing.Size(72, 13);
+            this.lblHitBoxXPos.Size = new System.Drawing.Size(38, 13);
             this.lblHitBoxXPos.TabIndex = 13;
-            this.lblHitBoxXPos.Text = "HitBox X Pos:";
-            // 
-            // cmbAnmObjectAtk1
-            // 
-            this.cmbAnmObjectAtk1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAnmObjectAtk1.FormattingEnabled = true;
-            this.cmbAnmObjectAtk1.Location = new System.Drawing.Point(211, 43);
-            this.cmbAnmObjectAtk1.Name = "cmbAnmObjectAtk1";
-            this.cmbAnmObjectAtk1.Size = new System.Drawing.Size(151, 21);
-            this.cmbAnmObjectAtk1.TabIndex = 12;
+            this.lblHitBoxXPos.Text = "X Pos:";
             // 
             // lblAnmObjectAtk
             // 
             this.lblAnmObjectAtk.AutoSize = true;
-            this.lblAnmObjectAtk.Location = new System.Drawing.Point(145, 47);
+            this.lblAnmObjectAtk.Location = new System.Drawing.Point(340, 48);
             this.lblAnmObjectAtk.Name = "lblAnmObjectAtk";
-            this.lblAnmObjectAtk.Size = new System.Drawing.Size(60, 13);
+            this.lblAnmObjectAtk.Size = new System.Drawing.Size(62, 13);
             this.lblAnmObjectAtk.TabIndex = 10;
-            this.lblAnmObjectAtk.Text = "Object Atk:";
+            this.lblAnmObjectAtk.Text = "Base Bone:";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkNoneCharStartMoveFrame);
+            this.groupBox1.Controls.Add(this.numCharYSlide);
+            this.groupBox1.Controls.Add(this.numAnmUnk3);
+            this.groupBox1.Controls.Add(this.numCharXSlide);
+            this.groupBox1.Controls.Add(this.lblCharYSlide);
+            this.groupBox1.Controls.Add(this.lblDuration);
+            this.groupBox1.Controls.Add(this.numDuration);
+            this.groupBox1.Controls.Add(this.cmbDuration);
             this.groupBox1.Controls.Add(this.numCharYDistance);
+            this.groupBox1.Controls.Add(this.lblCharXSlide);
             this.groupBox1.Controls.Add(this.numCharXDistance);
             this.groupBox1.Controls.Add(this.numAnmSpeed);
-            this.groupBox1.Controls.Add(this.lblAnmUnk6);
-            this.groupBox1.Controls.Add(this.txtAnmUnk6);
-            this.groupBox1.Controls.Add(this.lblAnmUnk5);
-            this.groupBox1.Controls.Add(this.txtAnmUnk5);
-            this.groupBox1.Controls.Add(this.numAnmUnk4);
-            this.groupBox1.Controls.Add(this.lblAnmUnk4);
-            this.groupBox1.Controls.Add(this.numAnmUnk3);
+            this.groupBox1.Controls.Add(this.numCharStartMoveFrame);
             this.groupBox1.Controls.Add(this.lblAnmUnk3);
+            this.groupBox1.Controls.Add(this.lblCharStartMoveFrame);
             this.groupBox1.Controls.Add(this.numAnmUnk2);
             this.groupBox1.Controls.Add(this.lblAnmUnk2);
-            this.groupBox1.Controls.Add(this.numAnmUnk1);
+            this.groupBox1.Controls.Add(this.numStartFrame);
             this.groupBox1.Controls.Add(this.lblAnmUnk1);
             this.groupBox1.Controls.Add(this.lblPlayAnmID);
             this.groupBox1.Controls.Add(this.cmbPlayAnmID);
@@ -651,6 +874,149 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Parameters:";
             // 
+            // chkNoneCharStartMoveFrame
+            // 
+            this.chkNoneCharStartMoveFrame.AutoSize = true;
+            this.chkNoneCharStartMoveFrame.Location = new System.Drawing.Point(182, 71);
+            this.chkNoneCharStartMoveFrame.Name = "chkNoneCharStartMoveFrame";
+            this.chkNoneCharStartMoveFrame.Size = new System.Drawing.Size(52, 17);
+            this.chkNoneCharStartMoveFrame.TabIndex = 44;
+            this.chkNoneCharStartMoveFrame.Text = "None";
+            this.chkNoneCharStartMoveFrame.UseVisualStyleBackColor = true;
+            // 
+            // numCharYSlide
+            // 
+            this.numCharYSlide.DecimalPlaces = 2;
+            this.numCharYSlide.Location = new System.Drawing.Point(295, 99);
+            this.numCharYSlide.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharYSlide.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numCharYSlide.Name = "numCharYSlide";
+            this.numCharYSlide.Size = new System.Drawing.Size(72, 20);
+            this.numCharYSlide.TabIndex = 44;
+            // 
+            // numAnmUnk3
+            // 
+            this.numAnmUnk3.Location = new System.Drawing.Point(578, 46);
+            this.numAnmUnk3.Name = "numAnmUnk3";
+            this.numAnmUnk3.Size = new System.Drawing.Size(45, 20);
+            this.numAnmUnk3.TabIndex = 40;
+            // 
+            // numCharXSlide
+            // 
+            this.numCharXSlide.DecimalPlaces = 2;
+            this.numCharXSlide.Location = new System.Drawing.Point(80, 99);
+            this.numCharXSlide.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharXSlide.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numCharXSlide.Name = "numCharXSlide";
+            this.numCharXSlide.Size = new System.Drawing.Size(72, 20);
+            this.numCharXSlide.TabIndex = 43;
+            // 
+            // lblCharYSlide
+            // 
+            this.lblCharYSlide.AutoSize = true;
+            this.lblCharYSlide.Location = new System.Drawing.Point(221, 101);
+            this.lblCharYSlide.Name = "lblCharYSlide";
+            this.lblCharYSlide.Size = new System.Drawing.Size(68, 13);
+            this.lblCharYSlide.TabIndex = 42;
+            this.lblCharYSlide.Text = "Char Y Slide:";
+            // 
+            // lblDuration
+            // 
+            this.lblDuration.AutoSize = true;
+            this.lblDuration.Location = new System.Drawing.Point(376, 20);
+            this.lblDuration.Name = "lblDuration";
+            this.lblDuration.Size = new System.Drawing.Size(86, 13);
+            this.lblDuration.TabIndex = 39;
+            this.lblDuration.Text = "Duration Length:";
+            // 
+            // numDuration
+            // 
+            this.numDuration.Location = new System.Drawing.Point(571, 19);
+            this.numDuration.Name = "numDuration";
+            this.numDuration.Size = new System.Drawing.Size(52, 20);
+            this.numDuration.TabIndex = 38;
+            // 
+            // cmbDuration
+            // 
+            this.cmbDuration.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDuration.FormattingEnabled = true;
+            this.cmbDuration.Items.AddRange(new object[] {
+            "Customized",
+            "Loop (-0x15)",
+            "All (-0x14)",
+            "Unk (-0x13)",
+            "Unk (-0x12)",
+            "Unk (-0x11)",
+            "All (-0x10)"});
+            this.cmbDuration.Location = new System.Drawing.Point(468, 18);
+            this.cmbDuration.Name = "cmbDuration";
+            this.cmbDuration.Size = new System.Drawing.Size(97, 21);
+            this.cmbDuration.TabIndex = 37;
+            this.cmbDuration.SelectedIndexChanged += new System.EventHandler(this.cmbDuration_SelectedIndexChanged);
+            // 
+            // numCharYDistance
+            // 
+            this.numCharYDistance.DecimalPlaces = 2;
+            this.numCharYDistance.Location = new System.Drawing.Point(551, 72);
+            this.numCharYDistance.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharYDistance.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numCharYDistance.Name = "numCharYDistance";
+            this.numCharYDistance.Size = new System.Drawing.Size(72, 20);
+            this.numCharYDistance.TabIndex = 36;
+            this.numCharYDistance.ValueChanged += new System.EventHandler(this.numCharYDistance_ValueChanged);
+            // 
+            // lblCharXSlide
+            // 
+            this.lblCharXSlide.AutoSize = true;
+            this.lblCharXSlide.Location = new System.Drawing.Point(6, 101);
+            this.lblCharXSlide.Name = "lblCharXSlide";
+            this.lblCharXSlide.Size = new System.Drawing.Size(68, 13);
+            this.lblCharXSlide.TabIndex = 41;
+            this.lblCharXSlide.Text = "Char X Slide:";
+            // 
+            // numCharXDistance
+            // 
+            this.numCharXDistance.DecimalPlaces = 2;
+            this.numCharXDistance.Location = new System.Drawing.Point(343, 69);
+            this.numCharXDistance.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharXDistance.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numCharXDistance.Name = "numCharXDistance";
+            this.numCharXDistance.Size = new System.Drawing.Size(72, 20);
+            this.numCharXDistance.TabIndex = 35;
+            this.numCharXDistance.ValueChanged += new System.EventHandler(this.numCharXDistance_ValueChanged);
+            // 
             // numAnmSpeed
             // 
             this.numAnmSpeed.DecimalPlaces = 2;
@@ -659,7 +1025,7 @@
             0,
             0,
             131072});
-            this.numAnmSpeed.Location = new System.Drawing.Point(267, 17);
+            this.numAnmSpeed.Location = new System.Drawing.Point(297, 18);
             this.numAnmSpeed.Maximum = new decimal(new int[] {
             2559961,
             0,
@@ -669,88 +1035,44 @@
             this.numAnmSpeed.Size = new System.Drawing.Size(64, 20);
             this.numAnmSpeed.TabIndex = 34;
             // 
-            // lblAnmUnk6
+            // numCharStartMoveFrame
             // 
-            this.lblAnmUnk6.AutoSize = true;
-            this.lblAnmUnk6.Location = new System.Drawing.Point(237, 98);
-            this.lblAnmUnk6.Name = "lblAnmUnk6";
-            this.lblAnmUnk6.Size = new System.Drawing.Size(54, 13);
-            this.lblAnmUnk6.TabIndex = 32;
-            this.lblAnmUnk6.Text = "AnmUnk6";
-            // 
-            // txtAnmUnk6
-            // 
-            this.txtAnmUnk6.Location = new System.Drawing.Point(297, 95);
-            this.txtAnmUnk6.Name = "txtAnmUnk6";
-            this.txtAnmUnk6.Size = new System.Drawing.Size(54, 20);
-            this.txtAnmUnk6.TabIndex = 33;
-            // 
-            // lblAnmUnk5
-            // 
-            this.lblAnmUnk5.AutoSize = true;
-            this.lblAnmUnk5.Location = new System.Drawing.Point(117, 98);
-            this.lblAnmUnk5.Name = "lblAnmUnk5";
-            this.lblAnmUnk5.Size = new System.Drawing.Size(54, 13);
-            this.lblAnmUnk5.TabIndex = 30;
-            this.lblAnmUnk5.Text = "AnmUnk5";
-            // 
-            // txtAnmUnk5
-            // 
-            this.txtAnmUnk5.Location = new System.Drawing.Point(177, 95);
-            this.txtAnmUnk5.Name = "txtAnmUnk5";
-            this.txtAnmUnk5.Size = new System.Drawing.Size(54, 20);
-            this.txtAnmUnk5.TabIndex = 31;
-            // 
-            // numAnmUnk4
-            // 
-            this.numAnmUnk4.Location = new System.Drawing.Point(67, 96);
-            this.numAnmUnk4.Maximum = new decimal(new int[] {
-            32767,
+            this.numCharStartMoveFrame.Location = new System.Drawing.Point(132, 70);
+            this.numCharStartMoveFrame.Maximum = new decimal(new int[] {
+            32766,
             0,
             0,
             0});
-            this.numAnmUnk4.Minimum = new decimal(new int[] {
+            this.numCharStartMoveFrame.Minimum = new decimal(new int[] {
             32768,
             0,
             0,
             -2147483648});
-            this.numAnmUnk4.Name = "numAnmUnk4";
-            this.numAnmUnk4.Size = new System.Drawing.Size(44, 20);
-            this.numAnmUnk4.TabIndex = 29;
-            // 
-            // lblAnmUnk4
-            // 
-            this.lblAnmUnk4.AutoSize = true;
-            this.lblAnmUnk4.Location = new System.Drawing.Point(7, 98);
-            this.lblAnmUnk4.Name = "lblAnmUnk4";
-            this.lblAnmUnk4.Size = new System.Drawing.Size(54, 13);
-            this.lblAnmUnk4.TabIndex = 28;
-            this.lblAnmUnk4.Text = "AnmUnk4";
-            // 
-            // numAnmUnk3
-            // 
-            this.numAnmUnk3.Location = new System.Drawing.Point(287, 70);
-            this.numAnmUnk3.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numAnmUnk3.Name = "numAnmUnk3";
-            this.numAnmUnk3.Size = new System.Drawing.Size(44, 20);
-            this.numAnmUnk3.TabIndex = 27;
+            this.numCharStartMoveFrame.Name = "numCharStartMoveFrame";
+            this.numCharStartMoveFrame.Size = new System.Drawing.Size(44, 20);
+            this.numCharStartMoveFrame.TabIndex = 29;
             // 
             // lblAnmUnk3
             // 
             this.lblAnmUnk3.AutoSize = true;
-            this.lblAnmUnk3.Location = new System.Drawing.Point(227, 72);
+            this.lblAnmUnk3.Location = new System.Drawing.Point(489, 48);
             this.lblAnmUnk3.Name = "lblAnmUnk3";
-            this.lblAnmUnk3.Size = new System.Drawing.Size(54, 13);
+            this.lblAnmUnk3.Size = new System.Drawing.Size(83, 13);
             this.lblAnmUnk3.TabIndex = 26;
-            this.lblAnmUnk3.Text = "AnmUnk3";
+            this.lblAnmUnk3.Text = "Anm Unk Flag 2";
+            // 
+            // lblCharStartMoveFrame
+            // 
+            this.lblCharStartMoveFrame.AutoSize = true;
+            this.lblCharStartMoveFrame.Location = new System.Drawing.Point(7, 72);
+            this.lblCharStartMoveFrame.Name = "lblCharStartMoveFrame";
+            this.lblCharStartMoveFrame.Size = new System.Drawing.Size(119, 13);
+            this.lblCharStartMoveFrame.TabIndex = 28;
+            this.lblCharStartMoveFrame.Text = "Char Start Move Frame:";
             // 
             // numAnmUnk2
             // 
-            this.numAnmUnk2.Location = new System.Drawing.Point(177, 70);
+            this.numAnmUnk2.Location = new System.Drawing.Point(325, 44);
             this.numAnmUnk2.Maximum = new decimal(new int[] {
             255,
             0,
@@ -763,37 +1085,37 @@
             // lblAnmUnk2
             // 
             this.lblAnmUnk2.AutoSize = true;
-            this.lblAnmUnk2.Location = new System.Drawing.Point(117, 72);
+            this.lblAnmUnk2.Location = new System.Drawing.Point(239, 46);
             this.lblAnmUnk2.Name = "lblAnmUnk2";
-            this.lblAnmUnk2.Size = new System.Drawing.Size(54, 13);
+            this.lblAnmUnk2.Size = new System.Drawing.Size(80, 13);
             this.lblAnmUnk2.TabIndex = 24;
-            this.lblAnmUnk2.Text = "AnmUnk2";
+            this.lblAnmUnk2.Text = "Anm Unk Flag1";
             // 
-            // numAnmUnk1
+            // numStartFrame
             // 
-            this.numAnmUnk1.Location = new System.Drawing.Point(67, 70);
-            this.numAnmUnk1.Maximum = new decimal(new int[] {
+            this.numStartFrame.Location = new System.Drawing.Point(73, 44);
+            this.numStartFrame.Maximum = new decimal(new int[] {
             32767,
             0,
             0,
             0});
-            this.numAnmUnk1.Minimum = new decimal(new int[] {
+            this.numStartFrame.Minimum = new decimal(new int[] {
             32768,
             0,
             0,
             -2147483648});
-            this.numAnmUnk1.Name = "numAnmUnk1";
-            this.numAnmUnk1.Size = new System.Drawing.Size(44, 20);
-            this.numAnmUnk1.TabIndex = 23;
+            this.numStartFrame.Name = "numStartFrame";
+            this.numStartFrame.Size = new System.Drawing.Size(44, 20);
+            this.numStartFrame.TabIndex = 23;
             // 
             // lblAnmUnk1
             // 
             this.lblAnmUnk1.AutoSize = true;
-            this.lblAnmUnk1.Location = new System.Drawing.Point(7, 72);
+            this.lblAnmUnk1.Location = new System.Drawing.Point(6, 46);
             this.lblAnmUnk1.Name = "lblAnmUnk1";
-            this.lblAnmUnk1.Size = new System.Drawing.Size(54, 13);
+            this.lblAnmUnk1.Size = new System.Drawing.Size(61, 13);
             this.lblAnmUnk1.TabIndex = 22;
-            this.lblAnmUnk1.Text = "AnmUnk1";
+            this.lblAnmUnk1.Text = "Start Frame";
             // 
             // lblPlayAnmID
             // 
@@ -816,7 +1138,7 @@
             // lblAnmSpeed
             // 
             this.lblAnmSpeed.AutoSize = true;
-            this.lblAnmSpeed.Location = new System.Drawing.Point(220, 20);
+            this.lblAnmSpeed.Location = new System.Drawing.Point(250, 21);
             this.lblAnmSpeed.Name = "lblAnmSpeed";
             this.lblAnmSpeed.Size = new System.Drawing.Size(41, 13);
             this.lblAnmSpeed.TabIndex = 2;
@@ -825,20 +1147,22 @@
             // lblCharYDistance
             // 
             this.lblCharYDistance.AutoSize = true;
-            this.lblCharYDistance.Location = new System.Drawing.Point(225, 47);
+            this.lblCharYDistance.Location = new System.Drawing.Point(458, 74);
             this.lblCharYDistance.Name = "lblCharYDistance";
             this.lblCharYDistance.Size = new System.Drawing.Size(87, 13);
             this.lblCharYDistance.TabIndex = 19;
             this.lblCharYDistance.Text = "Char Y Distance:";
+            this.lblCharYDistance.Click += new System.EventHandler(this.lblCharYDistance_Click);
             // 
             // lblCharXDistance
             // 
             this.lblCharXDistance.AutoSize = true;
-            this.lblCharXDistance.Location = new System.Drawing.Point(6, 47);
+            this.lblCharXDistance.Location = new System.Drawing.Point(250, 72);
             this.lblCharXDistance.Name = "lblCharXDistance";
             this.lblCharXDistance.Size = new System.Drawing.Size(87, 13);
             this.lblCharXDistance.TabIndex = 17;
             this.lblCharXDistance.Text = "Char X Distance:";
+            this.lblCharXDistance.Click += new System.EventHandler(this.lblCharXDistance_Click);
             // 
             // lblSelectedAtk2
             // 
@@ -1078,7 +1402,7 @@
             // 
             this.numSoundDelay.Location = new System.Drawing.Point(85, 220);
             this.numSoundDelay.Maximum = new decimal(new int[] {
-            32767,
+            65535,
             0,
             0,
             0});
@@ -1650,160 +1974,6 @@
             this.pnlAtkPrm.Size = new System.Drawing.Size(631, 574);
             this.pnlAtkPrm.TabIndex = 45;
             // 
-            // numCharXDistance
-            // 
-            this.numCharXDistance.DecimalPlaces = 2;
-            this.numCharXDistance.Location = new System.Drawing.Point(99, 44);
-            this.numCharXDistance.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharXDistance.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numCharXDistance.Name = "numCharXDistance";
-            this.numCharXDistance.Size = new System.Drawing.Size(72, 20);
-            this.numCharXDistance.TabIndex = 35;
-            // 
-            // numCharYDistance
-            // 
-            this.numCharYDistance.DecimalPlaces = 2;
-            this.numCharYDistance.Location = new System.Drawing.Point(318, 45);
-            this.numCharYDistance.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharYDistance.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numCharYDistance.Name = "numCharYDistance";
-            this.numCharYDistance.Size = new System.Drawing.Size(72, 20);
-            this.numCharYDistance.TabIndex = 36;
-            // 
-            // numHitBoxScale1
-            // 
-            this.numHitBoxScale1.DecimalPlaces = 2;
-            this.numHitBoxScale1.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numHitBoxScale1.Location = new System.Drawing.Point(85, 45);
-            this.numHitBoxScale1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numHitBoxScale1.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numHitBoxScale1.Name = "numHitBoxScale1";
-            this.numHitBoxScale1.Size = new System.Drawing.Size(54, 20);
-            this.numHitBoxScale1.TabIndex = 37;
-            // 
-            // numAnmHitBoxScale2
-            // 
-            this.numAnmHitBoxScale2.DecimalPlaces = 2;
-            this.numAnmHitBoxScale2.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numAnmHitBoxScale2.Location = new System.Drawing.Point(85, 43);
-            this.numAnmHitBoxScale2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numAnmHitBoxScale2.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numAnmHitBoxScale2.Name = "numAnmHitBoxScale2";
-            this.numAnmHitBoxScale2.Size = new System.Drawing.Size(54, 20);
-            this.numAnmHitBoxScale2.TabIndex = 38;
-            // 
-            // numHitBoxXPos1
-            // 
-            this.numHitBoxXPos1.DecimalPlaces = 2;
-            this.numHitBoxXPos1.Location = new System.Drawing.Point(85, 71);
-            this.numHitBoxXPos1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numHitBoxXPos1.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numHitBoxXPos1.Name = "numHitBoxXPos1";
-            this.numHitBoxXPos1.Size = new System.Drawing.Size(54, 20);
-            this.numHitBoxXPos1.TabIndex = 38;
-            // 
-            // numHitBoxYPos1
-            // 
-            this.numHitBoxYPos1.DecimalPlaces = 2;
-            this.numHitBoxYPos1.Location = new System.Drawing.Point(223, 70);
-            this.numHitBoxYPos1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numHitBoxYPos1.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numHitBoxYPos1.Name = "numHitBoxYPos1";
-            this.numHitBoxYPos1.Size = new System.Drawing.Size(54, 20);
-            this.numHitBoxYPos1.TabIndex = 39;
-            // 
-            // numHitBoxXPos2
-            // 
-            this.numHitBoxXPos2.DecimalPlaces = 2;
-            this.numHitBoxXPos2.Location = new System.Drawing.Point(86, 68);
-            this.numHitBoxXPos2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numHitBoxXPos2.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numHitBoxXPos2.Name = "numHitBoxXPos2";
-            this.numHitBoxXPos2.Size = new System.Drawing.Size(54, 20);
-            this.numHitBoxXPos2.TabIndex = 40;
-            // 
-            // numHitBoxYPos2
-            // 
-            this.numHitBoxYPos2.DecimalPlaces = 2;
-            this.numHitBoxYPos2.Location = new System.Drawing.Point(223, 69);
-            this.numHitBoxYPos2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numHitBoxYPos2.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numHitBoxYPos2.Name = "numHitBoxYPos2";
-            this.numHitBoxYPos2.Size = new System.Drawing.Size(54, 20);
-            this.numHitBoxYPos2.TabIndex = 40;
-            // 
             // MovesetParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1819,8 +1989,8 @@
             this.Controls.Add(this.lblCharName2);
             this.Controls.Add(this.lblCharName);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.pnlAnmPrm);
             this.Controls.Add(this.pnlAtkPrm);
+            this.Controls.Add(this.pnlAnmPrm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1830,21 +2000,30 @@
             this.pnlAnmPrm.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStartHitFrame2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmHitBoxScale2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmStartHitFrame2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmEndHitFrame2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxScale1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmStartHitFrame1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmEndHitFrame1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharYSlide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharXSlide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDuration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharYDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharXDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAnmSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharStartMoveFrame)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmUnk1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartFrame)).EndInit();
             this.panel2.ResumeLayout(false);
             this.grpAttackParameters.ResumeLayout(false);
             this.grpAttackParameters.PerformLayout();
@@ -1868,14 +2047,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numKnockback)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numKawarimi)).EndInit();
             this.pnlAtkPrm.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numCharXDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharYDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxScale1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAnmHitBoxScale2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxXPos2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitBoxYPos2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1907,7 +2078,6 @@
         public System.Windows.Forms.Label lblAnmEndHitFrame;
         public System.Windows.Forms.Label lblAnmHitBoxScale;
         public System.Windows.Forms.Label lblAnmObjectAtk;
-        public System.Windows.Forms.ComboBox cmbAnmObjectAtk1;
         public System.Windows.Forms.Label lblHitBoxXPos;
         public System.Windows.Forms.Label lblHitBoxYPos;
         public System.Windows.Forms.Label lblCharYDistance;
@@ -1916,30 +2086,20 @@
         public System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.GroupBox groupBox3;
         public System.Windows.Forms.Label lblAnmStartHitFrame2;
-        public System.Windows.Forms.NumericUpDown numStartHitFrame2;
+        public System.Windows.Forms.NumericUpDown numAnmStartHitFrame2;
         public System.Windows.Forms.Label lblAnmObjectAtk2;
-        public System.Windows.Forms.ComboBox cmbAnmObjectAtk2;
         public System.Windows.Forms.Label lblAnmEndHitFrame2;
         public System.Windows.Forms.Label lblAnmHitBoxYPos2;
         public System.Windows.Forms.Label lblAnmHitBoxXPos2;
         public System.Windows.Forms.NumericUpDown numAnmEndHitFrame2;
         public System.Windows.Forms.Label lblAnmHitBoxScale2;
-        public System.Windows.Forms.NumericUpDown numAnmUnk1;
+        public System.Windows.Forms.NumericUpDown numStartFrame;
         public System.Windows.Forms.Label lblAnmUnk1;
         public System.Windows.Forms.NumericUpDown numAnmUnk2;
         public System.Windows.Forms.Label lblAnmUnk2;
-        public System.Windows.Forms.NumericUpDown numAnmUnk3;
         public System.Windows.Forms.Label lblAnmUnk3;
-        public System.Windows.Forms.NumericUpDown numAnmUnk4;
-        public System.Windows.Forms.Label lblAnmUnk4;
-        public System.Windows.Forms.Label lblAnmUnk6;
-        public System.Windows.Forms.TextBox txtAnmUnk6;
-        public System.Windows.Forms.Label lblAnmUnk5;
-        public System.Windows.Forms.TextBox txtAnmUnk5;
-        public System.Windows.Forms.NumericUpDown numAnmUnk7;
-        public System.Windows.Forms.Label lblAnmUnk7;
-        public System.Windows.Forms.NumericUpDown numAnmUnk8;
-        public System.Windows.Forms.Label lblAnmUnk8;
+        public System.Windows.Forms.NumericUpDown numCharStartMoveFrame;
+        public System.Windows.Forms.Label lblCharStartMoveFrame;
         public System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.NumericUpDown numAnmSpeed;
         private System.Windows.Forms.Panel panel2;
@@ -2006,5 +2166,26 @@
         public System.Windows.Forms.NumericUpDown numHitBoxXPos1;
         public System.Windows.Forms.NumericUpDown numHitBoxXPos2;
         public System.Windows.Forms.NumericUpDown numHitBoxYPos2;
+        public System.Windows.Forms.Label lblDuration;
+        public System.Windows.Forms.NumericUpDown numDuration;
+        public System.Windows.Forms.ComboBox cmbDuration;
+        public System.Windows.Forms.NumericUpDown numAnmUnk3;
+        public System.Windows.Forms.NumericUpDown numCharYSlide;
+        public System.Windows.Forms.NumericUpDown numCharXSlide;
+        public System.Windows.Forms.Label lblCharYSlide;
+        public System.Windows.Forms.Label lblCharXSlide;
+        public System.Windows.Forms.CheckedListBox chkAnmFlags1;
+        public System.Windows.Forms.CheckedListBox chkAnmFlags2;
+        public System.Windows.Forms.CheckBox chkNoneEndHitFrame1;
+        public System.Windows.Forms.CheckBox chkNoneStartHitFrame1;
+        public System.Windows.Forms.CheckBox chkLastEndHitFrame1;
+        public System.Windows.Forms.CheckBox chkLastEndHitFrame2;
+        public System.Windows.Forms.CheckBox chkNoneEndHitFrame2;
+        public System.Windows.Forms.CheckBox chkNoneStartHitFrame2;
+        public System.Windows.Forms.CheckBox chkNoneCharStartMoveFrame;
+        public System.Windows.Forms.TextBox txtHitBone2;
+        public System.Windows.Forms.TextBox txtHitBone1;
+        public System.Windows.Forms.CheckBox chkHitBoxCharPos2;
+        public System.Windows.Forms.CheckBox chkHitBoxCharPos1;
     }
 }

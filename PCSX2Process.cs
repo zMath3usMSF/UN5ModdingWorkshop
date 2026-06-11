@@ -95,34 +95,26 @@ namespace UN5ModdingWorkshop
 
                 GAME.charCount = Util.ReadProcessMemoryInt16(0x1EDA20);
                 GAME.charSelCount = Util.ReadProcessMemoryInt16(0x3CDD80);
-                if (Util.ReadStringWithOffset(0x417CD0, false) == "2nrtbod1.ccs")
+                BTL.Clear();
+
+                int charStringTblOffset = 0x5BA570;
+                if (GAME.charCount != 94) //Verifica se é o UN6 usando quantidade de personagens presentes originalmente no jogo como base.
                 {
-                    BTL.Clear();
-
-                    int charStringTblOffset = 0x5BA570;
-                    if (GAME.charCount != 94) //Verifica se é o UN6 usando quantidade de personagens presentes originalmente no jogo como base.
-                    {
-                        GAME.isUN6 = true;
-                    }
-                    int charProgTblOffset = 0x5AC8C0;
-
-                    BTL.ReadCharProgDataTbl(processHandle, charProgTblOffset);
-
-                    BTL.ReadCharNameTbl(processHandle, charStringTblOffset);
-
-                    Config.Load(Main.instance);
-
-                    Main.instance.picBackground.Visible = false;
-                    Main.instance.tabControl1.Visible = true;
-                    Main.instance.btnEditGeneralParameters.Visible = true;
-                    Main.instance.btnEditMovesetParameters.Visible = true;
-                    Main.instance.btnEditAwekeningParameters.Visible = true;
+                    GAME.isUN6 = true;
                 }
-                else
-                {
-                    MessageBox.Show("Error reading process memory, check if the game has already started or if the PCSX2 version is 1.6 or earlier and try again.");
-                    return;
-                }
+                int charProgTblOffset = 0x5AC8C0;
+
+                BTL.ReadCharProgDataTbl(processHandle, charProgTblOffset);
+
+                BTL.ReadCharNameTbl(processHandle, charStringTblOffset);
+
+                Config.Load(Main.instance);
+
+                Main.instance.picBackground.Visible = false;
+                Main.instance.tabControl1.Visible = true;
+                Main.instance.btnEditGeneralParameters.Visible = true;
+                Main.instance.btnEditMovesetParameters.Visible = true;
+                Main.instance.btnEditAwekeningParameters.Visible = true;
             }
             else
             {

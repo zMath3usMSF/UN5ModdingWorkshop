@@ -44,8 +44,8 @@ namespace WindowsFormsApp1
 
             genForm.timer1.Enabled = true;
             genForm.UpdateLabels(charName, charID);
-            var charGenPrm = PlGen.CharGenPrm[charID];
-            PlGen.SendTextToGenForm(genForm, charGenPrm);
+            var charGenPrm = PlGen.List[charID];
+            PlGen.PopulateForm(genForm, charGenPrm);
             genForm.Show();
         }
 

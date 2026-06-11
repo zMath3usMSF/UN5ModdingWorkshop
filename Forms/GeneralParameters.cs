@@ -43,25 +43,25 @@ namespace WindowsFormsApp1
         private void btnUpdateP1_Click(object sender, EventArgs e)
         {
             int charID = int.Parse(lblCharID2.Text);
-            byte[] result = PlGen.UpdateCharGenPrm(this, charID);
-            PlGen.UpdateP1GenPrm(result, charID);
+            byte[] result = PlGen.Update(this, charID);
+            PlGen.WriteToMemory(result, charID);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             int charID = int.Parse(lblCharID2.Text);
 
-            var charAtk = PlGen.CharGenPrmBkp[charID];
-            PlGen.SendTextToGenForm(this, charAtk);
-            byte[] result = PlGen.UpdateCharGenPrm(this, charID);
-            PlGen.UpdateP1GenPrm(result, charID);
+            var charAtk = PlGen.ListBkp[charID];
+            PlGen.PopulateForm(this, charAtk);
+            byte[] result = PlGen.Update(this, charID);
+            PlGen.WriteToMemory(result, charID);
         }
 
         private void btnSaveELF_Click(object sender, EventArgs e)
         {
             int charID = int.Parse(lblCharID2.Text);
-            byte[] result = PlGen.UpdateCharGenPrm(this, charID);
-            PlGen.WriteELFCharPrm(result, charID);
+            byte[] result = PlGen.Update(this, charID);
+            PlGen.WriteToELF(result, charID);
         }
     }
 }

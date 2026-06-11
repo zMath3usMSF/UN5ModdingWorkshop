@@ -30,10 +30,10 @@ namespace UN5ModdingWorkshop
                 #endregion
 
                 #region Read General Char Parameters
-                var ninja = PlGen.ReadCharGenPrm(charMainAreaBuffer);
-                var clone = (PlGen)ninja.Clone();
-                PlGen.CharGenPrm.Add(ninja);
-                PlGen.CharGenPrmBkp.Add(clone);
+                var ninja = PlGen.Read(charMainAreaBuffer);
+                var clone = ninja.Clone();
+                PlGen.List.Add(ninja);
+                PlGen.ListBkp.Add(clone);
                 #endregion
             }
             PlAwk.ReadCharAwkIDList();
@@ -50,10 +50,10 @@ namespace UN5ModdingWorkshop
                     #endregion
 
                     #region Read General Char Parameters
-                    var ninja = PlGen.ReadCharGenPrm(charMainAreaBuffer);
+                    var ninja = PlGen.Read(charMainAreaBuffer);
                     var clone = (PlGen)ninja.Clone();
-                    PlGen.CharGenPrm.Add(ninja);
-                    PlGen.CharGenPrmBkp.Add(clone);
+                    PlGen.List.Add(ninja);
+                    PlGen.ListBkp.Add(clone);
                     #endregion
                 }
                 PlAwk.ReadCharAwkIDList();
@@ -68,8 +68,8 @@ namespace UN5ModdingWorkshop
             BTL.charCCSList.Clear();
             BTL.mapNameList.Clear();
 
-            PlGen.CharGenPrm.Clear();
-            PlGen.CharGenPrmBkp.Clear();
+            PlGen.List.Clear();
+            PlGen.ListBkp.Clear();
 
             PlAtk.CharAtkPrm.Clear();
             PlAtk.CharAtkPrmBkp.Clear();
@@ -88,21 +88,18 @@ namespace UN5ModdingWorkshop
         }
 
 
-        public static string GetCharCCSName(int selectedIndex)
+        public static string GetCharCCSName(int charIndex)
         {
             while (BTL.charCCSList.Count <= GAME.charCount)
             {
                 charCCSList.Add("");
             }
-            if (charCCSList[selectedIndex] == "")
+            if (charCCSList[charIndex] == "")
             {
-                byte[] ccsOffsetBytes = PlGen.CharGenPrm[selectedIndex].CCSOffset;
-                int ccsPointer = BitConverter.ToInt32(ccsOffsetBytes, 0);
-
-                charCCSList[selectedIndex] = Util.ReadStringWithOffset(ccsPointer, false);
+                charCCSList[charIndex] = Util.ReadStringWithOffset((int)PlGen.List[charIndex].CCSOffset, false);
             }
 
-            return charCCSList[selectedIndex];
+            return charCCSList[charIndex];
         }
 
         public static string GetMapName(int mapIndex)

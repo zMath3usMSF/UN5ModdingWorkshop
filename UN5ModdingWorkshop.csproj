@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-	<LangVersion>latest</LangVersion>
+    <LangVersion>latest</LangVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -133,8 +133,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BTL\BTL.cs" />
-    <Compile Include="CharSel.cs" />
-    <Compile Include="CharSkl.cs" />
+    <Compile Include="BTL\CharSel.cs" />
+    <Compile Include="BTL\CharSkl.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Forms\AwakeningParameters.cs">
       <SubType>Form</SubType>
@@ -1230,10 +1230,10 @@
     <Compile Include="BTL\PlAnm.cs" />
     <Compile Include="BTL\PlAtk.cs" />
     <Compile Include="BTL\PlGen.cs" />
-    <Compile Include="JutsuParameters.cs">
+    <Compile Include="Forms\JutsuParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JutsuParameters.Designer.cs">
+    <Compile Include="Forms\JutsuParameters.Designer.cs">
       <DependentUpon>JutsuParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="PCSX2Process.cs" />
@@ -1283,7 +1283,7 @@
     <EmbeddedResource Include="InfoADV.resx">
       <DependentUpon>InfoADV.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JutsuParameters.resx">
+    <EmbeddedResource Include="Forms\JutsuParameters.resx">
       <DependentUpon>JutsuParameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">

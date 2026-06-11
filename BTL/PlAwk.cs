@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1;
 
 namespace UN5ModdingWorkshop
 {
@@ -18,11 +15,31 @@ namespace UN5ModdingWorkshop
         public static List<int> CharAwkActivationSound = new List<int>();
         public static int awkCount = 0;
 
-        public float AwkDamageBuff, AwkDefenseBuff, AwkSpeedBuff, AwkJmpHeightBuff, AwkKnockbackBuff, AwkCharSize, AwkHealingBuff, AwkAtkDefDamage,
-                     AwkCkrChargeBuff, AwkAtkCkrDrain, AwkIniHP, AwkFinHP, AwkIniChakra, AwkFinChakra, AwkHPDrain, AwkHPDrainLimit, AwkCkrDrain,
-                     AwkCkrDrainLimit;
-        public int AwkID, AwkDuration, AwkInfCkrFlag, AwkAuraColor;
-        public byte[] Unk, AwkExtPrg, Unk2, AwkColorEffect;
+        public uint NameOffset = 0x6105C0;
+        public uint PrgOffset = 0x0;
+        public int ID = 0;
+        public int Duration = 0;
+        public int InfiniteChakraFlag = 0;
+        public float DamageBuff = 0;
+        public float DefenseBuff = 0;
+        public float SpeedBuff = 0;
+        public float JumpHeightBuff = 0;
+        public float KnockbackBuff = 0;
+        public float CharSize = 0;
+        public float HealingBuff = 0;
+        public float AttackDefenseDamage = 0;
+        public float ChakraChargeBuff = 0;
+        public float AttackChakraDrain = 0;
+        public float InitialHP = 0;
+        public float FinalHP = 0;
+        public float InitialChakra = 0;
+        public float FinalChakra = 0;
+        public float HPDrain = 0;
+        public float HPDrainLimit = 0;
+        public float ChakraDrain = 0;
+        public float ChakraDrainLimit = 0;
+        public uint ColorEffect = 0;
+        public int AuraColor = 0;
 
         public Dictionary<string, int> AuraColorsDict = new Dictionary<string, int>()
         {
@@ -59,47 +76,26 @@ namespace UN5ModdingWorkshop
         {"64: ???", 9},
         {"65: ???", 10},
         };
-        public Dictionary<string, byte[]> AwkCharColorEffsDict = new Dictionary<string, byte[]>()
-        {
-        {"Yellow", new byte[]{0x50, 0x81, 0x5A, 00 }},
-        {"Yellow 2", new byte[]{0x60, 0x81, 0x5A, 00 }},
-        {"Red", new byte[] { 0x70, 0x81, 0x5A, 00 }},
-        {"White", new byte[] { 0x80, 0x81, 0x5A, 00 }},
-        {"Dark Blue", new byte[] { 0x90, 0x81, 0x5A, 00 }},
-        {"Light Blue", new byte[]{0xA0, 0x81, 0x5A, 00 }},
-        {"Dark Blue 2", new byte[]{0xB0, 0x81, 0x5A, 00 }},
-        {"Purple", new byte[]{0xC0, 0x81, 0x5A, 00 }},
-        {"Black", new byte[]{0xD0, 0x81, 0x5A, 00 }},
-        {"White 2", new byte[]{0xE0, 0x81, 0x5A, 00 }},
-        {"White 3", new byte[]{0xF0, 0x81, 0x5A, 00 }},
-        {"White 4", new byte[]{0x00, 0x82, 0x5A, 00 }},
-        {"White 5", new byte[]{0x10, 0x82, 0x5A, 00 }},
-        {"Black 5", new byte[]{0x20, 0x82, 0x5A, 00 }},
-        {"Black 6", new byte[]{0x30, 0x82, 0x5A, 00 }},
-        {"Black 7", new byte[]{0x40, 0x82, 0x5A, 00 }},
-        {"Black 8", new byte[]{0x50, 0x82, 0x5A, 00 }},
 
-        };
-        public Dictionary<string, byte[]> NA2AwkCharColorEffsDict = new Dictionary<string, byte[]>()
+        public Dictionary<string, uint> AwkCharColorEffsDict = new Dictionary<string, uint>()
         {
-        {"Yellow", new byte[]{ 0x90, 0xE1, 0x59, 00 }},
-        {"Yellow 2", new byte[]{ 0xA0, 0xE1, 0x59, 00 }},
-        {"Red", new byte[] { 0xB0, 0xE1, 0x59, 00 }},
-        {"White", new byte[] { 0xC0, 0xE1, 0x59, 00 }},
-        {"Dark Blue", new byte[] { 0xD0, 0xE1, 0x59, 00 }},
-        {"Light Blue", new byte[]{ 0xE0, 0xE1, 0x59, 00 }},
-        {"Dark Blue 2", new byte[]{ 0xF0, 0xE1, 0x59, 00 }},
-        {"Purple", new byte[]{ 0x00, 0xE2, 0x59, 00 }},
-        {"Black", new byte[]{ 0x10, 0xE2, 0x59, 00 }},
-        {"White 2", new byte[]{ 0x20, 0xE2, 0x59, 00 }},
-        {"White 3", new byte[]{ 0x30, 0xE2, 0x59, 00 }},
-        {"White 4", new byte[]{ 0x40, 0xE2, 0x59, 00 }},
-        {"White 5", new byte[]{ 0x50, 0xE2, 0x59, 00 }},
-        {"Black 5", new byte[]{ 0x60, 0xE2, 0x59, 00 }},
-        {"Black 6", new byte[]{ 0x70, 0xE2, 0x59, 00 }},
-        {"Black 7", new byte[]{ 0x80, 0xE2, 0x59, 00 }},
-        {"Black 8", new byte[]{ 0x90, 0xE2, 0x59, 00 }},
-
+            {"Yellow",      0x005A8150},
+            {"Yellow 2",    0x005A8160},
+            {"Red",         0x005A8170},
+            {"White",       0x005A8180},
+            {"Dark Blue",   0x005A8190},
+            {"Light Blue",  0x005A81A0},
+            {"Dark Blue 2", 0x005A81B0},
+            {"Purple",      0x005A81C0},
+            {"Black",       0x005A81D0},
+            {"White 2",     0x005A81E0},
+            {"White 3",     0x005A81F0},
+            {"White 4",     0x005A8200},
+            {"White 5",     0x005A8210},
+            {"Black 5",     0x005A8220},
+            {"Black 6",     0x005A8230},
+            {"Black 7",     0x005A8240},
+            {"Black 8",     0x005A8250},
         };
         public object Clone()
         {
@@ -107,32 +103,33 @@ namespace UN5ModdingWorkshop
         }
         internal static PlAwk ReadAwkGenPrm(byte[] Input) => new PlAwk
         {
-            Unk = Input.ReadBytes(0x0, 4),
-            AwkExtPrg = Input.ReadBytes(0x4, 4),
-            AwkID = (int)Input.ReadUInt(0x8, 32),
-            AwkDuration = (int)Input.ReadUInt(0xC, 32),
-            AwkInfCkrFlag = (int)Input.ReadUInt(0x10, 32),
-            AwkDamageBuff = Input.ReadSingle(0x14),
-            AwkDefenseBuff = Input.ReadSingle(0x18),
-            AwkSpeedBuff = Input.ReadSingle(0x1C),
-            AwkJmpHeightBuff = Input.ReadSingle(0x20),
-            AwkKnockbackBuff = Input.ReadSingle(0x24),
-            AwkCharSize = Input.ReadSingle(0x28),
-            AwkHealingBuff = Input.ReadSingle(0x2C),
-            AwkAtkDefDamage = Input.ReadSingle(0x30),
-            AwkCkrChargeBuff = Input.ReadSingle(0x34),
-            AwkAtkCkrDrain = Input.ReadSingle(0x38),
-            AwkIniHP = Input.ReadSingle(0x3C),
-            AwkFinHP = Input.ReadSingle(0x40),
-            AwkIniChakra = Input.ReadSingle(0x44),
-            AwkFinChakra = Input.ReadSingle(0x48),
-            AwkHPDrain = Input.ReadSingle(0x4C),
-            AwkHPDrainLimit = Input.ReadSingle(0x50),
-            AwkCkrDrain = Input.ReadSingle(0x54),
-            AwkCkrDrainLimit = Input.ReadSingle(0x58),
-            AwkColorEffect = Input.ReadBytes(0x5C, 4),
-            AwkAuraColor = (int)Input.ReadUInt(0x60, 32),
+            NameOffset = Input.ReadUInt(0x0, 32),
+            PrgOffset = Input.ReadUInt(0x4, 32),
+            ID = (int)Input.ReadUInt(0x8, 32),
+            Duration = (int)Input.ReadUInt(0xC, 32),
+            InfiniteChakraFlag = (int)Input.ReadUInt(0x10, 32),
+            DamageBuff = Input.ReadSingle(0x14),
+            DefenseBuff = Input.ReadSingle(0x18),
+            SpeedBuff = Input.ReadSingle(0x1C),
+            JumpHeightBuff = Input.ReadSingle(0x20),
+            KnockbackBuff = Input.ReadSingle(0x24),
+            CharSize = Input.ReadSingle(0x28),
+            HealingBuff = Input.ReadSingle(0x2C),
+            AttackDefenseDamage = Input.ReadSingle(0x30),
+            ChakraChargeBuff = Input.ReadSingle(0x34),
+            AttackChakraDrain = Input.ReadSingle(0x38),
+            InitialHP = Input.ReadSingle(0x3C),
+            FinalHP = Input.ReadSingle(0x40),
+            InitialChakra = Input.ReadSingle(0x44),
+            FinalChakra = Input.ReadSingle(0x48),
+            HPDrain = Input.ReadSingle(0x4C),
+            HPDrainLimit = Input.ReadSingle(0x50),
+            ChakraDrain = Input.ReadSingle(0x54),
+            ChakraDrainLimit = Input.ReadSingle(0x58),
+            ColorEffect = Input.ReadUInt(0x5C, 32),
+            AuraColor = (int)Input.ReadUInt(0x60, 32),
         };
+
         public static void ReadCharAwkIDList()
         {
             while(CharAwkIDList.Count <= 93)
@@ -212,43 +209,43 @@ namespace UN5ModdingWorkshop
                 }
             }
             awkForm.cmbSwitchToAwakening.SelectedIndex = selectedIndex;
-            awkForm.numAwkDuration.Value = charAwkPrm.AwkDuration;
+            awkForm.numAwkDuration.Value = charAwkPrm.Duration;
             if(awkForm.cmbInfCkrFlag.Items.Count == 0)
             {
                 string[] yesnoOption = { "No", "Yes" };
                 awkForm.cmbInfCkrFlag.Items.AddRange(yesnoOption);
             }
-            awkForm.cmbInfCkrFlag.SelectedIndex = charAwkPrm.AwkInfCkrFlag == 0x82 ? 1 : 0;
-            awkForm.txtAwkDamage.Text = Convert.ToString(charAwkPrm.AwkDamageBuff);
-            awkForm.txtAwkDefense.Text = Convert.ToString(charAwkPrm.AwkDefenseBuff);
-            awkForm.txtAwkSpeed.Text = Convert.ToString(charAwkPrm.AwkSpeedBuff);
-            awkForm.txtJmpHeight.Text = Convert.ToString(charAwkPrm.AwkJmpHeightBuff);
-            awkForm.txtAwkAtkKnockback.Text = Convert.ToString(charAwkPrm.AwkKnockbackBuff);
-            awkForm.txtAwkCharSize.Text = Convert.ToString(charAwkPrm.AwkCharSize);
-            awkForm.txtAwkHealing.Text = Convert.ToString(charAwkPrm.AwkHealingBuff);
-            awkForm.txtAwkAtkDefDamage.Text = Convert.ToString(charAwkPrm.AwkAtkDefDamage);
-            awkForm.txtAwkCkrCharge.Text = Convert.ToString(charAwkPrm.AwkCkrChargeBuff);
-            awkForm.txtAwkAtkCkrDrain.Text = Convert.ToString(charAwkPrm.AwkAtkCkrDrain);           
-            awkForm.txtAwkIniHP.Text = Convert.ToString(charAwkPrm.AwkIniHP);
-            awkForm.txtAwkFinHP.Text = Convert.ToString(charAwkPrm.AwkFinHP);
-            awkForm.txtAwkIniCkr.Text = Convert.ToString(charAwkPrm.AwkIniChakra);
-            awkForm.txtAwkFinCkr.Text = Convert.ToString(charAwkPrm.AwkFinChakra);
-            awkForm.txtAwkHPDrain.Text = Convert.ToString(charAwkPrm.AwkHPDrain);
-            awkForm.txtAwkHPDrainLimit.Text = Convert.ToString(charAwkPrm.AwkHPDrainLimit);
-            awkForm.txtAwkCkrDrain.Text = Convert.ToString(charAwkPrm.AwkCkrDrain);
-            awkForm.txtAwkCkrDrainLimit.Text = Convert.ToString(charAwkPrm.AwkCkrDrainLimit);
-            var AwkColorDictionary = charAwkPrm.NA2AwkCharColorEffsDict;
+            awkForm.cmbInfCkrFlag.SelectedIndex = charAwkPrm.InfiniteChakraFlag == 0x82 ? 1 : 0;
+            awkForm.txtAwkDamage.Text = Convert.ToString(charAwkPrm.DamageBuff);
+            awkForm.txtAwkDefense.Text = Convert.ToString(charAwkPrm.DefenseBuff);
+            awkForm.txtAwkSpeed.Text = Convert.ToString(charAwkPrm.SpeedBuff);
+            awkForm.txtJmpHeight.Text = Convert.ToString(charAwkPrm.JumpHeightBuff);
+            awkForm.txtAwkAtkKnockback.Text = Convert.ToString(charAwkPrm.KnockbackBuff);
+            awkForm.txtAwkCharSize.Text = Convert.ToString(charAwkPrm.CharSize);
+            awkForm.txtAwkHealing.Text = Convert.ToString(charAwkPrm.HealingBuff);
+            awkForm.txtAwkAtkDefDamage.Text = Convert.ToString(charAwkPrm.AttackDefenseDamage);
+            awkForm.txtAwkCkrCharge.Text = Convert.ToString(charAwkPrm.ChakraChargeBuff);
+            awkForm.txtAwkAtkCkrDrain.Text = Convert.ToString(charAwkPrm.AttackChakraDrain);           
+            awkForm.txtAwkIniHP.Text = Convert.ToString(charAwkPrm.InitialHP);
+            awkForm.txtAwkFinHP.Text = Convert.ToString(charAwkPrm.FinalHP);
+            awkForm.txtAwkIniCkr.Text = Convert.ToString(charAwkPrm.InitialChakra);
+            awkForm.txtAwkFinCkr.Text = Convert.ToString(charAwkPrm.FinalChakra);
+            awkForm.txtAwkHPDrain.Text = Convert.ToString(charAwkPrm.HPDrain);
+            awkForm.txtAwkHPDrainLimit.Text = Convert.ToString(charAwkPrm.HPDrainLimit);
+            awkForm.txtAwkCkrDrain.Text = Convert.ToString(charAwkPrm.ChakraDrain);
+            awkForm.txtAwkCkrDrainLimit.Text = Convert.ToString(charAwkPrm.ChakraDrainLimit);
+            var AwkColorDictionary = charAwkPrm.AwkCharColorEffsDict;
             if (awkForm.cmbAwkCharColorEff.Items.Count == 0)
             {
                 awkForm.cmbAwkCharColorEff.Items.AddRange(AwkColorDictionary.Keys.ToArray());
                 awkForm.cmbAwkCharColorEff.Items.Add("(None)");
             }
-            List<byte[]> dicToList = AwkColorDictionary.Values.ToList();
+            List<uint> dicToList = AwkColorDictionary.Values.ToList();
             for(int i = 0; i < AwkColorDictionary.Count; i++)
             {
-                int one = BitConverter.ToInt32(charAwkPrm.AwkColorEffect, 0);
-                int two = BitConverter.ToInt32(dicToList[i], 0);
-                if (one == two)
+                uint currentAwkColorEffect = charAwkPrm.ColorEffect;
+                uint currentListColorEffect = dicToList[i];
+                if (currentAwkColorEffect == currentListColorEffect)
                 {
                     awkForm.cmbAwkCharColorEff.SelectedIndex = i;
                     break;
@@ -262,7 +259,7 @@ namespace UN5ModdingWorkshop
             {
                 awkForm.cmbAwkAuraColor.Items.AddRange(charAwkPrm.AuraColorsDict.Keys.ToArray());
             }
-            awkForm.cmbAwkAuraColor.SelectedIndex = charAwkPrm.AwkAuraColor;
+            awkForm.cmbAwkAuraColor.SelectedIndex = charAwkPrm.AuraColor;
 
             if(awkForm.cmbAwkActType.Items.Count == 0)
             {
@@ -282,59 +279,58 @@ namespace UN5ModdingWorkshop
         }
         public static (byte[] charAwkPrmBlock, byte[] charAwkAct)UpdateCharAwkPrm(AwakeningParameters awkForm, int selectedAwk, int charID, bool reset)
         {
-            List<byte> charAwkPrmBlock = new List<byte>();
+            List<byte> AwkData = new List<byte>();
             List<byte> charAwkAct = new List<byte>();
             var awkPrm = reset == true ? CharAwkPrmBkp[selectedAwk] : CharAwkPrm[selectedAwk];
 
-            charAwkPrmBlock.AddRange(awkPrm.Unk);
-            charAwkPrmBlock.AddRange(awkPrm.AwkExtPrg);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToInt32(awkPrm.AwkID)));
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToInt32(awkForm.numAwkDuration.Value)));
-            awkPrm.AwkDuration = Convert.ToInt32(awkForm.numAwkDuration.Value);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(awkForm.cmbInfCkrFlag.SelectedIndex == 0 ? 0x02 : 0x82));
-            awkPrm.AwkInfCkrFlag = awkForm.cmbInfCkrFlag.SelectedIndex == 0 ? 0x02 : 0x82;
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkDamage.Text)));
-            awkPrm.AwkDamageBuff = Convert.ToSingle(awkForm.txtAwkDamage.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkDefense.Text)));
-            awkPrm.AwkDefenseBuff = Convert.ToSingle(awkForm.txtAwkDefense.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkSpeed.Text)));
-            awkPrm.AwkSpeedBuff = Convert.ToSingle(awkForm.txtAwkSpeed.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtJmpHeight.Text)));
-            awkPrm.AwkJmpHeightBuff = Convert.ToSingle(awkForm.txtJmpHeight.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkAtkKnockback.Text)));
-            awkPrm.AwkKnockbackBuff = Convert.ToSingle(awkForm.txtAwkAtkKnockback.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCharSize.Text)));
-            awkPrm.AwkCharSize = Convert.ToSingle(awkForm.txtAwkCharSize.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkHealing.Text)));
-            awkPrm.AwkHealingBuff = Convert.ToSingle(awkForm.txtAwkHealing.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkAtkDefDamage.Text)));
-            awkPrm.AwkAtkDefDamage = Convert.ToSingle(awkForm.txtAwkAtkDefDamage.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCkrCharge.Text)));
-            awkPrm.AwkCkrChargeBuff = Convert.ToSingle(awkForm.txtAwkCkrCharge.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkAtkCkrDrain.Text)));
-            awkPrm.AwkAtkCkrDrain = Convert.ToSingle(awkForm.txtAwkAtkCkrDrain.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkIniHP.Text)));
-            awkPrm.AwkIniHP = Convert.ToSingle(awkForm.txtAwkIniHP.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkFinHP.Text)));
-            awkPrm.AwkFinHP = Convert.ToSingle(awkForm.txtAwkFinHP.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkIniCkr.Text)));
-            awkPrm.AwkIniChakra = Convert.ToSingle(awkForm.txtAwkIniCkr.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkFinCkr.Text)));
-            awkPrm.AwkFinChakra = Convert.ToSingle(awkForm.txtAwkFinCkr.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkHPDrain.Text)));
-            awkPrm.AwkHPDrain = Convert.ToSingle(awkForm.txtAwkHPDrain.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkHPDrainLimit.Text)));
-            awkPrm.AwkHPDrainLimit = Convert.ToSingle(awkForm.txtAwkHPDrainLimit.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCkrDrain.Text)));
-            awkPrm.AwkCkrDrain = Convert.ToSingle(awkForm.txtAwkCkrDrain.Text);
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCkrDrainLimit.Text)));
-            awkPrm.AwkCkrDrainLimit = Convert.ToSingle(awkForm.txtAwkCkrDrainLimit.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToUInt32(awkPrm.NameOffset)));
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToUInt32(awkPrm.PrgOffset)));
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToInt32(awkPrm.ID)));
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToInt32(awkForm.numAwkDuration.Value)));
+            awkPrm.Duration = Convert.ToInt32(awkForm.numAwkDuration.Value);
+            AwkData.AddRange(BitConverter.GetBytes(awkForm.cmbInfCkrFlag.SelectedIndex == 0 ? 0x02 : 0x82));
+            awkPrm.InfiniteChakraFlag = awkForm.cmbInfCkrFlag.SelectedIndex == 0 ? 0x02 : 0x82;
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkDamage.Text)));
+            awkPrm.DamageBuff = Convert.ToSingle(awkForm.txtAwkDamage.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkDefense.Text)));
+            awkPrm.DefenseBuff = Convert.ToSingle(awkForm.txtAwkDefense.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkSpeed.Text)));
+            awkPrm.SpeedBuff = Convert.ToSingle(awkForm.txtAwkSpeed.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtJmpHeight.Text)));
+            awkPrm.JumpHeightBuff = Convert.ToSingle(awkForm.txtJmpHeight.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkAtkKnockback.Text)));
+            awkPrm.KnockbackBuff = Convert.ToSingle(awkForm.txtAwkAtkKnockback.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCharSize.Text)));
+            awkPrm.CharSize = Convert.ToSingle(awkForm.txtAwkCharSize.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkHealing.Text)));
+            awkPrm.HealingBuff = Convert.ToSingle(awkForm.txtAwkHealing.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkAtkDefDamage.Text)));
+            awkPrm.AttackDefenseDamage = Convert.ToSingle(awkForm.txtAwkAtkDefDamage.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCkrCharge.Text)));
+            awkPrm.ChakraChargeBuff = Convert.ToSingle(awkForm.txtAwkCkrCharge.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkAtkCkrDrain.Text)));
+            awkPrm.AttackChakraDrain = Convert.ToSingle(awkForm.txtAwkAtkCkrDrain.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkIniHP.Text)));
+            awkPrm.InitialHP = Convert.ToSingle(awkForm.txtAwkIniHP.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkFinHP.Text)));
+            awkPrm.FinalHP = Convert.ToSingle(awkForm.txtAwkFinHP.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkIniCkr.Text)));
+            awkPrm.InitialChakra = Convert.ToSingle(awkForm.txtAwkIniCkr.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkFinCkr.Text)));
+            awkPrm.FinalChakra = Convert.ToSingle(awkForm.txtAwkFinCkr.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkHPDrain.Text)));
+            awkPrm.HPDrain = Convert.ToSingle(awkForm.txtAwkHPDrain.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkHPDrainLimit.Text)));
+            awkPrm.HPDrainLimit = Convert.ToSingle(awkForm.txtAwkHPDrainLimit.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCkrDrain.Text)));
+            awkPrm.ChakraDrain = Convert.ToSingle(awkForm.txtAwkCkrDrain.Text);
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(awkForm.txtAwkCkrDrainLimit.Text)));
+            awkPrm.ChakraDrainLimit = Convert.ToSingle(awkForm.txtAwkCkrDrainLimit.Text);
             string currentItemString = awkForm.cmbAwkCharColorEff.SelectedItem.ToString();
-            byte[] awkCharColorEffOffset = currentItemString != "(None)" ? awkPrm.AwkCharColorEffsDict[currentItemString] : new byte[]{00, 00, 00, 00};
-            charAwkPrmBlock.AddRange(awkCharColorEffOffset);
-            awkPrm.AwkColorEffect = awkCharColorEffOffset;
-            charAwkPrmBlock.AddRange(BitConverter.GetBytes(Convert.ToInt32(awkForm.cmbAwkAuraColor.SelectedIndex)));
-            awkPrm.AwkAuraColor = Convert.ToInt32(awkForm.cmbAwkAuraColor.SelectedIndex);
+            awkPrm.ColorEffect = currentItemString != "(None)" ? awkPrm.AwkCharColorEffsDict[currentItemString] : 0;
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToUInt32(awkPrm.ColorEffect)));
+            AwkData.AddRange(BitConverter.GetBytes(Convert.ToInt32(awkForm.cmbAwkAuraColor.SelectedIndex)));
+            awkPrm.AuraColor = Convert.ToInt32(awkForm.cmbAwkAuraColor.SelectedIndex);
 
             int currentPLSoundIndex = awkForm.cmbPLSound.SelectedIndex;
             int currentPLSound = currentPLSoundIndex - 4;
@@ -364,7 +360,7 @@ namespace UN5ModdingWorkshop
             int selectedAwkType = Convert.ToInt32(awkForm.cmbAwkActType.SelectedItem.ToString().Split(':')[0]);
             charAwkAct.AddRange(BitConverter.GetBytes((short)selectedAwkType));
             CharAwkActivationType[charID] = selectedAwkType;
-            byte[] resultBytes = charAwkPrmBlock.ToArray();
+            byte[] resultBytes = AwkData.ToArray();
             byte[] resultBytes2 = charAwkAct.ToArray();
             return (resultBytes, resultBytes2);
         }

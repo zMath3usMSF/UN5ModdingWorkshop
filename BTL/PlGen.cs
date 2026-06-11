@@ -11,47 +11,96 @@ namespace UN5ModdingWorkshop
 {
     public class PlGen
     {
-        public static List<PlGen> CharGenPrm = new List<PlGen>();
-        public static List<PlGen> CharGenPrmBkp = new List<PlGen>();
+        public static List<PlGen> List = new List<PlGen>();
+        public static List<PlGen> ListBkp = new List<PlGen>();
         #region GeneralParameters
 
-        public float Width, Height, Speed, RunningStartSpeed, Slide, Weight, Gravity, SpeedAir, WallJmpRecoilDistance, WallJmpDistanceLimit, 
-                     FirstJumpHeight, SecondJumpHeight,  DashSpeed, DashDistance, BackDashHeight, BackDashWeight, BackDashDistance, 
-                     BackDashHeight2, AirAtkXAdjLimit, AirAtkYAdjLimit, Strength, Defense, DamageKnockback, AttackKnockback, StatusDuration, QuantityProjectiles, 
-                     HealingMultiplier, ChakraSpeed;
+        public uint ID = 0x0;
+        public uint NameOffset = 0x0;
+        public uint CCSOffset = 0x0;
+        public uint CLTOffset = 0x0;
+        public uint TEXOffset = 0x0;
+        public uint MDLOffset = 0x0;
+        public uint HolOBJOffset = 0x0;
+        public uint PrgOffset = 0x0;
+        public float Unk = 0f;
+        public float Unk1 = 0f;
 
-        public int ID, cUnk1, cUnk2, AtkCount, AnmCount, AnmNameCount, AcessoryCount, FirstJumpDelay, DashDelay, DashDuration;
+        public uint AtkCount = 0x0;
+        public uint AtkOffset = 0x0;
+        public uint AtkListOffset = 0x0;
+        public uint AtkListMemOffset = 0x0;
+        public float Unk2 = 0f;
 
-        public byte[] NameOffset, CCSOffset, CLTOffset, TEXOffset, MDLOffset, HolOBJOffset, PrgOffset, AtkListOffset, AtkListMemOffset, 
-                      AnmListOffset, AnmListMemOffset, AnmNameListOffset, AnmNameListMemOffset, AccessoryListOffset;
+        public uint AnmCount = 0x0;
+        public uint AnmListOffset = 0x0;
+        public uint AnmListMemOffset = 0x0;
+        public uint AnmNameCount = 0x0;
+        public uint AnmNameListOffset = 0x0;
+        public uint AnmNameListMemOffset = 0x0;
 
-        public float Unk, Unk1, Unk2, Unk3, Unk4, Unk5, Unk6;
+        public uint AcessoryCount = 0x0;
+        public uint AccessoryListOffset = 0x0;
 
+        public float Height = 110f;
+        public float Width = 140f;
+        public float Speed = 1f;
+        public float RunningStartSpeed = 0.3f;
+        public float Slide = 0.3f;
+        public float Weight = 1f;
+        public float Gravity = 11.5f;
+        public float SpeedAir = 16f;
+        public float WallJmpRecoilDistance = 0.04f;
+        public float WallJmpDistanceLimit = 0.02f;
+        public uint FirstJumpDelay = 3;
+        public float FirstJumpHeight = 280f;
+        public float SecondJumpHeight = 210f;
+        public uint DashDelay = 9;
+        public uint DashDuration = 12;
+        public float DashSpeed = 400f;
+        public float DashDistance = 600f;
+        public float BackDashHeight = 40f;
+        public float BackDashWeight = 30f;
+        public float BackDashDistance = 0.02f;
+        public float BackDashHeight2 = 2f;
+        public float AirAtkXAdjLimit = 250f;
+        public float AirAtkYAdjLimit = 150f;
+        public float Unk3 = 0f;
+        public float Unk4 = 0f;
+        public float Strength = 1f;
+        public float Defense = 1f;
+        public float DamageKnockback = 1f;
+        public float AttackKnockback = 1f;
+        public float StatusDuration = 1f;
+        public float QuantityProjectiles = 1f;
+        public float HealingMultiplier = 1f;
+        public float ChakraSpeed = 1f;
         #endregion
-        internal static PlGen ReadCharGenPrm(byte[] Input) => new PlGen
+        public PlGen Clone() => (PlGen)MemberwiseClone();
+        internal static PlGen Read(byte[] Input) => new PlGen
         {
-            ID = (int)Input.ReadUInt(0x0, 32),
-            NameOffset = Input.ReadBytes(0x4, 4),
-            CCSOffset = Input.ReadBytes(0x8, 4),
-            CLTOffset = Input.ReadBytes(0xC, 4),
-            TEXOffset = Input.ReadBytes(0x10, 4),
-            MDLOffset = Input.ReadBytes(0x14, 4),
-            HolOBJOffset = Input.ReadBytes(0x18, 4),
-            PrgOffset = Input.ReadBytes(0x1C, 4),
+            ID = Input.ReadUInt(0x0, 32),
+            NameOffset = Input.ReadUInt(0x4, 4),
+            CCSOffset = Input.ReadUInt(0x8, 4),
+            CLTOffset = Input.ReadUInt(0xC, 4),
+            TEXOffset = Input.ReadUInt(0x10, 4),
+            MDLOffset = Input.ReadUInt(0x14, 4),
+            HolOBJOffset = Input.ReadUInt(0x18, 4),
+            PrgOffset = Input.ReadUInt(0x1C, 4),
             Unk = Input.ReadSingle(0x20),
             Unk1 = Input.ReadSingle(0x24),
-            AtkCount = (int)Input.ReadUInt(0x28, 32),
-            AtkListOffset = Input.ReadBytes(0x2C, 4),
-            AtkListMemOffset = Input.ReadBytes(0x30, 4),
+            AtkCount = Input.ReadUInt(0x28, 32),
+            AtkListOffset = Input.ReadUInt(0x2C, 32),
+            AtkListMemOffset = Input.ReadUInt(0x30, 32),
             Unk2 = Input.ReadSingle(0x34),
-            AnmCount = (int)Input.ReadUInt(0x38, 32),
-            AnmListOffset = Input.ReadBytes(0x3C, 4),
-            AnmListMemOffset = Input.ReadBytes(0x40, 4),
-            AnmNameCount = (int)Input.ReadUInt(0x44, 32),
-            AnmNameListOffset = Input.ReadBytes(0x48, 4),
-            AnmNameListMemOffset = Input.ReadBytes(0x4C, 4),
-            AcessoryCount = (int)Input.ReadUInt(0x50, 32),
-            AccessoryListOffset =  Input.ReadBytes(0x54, 4),
+            AnmCount = Input.ReadUInt(0x38, 32),
+            AnmListOffset = Input.ReadUInt(0x3C, 32),
+            AnmListMemOffset = Input.ReadUInt(0x40, 32),
+            AnmNameCount = Input.ReadUInt(0x44, 32),
+            AnmNameListOffset = Input.ReadUInt(0x48, 32),
+            AnmNameListMemOffset = Input.ReadUInt(0x4C, 32),
+            AcessoryCount = Input.ReadUInt(0x50, 32),
+            AccessoryListOffset =  Input.ReadUInt(0x54, 32),
 
             Height = Input.ReadSingle(0x58),
             Width = Input.ReadSingle(0x5c),
@@ -63,11 +112,11 @@ namespace UN5ModdingWorkshop
             SpeedAir = Input.ReadSingle(0x74),
             WallJmpRecoilDistance = Input.ReadSingle(0x78),
             WallJmpDistanceLimit = Input.ReadSingle(0x7C),
-            FirstJumpDelay = (int)Input.ReadUInt(0x80, 32),
+            FirstJumpDelay = Input.ReadUInt(0x80, 32),
             FirstJumpHeight = Input.ReadSingle(0x84),
             SecondJumpHeight = Input.ReadSingle(0x88),
-            DashDelay = (int)Input.ReadUInt(0x8c, 32),
-            DashDuration = (int)Input.ReadUInt(0x90, 32),
+            DashDelay = Input.ReadUInt(0x8c, 32),
+            DashDuration = Input.ReadUInt(0x90, 32),
             DashSpeed = Input.ReadSingle(0x94),
             DashDistance = Input.ReadSingle(0x98),
             BackDashHeight = Input.ReadSingle(0x9c),
@@ -89,18 +138,123 @@ namespace UN5ModdingWorkshop
             HealingMultiplier = Input.ReadSingle(0xd4),
             ChakraSpeed = Input.ReadSingle(0xd8)
         };
-        public object Clone()
+        public static void PopulateForm(GeneralParameters genForm, PlGen charGenPrm)
         {
-            return this.MemberwiseClone();
+            genForm.numCharHeight.Value = (decimal)charGenPrm.Height;
+            genForm.numCharWidth.Value = (decimal)charGenPrm.Width;
+            genForm.numCharSpeed.Value = (decimal)charGenPrm.Speed;
+            genForm.numRunningStartSpeed.Value = (decimal)charGenPrm.RunningStartSpeed;
+            genForm.numCharSlide.Value = (decimal)charGenPrm.Slide;
+            genForm.numCharWeight.Value = (decimal)charGenPrm.Weight;
+            genForm.numCharGravity.Value = (decimal)charGenPrm.Gravity;
+            genForm.numCharSpeedAir.Value = (decimal)charGenPrm.SpeedAir;
+            genForm.numWallJmpRecoilDistance.Value = (decimal)charGenPrm.WallJmpRecoilDistance;
+            genForm.numWallJmpDistanceLimit.Value = (decimal)charGenPrm.WallJmpDistanceLimit;
+            genForm.numCharFirstJumpDelay.Value = (decimal)charGenPrm.FirstJumpDelay;
+            genForm.numCharFirstJumpHeight.Value = (decimal)charGenPrm.FirstJumpHeight;
+            genForm.numCharSecondJumpHeight.Value = (decimal)charGenPrm.SecondJumpHeight;
+            genForm.numCharDashDelay.Value = (decimal)charGenPrm.DashDelay;
+            genForm.numCharDashDuration.Value = (decimal)charGenPrm.DashDuration;
+            genForm.numCharDashSpeed.Value = (decimal)charGenPrm.DashSpeed;
+            genForm.numCharDashDistance.Value = (decimal)charGenPrm.DashDistance;
+            genForm.numCharBackDashHeight.Value = (decimal)charGenPrm.BackDashHeight;
+            genForm.numCharBackDashWeight.Value = (decimal)charGenPrm.BackDashWeight;
+            genForm.numCharBackDashDistance.Value = (decimal)charGenPrm.BackDashDistance;
+            genForm.numCharBackDashHeight2.Value = (decimal)charGenPrm.BackDashHeight2;
+            genForm.numAirAtkXAdjLimit.Value = (decimal)charGenPrm.AirAtkXAdjLimit;
+            genForm.numAirAtkYAdjLimit.Value = (decimal)charGenPrm.AirAtkYAdjLimit;
+            genForm.numCharStrength.Value = (decimal)charGenPrm.Strength;
+            genForm.numCharDefense.Value = (decimal)charGenPrm.Defense;
+            genForm.numCharDamageKnockback.Value = (decimal)charGenPrm.DamageKnockback;
+            genForm.numCharAttackKnockback.Value = (decimal)charGenPrm.AttackKnockback;
+            genForm.numCharStatus.Value = (decimal)charGenPrm.StatusDuration;
+            genForm.numCharQuantityProjectiles.Value = (decimal)charGenPrm.QuantityProjectiles;
+            genForm.numCharHealingMultiplier.Value = (decimal)charGenPrm.HealingMultiplier;
+            genForm.numCharChakraRecoverySpeed.Value = (decimal)charGenPrm.ChakraSpeed;
+            genForm.grpGeneralConfig.Visible = true;
+            genForm.grpMovementConfig.Visible = true;
+            genForm.grpMovementAirConfig.Visible = true;
         }
-        public static void UpdateP1GenPrm(byte[] charGeneralDataBlock, int charID)
+        public static byte[] Update(GeneralParameters genForm, int charID)
+        {
+            List<byte> GenData = new List<byte>();
+
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharHeight.Value)));
+            List[charID].Height = Convert.ToSingle(genForm.numCharHeight.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharWidth.Value)));
+            List[charID].Width = Convert.ToSingle(genForm.numCharWidth.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharSpeed.Value)));
+            List[charID].Speed = Convert.ToSingle(genForm.numCharSpeed.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numRunningStartSpeed.Value)));
+            List[charID].RunningStartSpeed = Convert.ToSingle(genForm.numRunningStartSpeed.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharSlide.Value)));
+            List[charID].Slide = Convert.ToSingle(genForm.numCharSlide.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharWeight.Value)));
+            List[charID].Weight = Convert.ToSingle(genForm.numCharWeight.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharGravity.Value)));
+            List[charID].Gravity = Convert.ToSingle(genForm.numCharGravity.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharSpeedAir.Value)));
+            List[charID].SpeedAir = Convert.ToSingle(genForm.numCharSpeedAir.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numWallJmpRecoilDistance.Value)));
+            List[charID].WallJmpRecoilDistance = Convert.ToSingle(genForm.numWallJmpRecoilDistance.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numWallJmpDistanceLimit.Value)));
+            List[charID].WallJmpDistanceLimit = Convert.ToSingle(genForm.numWallJmpDistanceLimit.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToInt32(genForm.numCharFirstJumpDelay.Value)));
+            List[charID].FirstJumpDelay = Convert.ToUInt32(genForm.numCharFirstJumpDelay.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharFirstJumpHeight.Value)));
+            List[charID].FirstJumpHeight = Convert.ToSingle(genForm.numCharFirstJumpHeight.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharSecondJumpHeight.Value)));
+            List[charID].SecondJumpHeight = Convert.ToSingle(genForm.numCharSecondJumpHeight.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToInt32(genForm.numCharDashDelay.Value)));
+            List[charID].DashDelay = Convert.ToUInt32(genForm.numCharDashDelay.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToInt32(genForm.numCharDashDuration.Value)));
+            List[charID].DashDuration = Convert.ToUInt32(genForm.numCharDashDuration.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharDashSpeed.Value)));
+            List[charID].DashSpeed = Convert.ToSingle(genForm.numCharDashSpeed.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharDashDistance.Value)));
+            List[charID].DashDistance = Convert.ToSingle(genForm.numCharDashDistance.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharBackDashHeight.Value)));
+            List[charID].BackDashHeight = Convert.ToSingle(genForm.numCharBackDashHeight.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharBackDashWeight.Value)));
+            List[charID].BackDashWeight = Convert.ToSingle(genForm.numCharBackDashWeight.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharBackDashDistance.Value)));
+            List[charID].BackDashDistance = Convert.ToSingle(genForm.numCharBackDashDistance.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharBackDashHeight2.Value)));
+            List[charID].BackDashHeight2 = Convert.ToSingle(genForm.numCharBackDashHeight2.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numAirAtkXAdjLimit.Value)));
+            List[charID].AirAtkXAdjLimit = Convert.ToSingle(genForm.numAirAtkXAdjLimit.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numAirAtkYAdjLimit.Value)));
+            List[charID].AirAtkYAdjLimit = Convert.ToSingle(genForm.numAirAtkYAdjLimit.Value);
+            GenData.AddRange(BitConverter.GetBytes(PlGen.List[charID].Unk3));
+            GenData.AddRange(BitConverter.GetBytes(PlGen.List[charID].Unk4));
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharStrength.Value)));
+            List[charID].Strength = Convert.ToSingle(genForm.numCharStrength.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharDefense.Value)));
+            List[charID].Defense = Convert.ToSingle(genForm.numCharDefense.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharDamageKnockback.Value)));
+            List[charID].DamageKnockback = Convert.ToSingle(genForm.numCharDamageKnockback.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharAttackKnockback.Value)));
+            List[charID].AttackKnockback = Convert.ToSingle(genForm.numCharAttackKnockback.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharStatus.Value)));
+            List[charID].StatusDuration = Convert.ToSingle(genForm.numCharStatus.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharQuantityProjectiles.Value)));
+            List[charID].QuantityProjectiles = Convert.ToSingle(genForm.numCharQuantityProjectiles.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharHealingMultiplier.Value)));
+            List[charID].HealingMultiplier = Convert.ToSingle(genForm.numCharHealingMultiplier.Value);
+            GenData.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.numCharChakraRecoverySpeed.Value)));
+            List[charID].ChakraSpeed = Convert.ToSingle(genForm.numCharChakraRecoverySpeed.Value);
+
+            byte[] resultBytes = GenData.ToArray();
+            return resultBytes;
+        }
+        public static void WriteToMemory(byte[] charGeneralDataBlock, int charID)
         {
             int P1AtributtesOffs = Util.BTL_GetPlayer1MemoryOffs() + 0x8C;
 
             Util.WriteProcessMemoryBytes(P1AtributtesOffs + 0x58, charGeneralDataBlock);
             Util.WriteProcessMemoryBytes(BTL.charMainAreaOffsets[charID] + 0x58, charGeneralDataBlock);
         }
-        public static void WriteELFCharPrm(byte[] resultBytes, int charID)
+        public static void WriteToELF(byte[] resultBytes, int charID)
         {
             if (!File.Exists(GAME.caminhoELF))
             {
@@ -126,115 +280,6 @@ namespace UN5ModdingWorkshop
                     MessageBox.Show("The changes were saved successfully!", string.Empty, MessageBoxButtons.OK);
                 }
             }
-        }
-        public static byte[] UpdateCharGenPrm(GeneralParameters genForm, int charID)
-        {
-            List<byte> resultBytesList = new List<byte>();
-
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharHeight.Text)));
-            CharGenPrm[charID].Height = Convert.ToSingle(genForm.txtCharHeight.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharWidth.Text)));
-            CharGenPrm[charID].Width = Convert.ToSingle(genForm.txtCharWidth.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharSpeed.Text)));
-            CharGenPrm[charID].Speed = Convert.ToSingle(genForm.txtCharSpeed.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtRunningStartSpeed.Text)));
-            CharGenPrm[charID].RunningStartSpeed = Convert.ToSingle(genForm.txtRunningStartSpeed.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharSlide.Text)));
-            CharGenPrm[charID].Slide = Convert.ToSingle(genForm.txtCharSlide.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharWeight.Text)));
-            CharGenPrm[charID].Weight = Convert.ToSingle(genForm.txtCharWeight.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharGravity.Text)));
-            CharGenPrm[charID].Gravity = Convert.ToSingle(genForm.txtCharGravity.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharSpeedAir.Text)));
-            CharGenPrm[charID].SpeedAir = Convert.ToSingle(genForm.txtCharSpeedAir.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtWallJmpRecoilDistance.Text)));
-            CharGenPrm[charID].WallJmpRecoilDistance = Convert.ToSingle(genForm.txtWallJmpRecoilDistance.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtWallJmpDistanceLimit.Text)));
-            CharGenPrm[charID].WallJmpDistanceLimit = Convert.ToSingle(genForm.txtWallJmpDistanceLimit.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToInt32(genForm.txtCharFirstJumpDelay.Text)));
-            CharGenPrm[charID].FirstJumpDelay = Convert.ToInt32(genForm.txtCharFirstJumpDelay.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharFirstJumpHeight.Text)));
-            CharGenPrm[charID].FirstJumpHeight = Convert.ToSingle(genForm.txtCharFirstJumpHeight.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharSecondJumpHeight.Text)));
-            CharGenPrm[charID].SecondJumpHeight = Convert.ToSingle(genForm.txtCharSecondJumpHeight.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToInt32(genForm.txtCharDashDelay.Text)));
-            CharGenPrm[charID].DashDelay = Convert.ToInt32(genForm.txtCharDashDelay.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToInt32(genForm.txtCharDashDuration.Text)));
-            CharGenPrm[charID].DashDuration = Convert.ToInt32(genForm.txtCharDashDuration.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharDashSpeed.Text)));
-            CharGenPrm[charID].DashSpeed = Convert.ToSingle(genForm.txtCharDashSpeed.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharDashDistance.Text)));
-            CharGenPrm[charID].DashDistance = Convert.ToSingle(genForm.txtCharDashDistance.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharBackDashHeight.Text)));
-            CharGenPrm[charID].BackDashHeight = Convert.ToSingle(genForm.txtCharBackDashHeight.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharBackDashWeight.Text)));
-            CharGenPrm[charID].BackDashWeight = Convert.ToSingle(genForm.txtCharBackDashWeight.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharBackDashDistance.Text)));
-            CharGenPrm[charID].BackDashDistance = Convert.ToSingle(genForm.txtCharBackDashDistance.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharBackDashHeight2.Text)));
-            CharGenPrm[charID].BackDashHeight2 = Convert.ToSingle(genForm.txtCharBackDashHeight2.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtAirAtkXAdjLimit.Text)));
-            CharGenPrm[charID].AirAtkXAdjLimit = Convert.ToSingle(genForm.txtAirAtkXAdjLimit.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtAirAtkYAdjLimit.Text)));
-            CharGenPrm[charID].AirAtkYAdjLimit = Convert.ToSingle(genForm.txtAirAtkYAdjLimit.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(PlGen.CharGenPrm[charID].Unk3));
-            resultBytesList.AddRange(BitConverter.GetBytes(PlGen.CharGenPrm[charID].Unk4));
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharStrength.Text)));
-            CharGenPrm[charID].Strength = Convert.ToSingle(genForm.txtCharStrength.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharDefense.Text)));
-            CharGenPrm[charID].Defense = Convert.ToSingle(genForm.txtCharDefense.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharDamageKnockback.Text)));
-            CharGenPrm[charID].DamageKnockback = Convert.ToSingle(genForm.txtCharDamageKnockback.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharAttackKnockback.Text)));
-            CharGenPrm[charID].AttackKnockback = Convert.ToSingle(genForm.txtCharAttackKnockback.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharStatus.Text)));
-            CharGenPrm[charID].StatusDuration = Convert.ToSingle(genForm.txtCharStatus.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharQuantityProjectiles.Text)));
-            CharGenPrm[charID].QuantityProjectiles = Convert.ToSingle(genForm.txtCharQuantityProjectiles.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharHealingMultiplier.Text)));
-            CharGenPrm[charID].HealingMultiplier = Convert.ToSingle(genForm.txtCharHealingMultiplier.Text);
-            resultBytesList.AddRange(BitConverter.GetBytes(Convert.ToSingle(genForm.txtCharChakraRecoverySpeed.Text)));
-            CharGenPrm[charID].ChakraSpeed = Convert.ToSingle(genForm.txtCharChakraRecoverySpeed.Text);
-
-            byte [] resultBytes = resultBytesList.ToArray();
-            return resultBytes;
-        }
-        public static void SendTextToGenForm(GeneralParameters genForm, PlGen charGenPrm)
-        {
-            genForm.txtCharHeight.Text = ($"{charGenPrm.Height}");
-            genForm.txtCharWidth.Text = ($"{charGenPrm.Width}");
-            genForm.txtCharSpeed.Text = ($"{charGenPrm.Speed}");
-            genForm.txtRunningStartSpeed.Text = $"{charGenPrm.RunningStartSpeed}";
-            genForm.txtCharSlide.Text = ($"{charGenPrm.Slide}");
-            genForm.txtCharWeight.Text = ($"{charGenPrm.Weight}");
-            genForm.txtCharGravity.Text = ($"{charGenPrm.Gravity}");
-            genForm.txtCharSpeedAir.Text = ($"{charGenPrm.SpeedAir}");
-            genForm.txtWallJmpRecoilDistance.Text = $"{charGenPrm.WallJmpRecoilDistance}";
-            genForm.txtWallJmpDistanceLimit.Text = $"{charGenPrm.WallJmpDistanceLimit}";
-            genForm.txtCharFirstJumpDelay.Text = ($"{charGenPrm.FirstJumpDelay}");
-            genForm.txtCharFirstJumpHeight.Text = ($"{charGenPrm.FirstJumpHeight}");
-            genForm.txtCharSecondJumpHeight.Text = ($"{charGenPrm.SecondJumpHeight}");
-            genForm.txtCharDashDelay.Text = ($"{charGenPrm.DashDelay}");
-            genForm.txtCharDashDuration.Text = ($"{charGenPrm.DashDuration}");
-            genForm.txtCharDashSpeed.Text = ($"{charGenPrm.DashSpeed}"); ;
-            genForm.txtCharDashDistance.Text = ($"{charGenPrm.DashDistance}");
-            genForm.txtCharBackDashHeight.Text = ($"{charGenPrm.BackDashHeight}");
-            genForm.txtCharBackDashWeight.Text = ($"{charGenPrm.BackDashWeight}");
-            genForm.txtCharBackDashDistance.Text = ($"{charGenPrm.BackDashDistance}");
-            genForm.txtCharBackDashHeight2.Text = ($"{charGenPrm.BackDashHeight2}");
-            genForm.txtAirAtkXAdjLimit.Text = $"{charGenPrm.AirAtkXAdjLimit}";
-            genForm.txtAirAtkYAdjLimit.Text = $"{charGenPrm.AirAtkYAdjLimit}";
-            genForm.txtCharStrength.Text = ($"{charGenPrm.Strength}");
-            genForm.txtCharDefense.Text = ($"{charGenPrm.Defense}");
-            genForm.txtCharDamageKnockback.Text = ($"{charGenPrm.DamageKnockback}");
-            genForm.txtCharAttackKnockback.Text = ($"{charGenPrm.AttackKnockback}");
-            genForm.txtCharStatus.Text = ($"{charGenPrm.StatusDuration}");
-            genForm.txtCharQuantityProjectiles.Text = ($"{charGenPrm.QuantityProjectiles}");
-            genForm.txtCharHealingMultiplier.Text = ($"{charGenPrm.HealingMultiplier}");
-            genForm.txtCharChakraRecoverySpeed.Text = ($"{charGenPrm.ChakraSpeed}");
-            genForm.grpGeneralConfig.Visible = true;
-            genForm.grpMovementConfig.Visible = true;
-            genForm.grpMovementAirConfig.Visible = true;
         }
     }
 }

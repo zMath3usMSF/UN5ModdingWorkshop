@@ -21,7 +21,22 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            chkHitBoxCharPos1.CheckedChanged += ChkHitBoxCharPos1_CheckedChanged;
+            chkHitBoxCharPos2.CheckedChanged += ChkHitBoxCharPos2_CheckedChanged;
         }
+
+        private void ChkHitBoxCharPos2_CheckedChanged(object sender, EventArgs e)
+        {
+            txtHitBone2.Text = "";
+            txtHitBone2.Enabled = chkHitBoxCharPos2.Checked ? false : true;
+        }
+
+        private void ChkHitBoxCharPos1_CheckedChanged(object sender, EventArgs e)
+        {
+            txtHitBone1.Text = "";
+            txtHitBone1.Enabled = chkHitBoxCharPos1.Checked ? false : true;
+        }
+
         public void VerifyOpenedELF(object sender, EventArgs e)
         {
             btnSaveELF.Enabled = GAME.openedELF;
@@ -49,7 +64,7 @@ namespace WindowsFormsApp1
             else
             {
                 int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
-                PlAnm.SendTextAnm(this, PlAnm.GetPlAnm(charID, selectedAnm));
+                PlAnm.SendTextAnm(this, PlAnm.Get(charID, selectedAnm));
             }
         }
 
@@ -91,6 +106,7 @@ namespace WindowsFormsApp1
                 byte[] resultBytes = PlAnm.UpdateCharAnmPrm(this, charID);
                 int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
                 PlAnm.UpdateP1Anm(resultBytes, selectedAnm, charID);
+                PlAnm.SendTextAnm(this, PlAnm.Get(charID, selectedAnm));
             }
         }
 
@@ -105,10 +121,14 @@ namespace WindowsFormsApp1
             }
             else
             {
+                chkHitBoxCharPos1.CheckedChanged -= ChkHitBoxCharPos1_CheckedChanged;
+                chkHitBoxCharPos2.CheckedChanged -= ChkHitBoxCharPos2_CheckedChanged;
                 int charID = int.Parse(lblCharID2.Text);
                 int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
                 var charAnmPrm = PlAnm.PlAnmPrmBkp[charID][selectedAnm];
                 PlAnm.SendTextAnm(this, charAnmPrm);
+                chkHitBoxCharPos1.CheckedChanged += ChkHitBoxCharPos1_CheckedChanged;
+                chkHitBoxCharPos2.CheckedChanged += ChkHitBoxCharPos2_CheckedChanged;
             }
         }
 
@@ -145,11 +165,10 @@ namespace WindowsFormsApp1
             int currentCharID = int.Parse(lblCharID2.Text);
 
             int AtkAnmBlock = (int)PlAtk.CharAtkPrm[currentCharID][SelectedAtk].AnimationIdx;
-            int MaxAnm = PlGen.CharGenPrm[currentCharID].AnmCount;
 
-            for (int i = AtkAnmBlock; i < MaxAnm; i++)
+            for (int i = AtkAnmBlock; i < PlGen.List[currentCharID].AnmCount; i++)
             {
-                int AnmID = PlAnm.GetPlAnm(currentCharID, i).AnmID;
+                int AnmID = PlAnm.Get(currentCharID, i).AnmID;
 
                 if (-1 != AnmID)
                 {
@@ -193,6 +212,80 @@ namespace WindowsFormsApp1
         }
 
         private void numAnmStartHitFrame_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbDuration_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbDuration.SelectedIndex == 0)
+            {
+                numDuration.Value = 0;
+                numDuration.Enabled = true;
+            }
+            else
+            {
+                numDuration.Value = 0;
+                numDuration.Enabled = false;
+            }
+        }
+
+        private void lblCharXDistance_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numCharXDistance_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCharYDistance_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numCharYDistance_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAnmHitBoxXPos2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numHitBoxXPos2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numAnmUnk8_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numAnmUnk7_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAnmUnk7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAnmUnk8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAnmEndHitFrame2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numAnmEndHitFrame2_ValueChanged(object sender, EventArgs e)
         {
 
         }
