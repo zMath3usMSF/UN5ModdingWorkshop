@@ -59,7 +59,7 @@ namespace UN5ModdingWorkshop
 
             lblSelectedAwakening2.Text = listBox1.SelectedItem.ToString().Split(':')[0];
             cmbSwitchToAwakening.SelectedIndexChanged -= cmbSwitchToAwakening_SelectedIndexChanged;
-            PlAwk.SendTextAwk(this, PlAwk.GetCharAwk(selectedAwk, false), selectedAwk, charID);
+            PlAwk.SendTextAwk(this, PlAwk.GetCharAwk(selectedAwk, false), selectedAwk, charID, false);
             cmbSwitchToAwakening.SelectedIndexChanged += cmbSwitchToAwakening_SelectedIndexChanged;
         }
         public void cmbSwitchToAwakening_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,7 +72,7 @@ namespace UN5ModdingWorkshop
             lblSelectedAwakening2.Text = Convert.ToString(cmbSwitchToAwakening.SelectedIndex);
             listBox1.Items[selectedIndex] = $"{selectedAwk}: Char Awakening {selectedIndex + 1}";
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
-            PlAwk.SendTextAwk(this, PlAwk.GetCharAwk(selectedAwk, false), selectedAwk, charID);
+            PlAwk.SendTextAwk(this, PlAwk.GetCharAwk(selectedAwk, false), selectedAwk, charID, false);
         }
 
         private void btnUpdateP1_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace UN5ModdingWorkshop
             int charID = int.Parse(lblCharID2.Text);
             int selectedAwk = Convert.ToInt32(listBox1.SelectedItem.ToString().Split(':')[0]);
             int awkPos = listBox1.SelectedIndex;
-            PlAwk.SendTextAwk(this, PlAwk.GetCharAwk(selectedAwk, true), selectedAwk, charID);
+            PlAwk.SendTextAwk(this, PlAwk.GetCharAwk(selectedAwk, true), selectedAwk, charID, true);
             var result = PlAwk.UpdateCharAwkPrm(this, selectedAwk, charID, true);
             PlAwk.UpdateP1AwkPrm(result.charAwkPrmBlock, result.charAwkAct, selectedAwk, charID, awkPos);
         }

@@ -914,12 +914,12 @@
             this.numCharXSlide.DecimalPlaces = 2;
             this.numCharXSlide.Location = new System.Drawing.Point(80, 99);
             this.numCharXSlide.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
             this.numCharXSlide.Minimum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             -2147483648});
@@ -975,12 +975,12 @@
             this.numCharYDistance.DecimalPlaces = 2;
             this.numCharYDistance.Location = new System.Drawing.Point(551, 72);
             this.numCharYDistance.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
             this.numCharYDistance.Minimum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             -2147483648});
@@ -1003,12 +1003,12 @@
             this.numCharXDistance.DecimalPlaces = 2;
             this.numCharXDistance.Location = new System.Drawing.Point(343, 69);
             this.numCharXDistance.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
             this.numCharXDistance.Minimum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             -2147483648});
@@ -1039,7 +1039,7 @@
             // 
             this.numCharStartMoveFrame.Location = new System.Drawing.Point(132, 70);
             this.numCharStartMoveFrame.Maximum = new decimal(new int[] {
-            32766,
+            32769,
             0,
             0,
             0});
@@ -1989,8 +1989,8 @@
             this.Controls.Add(this.lblCharName2);
             this.Controls.Add(this.lblCharName);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.pnlAtkPrm);
             this.Controls.Add(this.pnlAnmPrm);
+            this.Controls.Add(this.pnlAtkPrm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

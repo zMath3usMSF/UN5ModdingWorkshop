@@ -36,11 +36,12 @@ public class Path_Table: Setor
         outTableBin.Add((byte)(NomePasta.Length > 0 ? NomePasta.Length : 1)); //Name Length(1 for empty/ Root)
         outTableBin.Add(0); //Extended atribute length(normally 0)
 
-        outTableBin.AddRange(bigendian ? BitConverter.GetBytes(DirLBA).Reverse() : 
-            BitConverter.GetBytes(DirLBA)); //LBA
-        outTableBin.AddRange(bigendian ? BitConverter.GetBytes((UInt16)ParenteDirNumber).Reverse() :
-            BitConverter.GetBytes((UInt16)ParenteDirNumber)); //Number of Parent Directory
-
+        byte[] lbaBytes = BitConverter.GetBytes(DirLBA);
+        if (bigendian) Array.Reverse(lbaBytes);
+        outTableBin.AddRange(lbaBytes);
+        byte[] parentBytes = BitConverter.GetBytes((UInt16)ParenteDirNumber);
+        if (bigendian) Array.Reverse(parentBytes);
+        outTableBin.AddRange(parentBytes);
         if (NomePasta.Length > 0)
             outTableBin.AddRange(Encoding.Default.GetBytes(NomePasta)); //Name
         else

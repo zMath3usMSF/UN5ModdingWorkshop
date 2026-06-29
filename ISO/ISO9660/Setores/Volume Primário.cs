@@ -145,8 +145,12 @@ public class Volume_Primário: Setor
         primaryout.AddRange(BitConverter.GetBytes((UInt32)LEpathtablelba));//LE
         primaryout.AddRange(BitConverter.GetBytes((UInt32)optionalLEpathtablelba));//LE Opcional
 
-        primaryout.AddRange(BitConverter.GetBytes((UInt32)BEpathtablelba).Reverse().ToArray());//BE
-        primaryout.AddRange(BitConverter.GetBytes((UInt32)optionalBEpathtablelba).Reverse().ToArray());//BE Opcional
+        byte[] beBytes = BitConverter.GetBytes((UInt32)BEpathtablelba);
+        Array.Reverse(beBytes);
+        primaryout.AddRange(beBytes);
+        byte[] optBeBytes = BitConverter.GetBytes((UInt32)optionalBEpathtablelba);
+        Array.Reverse(optBeBytes);
+        primaryout.AddRange(optBeBytes);
 
         //Directory Record[0x22]
         primaryout.AddRange(Arquivo.GetRecordData("", rootdirLBA, rootdirSize, DateTime.Now, new Arquivo.Regras[] { Arquivo.Regras.SubDiretório }));

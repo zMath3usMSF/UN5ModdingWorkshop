@@ -31,7 +31,8 @@ public static class IOextent
     /// <returns>Número de ponto flutuante(Single)</returns>
     public static Single ReadSingle(this byte[] array, int offset, bool bigendian = false)
     {
-        byte[] data = array.Skip(offset).ToArray().Take(32).ToArray();
+        byte[] data = array.Skip(offset).Take(4).ToArray(); // fix: Take(32) era errado, Single = 4 bytes
+        if (bigendian) Array.Reverse(data);
         float result = BitConverter.ToSingle(data, 0);
         return result;
     }
@@ -41,13 +42,12 @@ public static class IOextent
     /// <returns>Número de ponto flutuante(Single)</returns>
     public static Single ReadSingle(this Stream strean, bool bigendian = false)
     {
-        byte[] bitssx = strean.ReadBytes(0,4);
+        byte[] bitssx = strean.ReadBytes(0, 4);
         if (bigendian == true)
             Array.Reverse(bitssx);
         Single result = 0;
         result = BitConverter.ToSingle(bitssx, 0);
         strean.Flush();
-        //strean.Position = offset;
         return result;
     }
     /// <summary>
@@ -108,7 +108,7 @@ public static class IOextent
 
         doc.AppendChild(root);
         doc.Save(xml);
-        if(close)
+        if (close)
             xml.Close();
     }
 
@@ -117,7 +117,7 @@ public static class IOextent
         var outStrs = new List<string>();
         XmlDocument reader = new XmlDocument();
         reader.CreateElement("root");
-        reader.Load(xml); //Carregando o arquivo
+        reader.Load(xml);
 
         #region Common Tags
         XmlNodeList xnList = reader.GetElementsByTagName("Info");
@@ -168,12 +168,12 @@ public static class IOextent
 
         if (notfill == false)
         {
-            while (bin.Count % tamanhosetor != 0 || bin.Count() < tamanhosetor)//PADDING
+            while (bin.Count % tamanhosetor != 0 || bin.Count() < tamanhosetor)
                 bin.Add(0);
         }
         return bin.ToArray();
     }
-    public static uint GetParentsNumber(this string folderpath, string limiter=@"/")
+    public static uint GetParentsNumber(this string folderpath, string limiter = @"/")
     {
         uint ParentNumbers = 1;
         var parented = Directory.GetParent(folderpath);
@@ -226,7 +226,7 @@ public static class IOextent
         #region Arquivos soltos na raiz
         var origfiles = orig.GetFiles(@"\");
         var modiffiles = orig.GetFiles(@"\");
-        foreach (var file in origfiles)//Raiz
+        foreach (var file in origfiles)
         {
             var fileStr = orig.OpenFile(file, FileMode.Open);
             if (!modiffiles.Contains(file))
@@ -251,7 +251,7 @@ public static class IOextent
         #endregion
         #region Arquivos em Diretórios
         var origdirec = orig.GetDirectories(@"\");
-        foreach (var directory in origdirec)//Raiz
+        foreach (var directory in origdirec)
         {
             var origdirecFiles = orig.GetFiles(directory);
             foreach (var file in origdirecFiles)
@@ -260,7 +260,7 @@ public static class IOextent
                 foreach (var direcmo in modif.GetDirectories(@"\"))
                 {
                     var modifdirecFiles = modif.GetFiles(direcmo);
-                    
+
                     foreach (var filemo in modifdirecFiles)
                     {
                         if (filemo == file)
@@ -285,13 +285,10 @@ public static class IOextent
                 }
                 fileStr.Close();
             }
-            
+
         }
-
-
-
         #endregion
-        //Lista de arquivos para array
+
         if (list.Count > 0)
         {
             isEqual = false;
@@ -303,7 +300,6 @@ public static class IOextent
             deleteFiles = dellist.ToArray();
         else
             deleteFiles = null;
-        //Retornar
         return isEqual;
     }
 
@@ -365,7 +361,10 @@ public static class IOextent
         string result = "";
         foreach (var inte in array)
             result += Convert.ToInt32(inte).ToString();
-        result = new string(result.Reverse().ToArray());
+        // fix: result é string, .Reverse() aqui é LINQ sobre char — forçar ToCharArray
+        char[] chars = result.ToCharArray();
+        Array.Reverse(chars);
+        result = new string(chars);
         return result;
     }
     #endregion
@@ -379,7 +378,7 @@ public static class IOextent
     /// <returns>Byte[].</returns>
     public static byte[] ReadBytes(this byte[] array, int offset, int size)
     {
-        byte[] result = array.Skip(offset).ToArray().Take(size).ToArray();
+        byte[] result = array.Skip(offset).Take(size).ToArray();
         return result;
     }
 
@@ -424,7 +423,7 @@ public static class IOextent
         var result = new List<byte>();
         int offset = lba * size;
         bool stop = false;
-        while(stop==false)
+        while (stop == false)
         {
             stream.Position = offset;
             byte sizex = (byte)stream.ReadByte();
@@ -481,7 +480,7 @@ public static class IOextent
         stream.Position = offsetwrite;
         write.Position = offset;
         int c = 0;
-        while(c<size)
+        while (c < size)
         {
             stream.WriteByte((byte)write.ReadByte());
             c++;
@@ -508,17 +507,17 @@ public static class IOextent
             case 8:
                 result = (sbyte)reader.ReadByte();
                 break;
-
             case 16:
                 result = reader.ReadInt16();
                 break;
-
             case 32:
                 result = reader.ReadInt32();
                 break;
         }
         reader.Close();
-        result = bigendian ? BitConverter.ToInt32(BitConverter.GetBytes(result).Reverse().ToArray(), 0) : BitConverter.ToInt32(BitConverter.GetBytes(result), 0);
+        byte[] bytes = BitConverter.GetBytes(result);
+        if (bigendian) Array.Reverse(bytes);
+        result = BitConverter.ToInt32(bytes, 0);
         return result;
     }
 
@@ -539,17 +538,17 @@ public static class IOextent
             case 8:
                 result = (uint)reader.ReadByte();
                 break;
-
             case 16:
                 result = reader.ReadUInt16();
                 break;
-
             case 32:
                 result = reader.ReadUInt32();
                 break;
         }
         reader.Close();
-        result = bigendian ? BitConverter.ToUInt32(BitConverter.GetBytes(result).Reverse().ToArray(),0) : BitConverter.ToUInt32(BitConverter.GetBytes(result), 0);
+        byte[] bytes = BitConverter.GetBytes(result);
+        if (bigendian) Array.Reverse(bytes);
+        result = BitConverter.ToUInt32(bytes, 0);
         return result;
     }
 
@@ -564,17 +563,25 @@ public static class IOextent
     {
         byte[] bitssx = strean.ReadBytes(offset, (int)(bits / 8));
         uint result = 0;
-        switch(bits)
+        switch (bits)
         {
             case 8:
                 result = bitssx[0];
                 break;
             case 16:
-                result = bigendian ? BitConverter.ToUInt16(bitssx.Reverse().ToArray(), 0) : BitConverter.ToUInt16(bitssx, 0);
-                break;
+                {
+                    byte[] b = (byte[])bitssx.Clone();
+                    if (bigendian) Array.Reverse(b);
+                    result = BitConverter.ToUInt16(b, 0);
+                    break;
+                }
             case 32:
-                result = bigendian ? BitConverter.ToUInt32(bitssx.Reverse().ToArray(), 0) : BitConverter.ToUInt32(bitssx, 0);
-                break;
+                {
+                    byte[] b = (byte[])bitssx.Clone();
+                    if (bigendian) Array.Reverse(b);
+                    result = BitConverter.ToUInt32(b, 0);
+                    break;
+                }
         }
         return result;
     }
@@ -583,26 +590,26 @@ public static class IOextent
     /// Lê um Long sem sinal do array de bytes[buffer].
     /// </summary>
     /// <param name="offset">Posição para ler o inteiro.</param>
-    /// <param name="bits">Quantia de bits a serem lidos.</param>
     /// <param name="bigendian">Usar codificação BigEndian ao invés de LittleEndian padrão.</param>
     /// <returns>Long sem sinal(ulong)</returns>
     public static ulong ReadULong(this byte[] array, int offset, bool bigendian = false)
     {
-        ulong result = bigendian ? BitConverter.ToUInt64(array.ReadBytes(offset, 8).Reverse().ToArray(), 0) : BitConverter.ToUInt64(array.ReadBytes(offset, 8), 0);
-        return result;
+        byte[] b = array.ReadBytes(offset, 8);
+        if (bigendian) Array.Reverse(b);
+        return BitConverter.ToUInt64(b, 0);
     }
 
     /// <summary>
     /// Lê um Long sem sinal do fluxo[Stream].
     /// </summary>
     /// <param name="offset">Posição para ler o inteiro.</param>
-    /// <param name="bits">Quantia de bits a serem lidos.</param>
     /// <param name="bigendian">Usar codificação BigEndian ao invés de LittleEndian padrão.</param>
     /// <returns>Long sem sinal(ulong)</returns>
     public static ulong ReadULong(this Stream strean, int offset, bool bigendian = false)
     {
-        ulong result = bigendian ? BitConverter.ToUInt64(strean.ReadBytes(offset, 8).Reverse().ToArray(), 0) : BitConverter.ToUInt64(strean.ReadBytes(offset, 8), 0);
-        return result;
+        byte[] b = strean.ReadBytes(offset, 8);
+        if (bigendian) Array.Reverse(b);
+        return BitConverter.ToUInt64(b, 0);
     }
     #endregion
 
@@ -614,9 +621,9 @@ public static class IOextent
     /// <param name="offset">Posição para fazer a leitura.</param>
     /// <param name="breakeroff">Byte de quebra de leitura(limitador), valor padrão é o byte 0[NULL].</param>
     /// <returns>byte[]</returns>
-    public static byte[] ReadBroke(this byte[] file, int offset, byte breakeroff=0 )
+    public static byte[] ReadBroke(this byte[] file, int offset, byte breakeroff = 0)
     {
-        byte[] result = file.Skip(offset).ToArray().TakeWhile(x=>x!=breakeroff).ToArray();
+        byte[] result = file.Skip(offset).TakeWhile(x => x != breakeroff).ToArray();
         return result;
     }
 
@@ -630,7 +637,7 @@ public static class IOextent
     {
         var result = new List<byte>();
         file.Position = offset;
-        while(file.ReadBytes((int)file.Position,1)[0]!=breakeroff)
+        while (file.ReadBytes((int)file.Position, 1)[0] != breakeroff)
         {
             result.Add((byte)file.ReadByte());
         }
@@ -713,7 +720,7 @@ public static class IOextent
 
     #region Extra
 
-    public static byte[] GetFilledString(this string str,int size, byte fillwith)
+    public static byte[] GetFilledString(this string str, int size, byte fillwith)
     {
         byte[] outbin = new byte[size];
         outbin.FillArray(fillwith);
@@ -738,18 +745,24 @@ public static class IOextent
         var outbin = new List<byte>();
         if (bits == 16)
         {
-            outbin.AddRange(BitConverter.GetBytes((UInt16)entry));
-            outbin.AddRange(BitConverter.GetBytes((UInt16)entry).Reverse().ToArray());
+            byte[] le = BitConverter.GetBytes((UInt16)entry);
+            byte[] be = (byte[])le.Clone(); Array.Reverse(be);
+            outbin.AddRange(le);
+            outbin.AddRange(be);
         }
-        else if(bits==64)
+        else if (bits == 64)
         {
-            outbin.AddRange(BitConverter.GetBytes((UInt64)entry));
-            outbin.AddRange(BitConverter.GetBytes((UInt64)entry).Reverse().ToArray());
+            byte[] le = BitConverter.GetBytes((UInt64)entry);
+            byte[] be = (byte[])le.Clone(); Array.Reverse(be);
+            outbin.AddRange(le);
+            outbin.AddRange(be);
         }
-        else if(bits==32)
+        else if (bits == 32)
         {
-            outbin.AddRange(BitConverter.GetBytes((UInt32)entry));
-            outbin.AddRange(BitConverter.GetBytes((UInt32)entry).Reverse().ToArray());
+            byte[] le = BitConverter.GetBytes((UInt32)entry);
+            byte[] be = (byte[])le.Clone(); Array.Reverse(be);
+            outbin.AddRange(le);
+            outbin.AddRange(be);
         }
         return outbin.ToArray();
     }
@@ -764,7 +777,7 @@ public static class IOextent
     {
         try
         {
-            int ano = file[0] + 1900;//Ano desde 1900
+            int ano = file[0] + 1900;
             int mês = file[1];
             int dia = file[2];
             int hora = file[3];
@@ -783,13 +796,13 @@ public static class IOextent
         outbin.Add((byte)(time.Hour));
         outbin.Add((byte)(time.Minute));
         outbin.Add((byte)(time.Second));
-        outbin.Add((byte)(0));//GMT Position(REVIEW)
+        outbin.Add((byte)(0));
         return outbin.ToArray();
     }
     public static byte[] GetDateTimeOffsetData(this DateTimeOffset time)
     {
         var outbin = new List<byte>();
-        outbin.AddRange(BitConverter.GetBytes((UInt16)0));//GMT Position(REVIEW)
+        outbin.AddRange(BitConverter.GetBytes((UInt16)0));
         outbin.AddRange(BitConverter.GetBytes((Int16)time.Year));
         outbin.Add((byte)time.Month);
         outbin.Add((byte)time.Day);
@@ -811,8 +824,8 @@ public static class IOextent
         string name = "";
         var names = new List<string>();
         string pastaname = pasta.FindDirectory(dirs);
-        if(pastaname != "\0")
-          names.Add(pastaname);
+        if (pastaname != "\0")
+            names.Add(pastaname);
         var paths = new List<Path_Table>();
         paths.Add(pasta);
         for (int c = 0; c < pasta.ParenteDirNumber; c++)
@@ -827,16 +840,15 @@ public static class IOextent
                 }
                 catch (Exception) { }
             }
-           
         }
         foreach (var path in paths)
         {
             names.Add(path.NomePasta);
         }
-        for (int k = names.Count-1;k>0;k--)
+        for (int k = names.Count - 1; k > 0; k--)
         {
-            if(names[k]!= "\0")
-               name += @"\" + names[k];
+            if (names[k] != "\0")
+                name += @"\" + names[k];
         }
         return name;
     }

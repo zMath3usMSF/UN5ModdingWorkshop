@@ -51,7 +51,6 @@ namespace UN5ModdingWorkshop
                 gamePath = Path.Combine(Path.GetDirectoryName(gameFile), "GAME");
                 Directory.CreateDirectory(gamePath);
 
-                // Extrai o conteúdo da ISO usando DiscUtils
                 using (FileStream isoStream = File.OpenRead(gameFile))
                 {
                     var cdReader = new DiscUtils.Iso9660.CDReader(isoStream, joliet: false);
@@ -67,11 +66,10 @@ namespace UN5ModdingWorkshop
                 iso = Path.Combine(gamePath, "DATA\\data.iso");
                 rofs = Path.Combine(gamePath, "DATA\\ROFS");
 
-                // Divide o CVM com o cvm_tool
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = cvm_toolPath,
-                    Arguments = $"split \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p Iruka",
+                    Arguments = $"split \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p cc2fuku",
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -79,7 +77,6 @@ namespace UN5ModdingWorkshop
                 Process process = Process.Start(psi);
                 process.WaitForExit();
 
-                // Extrai o data.iso usando DiscUtils também
                 Directory.CreateDirectory(rofs);
 
                 using (FileStream dataIsoStream = File.OpenRead(iso))
@@ -91,7 +88,6 @@ namespace UN5ModdingWorkshop
                 File.Delete(cvm);
                 File.Delete(iso);
 
-                // Descompressão dos arquivos CCS
                 foreach (string file in Directory.GetFiles(rofs, "*.ccs", SearchOption.AllDirectories))
                 {
                     using (FileStream fs = File.OpenRead(file))
@@ -125,15 +121,12 @@ namespace UN5ModdingWorkshop
                 MessageBox.Show("Game successfully extracted!");
             });
         }
-        // Extrai recursivamente todos os arquivos e pastas de um diretório DiscUtils
         private static void ExtractDirectory(DiscUtils.DiscDirectoryInfo dir, string destPath)
         {
             Directory.CreateDirectory(destPath);
 
-            // Arquivos
             foreach (var file in dir.GetFiles())
             {
-                // Remove o sufixo ";1" que o ISO9660 adiciona
                 string cleanName = file.Name.Contains(";")
                     ? file.Name.Substring(0, file.Name.LastIndexOf(';'))
                     : file.Name;
@@ -144,12 +137,10 @@ namespace UN5ModdingWorkshop
                 using (FileStream dst = File.Create(destFile))
                     src.CopyTo(dst);
 
-                // Preserva data de modificação
                 File.SetLastWriteTime(destFile, file.LastWriteTime);
                 File.SetCreationTime(destFile, file.LastWriteTime);
             }
 
-            // Subpastas recursivo
             foreach (var subDir in dir.GetDirectories())
             {
                 string destSub = Path.Combine(destPath, subDir.Name);
@@ -172,10 +163,8 @@ namespace UN5ModdingWorkshop
                 iso = Path.Combine(sourceFolder, @"DATA\data.iso");
                 rofs = Path.Combine(sourceFolder, @"DATA\ROFS");
 
-                // ── 1. Comprime CCS e gera gzlist ──────────────────────────
                 await MakeGzlist();
 
-                // ── 2. Cria data.iso a partir do ROFS ──────────────────────
                 Main.instance.Invoke(new Action(() =>
                     Main.instance.lblProgress.Text = "Criando DATA.ISO..."));
 
@@ -200,25 +189,21 @@ namespace UN5ModdingWorkshop
                     );
                 });
 
-                // ── 3. Empacota data.iso no DATA.CVM ───────────────────────
                 Main.instance.Invoke(new Action(() =>
                     Main.instance.lblProgress.Text = "Convertendo DATA.ISO para DATA.CVM..."));
 
                 await RunProcessAsync(
                     cvm_toolPath,
-                    $"mkcvm \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p Iruka",
+                    $"mkcvm \"{cvm}\" \"{iso}\" \"{cvm_hdrPath}\" -p cc2fuku",
                     "Erro ao criar CVM"
                 );
 
-                // Limpa temporários do ROFS
                 if (Directory.Exists(rofs)) Directory.Delete(rofs, true);
                 if (File.Exists(iso)) File.Delete(iso);
 
-                // ── 4. Cria a ISO final do jogo (sem UN5.ELF) ──────────────
                 Main.instance.Invoke(new Action(() =>
                     Main.instance.lblProgress.Text = "Criando ISO final do jogo..."));
 
-                // Arquivos a ignorar na ISO final
                 var excludeFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "UN5.ELF"
@@ -297,7 +282,6 @@ namespace UN5ModdingWorkshop
             });
         }
 
-        // Método auxiliar que resolve o deadlock lendo stdout/stderr em paralelo
         private static async Task RunProcessAsync(string fileName, string arguments, string errorPrefix)
         {
             var psi = new ProcessStartInfo
@@ -318,7 +302,6 @@ namespace UN5ModdingWorkshop
                 var stdout = new StringBuilder();
                 var stderr = new StringBuilder();
 
-                // Lê em paralelo via eventos — mais seguro que ReadToEndAsync
                 process.OutputDataReceived += (s, e) => { if (e.Data != null) stdout.AppendLine(e.Data); };
                 process.ErrorDataReceived += (s, e) => { if (e.Data != null) stderr.AppendLine(e.Data); };
 

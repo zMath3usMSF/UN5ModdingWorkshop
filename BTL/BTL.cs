@@ -56,7 +56,6 @@ namespace UN5ModdingWorkshop
                     PlGen.ListBkp.Add(clone);
                     #endregion
                 }
-                PlAwk.ReadCharAwkIDList();
             }
         }
 

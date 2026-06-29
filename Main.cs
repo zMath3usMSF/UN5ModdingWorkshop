@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
         {
             GeneralParameters genForm = new GeneralParameters();
             int charID = CharSel.CharSelID[CharSel.SelectedID];
-            string charName = BTL.charNameList[charID];
+            string charName = charID < 93 ? BTL.charNameList[charID] : "???";
 
             genForm.timer1.Enabled = true;
             genForm.UpdateLabels(charName, charID);
@@ -207,6 +207,17 @@ namespace WindowsFormsApp1
         private void buildGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GAME.Build();
+        }
+
+        private void btnEditJutsusParameters_Click(object sender, EventArgs e)
+        {
+            int charID = CharSel.CharSelID[CharSel.SelectedID];
+            string charName = "";
+
+            JutsuParameters sklForm = new JutsuParameters();
+            sklForm.timer1.Enabled = true;
+            sklForm.UpdateLabels(charName, charID.ToString());
+            sklForm.Show();
         }
     }
 }

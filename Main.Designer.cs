@@ -105,14 +105,14 @@
             // pCSX2MemoryProcessToolStripMenuItem
             // 
             this.pCSX2MemoryProcessToolStripMenuItem.Name = "pCSX2MemoryProcessToolStripMenuItem";
-            this.pCSX2MemoryProcessToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pCSX2MemoryProcessToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.pCSX2MemoryProcessToolStripMenuItem.Text = "PCSX2 Process";
             this.pCSX2MemoryProcessToolStripMenuItem.Click += new System.EventHandler(this.pCSX2MemoryProcessToolStripMenuItem_Click);
             // 
             // openELFToolStripMenuItem
             // 
             this.openELFToolStripMenuItem.Name = "openELFToolStripMenuItem";
-            this.openELFToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openELFToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.openELFToolStripMenuItem.Text = "ELF";
             this.openELFToolStripMenuItem.Click += new System.EventHandler(this.openELFToolStripMenuItem_Click);
             // 
@@ -272,7 +272,7 @@
             this.btnEditJutsusParameters.TabIndex = 19;
             this.btnEditJutsusParameters.Text = "Edit Jutsu";
             this.btnEditJutsusParameters.UseVisualStyleBackColor = true;
-            this.btnEditJutsusParameters.Visible = false;
+            this.btnEditJutsusParameters.Click += new System.EventHandler(this.btnEditJutsusParameters_Click);
             // 
             // btnEditAwekeningParameters
             // 
@@ -280,7 +280,7 @@
             this.btnEditAwekeningParameters.Name = "btnEditAwekeningParameters";
             this.btnEditAwekeningParameters.Size = new System.Drawing.Size(151, 23);
             this.btnEditAwekeningParameters.TabIndex = 18;
-            this.btnEditAwekeningParameters.Text = "Edit Awekeninng";
+            this.btnEditAwekeningParameters.Text = "Edit Awekening";
             this.btnEditAwekeningParameters.UseVisualStyleBackColor = true;
             this.btnEditAwekeningParameters.Visible = false;
             this.btnEditAwekeningParameters.Click += new System.EventHandler(this.btnEditAwekeningParameters_Click);

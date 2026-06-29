@@ -21,7 +21,7 @@ namespace UN5ModdingWorkshop
         public uint UnkFlag1 = 2;
         public uint UnkFlag2 = 2;
 
-        public int CharMoveFrame = 0x7FFF;
+        public short CharMoveFrame = 0x7FFF;
         public float CharXDistance = 0f;
         public float CharYDistance = 0f;
         public float CharXSlide = 0f;
@@ -102,11 +102,13 @@ namespace UN5ModdingWorkshop
         {"OBJ_2cmn00t0 neck", new byte[]{ 0x40, 0x88, 0x49, 0x00 }},
         {"OBJ_2cmn00t0 head", new byte[]{ 0x20, 0xB9, 0x42, 0x00 }},
         {"OBJ_2cmn00t0 l clavicle", new byte[]{ 0x60, 0xC3, 0x41, 0x00 }},
+        {"OBJ_2cmn00t0 l upperarm", new byte[]{ 0x30, 0x48, 0x46, 0x00 }},
         {"OBJ_2cmn00t0 l forearm", new byte[]{ 0x40, 0xC3, 0x41, 0x00 }},
         {"OBJ_2cmn00t0 l hand", new byte[]{ 0xB0, 0x90, 0x46, 0x00 }},
         {"OBJ_2cmn00t0 l finger0", new byte[]{ 0x80, 0xC4, 0x41, 0x00 }},
         {"OBJ_2cmn00t0 r clavicle", new byte[]{ 0xC0, 0x6F, 0x42, 0x00 }},
         {"OBJ_2cmn00t0 r upperarm", new byte[]{ 0xC0, 0x26, 0x4C, 0x00 }},
+        {"OBJ_2cmn00t0 r forearm", new byte[]{ 0x60, 0x93, 0x45, 0x00 }},
         {"OBJ_2cmn00t0 r hand", new byte[]{ 0x90, 0x90, 0x46, 0x00 }},
         {"OBJ_2cmn00t0 r finger0", new byte[]{ 0x80, 0xC3, 0x41, 0x00 }},
         {"OBJ_2cmn00t0 tail", new byte[]{ 0x80, 0x26, 0x4C, 0x00 }},
@@ -378,8 +380,8 @@ namespace UN5ModdingWorkshop
             Anm.UnkFlag1 = (byte)movForm.numAnmUnk2.Value;
             AnmData.Add((byte)movForm.numAnmUnk3.Value);
             Anm.UnkFlag2 = (byte)movForm.numAnmUnk3.Value;
-            AnmData.AddRange(BitConverter.GetBytes(Convert.ToInt16((short)movForm.numCharStartMoveFrame.Value)));
-            Anm.CharMoveFrame = movForm.chkNoneCharStartMoveFrame.Checked == true ? 0x7FFF : (int)movForm.numCharStartMoveFrame.Value;
+            Anm.CharMoveFrame = movForm.chkNoneCharStartMoveFrame.Checked == true ? (short)0x7FFF : (short)movForm.numCharStartMoveFrame.Value;
+            AnmData.AddRange(BitConverter.GetBytes(Convert.ToInt16((short)Anm.CharMoveFrame)));
             AnmData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numCharXDistance.Value)));
             Anm.CharXDistance = Convert.ToSingle(movForm.numCharXDistance.Value);
             AnmData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numCharYDistance.Value)));
