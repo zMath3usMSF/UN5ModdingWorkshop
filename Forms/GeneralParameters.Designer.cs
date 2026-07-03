@@ -51,6 +51,13 @@
             this.lblCharDashSpeed = new System.Windows.Forms.Label();
             this.lblCharDashDistance = new System.Windows.Forms.Label();
             this.grpMovementConfig = new System.Windows.Forms.GroupBox();
+            this.numCharBackDashHeight2 = new System.Windows.Forms.NumericUpDown();
+            this.numCharBackDashHeight = new System.Windows.Forms.NumericUpDown();
+            this.numCharBackDashWeight = new System.Windows.Forms.NumericUpDown();
+            this.numCharBackDashDistance = new System.Windows.Forms.NumericUpDown();
+            this.numCharSlide = new System.Windows.Forms.NumericUpDown();
+            this.numCharSpeed = new System.Windows.Forms.NumericUpDown();
+            this.numRunningStartSpeed = new System.Windows.Forms.NumericUpDown();
             this.lblRunningStartSpeed = new System.Windows.Forms.Label();
             this.grpGeneralConfig = new System.Windows.Forms.GroupBox();
             this.numCharWeight = new System.Windows.Forms.NumericUpDown();
@@ -65,6 +72,19 @@
             this.numCharDefense = new System.Windows.Forms.NumericUpDown();
             this.numCharStrength = new System.Windows.Forms.NumericUpDown();
             this.grpMovementAirConfig = new System.Windows.Forms.GroupBox();
+            this.numAirAtkYAdjLimit = new System.Windows.Forms.NumericUpDown();
+            this.numAirAtkXAdjLimit = new System.Windows.Forms.NumericUpDown();
+            this.numWallJmpDistanceLimit = new System.Windows.Forms.NumericUpDown();
+            this.numWallJmpRecoilDistance = new System.Windows.Forms.NumericUpDown();
+            this.numCharGravity = new System.Windows.Forms.NumericUpDown();
+            this.numCharSpeedAir = new System.Windows.Forms.NumericUpDown();
+            this.numCharDashDistance = new System.Windows.Forms.NumericUpDown();
+            this.numCharDashDuration = new System.Windows.Forms.NumericUpDown();
+            this.numCharDashSpeed = new System.Windows.Forms.NumericUpDown();
+            this.numCharDashDelay = new System.Windows.Forms.NumericUpDown();
+            this.numCharSecondJumpHeight = new System.Windows.Forms.NumericUpDown();
+            this.numCharFirstJumpHeight = new System.Windows.Forms.NumericUpDown();
+            this.numCharFirstJumpDelay = new System.Windows.Forms.NumericUpDown();
             this.lblAirAtkYAdjLimit = new System.Windows.Forms.Label();
             this.lblAirAtkXAdjLimit = new System.Windows.Forms.Label();
             this.lblWallJmpDistanceLimit = new System.Windows.Forms.Label();
@@ -77,27 +97,14 @@
             this.lblCharID2 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.numRunningStartSpeed = new System.Windows.Forms.NumericUpDown();
-            this.numCharSpeed = new System.Windows.Forms.NumericUpDown();
-            this.numCharSlide = new System.Windows.Forms.NumericUpDown();
-            this.numCharBackDashDistance = new System.Windows.Forms.NumericUpDown();
-            this.numCharBackDashWeight = new System.Windows.Forms.NumericUpDown();
-            this.numCharBackDashHeight = new System.Windows.Forms.NumericUpDown();
-            this.numCharBackDashHeight2 = new System.Windows.Forms.NumericUpDown();
-            this.numCharFirstJumpDelay = new System.Windows.Forms.NumericUpDown();
-            this.numCharFirstJumpHeight = new System.Windows.Forms.NumericUpDown();
-            this.numCharSecondJumpHeight = new System.Windows.Forms.NumericUpDown();
-            this.numCharDashDelay = new System.Windows.Forms.NumericUpDown();
-            this.numCharDashSpeed = new System.Windows.Forms.NumericUpDown();
-            this.numCharDashDuration = new System.Windows.Forms.NumericUpDown();
-            this.numCharDashDistance = new System.Windows.Forms.NumericUpDown();
-            this.numCharSpeedAir = new System.Windows.Forms.NumericUpDown();
-            this.numCharGravity = new System.Windows.Forms.NumericUpDown();
-            this.numWallJmpRecoilDistance = new System.Windows.Forms.NumericUpDown();
-            this.numWallJmpDistanceLimit = new System.Windows.Forms.NumericUpDown();
-            this.numAirAtkXAdjLimit = new System.Windows.Forms.NumericUpDown();
-            this.numAirAtkYAdjLimit = new System.Windows.Forms.NumericUpDown();
             this.grpMovementConfig.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSlide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRunningStartSpeed)).BeginInit();
             this.grpGeneralConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCharWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCharHeight)).BeginInit();
@@ -111,26 +118,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCharDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCharStrength)).BeginInit();
             this.grpMovementAirConfig.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRunningStartSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSlide)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashWeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpDelay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSecondJumpHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDelay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDuration)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeedAir)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharGravity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpRecoilDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpDistanceLimit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAirAtkXAdjLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAirAtkYAdjLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAirAtkXAdjLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpDistanceLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpRecoilDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharGravity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeedAir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDuration)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSecondJumpHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpDelay)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCharHeight
@@ -391,6 +391,103 @@
             this.grpMovementConfig.Text = "Movement Parameters:";
             this.grpMovementConfig.Visible = false;
             // 
+            // numCharBackDashHeight2
+            // 
+            this.numCharBackDashHeight2.Location = new System.Drawing.Point(112, 72);
+            this.numCharBackDashHeight2.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharBackDashHeight2.Name = "numCharBackDashHeight2";
+            this.numCharBackDashHeight2.Size = new System.Drawing.Size(54, 20);
+            this.numCharBackDashHeight2.TabIndex = 71;
+            // 
+            // numCharBackDashHeight
+            // 
+            this.numCharBackDashHeight.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCharBackDashHeight.Location = new System.Drawing.Point(509, 45);
+            this.numCharBackDashHeight.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharBackDashHeight.Name = "numCharBackDashHeight";
+            this.numCharBackDashHeight.Size = new System.Drawing.Size(67, 20);
+            this.numCharBackDashHeight.TabIndex = 70;
+            // 
+            // numCharBackDashWeight
+            // 
+            this.numCharBackDashWeight.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCharBackDashWeight.Location = new System.Drawing.Point(331, 45);
+            this.numCharBackDashWeight.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharBackDashWeight.Name = "numCharBackDashWeight";
+            this.numCharBackDashWeight.Size = new System.Drawing.Size(64, 20);
+            this.numCharBackDashWeight.TabIndex = 69;
+            // 
+            // numCharBackDashDistance
+            // 
+            this.numCharBackDashDistance.DecimalPlaces = 2;
+            this.numCharBackDashDistance.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numCharBackDashDistance.Location = new System.Drawing.Point(117, 46);
+            this.numCharBackDashDistance.Name = "numCharBackDashDistance";
+            this.numCharBackDashDistance.Size = new System.Drawing.Size(105, 20);
+            this.numCharBackDashDistance.TabIndex = 68;
+            // 
+            // numCharSlide
+            // 
+            this.numCharSlide.DecimalPlaces = 2;
+            this.numCharSlide.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numCharSlide.Location = new System.Drawing.Point(498, 19);
+            this.numCharSlide.Name = "numCharSlide";
+            this.numCharSlide.Size = new System.Drawing.Size(78, 20);
+            this.numCharSlide.TabIndex = 67;
+            // 
+            // numCharSpeed
+            // 
+            this.numCharSpeed.Location = new System.Drawing.Point(325, 19);
+            this.numCharSpeed.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharSpeed.Name = "numCharSpeed";
+            this.numCharSpeed.Size = new System.Drawing.Size(70, 20);
+            this.numCharSpeed.TabIndex = 66;
+            // 
+            // numRunningStartSpeed
+            // 
+            this.numRunningStartSpeed.DecimalPlaces = 2;
+            this.numRunningStartSpeed.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numRunningStartSpeed.Location = new System.Drawing.Point(121, 19);
+            this.numRunningStartSpeed.Name = "numRunningStartSpeed";
+            this.numRunningStartSpeed.Size = new System.Drawing.Size(108, 20);
+            this.numRunningStartSpeed.TabIndex = 66;
+            // 
             // lblRunningStartSpeed
             // 
             this.lblRunningStartSpeed.AutoSize = true;
@@ -613,6 +710,194 @@
             this.grpMovementAirConfig.Text = "Movement (Air) Config:";
             this.grpMovementAirConfig.Visible = false;
             // 
+            // numAirAtkYAdjLimit
+            // 
+            this.numAirAtkYAdjLimit.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numAirAtkYAdjLimit.Location = new System.Drawing.Point(104, 125);
+            this.numAirAtkYAdjLimit.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAirAtkYAdjLimit.Name = "numAirAtkYAdjLimit";
+            this.numAirAtkYAdjLimit.Size = new System.Drawing.Size(64, 20);
+            this.numAirAtkYAdjLimit.TabIndex = 83;
+            // 
+            // numAirAtkXAdjLimit
+            // 
+            this.numAirAtkXAdjLimit.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numAirAtkXAdjLimit.Location = new System.Drawing.Point(512, 100);
+            this.numAirAtkXAdjLimit.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAirAtkXAdjLimit.Name = "numAirAtkXAdjLimit";
+            this.numAirAtkXAdjLimit.Size = new System.Drawing.Size(64, 20);
+            this.numAirAtkXAdjLimit.TabIndex = 82;
+            // 
+            // numWallJmpDistanceLimit
+            // 
+            this.numWallJmpDistanceLimit.DecimalPlaces = 2;
+            this.numWallJmpDistanceLimit.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numWallJmpDistanceLimit.Location = new System.Drawing.Point(344, 100);
+            this.numWallJmpDistanceLimit.Name = "numWallJmpDistanceLimit";
+            this.numWallJmpDistanceLimit.Size = new System.Drawing.Size(67, 20);
+            this.numWallJmpDistanceLimit.TabIndex = 81;
+            // 
+            // numWallJmpRecoilDistance
+            // 
+            this.numWallJmpRecoilDistance.DecimalPlaces = 2;
+            this.numWallJmpRecoilDistance.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numWallJmpRecoilDistance.Location = new System.Drawing.Point(144, 100);
+            this.numWallJmpRecoilDistance.Name = "numWallJmpRecoilDistance";
+            this.numWallJmpRecoilDistance.Size = new System.Drawing.Size(66, 20);
+            this.numWallJmpRecoilDistance.TabIndex = 72;
+            // 
+            // numCharGravity
+            // 
+            this.numCharGravity.Location = new System.Drawing.Point(435, 74);
+            this.numCharGravity.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharGravity.Name = "numCharGravity";
+            this.numCharGravity.Size = new System.Drawing.Size(141, 20);
+            this.numCharGravity.TabIndex = 80;
+            // 
+            // numCharSpeedAir
+            // 
+            this.numCharSpeedAir.Location = new System.Drawing.Point(270, 73);
+            this.numCharSpeedAir.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharSpeedAir.Name = "numCharSpeedAir";
+            this.numCharSpeedAir.Size = new System.Drawing.Size(78, 20);
+            this.numCharSpeedAir.TabIndex = 79;
+            // 
+            // numCharDashDistance
+            // 
+            this.numCharDashDistance.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCharDashDistance.Location = new System.Drawing.Point(92, 74);
+            this.numCharDashDistance.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharDashDistance.Name = "numCharDashDistance";
+            this.numCharDashDistance.Size = new System.Drawing.Size(74, 20);
+            this.numCharDashDistance.TabIndex = 78;
+            // 
+            // numCharDashDuration
+            // 
+            this.numCharDashDuration.Location = new System.Drawing.Point(445, 48);
+            this.numCharDashDuration.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharDashDuration.Name = "numCharDashDuration";
+            this.numCharDashDuration.Size = new System.Drawing.Size(131, 20);
+            this.numCharDashDuration.TabIndex = 77;
+            // 
+            // numCharDashSpeed
+            // 
+            this.numCharDashSpeed.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCharDashSpeed.Location = new System.Drawing.Point(263, 48);
+            this.numCharDashSpeed.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharDashSpeed.Name = "numCharDashSpeed";
+            this.numCharDashSpeed.Size = new System.Drawing.Size(85, 20);
+            this.numCharDashSpeed.TabIndex = 76;
+            // 
+            // numCharDashDelay
+            // 
+            this.numCharDashDelay.Location = new System.Drawing.Point(77, 48);
+            this.numCharDashDelay.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharDashDelay.Name = "numCharDashDelay";
+            this.numCharDashDelay.Size = new System.Drawing.Size(89, 20);
+            this.numCharDashDelay.TabIndex = 75;
+            // 
+            // numCharSecondJumpHeight
+            // 
+            this.numCharSecondJumpHeight.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCharSecondJumpHeight.Location = new System.Drawing.Point(476, 22);
+            this.numCharSecondJumpHeight.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharSecondJumpHeight.Name = "numCharSecondJumpHeight";
+            this.numCharSecondJumpHeight.Size = new System.Drawing.Size(100, 20);
+            this.numCharSecondJumpHeight.TabIndex = 74;
+            // 
+            // numCharFirstJumpHeight
+            // 
+            this.numCharFirstJumpHeight.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCharFirstJumpHeight.Location = new System.Drawing.Point(284, 22);
+            this.numCharFirstJumpHeight.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharFirstJumpHeight.Name = "numCharFirstJumpHeight";
+            this.numCharFirstJumpHeight.Size = new System.Drawing.Size(64, 20);
+            this.numCharFirstJumpHeight.TabIndex = 73;
+            // 
+            // numCharFirstJumpDelay
+            // 
+            this.numCharFirstJumpDelay.Location = new System.Drawing.Point(99, 22);
+            this.numCharFirstJumpDelay.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCharFirstJumpDelay.Name = "numCharFirstJumpDelay";
+            this.numCharFirstJumpDelay.Size = new System.Drawing.Size(67, 20);
+            this.numCharFirstJumpDelay.TabIndex = 72;
+            // 
             // lblAirAtkYAdjLimit
             // 
             this.lblAirAtkYAdjLimit.AutoSize = true;
@@ -662,7 +947,6 @@
             // 
             // btnSaveELF
             // 
-            this.btnSaveELF.Enabled = false;
             this.btnSaveELF.Location = new System.Drawing.Point(421, 410);
             this.btnSaveELF.Name = "btnSaveELF";
             this.btnSaveELF.Size = new System.Drawing.Size(75, 23);
@@ -725,291 +1009,6 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
-            // numRunningStartSpeed
-            // 
-            this.numRunningStartSpeed.DecimalPlaces = 2;
-            this.numRunningStartSpeed.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numRunningStartSpeed.Location = new System.Drawing.Point(121, 19);
-            this.numRunningStartSpeed.Name = "numRunningStartSpeed";
-            this.numRunningStartSpeed.Size = new System.Drawing.Size(108, 20);
-            this.numRunningStartSpeed.TabIndex = 66;
-            // 
-            // numCharSpeed
-            // 
-            this.numCharSpeed.Location = new System.Drawing.Point(325, 19);
-            this.numCharSpeed.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharSpeed.Name = "numCharSpeed";
-            this.numCharSpeed.Size = new System.Drawing.Size(70, 20);
-            this.numCharSpeed.TabIndex = 66;
-            // 
-            // numCharSlide
-            // 
-            this.numCharSlide.DecimalPlaces = 2;
-            this.numCharSlide.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numCharSlide.Location = new System.Drawing.Point(498, 19);
-            this.numCharSlide.Name = "numCharSlide";
-            this.numCharSlide.Size = new System.Drawing.Size(78, 20);
-            this.numCharSlide.TabIndex = 67;
-            // 
-            // numCharBackDashDistance
-            // 
-            this.numCharBackDashDistance.DecimalPlaces = 2;
-            this.numCharBackDashDistance.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numCharBackDashDistance.Location = new System.Drawing.Point(117, 46);
-            this.numCharBackDashDistance.Name = "numCharBackDashDistance";
-            this.numCharBackDashDistance.Size = new System.Drawing.Size(105, 20);
-            this.numCharBackDashDistance.TabIndex = 68;
-            // 
-            // numCharBackDashWeight
-            // 
-            this.numCharBackDashWeight.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numCharBackDashWeight.Location = new System.Drawing.Point(331, 45);
-            this.numCharBackDashWeight.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharBackDashWeight.Name = "numCharBackDashWeight";
-            this.numCharBackDashWeight.Size = new System.Drawing.Size(64, 20);
-            this.numCharBackDashWeight.TabIndex = 69;
-            // 
-            // numCharBackDashHeight
-            // 
-            this.numCharBackDashHeight.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numCharBackDashHeight.Location = new System.Drawing.Point(509, 45);
-            this.numCharBackDashHeight.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharBackDashHeight.Name = "numCharBackDashHeight";
-            this.numCharBackDashHeight.Size = new System.Drawing.Size(67, 20);
-            this.numCharBackDashHeight.TabIndex = 70;
-            // 
-            // numCharBackDashHeight2
-            // 
-            this.numCharBackDashHeight2.Location = new System.Drawing.Point(112, 72);
-            this.numCharBackDashHeight2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharBackDashHeight2.Name = "numCharBackDashHeight2";
-            this.numCharBackDashHeight2.Size = new System.Drawing.Size(54, 20);
-            this.numCharBackDashHeight2.TabIndex = 71;
-            // 
-            // numCharFirstJumpDelay
-            // 
-            this.numCharFirstJumpDelay.Location = new System.Drawing.Point(99, 22);
-            this.numCharFirstJumpDelay.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharFirstJumpDelay.Name = "numCharFirstJumpDelay";
-            this.numCharFirstJumpDelay.Size = new System.Drawing.Size(67, 20);
-            this.numCharFirstJumpDelay.TabIndex = 72;
-            // 
-            // numCharFirstJumpHeight
-            // 
-            this.numCharFirstJumpHeight.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numCharFirstJumpHeight.Location = new System.Drawing.Point(284, 22);
-            this.numCharFirstJumpHeight.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharFirstJumpHeight.Name = "numCharFirstJumpHeight";
-            this.numCharFirstJumpHeight.Size = new System.Drawing.Size(64, 20);
-            this.numCharFirstJumpHeight.TabIndex = 73;
-            // 
-            // numCharSecondJumpHeight
-            // 
-            this.numCharSecondJumpHeight.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numCharSecondJumpHeight.Location = new System.Drawing.Point(476, 22);
-            this.numCharSecondJumpHeight.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharSecondJumpHeight.Name = "numCharSecondJumpHeight";
-            this.numCharSecondJumpHeight.Size = new System.Drawing.Size(100, 20);
-            this.numCharSecondJumpHeight.TabIndex = 74;
-            // 
-            // numCharDashDelay
-            // 
-            this.numCharDashDelay.Location = new System.Drawing.Point(77, 48);
-            this.numCharDashDelay.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharDashDelay.Name = "numCharDashDelay";
-            this.numCharDashDelay.Size = new System.Drawing.Size(89, 20);
-            this.numCharDashDelay.TabIndex = 75;
-            // 
-            // numCharDashSpeed
-            // 
-            this.numCharDashSpeed.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numCharDashSpeed.Location = new System.Drawing.Point(263, 48);
-            this.numCharDashSpeed.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharDashSpeed.Name = "numCharDashSpeed";
-            this.numCharDashSpeed.Size = new System.Drawing.Size(85, 20);
-            this.numCharDashSpeed.TabIndex = 76;
-            // 
-            // numCharDashDuration
-            // 
-            this.numCharDashDuration.Location = new System.Drawing.Point(445, 48);
-            this.numCharDashDuration.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharDashDuration.Name = "numCharDashDuration";
-            this.numCharDashDuration.Size = new System.Drawing.Size(131, 20);
-            this.numCharDashDuration.TabIndex = 77;
-            // 
-            // numCharDashDistance
-            // 
-            this.numCharDashDistance.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numCharDashDistance.Location = new System.Drawing.Point(92, 74);
-            this.numCharDashDistance.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharDashDistance.Name = "numCharDashDistance";
-            this.numCharDashDistance.Size = new System.Drawing.Size(74, 20);
-            this.numCharDashDistance.TabIndex = 78;
-            // 
-            // numCharSpeedAir
-            // 
-            this.numCharSpeedAir.Location = new System.Drawing.Point(270, 73);
-            this.numCharSpeedAir.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharSpeedAir.Name = "numCharSpeedAir";
-            this.numCharSpeedAir.Size = new System.Drawing.Size(78, 20);
-            this.numCharSpeedAir.TabIndex = 79;
-            // 
-            // numCharGravity
-            // 
-            this.numCharGravity.Location = new System.Drawing.Point(435, 74);
-            this.numCharGravity.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numCharGravity.Name = "numCharGravity";
-            this.numCharGravity.Size = new System.Drawing.Size(141, 20);
-            this.numCharGravity.TabIndex = 80;
-            // 
-            // numWallJmpRecoilDistance
-            // 
-            this.numWallJmpRecoilDistance.DecimalPlaces = 2;
-            this.numWallJmpRecoilDistance.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numWallJmpRecoilDistance.Location = new System.Drawing.Point(144, 100);
-            this.numWallJmpRecoilDistance.Name = "numWallJmpRecoilDistance";
-            this.numWallJmpRecoilDistance.Size = new System.Drawing.Size(66, 20);
-            this.numWallJmpRecoilDistance.TabIndex = 72;
-            // 
-            // numWallJmpDistanceLimit
-            // 
-            this.numWallJmpDistanceLimit.DecimalPlaces = 2;
-            this.numWallJmpDistanceLimit.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numWallJmpDistanceLimit.Location = new System.Drawing.Point(344, 100);
-            this.numWallJmpDistanceLimit.Name = "numWallJmpDistanceLimit";
-            this.numWallJmpDistanceLimit.Size = new System.Drawing.Size(67, 20);
-            this.numWallJmpDistanceLimit.TabIndex = 81;
-            // 
-            // numAirAtkXAdjLimit
-            // 
-            this.numAirAtkXAdjLimit.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numAirAtkXAdjLimit.Location = new System.Drawing.Point(512, 100);
-            this.numAirAtkXAdjLimit.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numAirAtkXAdjLimit.Name = "numAirAtkXAdjLimit";
-            this.numAirAtkXAdjLimit.Size = new System.Drawing.Size(64, 20);
-            this.numAirAtkXAdjLimit.TabIndex = 82;
-            // 
-            // numAirAtkYAdjLimit
-            // 
-            this.numAirAtkYAdjLimit.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numAirAtkYAdjLimit.Location = new System.Drawing.Point(104, 125);
-            this.numAirAtkYAdjLimit.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numAirAtkYAdjLimit.Name = "numAirAtkYAdjLimit";
-            this.numAirAtkYAdjLimit.Size = new System.Drawing.Size(64, 20);
-            this.numAirAtkYAdjLimit.TabIndex = 83;
-            // 
             // GeneralParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1032,6 +1031,13 @@
             this.Text = "Edit General Parameters:";
             this.grpMovementConfig.ResumeLayout(false);
             this.grpMovementConfig.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSlide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRunningStartSpeed)).EndInit();
             this.grpGeneralConfig.ResumeLayout(false);
             this.grpGeneralConfig.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCharWeight)).EndInit();
@@ -1047,26 +1053,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCharStrength)).EndInit();
             this.grpMovementAirConfig.ResumeLayout(false);
             this.grpMovementAirConfig.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRunningStartSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSlide)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashWeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharBackDashHeight2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpDelay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSecondJumpHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDelay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDuration)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeedAir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCharGravity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpRecoilDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpDistanceLimit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAirAtkXAdjLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAirAtkYAdjLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAirAtkXAdjLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpDistanceLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWallJmpRecoilDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharGravity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSpeedAir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDuration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharDashDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharSecondJumpHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCharFirstJumpDelay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

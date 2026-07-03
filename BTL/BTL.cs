@@ -125,8 +125,7 @@ namespace UN5ModdingWorkshop
             int LastLoadingTimeLog = Util.ReadProcessMemoryInt32(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x60);
             if (Util.ReadProcessMemoryInt32(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1D0)) == 0xF &&
                 LastLoadingTimeLog != 0 &&
-                PlayerID != 0 &&
-                PlayerID != GAME.lastSelectedID)
+                PlayerID != 0)
             {
                 GAME.lastSelectedID = PlayerID;
                 Util.WriteProcessMemoryInt32(isP1 == true ? Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x50 :
@@ -142,6 +141,12 @@ namespace UN5ModdingWorkshop
 
                 Util.WriteProcessMemoryInt32(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1D0), 0x18);
                 //Restart Battle
+
+                int test = Util.ReadProcessMemoryInt32(GAME.Global_Pointer + 0xC0);
+                Util.WriteProcessMemoryInt32(test + 0x4, 0x0);
+                Util.WriteProcessMemoryInt32(test + 0x8, 0x0);
+                //Util.WriteProcessMemoryInt8(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x9FF, 0x0);
+                //Turn Off Auto-Support
             }
         }
 

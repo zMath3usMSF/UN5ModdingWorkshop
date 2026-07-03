@@ -256,13 +256,13 @@ namespace UN5ModdingWorkshop
         }
         public static void WriteToELF(byte[] resultBytes, int charID)
         {
-            if (!File.Exists(GAME.caminhoELF))
+            if (!File.Exists(GAME.elfPath))
             {
                 MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (FileStream fs = new FileStream(GAME.elfPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     int skipChars = charID * 0x8 + 0x4;
                     int mainAreaOffset = GAME.isUN6 == true ? 0x317E80 : 0x4ACA40;

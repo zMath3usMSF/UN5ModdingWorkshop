@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -109,6 +110,7 @@ namespace UN5ModdingWorkshop
                 BTL.ReadCharNameTbl(processHandle, charStringTblOffset);
 
                 Config.Load(Main.instance);
+                if (!Directory.Exists(GAME.gamePath)) return;
 
                 Main.instance.picBackground.Visible = false;
                 Main.instance.tabControl1.Visible = true;

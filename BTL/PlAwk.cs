@@ -398,13 +398,13 @@ namespace UN5ModdingWorkshop
             }
             else
             {
-                if (!File.Exists(GAME.caminhoELF))
+                if (!File.Exists(GAME.elfPath))
                 {
                     MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
                 }
                 else
                 {
-                    using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    using (FileStream fs = new FileStream(GAME.elfPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         int skipAwks = selectedAwk * 0x64;
                         int awkAreaOffset = 0x5A8260 + skipAwks;

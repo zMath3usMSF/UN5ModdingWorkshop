@@ -1,5 +1,4 @@
 ﻿using CCSFileExplorerWV;
-using DiscUtils.Btrfs.Base.Items;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -833,38 +832,78 @@ namespace UN5ModdingWorkshop
             return dpadIconIdx;
         }
 
+        private static void SerializeAtk(List<byte> data, PlAtk atk)
+        {
+            data.AddRange(BitConverter.GetBytes(atk.NameOffs1));
+            data.AddRange(BitConverter.GetBytes(atk.NameOffs1));
+
+            data.AddRange(BitConverter.GetBytes((ushort)atk.Index));
+
+            data.Add((byte)atk.ComboNameTableIdx);
+            data.Add((byte)atk.UseComboNameTableFlag);
+            data.AddRange(BitConverter.GetBytes((ushort)atk.ComboNameTableIdx2));
+
+            data.AddRange(BitConverter.GetBytes((ushort)atk.JutsuIdx));
+
+            data.Add((byte)atk.SpecialFlag);
+            data.Add((byte)atk.ThrowFlag);
+            data.Add((byte)atk.JutsuFlag);
+            data.Add((byte)atk.JanKenPonFlag);
+
+            data.Add((byte)atk.DirectionFlag);
+            data.Add((byte)atk.OtherFlag1);
+            data.Add((byte)atk.DefenseFlag);
+            data.Add((byte)atk.OtherFlag2);
+
+            data.Add((byte)atk.PreviousIdx);
+            data.Add((byte)atk.SequenceIdx);
+            data.Add((byte)atk.KawarimiDificulty);
+            data.Add(0);
+
+            data.Add((byte)atk.Type);
+            data.Add((byte)atk.DpadFlag);
+            data.Add((byte)atk.ButtonFlag);
+            data.Add((byte)atk.AutoExecuteFlag);
+
+            data.AddRange(BitConverter.GetBytes(atk.Chakra));
+            data.AddRange(BitConverter.GetBytes(atk.Damage));
+            data.AddRange(BitConverter.GetBytes(atk.Knockback));
+
+            data.Add((byte)atk.DamageEffect);
+            data.Add((byte)atk.DefenseEffect);
+
+            data.AddRange(BitConverter.GetBytes((short)atk.HitCount));
+            data.AddRange(BitConverter.GetBytes((short)atk.HitStop));
+            data.AddRange(BitConverter.GetBytes((short)atk.HitSpeed));
+
+            data.AddRange(BitConverter.GetBytes(atk.RangeValue1));
+            data.AddRange(BitConverter.GetBytes(atk.RangeValue2));
+            data.AddRange(BitConverter.GetBytes(atk.KnockbackDirection));
+
+            data.AddRange(BitConverter.GetBytes((short)atk.WhiffSound));
+            data.AddRange(BitConverter.GetBytes((short)atk.PlayerSound));
+            data.AddRange(BitConverter.GetBytes((ushort)atk.SoundDelay));
+            data.AddRange(BitConverter.GetBytes((short)atk.HitSound));
+            data.AddRange(BitConverter.GetBytes((short)atk.DamageParticle));
+            data.AddRange(BitConverter.GetBytes((short)atk.DefenseSound));
+            data.AddRange(BitConverter.GetBytes((short)atk.DefenseParticle));
+            data.AddRange(BitConverter.GetBytes((short)atk.EnemySound));
+        }
+
         public static byte[] UpdateCharAtkPrm(MovesetParameters movForm, int charID, int atkID)
         {
             var Atk = CharAtkPrm[charID][atkID];
 
-            List<byte> AtkData = new List<byte>();
-
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt32(Atk.NameOffs1)));
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt32(Atk.NameOffs1)));
-
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.Index)));
-
-            AtkData.Add(Convert.ToByte(Atk.ComboNameTableIdx));
-            AtkData.Add(Convert.ToByte(Atk.UseComboNameTableFlag));
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.ComboNameTableIdx2)));
-
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.JutsuIdx)));
-
-            AtkData.Add(Convert.ToByte(Atk.SpecialFlag));
-            AtkData.Add(Convert.ToByte(Atk.ThrowFlag));
-            AtkData.Add(Convert.ToByte(Atk.JutsuFlag));
-            AtkData.Add(Convert.ToByte(Atk.JanKenPonFlag));
+            Atk.NameOffs1 = Atk.NameOffs1; // (mantido igual ao original — só reforça o valor já existente)
 
             int flagsCount = 0;
             int[] bitsGroupFlag1 = new int[8];
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 bitsGroupFlag1[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
                 flagsCount++;
             }
-            byte byteGroupFlag1 = Util.FormarByte(bitsGroupFlag1);
-            AtkData.Add(byteGroupFlag1);
-            Atk.DirectionFlag = byteGroupFlag1;
+            Atk.DirectionFlag = Util.FormarByte(bitsGroupFlag1);
 
             int[] bitsGroupFlag2 = new int[8];
             for (int i = 0; i < 8; i++)
@@ -872,9 +911,7 @@ namespace UN5ModdingWorkshop
                 bitsGroupFlag2[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
                 flagsCount++;
             }
-            byte byteGroupFlag2 = Util.FormarByte(bitsGroupFlag2);
-            AtkData.Add(byteGroupFlag2);
-            Atk.OtherFlag1 = byteGroupFlag2;
+            Atk.OtherFlag1 = Util.FormarByte(bitsGroupFlag2);
 
             int[] bitsGroupFlag3 = new int[8];
             for (int i = 0; i < 8; i++)
@@ -882,10 +919,7 @@ namespace UN5ModdingWorkshop
                 bitsGroupFlag3[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
                 flagsCount++;
             }
-            byte resultado = Util.FormarByte(bitsGroupFlag3);
-
-            AtkData.Add(resultado);
-            Atk.DefenseFlag = resultado;
+            Atk.DefenseFlag = Util.FormarByte(bitsGroupFlag3);
 
             int[] bitsGroupFlag4 = new int[8];
             for (int i = 0; i < 8; i++)
@@ -893,124 +927,63 @@ namespace UN5ModdingWorkshop
                 bitsGroupFlag4[i] = movForm.clbFlags.GetItemChecked(flagsCount) ? 1 : 0;
                 flagsCount++;
             }
-            byte byteGroupFlag4 = Util.FormarByte(bitsGroupFlag4);
-            AtkData.Add(byteGroupFlag4);
-            Atk.OtherFlag2 = byteGroupFlag4;
+            Atk.OtherFlag2 = Util.FormarByte(bitsGroupFlag4);
 
-            AtkData.Add((byte)Atk.PreviousIdx);
-            AtkData.Add((byte)Atk.SequenceIdx);
             Atk.KawarimiDificulty = (sbyte)(movForm.numKawarimi.Value);
-            AtkData.Add((byte)Atk.KawarimiDificulty);
-            AtkData.Add((byte)0);
 
             byte AtkTypeValue = (byte)movForm.cmbType.SelectedIndex;
             if (AtkTypeValue == 0)
-            {
                 AtkTypeValue = 0x11;
-            }
             else if (AtkTypeValue == 1)
-            {
                 AtkTypeValue = 0x12;
-            }
             else if (AtkTypeValue == 2)
-            {
                 AtkTypeValue = 0x14;
-            }
             Atk.Type = AtkTypeValue;
-            AtkData.Add(AtkTypeValue);
 
-            byte atkDpadFlag = (byte)GetDpadFlagGroupFromCmbBox(movForm.cmbDpad);
-            Atk.DpadFlag = atkDpadFlag;
-            AtkData.Add(atkDpadFlag);
-            byte atkButtonFlag = (byte)Atk.ButtonFlag;
-            AtkData.Add(atkButtonFlag);
-            AtkData.Add((byte)Atk.AutoExecuteFlag);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numChakra.Value)));
+            Atk.DpadFlag = (byte)GetDpadFlagGroupFromCmbBox(movForm.cmbDpad);
+
             Atk.Chakra = Convert.ToSingle(movForm.numChakra.Value);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numDamage.Value)));
             Atk.Damage = Convert.ToSingle(movForm.numDamage.Value);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToSingle(movForm.numKnockback.Value)));
             Atk.Knockback = Convert.ToSingle(movForm.numKnockback.Value);
-            byte currentDmgEffect = (byte)movForm.cmbDmgEffect.SelectedIndex;
-            AtkData.Add(currentDmgEffect);
-            Atk.DamageEffect = currentDmgEffect;
-            byte currentDefenseEffect = (byte)(movForm.cmbDefenseEffect.SelectedIndex - 1);
-            AtkData.Add(currentDefenseEffect);
-            Atk.DefenseEffect = currentDefenseEffect;
+
+            Atk.DamageEffect = (byte)movForm.cmbDmgEffect.SelectedIndex;
+            Atk.DefenseEffect = (byte)(movForm.cmbDefenseEffect.SelectedIndex - 1);
 
             Atk.HitCount = movForm.chkHitCount.Checked ? 0x7FFF : (int)movForm.numHitCount.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitCount)));
             Atk.HitStop = movForm.chkHitStop.Checked ? 0x7FFF : (int)movForm.numHitStop.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitStop)));
             Atk.HitSpeed = movForm.chkHitSpeed.Checked ? 0x7FFF : (int)movForm.numHitSpeed.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitSpeed)));
 
             Atk.RangeValue1 = (float)movForm.numRangeValue1.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue1));
-
             Atk.RangeValue2 = (float)movForm.numRangeValue2.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue2));
-
             Atk.KnockbackDirection = (float)movForm.numKnockbackDirection.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Atk.KnockbackDirection));           
 
             Atk.WhiffSound = (int)movForm.numWhiffSound.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.WhiffSound)));
 
             int currentPLSoundIndex = movForm.cmbPLSound.SelectedIndex;
-            int currentPLSound = currentPLSoundIndex - 4;
             switch (currentPLSoundIndex)
             {
-                case 0:
-                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-4)));
-                    Atk.PlayerSound = -4;
-                    break;
-                case 1:
-                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-3)));
-                    Atk.PlayerSound = -3;
-                    break;
-                case 2:
-                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-2)));
-                    Atk.PlayerSound = -2;
-                    break;
-                case 3:
-                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-1)));
-                    Atk.PlayerSound = -1;
-                    break;
-                default:
-                    AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(currentPLSound)));
-                    Atk.PlayerSound = (short)currentPLSound;
-                    break;
+                case 0: Atk.PlayerSound = -4; break;
+                case 1: Atk.PlayerSound = -3; break;
+                case 2: Atk.PlayerSound = -2; break;
+                case 3: Atk.PlayerSound = -1; break;
+                default: Atk.PlayerSound = (short)(currentPLSoundIndex - 4); break;
             }
-            
+
             Atk.SoundDelay = (uint)movForm.numSoundDelay.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.SoundDelay)));
-
             Atk.HitSound = (int)movForm.numHitSound.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.HitSound)));
+
             int currentDmgParticleIndex = movForm.cmbDmgParticle.SelectedIndex;
-            int currentDmgParticle = currentDmgParticleIndex - 1;
-            if (currentDmgParticleIndex == 0)
-            {
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(-1)));
-                Atk.DamageParticle = -1;
-            }
-            else
-            {
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(currentDmgParticle)));
-                Atk.DamageParticle = (short)currentDmgParticle;
-            }
+            Atk.DamageParticle = currentDmgParticleIndex == 0
+                ? (short)-1
+                : (short)(currentDmgParticleIndex - 1);
+
             Atk.DefenseSound = (int)movForm.numDefenseSound.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.DefenseSound)));
-
             Atk.DefenseParticle = (int)(movForm.cmbDefenseParticle.SelectedIndex - 1);
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.DefenseParticle)));
-
             Atk.EnemySound = (int)movForm.numEnemySound.Value;
-            AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt16(Atk.EnemySound)));
 
-            byte[] resultBytes = AtkData.ToArray();
-            return resultBytes;
+            List<byte> AtkData = new List<byte>();
+            SerializeAtk(AtkData, Atk);
+            return AtkData.ToArray();
         }
 
         public static byte[] UpdateAllCharAtkPrm(MovesetParameters movForm, int charID)
@@ -1020,78 +993,22 @@ namespace UN5ModdingWorkshop
             for (int i = 0; i < PlGen.List[charID].AtkCount; i++)
             {
                 var Atk = CharAtkPrm[charID][i];
-
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt32(Atk.NameOffs1)));
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt32(Atk.NameOffs1)));
-
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.Index)));
-
-                AtkData.Add(Convert.ToByte(Atk.ComboNameTableIdx));
-                AtkData.Add(Convert.ToByte(Atk.UseComboNameTableFlag));
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.ComboNameTableIdx2)));
-
-                AtkData.AddRange(BitConverter.GetBytes(Convert.ToUInt16(Atk.JutsuIdx)));
-
-                AtkData.Add(Convert.ToByte(Atk.SpecialFlag));
-                AtkData.Add(Convert.ToByte(Atk.ThrowFlag));
-                AtkData.Add(Convert.ToByte(Atk.JutsuFlag));
-                AtkData.Add(Convert.ToByte(Atk.JanKenPonFlag));
-
-                AtkData.AddRange(BitConverter.GetBytes((short)Atk.ComboNameTableIdx));
-                AtkData.AddRange(BitConverter.GetBytes((byte)Atk.UseComboNameTableFlag));
-                AtkData.AddRange(BitConverter.GetBytes((short)Atk.ComboNameTableIdx2));
-
-                AtkData.AddRange(BitConverter.GetBytes((short)Atk.JutsuIdx));
-
-                AtkData.Add((byte)Atk.DirectionFlag);
-                AtkData.Add((byte)Atk.OtherFlag1);
-                AtkData.Add((byte)Atk.DefenseFlag);
-                AtkData.Add((byte)Atk.OtherFlag2);
-
-                AtkData.Add((byte)Atk.PreviousIdx);
-                AtkData.Add((byte)(movForm.numKawarimi.Value));
-                AtkData.Add((byte)Atk.KawarimiDificulty);
-                AtkData.Add((byte)0);
-
-                AtkData.Add((byte)Atk.Type);
-                AtkData.Add((byte)Atk.DpadFlag);
-                byte atkButtonFlag = (byte)Atk.ButtonFlag;
-                AtkData.Add(atkButtonFlag);
-                AtkData.Add((byte)Atk.AutoExecuteFlag);
-                AtkData.AddRange(BitConverter.GetBytes(Atk.Chakra));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.Damage));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.Knockback));
-                AtkData.Add((byte)Atk.DamageEffect);
-                AtkData.Add((byte)Atk.DefenseEffect);
-                AtkData.AddRange(BitConverter.GetBytes(Atk.HitCount));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.HitSpeed));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.HitStop));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue1));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.RangeValue2));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.KnockbackDirection));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.WhiffSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.PlayerSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.SoundDelay));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.HitSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.DamageParticle));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.DefenseSound));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.DefenseParticle));
-                AtkData.AddRange(BitConverter.GetBytes(Atk.EnemySound));
+                SerializeAtk(AtkData, Atk);
                 AtkData.AddRange(BitConverter.GetBytes(Convert.ToInt32(Atk.AnimationIdx)));
             }
-            byte[] resultBytes = AtkData.ToArray();
-            return resultBytes;
+
+            return AtkData.ToArray();
         }
-        
+
         public static void WriteELFCharAtk(byte[] resultBytes, int charID)
         {
-            if (!File.Exists(GAME.caminhoELF))
+            if (!File.Exists(GAME.elfPath))
             {
                 MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (FileStream fs = new FileStream(GAME.elfPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     int charAtkAreaOffset = (int)PlGen.List[charID].AtkListOffset - 0xFFE80;
 

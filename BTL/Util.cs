@@ -48,6 +48,12 @@ namespace UN5ModdingWorkshop
 
             PCSX2Process.WriteProcessMemory(PCSX2Process.processHandle, ToPointer(address), buffer, 4, out var none);
         }
+        public static void WriteProcessMemoryInt16(int address, int value)
+        {
+            byte[] buffer = BitConverter.GetBytes(Convert.ToInt16(value));
+
+            PCSX2Process.WriteProcessMemory(PCSX2Process.processHandle, ToPointer(address), buffer, 2, out var none);
+        }
 
         public static void WriteProcessMemoryInt8(int address, int value)
         {
@@ -106,6 +112,44 @@ namespace UN5ModdingWorkshop
             int btlManagerOffs = ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0);
             int Player1MemoryOffset = ReadProcessMemoryInt32(btlManagerOffs + 0xDE4);
             return Player1MemoryOffset;
+        }
+
+        public static string GetCurrentGameMode()
+        {
+            int btlManagerOffs = ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0);
+            int currentGameModeID = ReadProcessMemoryInt32(btlManagerOffs + 0xC);
+            switch(currentGameModeID)
+            {
+                case 1:
+                    return "Minigame";
+                case 2:
+                    return "Free Battle";
+                case 3:
+                    return "Pratice";
+                case 4:
+                    return "Master";
+                case 5:
+                    return "Shop";
+                case 6:
+                    return "Collection";
+                case 7:
+                    return "Options";
+                default:
+                    return "None";
+            }
+        }
+
+        public static bool IsStartedBattle()
+        {
+            int LastLoadingTimeLog = Util.ReadProcessMemoryInt32(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x60);
+            if(Util.ReadProcessMemoryInt32(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1D0)) == 0xF)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

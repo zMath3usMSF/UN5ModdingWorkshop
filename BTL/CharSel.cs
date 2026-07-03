@@ -219,7 +219,15 @@ namespace UN5ModdingWorkshop
         public static void Pic_Click(object sender, MouseEventArgs e)
         {
             CharSelect(sender as PictureBox);
-            if (e.Button == MouseButtons.Right) BTL.UpdateMatch(true, CharSelID[SelectedID], 0);
+            if (e.Button == MouseButtons.Right)
+            {
+                if (Util.GetCurrentGameMode() != "Pratice" || Util.IsStartedBattle() == false)
+                {
+                    MessageBox.Show("Unable to switch characters; check if you are in Practice Mode and the fight has already started.");
+                    return;
+                }
+                BTL.UpdateMatch(true, CharSelID[SelectedID], 0);
+            }
         }
         static void CharSelect(PictureBox pictureBox)
         {
@@ -277,7 +285,7 @@ namespace UN5ModdingWorkshop
         {
             Bitmap charselTexture = GetCCSImage(charselFile, "purecharsel10.bmp");
             byte[] modData = GAME.isUN6 != true ? 
-                             File.ReadAllBytes(gamePath + "\\UN5.ELF") : 
+                             File.ReadAllBytes(GAME.GetELFPathInSystemCNF(gamePath)) : 
                              File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
 
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
@@ -302,7 +310,7 @@ namespace UN5ModdingWorkshop
         private static void ReadAllCharRender(string gamePath)
         {
             byte[] modData = GAME.isUN6 != true ?
-                 File.ReadAllBytes(gamePath + "\\UN5.ELF") :
+                 File.ReadAllBytes(GAME.GetELFPathInSystemCNF(gamePath)) :
                  File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
 
             using (BinaryReader br = new BinaryReader(new MemoryStream(modData)))
@@ -349,7 +357,7 @@ namespace UN5ModdingWorkshop
         public static List<int> ReadAllCharSelID(string gamePath)
         {
             List<int> listCharselID = new List<int>();
-            byte[] modData = File.ReadAllBytes(GAME.GetELFPathInSystemCNF());
+            byte[] modData = File.ReadAllBytes(GAME.elfPath);
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
             br.BaseStream.Position = 0x4DD790;
             for (int i = 0; i < GAME.charSelCount * 2; i++)

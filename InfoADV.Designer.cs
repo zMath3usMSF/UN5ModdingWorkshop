@@ -119,6 +119,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Name = "InfoADV";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InfoADV";
             this.ResumeLayout(false);
             this.PerformLayout();

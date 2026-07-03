@@ -20,7 +20,6 @@ namespace WindowsFormsApp1
         }
         public void VerifyOpenedELF(object sender, EventArgs e)
         {
-            btnSaveELF.Enabled = GAME.openedELF;
             if (BTL.P1ID != int.Parse(lblCharID2.Text))
             {
                 btnUpdateP1.Enabled = false;
@@ -37,7 +36,6 @@ namespace WindowsFormsApp1
             Util.VerifyCurrentPlayersIDs();
 
             btnUpdateP1.Enabled = BTL.P1ID == charID ? true : false;
-            btnSaveELF.Enabled = GAME.openedELF;
         }
 
         private void btnUpdateP1_Click(object sender, EventArgs e)

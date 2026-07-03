@@ -66,10 +66,6 @@ namespace UN5ModdingWorkshop
             {
                 btnUpdateP1.Enabled = true;
             }
-            if (GAME.openedELF == true)
-            {
-                btnSaveELF.Enabled = true;
-            }
         }
 
         private void btnUpdateP1_Click(object sender, EventArgs e)

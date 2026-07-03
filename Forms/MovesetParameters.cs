@@ -39,7 +39,6 @@ namespace WindowsFormsApp1
 
         public void VerifyOpenedELF(object sender, EventArgs e)
         {
-            btnSaveELF.Enabled = GAME.openedELF;
             Util.VerifyCurrentPlayersIDs();
             if (BTL.P1ID != int.Parse(lblCharID2.Text))
             {
@@ -81,11 +80,6 @@ namespace WindowsFormsApp1
             {
                 btnUpdateP1.Enabled = true;
             }
-            if (GAME.openedELF == true)
-            {
-                btnSaveELF.Enabled = true;
-            }
-
             listBox1.SelectedIndex = 21;
         }
 

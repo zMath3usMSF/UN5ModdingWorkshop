@@ -49,26 +49,6 @@ namespace WindowsFormsApp1
             genForm.Show();
         }
 
-        private void OpenELF()
-        {
-            var openFileDialog = new OpenFileDialog()
-            {
-                Title = "Select the ELF.",
-                Filter = "ELF Files|*.05;*.06;*.37|All Files|*.*"
-            };
-
-            if (openFileDialog.ShowDialog() != DialogResult.OK)
-            {
-                GAME.openedELF = false;
-            }
-            else
-            {
-                GAME.caminhoELF = openFileDialog.FileName;
-                GAME.openedELF = true;
-                GAME.generalParameters.btnSaveELF.Enabled = true;
-            }
-        }
-
         private void pCSX2MemoryProcessToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectProcess selectProcess = new SelectProcess();
@@ -76,11 +56,6 @@ namespace WindowsFormsApp1
             selectProcess.Owner = this;
             SelectProcess.GetPCSX2Process();
             PCSX2Process.ReadMainBTLMemory();
-        }
-
-        private void openELFToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenELF();
         }
 
         private void btnEditMovesetParameters_Click(object sender, EventArgs e)
@@ -175,13 +150,20 @@ namespace WindowsFormsApp1
 
         private void makeGzlistToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GAME.MakeGzlist();
+            GAME.MakeGzlist(GAME.rofs);
         }
 
         private void infoADVToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InfoADV form = new InfoADV();
-            form.Show();
+            if(Util.GetCurrentGameMode() == "Master")
+            {
+                InfoADV form = new InfoADV();
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("You need to be in Master Mode first!");
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -218,6 +200,33 @@ namespace WindowsFormsApp1
             sklForm.timer1.Enabled = true;
             sklForm.UpdateLabels(charName, charID.ToString());
             sklForm.Show();
+        }
+
+        private void openELFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cheatsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheatsMenu cheatsMenu = new CheatsMenu();
+            cheatsMenu.ShowDialog();
+        }
+
+        private void testeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            File.WriteAllBytes(GAME.elfPath + "_T", GAME.ApplyPnachPatch(@"cheats\NoLinkedMode_Enable.pnach").elfBytes);
+            File.WriteAllBytes(GAME.btlPath + "_T", GAME.ApplyPnachPatch(@"cheats\NoLinkedMode_Enable.pnach").btlBytes);
         }
     }
 }

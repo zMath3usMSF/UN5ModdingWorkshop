@@ -70,49 +70,49 @@
             this.lblPLSound = new System.Windows.Forms.Label();
             this.cmbAwkCharColorEff = new System.Windows.Forms.ComboBox();
             this.grpAwakeningParameters = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.numAwkDamage = new System.Windows.Forms.NumericUpDown();
-            this.numAwkDefense = new System.Windows.Forms.NumericUpDown();
-            this.numAwkSpeed = new System.Windows.Forms.NumericUpDown();
-            this.numJmpHeight = new System.Windows.Forms.NumericUpDown();
-            this.numAwkAtkKnockback = new System.Windows.Forms.NumericUpDown();
-            this.numAwkCharSize = new System.Windows.Forms.NumericUpDown();
-            this.numAwkHealing = new System.Windows.Forms.NumericUpDown();
-            this.numAwkAtkDefDamage = new System.Windows.Forms.NumericUpDown();
-            this.numAwkCkrCharge = new System.Windows.Forms.NumericUpDown();
-            this.numAwkAtkCkrDrain = new System.Windows.Forms.NumericUpDown();
-            this.numAwkIniHP = new System.Windows.Forms.NumericUpDown();
-            this.numAwkFinHP = new System.Windows.Forms.NumericUpDown();
-            this.numAwkIniCkr = new System.Windows.Forms.NumericUpDown();
-            this.numAwkFinCkr = new System.Windows.Forms.NumericUpDown();
-            this.numAwkHPDrain = new System.Windows.Forms.NumericUpDown();
-            this.numAwkHPDrainLimit = new System.Windows.Forms.NumericUpDown();
-            this.numAwkCkrDrain = new System.Windows.Forms.NumericUpDown();
-            this.numAwkCkrDrainLimit = new System.Windows.Forms.NumericUpDown();
             this.chkInfCkrFlag = new System.Windows.Forms.CheckBox();
+            this.numAwkCkrDrainLimit = new System.Windows.Forms.NumericUpDown();
+            this.numAwkCkrDrain = new System.Windows.Forms.NumericUpDown();
+            this.numAwkHPDrainLimit = new System.Windows.Forms.NumericUpDown();
+            this.numAwkHPDrain = new System.Windows.Forms.NumericUpDown();
+            this.numAwkFinCkr = new System.Windows.Forms.NumericUpDown();
+            this.numAwkIniCkr = new System.Windows.Forms.NumericUpDown();
+            this.numAwkFinHP = new System.Windows.Forms.NumericUpDown();
+            this.numAwkIniHP = new System.Windows.Forms.NumericUpDown();
+            this.numAwkAtkCkrDrain = new System.Windows.Forms.NumericUpDown();
+            this.numAwkCkrCharge = new System.Windows.Forms.NumericUpDown();
+            this.numAwkAtkDefDamage = new System.Windows.Forms.NumericUpDown();
+            this.numAwkHealing = new System.Windows.Forms.NumericUpDown();
+            this.numAwkCharSize = new System.Windows.Forms.NumericUpDown();
+            this.numAwkAtkKnockback = new System.Windows.Forms.NumericUpDown();
+            this.numJmpHeight = new System.Windows.Forms.NumericUpDown();
+            this.numAwkSpeed = new System.Windows.Forms.NumericUpDown();
+            this.numAwkDefense = new System.Windows.Forms.NumericUpDown();
+            this.numAwkDamage = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkAwkActType = new System.Windows.Forms.CheckedListBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numAwkDuration)).BeginInit();
             this.grpAwakeningParameters.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkDamage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkDefense)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numJmpHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkKnockback)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkCharSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkHealing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkDefDamage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrCharge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkCkrDrain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniHP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinHP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniCkr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinCkr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrainLimit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrDrain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrDrainLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrDrain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrainLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinCkr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniCkr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinHP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniHP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkCkrDrain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrCharge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkDefDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkHealing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkCharSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkKnockback)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numJmpHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkDefense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkDamage)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblSelectedAwakening2
@@ -165,7 +165,6 @@
             // 
             // btnSaveELF
             // 
-            this.btnSaveELF.Enabled = false;
             this.btnSaveELF.Location = new System.Drawing.Point(655, 466);
             this.btnSaveELF.Name = "btnSaveELF";
             this.btnSaveELF.Size = new System.Drawing.Size(75, 23);
@@ -571,264 +570,15 @@
             this.grpAwakeningParameters.TabStop = false;
             this.grpAwakeningParameters.Text = "Awakening Parameters";
             // 
-            // groupBox1
+            // chkInfCkrFlag
             // 
-            this.groupBox1.Controls.Add(this.chkAwkActType);
-            this.groupBox1.Controls.Add(this.lblPLSound);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cmbPLSound);
-            this.groupBox1.Location = new System.Drawing.Point(295, 282);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(528, 178);
-            this.groupBox1.TabIndex = 139;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Awakening Activation Parameters";
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
-            // 
-            // numAwkDamage
-            // 
-            this.numAwkDamage.DecimalPlaces = 2;
-            this.numAwkDamage.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkDamage.Location = new System.Drawing.Point(457, 20);
-            this.numAwkDamage.Name = "numAwkDamage";
-            this.numAwkDamage.Size = new System.Drawing.Size(59, 20);
-            this.numAwkDamage.TabIndex = 138;
-            // 
-            // numAwkDefense
-            // 
-            this.numAwkDefense.DecimalPlaces = 2;
-            this.numAwkDefense.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkDefense.Location = new System.Drawing.Point(62, 44);
-            this.numAwkDefense.Name = "numAwkDefense";
-            this.numAwkDefense.Size = new System.Drawing.Size(81, 20);
-            this.numAwkDefense.TabIndex = 139;
-            // 
-            // numAwkSpeed
-            // 
-            this.numAwkSpeed.DecimalPlaces = 2;
-            this.numAwkSpeed.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkSpeed.Location = new System.Drawing.Point(267, 45);
-            this.numAwkSpeed.Name = "numAwkSpeed";
-            this.numAwkSpeed.Size = new System.Drawing.Size(59, 20);
-            this.numAwkSpeed.TabIndex = 140;
-            // 
-            // numJmpHeight
-            // 
-            this.numJmpHeight.DecimalPlaces = 2;
-            this.numJmpHeight.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numJmpHeight.Location = new System.Drawing.Point(457, 46);
-            this.numJmpHeight.Name = "numJmpHeight";
-            this.numJmpHeight.Size = new System.Drawing.Size(59, 20);
-            this.numJmpHeight.TabIndex = 141;
-            // 
-            // numAwkAtkKnockback
-            // 
-            this.numAwkAtkKnockback.DecimalPlaces = 2;
-            this.numAwkAtkKnockback.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkAtkKnockback.Location = new System.Drawing.Point(96, 70);
-            this.numAwkAtkKnockback.Name = "numAwkAtkKnockback";
-            this.numAwkAtkKnockback.Size = new System.Drawing.Size(47, 20);
-            this.numAwkAtkKnockback.TabIndex = 142;
-            // 
-            // numAwkCharSize
-            // 
-            this.numAwkCharSize.DecimalPlaces = 2;
-            this.numAwkCharSize.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkCharSize.Location = new System.Drawing.Point(275, 71);
-            this.numAwkCharSize.Name = "numAwkCharSize";
-            this.numAwkCharSize.Size = new System.Drawing.Size(51, 20);
-            this.numAwkCharSize.TabIndex = 143;
-            // 
-            // numAwkHealing
-            // 
-            this.numAwkHealing.DecimalPlaces = 2;
-            this.numAwkHealing.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkHealing.Location = new System.Drawing.Point(461, 73);
-            this.numAwkHealing.Name = "numAwkHealing";
-            this.numAwkHealing.Size = new System.Drawing.Size(55, 20);
-            this.numAwkHealing.TabIndex = 144;
-            // 
-            // numAwkAtkDefDamage
-            // 
-            this.numAwkAtkDefDamage.DecimalPlaces = 2;
-            this.numAwkAtkDefDamage.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkAtkDefDamage.Location = new System.Drawing.Point(85, 96);
-            this.numAwkAtkDefDamage.Name = "numAwkAtkDefDamage";
-            this.numAwkAtkDefDamage.Size = new System.Drawing.Size(58, 20);
-            this.numAwkAtkDefDamage.TabIndex = 145;
-            // 
-            // numAwkCkrCharge
-            // 
-            this.numAwkCkrCharge.DecimalPlaces = 2;
-            this.numAwkCkrCharge.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkCkrCharge.Location = new System.Drawing.Point(272, 97);
-            this.numAwkCkrCharge.Name = "numAwkCkrCharge";
-            this.numAwkCkrCharge.Size = new System.Drawing.Size(54, 20);
-            this.numAwkCkrCharge.TabIndex = 146;
-            // 
-            // numAwkAtkCkrDrain
-            // 
-            this.numAwkAtkCkrDrain.DecimalPlaces = 2;
-            this.numAwkAtkCkrDrain.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkAtkCkrDrain.Location = new System.Drawing.Point(436, 98);
-            this.numAwkAtkCkrDrain.Name = "numAwkAtkCkrDrain";
-            this.numAwkAtkCkrDrain.Size = new System.Drawing.Size(80, 20);
-            this.numAwkAtkCkrDrain.TabIndex = 147;
-            // 
-            // numAwkIniHP
-            // 
-            this.numAwkIniHP.DecimalPlaces = 2;
-            this.numAwkIniHP.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkIniHP.Location = new System.Drawing.Point(81, 122);
-            this.numAwkIniHP.Name = "numAwkIniHP";
-            this.numAwkIniHP.Size = new System.Drawing.Size(62, 20);
-            this.numAwkIniHP.TabIndex = 148;
-            // 
-            // numAwkFinHP
-            // 
-            this.numAwkFinHP.DecimalPlaces = 2;
-            this.numAwkFinHP.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkFinHP.Location = new System.Drawing.Point(267, 123);
-            this.numAwkFinHP.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numAwkFinHP.Name = "numAwkFinHP";
-            this.numAwkFinHP.Size = new System.Drawing.Size(59, 20);
-            this.numAwkFinHP.TabIndex = 149;
-            // 
-            // numAwkIniCkr
-            // 
-            this.numAwkIniCkr.DecimalPlaces = 2;
-            this.numAwkIniCkr.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkIniCkr.Location = new System.Drawing.Point(457, 125);
-            this.numAwkIniCkr.Name = "numAwkIniCkr";
-            this.numAwkIniCkr.Size = new System.Drawing.Size(59, 20);
-            this.numAwkIniCkr.TabIndex = 150;
-            // 
-            // numAwkFinCkr
-            // 
-            this.numAwkFinCkr.DecimalPlaces = 2;
-            this.numAwkFinCkr.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkFinCkr.Location = new System.Drawing.Point(81, 148);
-            this.numAwkFinCkr.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numAwkFinCkr.Name = "numAwkFinCkr";
-            this.numAwkFinCkr.Size = new System.Drawing.Size(62, 20);
-            this.numAwkFinCkr.TabIndex = 151;
-            // 
-            // numAwkHPDrain
-            // 
-            this.numAwkHPDrain.DecimalPlaces = 4;
-            this.numAwkHPDrain.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkHPDrain.Location = new System.Drawing.Point(267, 149);
-            this.numAwkHPDrain.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numAwkHPDrain.Name = "numAwkHPDrain";
-            this.numAwkHPDrain.Size = new System.Drawing.Size(59, 20);
-            this.numAwkHPDrain.TabIndex = 152;
-            // 
-            // numAwkHPDrainLimit
-            // 
-            this.numAwkHPDrainLimit.DecimalPlaces = 4;
-            this.numAwkHPDrainLimit.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkHPDrainLimit.Location = new System.Drawing.Point(457, 151);
-            this.numAwkHPDrainLimit.Name = "numAwkHPDrainLimit";
-            this.numAwkHPDrainLimit.Size = new System.Drawing.Size(59, 20);
-            this.numAwkHPDrainLimit.TabIndex = 153;
-            // 
-            // numAwkCkrDrain
-            // 
-            this.numAwkCkrDrain.DecimalPlaces = 4;
-            this.numAwkCkrDrain.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            131072});
-            this.numAwkCkrDrain.Location = new System.Drawing.Point(84, 174);
-            this.numAwkCkrDrain.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numAwkCkrDrain.Name = "numAwkCkrDrain";
-            this.numAwkCkrDrain.Size = new System.Drawing.Size(59, 20);
-            this.numAwkCkrDrain.TabIndex = 154;
+            this.chkInfCkrFlag.AutoSize = true;
+            this.chkInfCkrFlag.Location = new System.Drawing.Point(232, 21);
+            this.chkInfCkrFlag.Name = "chkInfCkrFlag";
+            this.chkInfCkrFlag.Size = new System.Drawing.Size(94, 17);
+            this.chkInfCkrFlag.TabIndex = 156;
+            this.chkInfCkrFlag.Text = "Infinite Chakra";
+            this.chkInfCkrFlag.UseVisualStyleBackColor = true;
             // 
             // numAwkCkrDrainLimit
             // 
@@ -848,15 +598,259 @@
             this.numAwkCkrDrainLimit.Size = new System.Drawing.Size(59, 20);
             this.numAwkCkrDrainLimit.TabIndex = 155;
             // 
-            // chkInfCkrFlag
+            // numAwkCkrDrain
             // 
-            this.chkInfCkrFlag.AutoSize = true;
-            this.chkInfCkrFlag.Location = new System.Drawing.Point(232, 21);
-            this.chkInfCkrFlag.Name = "chkInfCkrFlag";
-            this.chkInfCkrFlag.Size = new System.Drawing.Size(94, 17);
-            this.chkInfCkrFlag.TabIndex = 156;
-            this.chkInfCkrFlag.Text = "Infinite Chakra";
-            this.chkInfCkrFlag.UseVisualStyleBackColor = true;
+            this.numAwkCkrDrain.DecimalPlaces = 4;
+            this.numAwkCkrDrain.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkCkrDrain.Location = new System.Drawing.Point(84, 174);
+            this.numAwkCkrDrain.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numAwkCkrDrain.Name = "numAwkCkrDrain";
+            this.numAwkCkrDrain.Size = new System.Drawing.Size(59, 20);
+            this.numAwkCkrDrain.TabIndex = 154;
+            // 
+            // numAwkHPDrainLimit
+            // 
+            this.numAwkHPDrainLimit.DecimalPlaces = 4;
+            this.numAwkHPDrainLimit.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkHPDrainLimit.Location = new System.Drawing.Point(457, 151);
+            this.numAwkHPDrainLimit.Name = "numAwkHPDrainLimit";
+            this.numAwkHPDrainLimit.Size = new System.Drawing.Size(59, 20);
+            this.numAwkHPDrainLimit.TabIndex = 153;
+            // 
+            // numAwkHPDrain
+            // 
+            this.numAwkHPDrain.DecimalPlaces = 4;
+            this.numAwkHPDrain.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkHPDrain.Location = new System.Drawing.Point(267, 149);
+            this.numAwkHPDrain.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numAwkHPDrain.Name = "numAwkHPDrain";
+            this.numAwkHPDrain.Size = new System.Drawing.Size(59, 20);
+            this.numAwkHPDrain.TabIndex = 152;
+            // 
+            // numAwkFinCkr
+            // 
+            this.numAwkFinCkr.DecimalPlaces = 2;
+            this.numAwkFinCkr.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkFinCkr.Location = new System.Drawing.Point(81, 148);
+            this.numAwkFinCkr.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numAwkFinCkr.Name = "numAwkFinCkr";
+            this.numAwkFinCkr.Size = new System.Drawing.Size(62, 20);
+            this.numAwkFinCkr.TabIndex = 151;
+            // 
+            // numAwkIniCkr
+            // 
+            this.numAwkIniCkr.DecimalPlaces = 2;
+            this.numAwkIniCkr.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkIniCkr.Location = new System.Drawing.Point(457, 125);
+            this.numAwkIniCkr.Name = "numAwkIniCkr";
+            this.numAwkIniCkr.Size = new System.Drawing.Size(59, 20);
+            this.numAwkIniCkr.TabIndex = 150;
+            // 
+            // numAwkFinHP
+            // 
+            this.numAwkFinHP.DecimalPlaces = 2;
+            this.numAwkFinHP.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkFinHP.Location = new System.Drawing.Point(267, 123);
+            this.numAwkFinHP.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numAwkFinHP.Name = "numAwkFinHP";
+            this.numAwkFinHP.Size = new System.Drawing.Size(59, 20);
+            this.numAwkFinHP.TabIndex = 149;
+            // 
+            // numAwkIniHP
+            // 
+            this.numAwkIniHP.DecimalPlaces = 2;
+            this.numAwkIniHP.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkIniHP.Location = new System.Drawing.Point(81, 122);
+            this.numAwkIniHP.Name = "numAwkIniHP";
+            this.numAwkIniHP.Size = new System.Drawing.Size(62, 20);
+            this.numAwkIniHP.TabIndex = 148;
+            // 
+            // numAwkAtkCkrDrain
+            // 
+            this.numAwkAtkCkrDrain.DecimalPlaces = 2;
+            this.numAwkAtkCkrDrain.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkAtkCkrDrain.Location = new System.Drawing.Point(436, 98);
+            this.numAwkAtkCkrDrain.Name = "numAwkAtkCkrDrain";
+            this.numAwkAtkCkrDrain.Size = new System.Drawing.Size(80, 20);
+            this.numAwkAtkCkrDrain.TabIndex = 147;
+            // 
+            // numAwkCkrCharge
+            // 
+            this.numAwkCkrCharge.DecimalPlaces = 2;
+            this.numAwkCkrCharge.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkCkrCharge.Location = new System.Drawing.Point(272, 97);
+            this.numAwkCkrCharge.Name = "numAwkCkrCharge";
+            this.numAwkCkrCharge.Size = new System.Drawing.Size(54, 20);
+            this.numAwkCkrCharge.TabIndex = 146;
+            // 
+            // numAwkAtkDefDamage
+            // 
+            this.numAwkAtkDefDamage.DecimalPlaces = 2;
+            this.numAwkAtkDefDamage.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkAtkDefDamage.Location = new System.Drawing.Point(85, 96);
+            this.numAwkAtkDefDamage.Name = "numAwkAtkDefDamage";
+            this.numAwkAtkDefDamage.Size = new System.Drawing.Size(58, 20);
+            this.numAwkAtkDefDamage.TabIndex = 145;
+            // 
+            // numAwkHealing
+            // 
+            this.numAwkHealing.DecimalPlaces = 2;
+            this.numAwkHealing.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkHealing.Location = new System.Drawing.Point(461, 73);
+            this.numAwkHealing.Name = "numAwkHealing";
+            this.numAwkHealing.Size = new System.Drawing.Size(55, 20);
+            this.numAwkHealing.TabIndex = 144;
+            // 
+            // numAwkCharSize
+            // 
+            this.numAwkCharSize.DecimalPlaces = 2;
+            this.numAwkCharSize.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkCharSize.Location = new System.Drawing.Point(275, 71);
+            this.numAwkCharSize.Name = "numAwkCharSize";
+            this.numAwkCharSize.Size = new System.Drawing.Size(51, 20);
+            this.numAwkCharSize.TabIndex = 143;
+            // 
+            // numAwkAtkKnockback
+            // 
+            this.numAwkAtkKnockback.DecimalPlaces = 2;
+            this.numAwkAtkKnockback.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkAtkKnockback.Location = new System.Drawing.Point(96, 70);
+            this.numAwkAtkKnockback.Name = "numAwkAtkKnockback";
+            this.numAwkAtkKnockback.Size = new System.Drawing.Size(47, 20);
+            this.numAwkAtkKnockback.TabIndex = 142;
+            // 
+            // numJmpHeight
+            // 
+            this.numJmpHeight.DecimalPlaces = 2;
+            this.numJmpHeight.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numJmpHeight.Location = new System.Drawing.Point(457, 46);
+            this.numJmpHeight.Name = "numJmpHeight";
+            this.numJmpHeight.Size = new System.Drawing.Size(59, 20);
+            this.numJmpHeight.TabIndex = 141;
+            // 
+            // numAwkSpeed
+            // 
+            this.numAwkSpeed.DecimalPlaces = 2;
+            this.numAwkSpeed.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkSpeed.Location = new System.Drawing.Point(267, 45);
+            this.numAwkSpeed.Name = "numAwkSpeed";
+            this.numAwkSpeed.Size = new System.Drawing.Size(59, 20);
+            this.numAwkSpeed.TabIndex = 140;
+            // 
+            // numAwkDefense
+            // 
+            this.numAwkDefense.DecimalPlaces = 2;
+            this.numAwkDefense.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkDefense.Location = new System.Drawing.Point(62, 44);
+            this.numAwkDefense.Name = "numAwkDefense";
+            this.numAwkDefense.Size = new System.Drawing.Size(81, 20);
+            this.numAwkDefense.TabIndex = 139;
+            // 
+            // numAwkDamage
+            // 
+            this.numAwkDamage.DecimalPlaces = 2;
+            this.numAwkDamage.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.numAwkDamage.Location = new System.Drawing.Point(457, 20);
+            this.numAwkDamage.Name = "numAwkDamage";
+            this.numAwkDamage.Size = new System.Drawing.Size(59, 20);
+            this.numAwkDamage.TabIndex = 138;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkAwkActType);
+            this.groupBox1.Controls.Add(this.lblPLSound);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cmbPLSound);
+            this.groupBox1.Location = new System.Drawing.Point(295, 282);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(528, 178);
+            this.groupBox1.TabIndex = 139;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Awakening Activation Parameters";
             // 
             // chkAwkActType
             // 
@@ -866,13 +860,18 @@
             "Adversity",
             "Tools",
             "Tension",
-            "Provocar",
+            "Taunt",
             "Ultimate Jutsu",
             "Release"});
             this.chkAwkActType.Location = new System.Drawing.Point(332, 19);
             this.chkAwkActType.Name = "chkAwkActType";
             this.chkAwkActType.Size = new System.Drawing.Size(184, 154);
             this.chkAwkActType.TabIndex = 138;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.VerifyOpenedELF);
             // 
             // AwakeningParameters
             // 
@@ -901,26 +900,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAwkDuration)).EndInit();
             this.grpAwakeningParameters.ResumeLayout(false);
             this.grpAwakeningParameters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrDrainLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrDrain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrainLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinCkr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniCkr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinHP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniHP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkCkrDrain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrCharge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkDefDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkHealing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkCharSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkKnockback)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numJmpHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkDefense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAwkDamage)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkDamage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkDefense)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numJmpHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkKnockback)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkCharSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkHealing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkDefDamage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrCharge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkAtkCkrDrain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniHP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinHP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkIniCkr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkFinCkr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkHPDrainLimit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrDrain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAwkCkrDrainLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

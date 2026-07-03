@@ -21,7 +21,6 @@ namespace UN5ModdingWorkshop
         }
         public void VerifyOpenedELF(object sender, EventArgs e)
         {
-            btnSaveELF.Enabled = GAME.openedELF;
             if (BTL.P1ID != int.Parse(lblCharID2.Text))
             {
                 btnUpdateP1.Enabled = false;
@@ -43,10 +42,6 @@ namespace UN5ModdingWorkshop
             if (p1IDFromForm1 == CharIDForm2Int)
             {
                 btnUpdateP1.Enabled = true;
-            }
-            if (GAME.openedELF == true)
-            {
-                btnSaveELF.Enabled = true;
             }
 
             listBox1.SelectedIndex = 0;

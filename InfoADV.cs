@@ -23,19 +23,28 @@ namespace UN5ModdingWorkshop
 
         private void UpdateInfo()
         {
+            int offs = Util.ReadProcessMemoryInt32(GAME.Global_Pointer + 0x170);
+            int control = Util.ReadProcessMemoryInt8(offs);
             int PlayerInfoOffs = Util.ReadProcessMemoryInt32(GAME.Global_Pointer + 0x1A0);
+            if (control != 0 || offs == 0 || PlayerInfoOffs == 0)
+            {
+                timer1.Stop();
+                this.Close();
+                MessageBox.Show("Unable to retrieve player information; please check if the player is in a cutscene or other specific modes.");
+                return;
+            }
             float PlayerPosX = Util.ReadProcessMemoryFloat(PlayerInfoOffs + 0x10);
             float PlayerPosY = Util.ReadProcessMemoryFloat(PlayerInfoOffs + 0x14);
             float PlayerPosZ = Util.ReadProcessMemoryFloat(PlayerInfoOffs + 0x18);
             float PlayerRotZ = Util.ReadProcessMemoryFloat(PlayerInfoOffs + 0x28) * (180f / (float)Math.PI);
             textBox1.Text = $"{Convert.ToInt32(PlayerPosX)} {Convert.ToInt32(PlayerPosY)} {Convert.ToInt32(PlayerPosZ)} {Convert.ToInt32(PlayerRotZ)}";
 
-            while(foundCameraInfoOffs == false)
+            while (foundCameraInfoOffs == false)
             {
                 int currentValue = Util.ReadProcessMemoryInt32(CameraInfoOffs);
                 if (currentValue == 0x60DD00)
                 {
-                    foundCameraInfoOffs=true;
+                    foundCameraInfoOffs = true;
                     break;
                 }
                 CameraInfoOffs += 4;

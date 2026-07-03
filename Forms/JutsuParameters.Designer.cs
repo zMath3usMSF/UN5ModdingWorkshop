@@ -167,7 +167,6 @@
             // 
             // btnSaveELF
             // 
-            this.btnSaveELF.Enabled = false;
             this.btnSaveELF.Location = new System.Drawing.Point(579, 353);
             this.btnSaveELF.Name = "btnSaveELF";
             this.btnSaveELF.Size = new System.Drawing.Size(75, 23);

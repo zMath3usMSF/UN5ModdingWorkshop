@@ -530,13 +530,13 @@ namespace UN5ModdingWorkshop
         }
         public static void WriteELFCharAnm(byte[] resultBytes, int charID)
         {
-            if (!File.Exists(GAME.caminhoELF))
+            if (!File.Exists(GAME.elfPath))
             {
                 MessageBox.Show("Unable to save, check if the file has been deleted or moved.", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                using (FileStream fs = new FileStream(GAME.caminhoELF, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (FileStream fs = new FileStream(GAME.elfPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     int subValue = 0xFFE80;
                     int charAnmAreaOffset = (int)PlGen.List[charID].AnmListOffset - subValue;
