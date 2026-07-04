@@ -27,8 +27,8 @@ namespace UN5ModdingWorkshop
         public static GeneralParameters generalParameters;
         public static ulong eeAddress;
         public static int lastSelectedID = 0;
-        public static string cvm_toolPath = @"CVM Tool\cvm_tool.exe";
-        public static string cvm_hdrPath = @"CVM Tool\data.hdr";
+        public static string cvm_toolPath = @"tools\cvm_tool.exe";
+        public static string cvm_hdrPath = @"tools\data.hdr";
         public static string ps2isoPath = @"tools\ps2iso.exe";
         public static string mkisofsPath = @"tools\mkisofs.exe"; // ou genisoimage.exe, conforme o nome do binário que você baixou
         public static string sevenZipPath = @"tools\7z.exe";
@@ -83,7 +83,7 @@ namespace UN5ModdingWorkshop
                     // ps2iso gera UNPACK_<nome>.iso/FILES/
                     string filesFolder = Path.Combine(unpackFolder, "FILES");
 
-                    gamePath = Path.Combine(Path.GetDirectoryName(gameFile), "GAME");
+                    gamePath = Path.Combine(Path.GetDirectoryName(gameFile), "UN5");
                     if (Directory.Exists(gamePath)) Directory.Delete(gamePath, true);
                     Directory.CreateDirectory(gamePath);
 
@@ -152,7 +152,15 @@ namespace UN5ModdingWorkshop
                         Main.instance.lblProgress.Text = ""));
 
                     MakeHostFS();
-                    MessageBox.Show("Game successfully extracted!");
+                    MessageBox.Show(
+                        $"Game successfully extracted to \"{gamePath}\"!\n\n" +
+                        "You can run the extracted game using Host Filesystem. " +
+                        "In PCSX2, go to Settings > Emulation and enable \"Host Filesystem\".\n\n" +
+                        $"Then go to System > Start File and select the executable file \"{Path.GetFileName(elfPath)}\".",
+                        "Extraction Complete",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
                 catch (WrongCvmPasswordException)
                 {
@@ -217,7 +225,7 @@ namespace UN5ModdingWorkshop
                 try
                 {
                     Main.instance.Invoke(new Action(() =>
-                        Main.instance.lblProgress.Text = "Copiando ROFS para área temporária..."));
+                        Main.instance.lblProgress.Text = "Copying CCS Files to temporary workspace..."));
 
                     // Copia TODO o conteúdo de ROFS para a pasta temporária,
                     // preservando o original intacto
@@ -232,22 +240,22 @@ namespace UN5ModdingWorkshop
                     await MakeGzlist(tempRofs);
 
                     Main.instance.Invoke(new Action(() =>
-                        Main.instance.lblProgress.Text = "Criando DATA.ISO..."));
+                        Main.instance.lblProgress.Text = "Building DATA.ISO..."));
 
                     await BuildIso9660Async(tempRofs, tempIso);
 
                     Main.instance.Invoke(new Action(() =>
-                        Main.instance.lblProgress.Text = "Convertendo DATA.ISO para DATA.CVM..."));
+                        Main.instance.lblProgress.Text = "Converting DATA.ISO to DATA.CVM..."));
 
                     string mkcvmArgs = string.IsNullOrEmpty(cvmPassword)
                         ? $"mkcvm \"{tempCvm}\" \"{tempIso}\" \"{cvm_hdrPath}\""
                         : $"mkcvm \"{tempCvm}\" \"{tempIso}\" \"{cvm_hdrPath}\" -p {cvmPassword}";
 
-                    await RunProcessAsync(cvm_toolPath, mkcvmArgs, "Erro ao criar CVM");
+                    await RunProcessAsync(cvm_toolPath, mkcvmArgs, "Error creating CVM");
 
                     // ── Monta estrutura que o ps2iso espera ──────────────────────────
                     Main.instance.Invoke(new Action(() =>
-                        Main.instance.lblProgress.Text = "Preparando estrutura para ps2iso..."));
+                        Main.instance.lblProgress.Text = "Organizing Folders and Files..."));
 
                     string packStaging = Path.Combine(tempBuildFolder, "ps2iso_staging");
                     Directory.CreateDirectory(packStaging);
@@ -255,7 +263,7 @@ namespace UN5ModdingWorkshop
                     string stagingFiles = Path.Combine(packStaging, "FILES");
                     Directory.CreateDirectory(stagingFiles);
 
-                    string retailElfPath = GetELFPathInSystemCNF(sourceFolder);   // ex.: sourceFolder\SCES_123.45
+                    string retailElfPath = elfPath;   // ex.: sourceFolder\SCES_123.45
                     string enabledElfPath = retailElfPath;                // arquivo real que existe na pasta
                     string originalCvmPath = Path.Combine(sourceFolder, @"DATA\DATA.CVM"); // CVM antigo, não deve ir pro staging
 
@@ -301,15 +309,15 @@ namespace UN5ModdingWorkshop
 
                     // Gera METADATA.json dentro de packStaging
                     Main.instance.Invoke(new Action(() =>
-                        Main.instance.lblProgress.Text = "Gerando METADATA.json..."));
+                        Main.instance.lblProgress.Text = "Generating METADATA.json..."));
 
                     string metadataPath = BuildPs2IsoMetadata(sourceFolder, packStaging, stagingFiles);
 
                     // Chama ps2iso pack → gera packStaging/OUTPUT.iso
                     Main.instance.Invoke(new Action(() =>
-                        Main.instance.lblProgress.Text = "Criando ISO final do jogo..."));
+                        Main.instance.lblProgress.Text = "Building final game ISO..."));
 
-                    await RunProcessAsync(ps2isoPath, $"pack \"{metadataPath}\"", "Erro ao criar ISO final");
+                    await RunProcessAsync(ps2isoPath, $"pack \"{metadataPath}\"", "Error creating final ISO");
 
                     string generatedIso = Path.Combine(packStaging, "OUTPUT.iso");
 
@@ -377,7 +385,7 @@ namespace UN5ModdingWorkshop
         /// </summary>
         private static string BuildPs2IsoMetadata(string sourceFolder, string packStaging, string stagingFiles)
         {
-            string volumeLabel = "GAME";
+            string volumeLabel = "UN5";
             string sysCNF = Path.Combine(sourceFolder, "SYSTEM.CNF");
             if (File.Exists(sysCNF))
             {
@@ -568,7 +576,7 @@ namespace UN5ModdingWorkshop
                         string fileCVMPath = filePath.Replace(rofsPath.TrimEnd('\\') + "\\", "").ToLower();
 
                         Main.instance.Invoke(new Action(() =>
-                            Main.instance.lblProgress.Text = "Reading: " + Path.GetFileName(filePath)));
+                            Main.instance.lblProgress.Text = "Compressing: " + Path.GetFileName(filePath)));
 
                         string nameNoExt = Path.GetFileNameWithoutExtension(filePath).ToLower();
                         byte[] data = ReadAllBytesBuffered(filePath);
@@ -714,14 +722,14 @@ namespace UN5ModdingWorkshop
                         try
                         {
                             File.Move(Path.Combine(basePath, elfPath), Path.Combine(basePath, elfPath + ".ELF"));
-
                         }
                         catch (Exception ex)
                         {
                             
                         }
                         elfPath = Path.Combine(basePath, elfPath + ".ELF");
-                        btlPath = Path.Combine(gamePath, "PRG\\BTL.BIN");
+                        btlPath = Path.Combine(basePath, "PRG\\BTL.BIN");
+                        break;
                     }
                 }
             }

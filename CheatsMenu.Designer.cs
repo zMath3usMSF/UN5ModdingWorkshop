@@ -30,8 +30,8 @@
         {
             this.chkNTSCMode = new System.Windows.Forms.CheckBox();
             this.chkNoLinkedCharacter = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.chkNoExtraHit = new System.Windows.Forms.CheckBox();
+            this.chkNoJankenpon = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -55,25 +55,25 @@
             this.chkNoLinkedCharacter.Text = "No Linked Character Option";
             this.chkNoLinkedCharacter.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // chkNoExtraHit
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(12, 58);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(83, 17);
-            this.checkBox3.TabIndex = 2;
-            this.checkBox3.Text = "No Extra-Hit";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chkNoExtraHit.AutoSize = true;
+            this.chkNoExtraHit.Location = new System.Drawing.Point(12, 58);
+            this.chkNoExtraHit.Name = "chkNoExtraHit";
+            this.chkNoExtraHit.Size = new System.Drawing.Size(83, 17);
+            this.chkNoExtraHit.TabIndex = 2;
+            this.chkNoExtraHit.Text = "No Extra-Hit";
+            this.chkNoExtraHit.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // chkNoJankenpon
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(12, 81);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(96, 17);
-            this.checkBox4.TabIndex = 3;
-            this.checkBox4.Text = "No Jankenpon";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chkNoJankenpon.AutoSize = true;
+            this.chkNoJankenpon.Location = new System.Drawing.Point(12, 81);
+            this.chkNoJankenpon.Name = "chkNoJankenpon";
+            this.chkNoJankenpon.Size = new System.Drawing.Size(96, 17);
+            this.chkNoJankenpon.TabIndex = 3;
+            this.chkNoJankenpon.Text = "No Jankenpon";
+            this.chkNoJankenpon.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
@@ -91,25 +91,25 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(361, 145);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.chkNoJankenpon);
+            this.Controls.Add(this.chkNoExtraHit);
             this.Controls.Add(this.chkNoLinkedCharacter);
             this.Controls.Add(this.chkNTSCMode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "CheatsMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cheats:";
+            this.Text = "Cheats";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button btnSave;
         public System.Windows.Forms.CheckBox chkNTSCMode;
         public System.Windows.Forms.CheckBox chkNoLinkedCharacter;
+        public System.Windows.Forms.CheckBox chkNoExtraHit;
+        public System.Windows.Forms.CheckBox chkNoJankenpon;
     }
 }

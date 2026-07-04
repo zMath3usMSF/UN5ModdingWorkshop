@@ -27,14 +27,6 @@ namespace UN5ModdingWorkshop
 
             form.txtGamePath.Text = Data.GamePath;
             GAME.gamePath = Data.GamePath;
-            if(Directory.Exists(Data.GamePath))
-            {
-                CharSel.Create(form, Data.GamePath);
-            }
-            else
-            {
-                MessageBox.Show("Game directory not found. Please select it manually. If you haven't extracted it yet, use Game > Extract.");
-            }
         }
 
         public static void Save()

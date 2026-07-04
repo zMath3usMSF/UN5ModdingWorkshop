@@ -253,7 +253,7 @@ namespace UN5ModdingWorkshop
                 jutsus.Add(comboNameList[i][3]);
             }
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            File.WriteAllLines(Path.Combine(desktop, "jutsus.txt"), jutsus.ToArray());
+            //File.WriteAllLines(Path.Combine(desktop, "jutsus.txt"), jutsus.ToArray());
             for (int i = 0; i < PlGen.List[charID].AtkCount; i++)
             {
                 switch (i)

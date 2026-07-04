@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
                 {
                     PCSX2Process.ID = processes[i].Id;
                     PCSX2Process.GetEEAdress();
-                    PCSX2Process.ReadMainBTLMemory();
+                    PCSX2Process.ReadMainBTLMemory(this);
                 }
             }
             if (PCSX2Process.ID == 0) MessageBox.Show("Unable to automatically detect any running PCSX2 process. " +
@@ -55,7 +55,7 @@ namespace WindowsFormsApp1
             selectProcess.ListBox1.Items.Clear();
             selectProcess.Owner = this;
             SelectProcess.GetPCSX2Process();
-            PCSX2Process.ReadMainBTLMemory();
+            PCSX2Process.ReadMainBTLMemory(this);
         }
 
         private void btnEditMovesetParameters_Click(object sender, EventArgs e)
@@ -73,7 +73,10 @@ namespace WindowsFormsApp1
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("UN5CharPrmEditor, version 1.4. \n\nMade by zMath3usMSF.");
+            using (var about = new AboutForm())
+            {
+                about.ShowDialog(this);
+            }
         }
 
         private void changeP1CharacterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -221,12 +224,6 @@ namespace WindowsFormsApp1
         {
             CheatsMenu cheatsMenu = new CheatsMenu();
             cheatsMenu.ShowDialog();
-        }
-
-        private void testeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            File.WriteAllBytes(GAME.elfPath + "_T", GAME.ApplyPnachPatch(@"cheats\NoLinkedMode_Enable.pnach").elfBytes);
-            File.WriteAllBytes(GAME.btlPath + "_T", GAME.ApplyPnachPatch(@"cheats\NoLinkedMode_Enable.pnach").btlBytes);
         }
     }
 }

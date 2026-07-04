@@ -59,7 +59,7 @@ namespace UN5ModdingWorkshop
         public static int ID = 0;
         public static void GetEEAdress()
         {
-            string path = @"pcsx2_offsetreader.exe";
+            string path = @"tools\pcsx2_offsetreader.exe";
             ProcessStartInfo psi = new ProcessStartInfo
             {
                 FileName = path,
@@ -84,8 +84,21 @@ namespace UN5ModdingWorkshop
             }
         }
 
-        public static void ReadMainBTLMemory()
+        public static void ReadMainBTLMemory(Main main)
         {
+
+            GAME.gamePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "UN5");
+            //Config.Load(Main.instance);
+
+            if (!Directory.Exists(GAME.gamePath))
+            {
+                MessageBox.Show("The \"UN5\" game directory was not found on the desktop. If you don't have it yet, extract the game under Game > Extract.",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
+            }
+
             processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, ID);
             if (processHandle != IntPtr.Zero)
             {
@@ -109,14 +122,12 @@ namespace UN5ModdingWorkshop
 
                 BTL.ReadCharNameTbl(processHandle, charStringTblOffset);
 
-                Config.Load(Main.instance);
-                if (!Directory.Exists(GAME.gamePath)) return;
-
                 Main.instance.picBackground.Visible = false;
                 Main.instance.tabControl1.Visible = true;
                 Main.instance.btnEditGeneralParameters.Visible = true;
                 Main.instance.btnEditMovesetParameters.Visible = true;
                 Main.instance.btnEditAwekeningParameters.Visible = true;
+                CharSel.Create(main, GAME.gamePath);
             }
             else
             {

@@ -50,16 +50,6 @@ namespace CCSFileExplorerWV
 				b.CCSFile = this;
 				blocks.Add(b);
 			}
-			if (File.Exists("blocks.txt"))
-			{
-				File.Delete("blocks.txt");
-			}
-			StreamWriter sw = new StreamWriter("blocks.txt");
-			foreach (Block b2 in blocks)
-			{
-				sw.WriteLine(b2.BlockID.ToString("X2") + "\n");
-			}
-			sw.Close();
 			if (blocks.Count == 0)
 			{
 				return;

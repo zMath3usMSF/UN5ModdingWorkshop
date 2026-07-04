@@ -120,7 +120,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "InfoADV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InfoADV";
+            this.Text = "Master Mode Informations";
             this.ResumeLayout(false);
             this.PerformLayout();
 

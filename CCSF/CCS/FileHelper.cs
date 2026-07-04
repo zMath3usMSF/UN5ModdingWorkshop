@@ -29,7 +29,7 @@ namespace CCSFileExplorerWV
         {
             MemoryStream ms = new MemoryStream();
             GZipOutputStream gs = new GZipOutputStream(ms);
-            gs.SetLevel(0);
+            gs.SetLevel(8);
             gs.FileName = filename + ".tmp";
             gs.Write(data, 0, data.Length);
             gs.Close();

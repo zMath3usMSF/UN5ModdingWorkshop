@@ -221,11 +221,6 @@ namespace UN5ModdingWorkshop
             CharSelect(sender as PictureBox);
             if (e.Button == MouseButtons.Right)
             {
-                if (Util.GetCurrentGameMode() != "Pratice" || Util.IsStartedBattle() == false)
-                {
-                    MessageBox.Show("Unable to switch characters; check if you are in Practice Mode and the fight has already started.");
-                    return;
-                }
                 BTL.UpdateMatch(true, CharSelID[SelectedID], 0);
             }
         }

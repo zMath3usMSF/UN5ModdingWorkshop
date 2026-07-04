@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using WindowsFormsApp1;
 
 namespace UN5ModdingWorkshop
@@ -122,6 +123,17 @@ namespace UN5ModdingWorkshop
 
         public static void UpdateMatch(bool isP1, int PlayerID, int MapID)
         {
+            if (Util.GetCurrentGameMode() != "Pratice" || Util.IsStartedBattle() == false)
+            {
+                MessageBox.Show("Unable to switch characters, check if you are in Practice Mode and the fight has already started.");
+                return;
+            }
+            if (IsOnUltimateJutsu() == true)
+            {
+                MessageBox.Show("Unable to switch characters while performing an Ultimate Jutsu.");
+                return;
+            }
+
             int LastLoadingTimeLog = Util.ReadProcessMemoryInt32(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x60);
             if (Util.ReadProcessMemoryInt32(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1D0)) == 0xF &&
                 LastLoadingTimeLog != 0 &&
@@ -145,8 +157,20 @@ namespace UN5ModdingWorkshop
                 int test = Util.ReadProcessMemoryInt32(GAME.Global_Pointer + 0xC0);
                 Util.WriteProcessMemoryInt32(test + 0x4, 0x0);
                 Util.WriteProcessMemoryInt32(test + 0x8, 0x0);
-                //Util.WriteProcessMemoryInt8(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x9FF, 0x0);
+                Util.WriteProcessMemoryInt8(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x9FF, 0x0);
                 //Turn Off Auto-Support
+            }
+        }
+
+        public static bool IsOnUltimateJutsu()
+        {
+            if(Util.ReadProcessMemoryInt8(Util.ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1EC)) == 0xC)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
