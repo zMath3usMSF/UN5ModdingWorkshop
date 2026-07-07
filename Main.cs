@@ -19,6 +19,12 @@ namespace WindowsFormsApp1
         public Main()
         {
             InitializeComponent();
+
+            tabControl1.TabPages.Remove(tabPage2);
+            tabControl1.TabPages.Remove(tabPage3);
+            tabControl1.TabPages.Remove(tabPage4);
+            tabControl1.TabPages.Remove(tabPage5);
+
             instance = this;
             picBackground.Location = new Point(0, 27);
             lblProgress.Text = "";

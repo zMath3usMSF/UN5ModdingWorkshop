@@ -189,6 +189,8 @@ namespace UN5ModdingWorkshop
 
         public static void SendTextAnm(MovesetParameters movForm, PlAnm Anm)
         {
+            movForm.chkHitBoxCharPos1.CheckedChanged -= movForm.ChkHitBoxCharPos1_CheckedChanged;
+            movForm.chkHitBoxCharPos2.CheckedChanged -= movForm.ChkHitBoxCharPos2_CheckedChanged;
             int currentCharID = int.Parse(movForm.lblCharID2.Text);
 
             movForm.cmbPlayAnmID.Items.AddRange(movForm.cmbPlayAnmID.Items.Count == 0 ? PlAnmListName[currentCharID].ToArray() : new object[0]);
@@ -261,9 +263,8 @@ namespace UN5ModdingWorkshop
             }
 
             movForm.numHitBoxScale1.Value = Convert.ToDecimal(Anm.HitBoxScale);
-            byte[] anmObjectAtk = new byte[4];
-            Array.Copy(Anm.ObjAtk, 0x0, anmObjectAtk, 0, 4);
-            int anmObjectAtkPointer = BitConverter.ToInt32(anmObjectAtk, 0);
+
+            int anmObjectAtkPointer = BitConverter.ToInt32(Anm.ObjAtk, 0);
             string hitBoxBasePos = Util.ReadStringWithOffset(anmObjectAtkPointer, false);
             if(hitBoxBasePos == "")
             {
@@ -345,6 +346,8 @@ namespace UN5ModdingWorkshop
                 bool currentFlag = ((Anm.FlagsGroup2 >> i) & 1) == 1;
                 movForm.chkAnmFlags2.SetItemChecked(i, currentFlag);
             }
+            movForm.chkHitBoxCharPos1.CheckedChanged += movForm.ChkHitBoxCharPos1_CheckedChanged;
+            movForm.chkHitBoxCharPos2.CheckedChanged += movForm.ChkHitBoxCharPos2_CheckedChanged;
         }
 
         private static void ChkHitBoxCharPos1_CheckedChanged(object sender, EventArgs e)

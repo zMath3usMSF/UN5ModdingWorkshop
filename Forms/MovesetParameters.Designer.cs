@@ -626,6 +626,7 @@
             this.chkHitBoxCharPos1.TabIndex = 45;
             this.chkHitBoxCharPos1.Text = "Char Pos";
             this.chkHitBoxCharPos1.UseVisualStyleBackColor = true;
+            this.chkHitBoxCharPos1.CheckedChanged += new System.EventHandler(this.chkHitBoxCharPos1_CheckedChanged_1);
             // 
             // txtHitBone1
             // 

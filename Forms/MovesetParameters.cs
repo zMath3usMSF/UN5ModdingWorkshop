@@ -25,15 +25,29 @@ namespace WindowsFormsApp1
             chkHitBoxCharPos2.CheckedChanged += ChkHitBoxCharPos2_CheckedChanged;
         }
 
-        private void ChkHitBoxCharPos2_CheckedChanged(object sender, EventArgs e)
+        public void ChkHitBoxCharPos2_CheckedChanged(object sender, EventArgs e)
         {
-            txtHitBone2.Text = "";
+            int charID = int.Parse(lblCharID2.Text);
+            int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
+
+            PlAnm Anm = PlAnm.Get(charID, selectedAnm);
+            int anmObjectAtkPointer = BitConverter.ToInt32(Anm.ObjAtk2, 0);
+            string hitBoxBasePos = Util.ReadStringWithOffset(anmObjectAtkPointer, false);
+
+            txtHitBone2.Text = chkHitBoxCharPos2.Checked ? "" : hitBoxBasePos;
             txtHitBone2.Enabled = chkHitBoxCharPos2.Checked ? false : true;
         }
 
-        private void ChkHitBoxCharPos1_CheckedChanged(object sender, EventArgs e)
+        public void ChkHitBoxCharPos1_CheckedChanged(object sender, EventArgs e)
         {
-            txtHitBone1.Text = "";
+            int charID = int.Parse(lblCharID2.Text);
+            int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
+
+            PlAnm Anm = PlAnm.Get(charID, selectedAnm);
+            int anmObjectAtkPointer = BitConverter.ToInt32(Anm.ObjAtk, 0);
+            string hitBoxBasePos = Util.ReadStringWithOffset(anmObjectAtkPointer, false);
+
+            txtHitBone1.Text = chkHitBoxCharPos1.Checked ? "" : hitBoxBasePos;
             txtHitBone1.Enabled = chkHitBoxCharPos1.Checked ? false : true;
         }
 
@@ -120,6 +134,8 @@ namespace WindowsFormsApp1
                 int charID = int.Parse(lblCharID2.Text);
                 int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
                 var charAnmPrm = PlAnm.PlAnmPrmBkp[charID][selectedAnm];
+                PlAnm.PlAnmPrm[charID][selectedAnm].ObjAtk = PlAnm.PlAnmPrmBkp[charID][selectedAnm].ObjAtk;
+                PlAnm.PlAnmPrm[charID][selectedAnm].ObjAtk2 = PlAnm.PlAnmPrmBkp[charID][selectedAnm].ObjAtk2;
                 PlAnm.SendTextAnm(this, charAnmPrm);
                 chkHitBoxCharPos1.CheckedChanged += ChkHitBoxCharPos1_CheckedChanged;
                 chkHitBoxCharPos2.CheckedChanged += ChkHitBoxCharPos2_CheckedChanged;
@@ -280,6 +296,11 @@ namespace WindowsFormsApp1
         }
 
         private void numAnmEndHitFrame2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkHitBoxCharPos1_CheckedChanged_1(object sender, EventArgs e)
         {
 
         }
