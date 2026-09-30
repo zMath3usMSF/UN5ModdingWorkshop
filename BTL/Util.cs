@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using WindowsFormsApp1;
 
@@ -92,6 +93,86 @@ namespace UN5ModdingWorkshop
             }
             return decodedString;
         }
+        public static string ReadFixedLenString(BinaryReader br, int len, char t)
+        {
+            List<byte> fileStrBytes = new List<byte>();
+            while (fileStrBytes.Count != len)
+            {
+                byte b = br.ReadByte();
+                if (b == t || b == 0)
+                {
+                    br.BaseStream.Position--;
+                    break;
+                }
+                fileStrBytes.Add(b);
+            }
+            if (len >= 0) br.BaseStream.Position += len - fileStrBytes.Count;
+            return Encoding.GetEncoding("shift-jis").GetString(fileStrBytes.ToArray());
+        }
+
+        public static void WriteFixedLenString(BinaryWriter bw, string value, int len)
+        {
+            byte[] bytes = Encoding.GetEncoding("shift-jis").GetBytes(value ?? string.Empty);
+            if (bytes.Length > len)
+                Array.Resize(ref bytes, len);
+
+            bw.Write(bytes);
+            for (int i = bytes.Length; i < len; i++)
+                bw.Write((byte)0);
+        }
+        public static string ReadMemoryFixedLenString(int basePointer, int len, char t)
+        {
+            List<byte> fileStrBytes = new List<byte>();
+            while (fileStrBytes.Count != len)
+            {
+                byte b = (byte)(ReadProcessMemoryInt8(basePointer));
+                basePointer += 1;
+                if (b == t || b == 0)
+                {
+                    break;
+                }
+                fileStrBytes.Add(b);
+            }
+            return Encoding.GetEncoding("iso-8859-1").GetString(fileStrBytes.ToArray());
+        }
+
+        public static void WriteMemoryFixedLenString(int basePointer, string value, int len)
+        {
+            byte[] bytes = Encoding.GetEncoding("shift-jis").GetBytes(value ?? string.Empty);
+            if (bytes.Length > len)
+                Array.Resize(ref bytes, len);
+
+            for (int i = 0; i < len; i++)
+            {
+                WriteProcessMemoryInt8(basePointer + i, bytes[i]);
+            }
+        }
+
+        public static void ReadStringList(List<string> list, int offset, int stringLength)
+        {
+            for (int i = 0; ; i++)
+            {
+                string value = Util.ReadMemoryFixedLenString(
+                    offset + (i * stringLength),
+                    stringLength,
+                    '\0'
+                );
+
+                if (value == "")
+                    break;
+
+                list.Add(value);
+            }
+        }
+
+        public static void AlignBinaryWriter(BinaryWriter bw, int value)
+        {
+            while(bw.BaseStream.Position % value != 0)
+            {
+                bw.Write((byte)0);
+            }
+        }
+
         public static void VerifyCurrentPlayersIDs()
         {
             int P1Offset = ReadProcessMemoryInt32(GAME.Global_Pointer - 0x1F0) + 0x4C;

@@ -31,6 +31,7 @@ namespace UN5ModdingWorkshop
 
         public static void Save()
         {
+            Data.GamePath = GAME.gamePath;
             string json = JsonConvert.SerializeObject(Data, Formatting.Indented);
             File.WriteAllText(ConfigPath, json);
         }

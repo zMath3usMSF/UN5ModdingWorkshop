@@ -44,22 +44,28 @@
             this.extractCVMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeGzlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cCSEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.characterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reallocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblProgress = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.picR1 = new System.Windows.Forms.PictureBox();
             this.btnEditJutsusParameters = new System.Windows.Forms.Button();
             this.btnEditAwekeningParameters = new System.Windows.Forms.Button();
             this.btnEditMovesetParameters = new System.Windows.Forms.Button();
             this.btnEditGeneralParameters = new System.Windows.Forms.Button();
-            this.picArrowRight = new System.Windows.Forms.PictureBox();
-            this.picArrowLeft = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnSelectGamePath = new System.Windows.Forms.Button();
             this.txtGamePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.picArrowLeft = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.picArrowRight = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -67,13 +73,15 @@
             this.picBackground = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picR1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picArrowRight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picArrowLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picArrowLeft)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picArrowRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,10 +91,12 @@
             this.openToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.aboutToolStripMenuItem,
-            this.gameToolStripMenuItem});
+            this.gameToolStripMenuItem,
+            this.cCSEditorToolStripMenuItem,
+            this.characterToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(863, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(878, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -102,7 +112,7 @@
             // pCSX2MemoryProcessToolStripMenuItem
             // 
             this.pCSX2MemoryProcessToolStripMenuItem.Name = "pCSX2MemoryProcessToolStripMenuItem";
-            this.pCSX2MemoryProcessToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.pCSX2MemoryProcessToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pCSX2MemoryProcessToolStripMenuItem.Text = "PCSX2 Process";
             this.pCSX2MemoryProcessToolStripMenuItem.Click += new System.EventHandler(this.pCSX2MemoryProcessToolStripMenuItem_Click);
             // 
@@ -205,24 +215,61 @@
             this.makeGzlistToolStripMenuItem.Visible = false;
             this.makeGzlistToolStripMenuItem.Click += new System.EventHandler(this.makeGzlistToolStripMenuItem_Click_1);
             // 
+            // cCSEditorToolStripMenuItem
+            // 
+            this.cCSEditorToolStripMenuItem.Name = "cCSEditorToolStripMenuItem";
+            this.cCSEditorToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.cCSEditorToolStripMenuItem.Text = "CCS Editor";
+            this.cCSEditorToolStripMenuItem.Click += new System.EventHandler(this.cCSEditorToolStripMenuItem_Click);
+            // 
+            // characterToolStripMenuItem
+            // 
+            this.characterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reallocToolStripMenuItem});
+            this.characterToolStripMenuItem.Name = "characterToolStripMenuItem";
+            this.characterToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.characterToolStripMenuItem.Text = "Character";
+            // 
+            // reallocToolStripMenuItem
+            // 
+            this.reallocToolStripMenuItem.Name = "reallocToolStripMenuItem";
+            this.reallocToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.reallocToolStripMenuItem.Text = "Realloc";
+            this.reallocToolStripMenuItem.Click += new System.EventHandler(this.reallocToolStripMenuItem_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.lblProgress);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 423);
+            this.panel1.Location = new System.Drawing.Point(0, 34);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(863, 15);
+            this.panel1.Size = new System.Drawing.Size(878, 15);
             this.panel1.TabIndex = 17;
             // 
             // lblProgress
             // 
             this.lblProgress.AutoSize = true;
             this.lblProgress.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblProgress.Location = new System.Drawing.Point(853, 0);
+            this.lblProgress.Location = new System.Drawing.Point(868, 0);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(10, 13);
             this.lblProgress.TabIndex = 0;
             this.lblProgress.Text = ".";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabControl1.Location = new System.Drawing.Point(0, 49);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(878, 402);
+            this.tabControl1.TabIndex = 16;
+            this.tabControl1.Visible = false;
             // 
             // tabPage1
             // 
@@ -231,18 +278,16 @@
             this.tabPage1.Controls.Add(this.btnEditAwekeningParameters);
             this.tabPage1.Controls.Add(this.btnEditMovesetParameters);
             this.tabPage1.Controls.Add(this.btnEditGeneralParameters);
-            this.tabPage1.Controls.Add(this.picArrowRight);
-            this.tabPage1.Controls.Add(this.picArrowLeft);
-            this.tabPage1.Controls.Add(this.pictureBox2);
             this.tabPage1.Controls.Add(this.btnSelectGamePath);
             this.tabPage1.Controls.Add(this.txtGamePath);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.pictureBox3);
+            this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage1.Size = new System.Drawing.Size(855, 376);
+            this.tabPage1.Size = new System.Drawing.Size(870, 376);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Free Battle";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -302,33 +347,6 @@
             this.btnEditGeneralParameters.Visible = false;
             this.btnEditGeneralParameters.Click += new System.EventHandler(this.btnEditGeneralParameters_Click);
             // 
-            // picArrowRight
-            // 
-            this.picArrowRight.Location = new System.Drawing.Point(847, 311);
-            this.picArrowRight.Name = "picArrowRight";
-            this.picArrowRight.Size = new System.Drawing.Size(10, 14);
-            this.picArrowRight.TabIndex = 6;
-            this.picArrowRight.TabStop = false;
-            // 
-            // picArrowLeft
-            // 
-            this.picArrowLeft.Location = new System.Drawing.Point(-2, 311);
-            this.picArrowLeft.Name = "picArrowLeft";
-            this.picArrowLeft.Size = new System.Drawing.Size(10, 14);
-            this.picArrowLeft.TabIndex = 5;
-            this.picArrowLeft.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(9, 322);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(38, 46);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
             // btnSelectGamePath
             // 
             this.btnSelectGamePath.Location = new System.Drawing.Point(825, 6);
@@ -369,25 +387,67 @@
             this.pictureBox3.TabIndex = 4;
             this.pictureBox3.TabStop = false;
             // 
-            // tabControl1
+            // panel2
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(0, 27);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(863, 402);
-            this.tabControl1.TabIndex = 16;
-            this.tabControl1.Visible = false;
+            this.panel2.Controls.Add(this.picArrowLeft);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(3, 267);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(864, 106);
+            this.panel2.TabIndex = 22;
+            // 
+            // picArrowLeft
+            // 
+            this.picArrowLeft.Location = new System.Drawing.Point(0, 46);
+            this.picArrowLeft.Name = "picArrowLeft";
+            this.picArrowLeft.Size = new System.Drawing.Size(10, 14);
+            this.picArrowLeft.TabIndex = 5;
+            this.picArrowLeft.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.picArrowRight);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(854, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(10, 106);
+            this.panel3.TabIndex = 23;
+            // 
+            // picArrowRight
+            // 
+            this.picArrowRight.Location = new System.Drawing.Point(2, 46);
+            this.picArrowRight.Name = "picArrowRight";
+            this.picArrowRight.Size = new System.Drawing.Size(10, 14);
+            this.picArrowRight.TabIndex = 6;
+            this.picArrowRight.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(16, 14);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(38, 46);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(10, 106);
+            this.panel4.TabIndex = 24;
             // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(855, 376);
+            this.tabPage2.Size = new System.Drawing.Size(870, 376);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Master Mode";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -396,7 +456,7 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(855, 376);
+            this.tabPage3.Size = new System.Drawing.Size(870, 376);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Collection";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -405,7 +465,7 @@
             // 
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(855, 376);
+            this.tabPage4.Size = new System.Drawing.Size(870, 376);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Shop";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -414,7 +474,7 @@
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(855, 376);
+            this.tabPage5.Size = new System.Drawing.Size(870, 376);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Options";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -433,10 +493,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 438);
+            this.ClientSize = new System.Drawing.Size(878, 451);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.picBackground);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -449,14 +509,16 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picR1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picArrowRight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picArrowLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picArrowLeft)).EndInit();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picArrowRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -476,19 +538,7 @@
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.ToolStripMenuItem infoADVToolStripMenuItem;
-        public System.Windows.Forms.TabPage tabPage1;
-        public System.Windows.Forms.PictureBox picArrowRight;
-        public System.Windows.Forms.PictureBox picArrowLeft;
-        public System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button btnSelectGamePath;
-        public System.Windows.Forms.TextBox txtGamePath;
-        private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.PictureBox pictureBox3;
         public System.Windows.Forms.TabControl tabControl1;
-        public System.Windows.Forms.Button btnEditGeneralParameters;
-        public System.Windows.Forms.Button btnEditMovesetParameters;
-        public System.Windows.Forms.Button btnEditJutsusParameters;
-        public System.Windows.Forms.Button btnEditAwekeningParameters;
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem extractCVMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildGameToolStripMenuItem;
@@ -498,8 +548,26 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
-        public System.Windows.Forms.PictureBox picR1;
         private System.Windows.Forms.ToolStripMenuItem cheatsToolStripMenuItem;
+        public System.Windows.Forms.TabPage tabPage1;
+        public System.Windows.Forms.PictureBox picR1;
+        public System.Windows.Forms.Button btnEditJutsusParameters;
+        public System.Windows.Forms.Button btnEditAwekeningParameters;
+        public System.Windows.Forms.Button btnEditMovesetParameters;
+        public System.Windows.Forms.Button btnEditGeneralParameters;
+        private System.Windows.Forms.Button btnSelectGamePath;
+        public System.Windows.Forms.TextBox txtGamePath;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.PictureBox pictureBox3;
+        public System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.PictureBox picArrowLeft;
+        private System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.PictureBox picArrowRight;
+        public System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ToolStripMenuItem cCSEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem characterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reallocToolStripMenuItem;
     }
 }
 

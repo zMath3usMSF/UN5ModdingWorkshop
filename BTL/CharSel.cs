@@ -1,5 +1,4 @@
-﻿using CCSFileExplorerWV;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -9,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
-using static CCSFileExplorerWV.CCSFile;
+
 
 namespace UN5ModdingWorkshop
 {
@@ -22,28 +21,30 @@ namespace UN5ModdingWorkshop
         public static List<Bitmap> CommandIcons = new List<Bitmap>();
         static Bitmap selIconImage;
         static PictureBox selIcon = new PictureBox();
-        static CCSFile charselFile = new CCSFile(new byte[0], FileVersionEnum.HACK_GU);
+        static CCS charselFile = new CCS();
         static Main mainF;
         static PictureBox charIcon = null;
+        private static int selectedCharIndex = 1;
 
         public static void Create(Main main, string gamePath)
         {
             mainF = main;
-            charselFile = new CCSFile(File.ReadAllBytes(Path.Combine(gamePath, "DATA\\ROFS\\CHARSEL1.CCS")), FileVersionEnum.HACK_GU);
-            Bitmap charselTexture = GetCCSImage(charselFile, "purecharsel10.bmp");
+            charselFile = new CCS();
+            charselFile.Read(Path.Combine(gamePath, "DATA\\ROFS\\CHARSEL1.CCS"));
+            Bitmap charselTexture = charselFile.GetCCSImage("PURECHARSEL10.BMP");
             ReadAllCharIcon(gamePath);
             CharSelID = ReadAllCharSelID(gamePath);
-            Bitmap purecharsel01 = GetCCSImage(charselFile, "purecharsel01.bmp");
+            Bitmap purecharsel01 = charselFile.GetCCSImage("PURECHARSEL01.BMP");
             Bitmap nrtImage = purecharsel01.Clone(new Rectangle(0, 0, 168, 168), purecharsel01.PixelFormat);
             main.pictureBox3.Image = nrtImage;
-            main.tabPage1.Controls.Add(selIcon);
             ReadAllCharRender(gamePath);
             selIconImage = charselTexture.Clone(new Rectangle(202, 468, 36, 40), charselTexture.PixelFormat);
-            selIcon.SizeMode = PictureBoxSizeMode.CenterImage;
-            selIcon.Image = selIconImage;
-            selIcon.Visible = false;
+            selIcon.SizeMode = PictureBoxSizeMode.AutoSize;
+            selIcon.BackColor = Color.Transparent;
+            mainF.panel2.Controls.Add(selIcon);
+            selIcon.BringToFront();
 
-            Bitmap charsel01 = GetCCSImage(charselFile, "charsel01.bmp");
+            Bitmap charsel01 = charselFile.GetCCSImage("CHARSEL01.BMP");
             Bitmap arrowImage = charsel01.Clone(new Rectangle(259, 185, 10, 14), charsel01.PixelFormat);
             main.picArrowRight.Image = (Bitmap)arrowImage.Clone();
             arrowImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
@@ -54,10 +55,12 @@ namespace UN5ModdingWorkshop
             main.picArrowLeft.DoubleClick += PicArrowLeft_Click;
 
             CreateCharPicBoxes();
+            ArrangeCharPicBoxes();
             CreateCommandImages();
 
-            CCSFile gaugeFile = new CCSFile(File.ReadAllBytes(Path.Combine(GAME.gamePath, "DATA\\ROFS\\CMN\\GAUGE.CCS")), FileVersionEnum.HACK_GU);
-            Bitmap xCommandTexture = GetCCSImage(gaugeFile, "xcommand02.bmp");
+            CCS gaugeFile = new CCS();
+            gaugeFile.Read(Path.Combine(GAME.gamePath, "DATA\\ROFS\\CMN\\GAUGE.CCS"));
+            Bitmap xCommandTexture = gaugeFile.GetCCSImage("XCOMMAND02.BMP");
 
             //L1/L2
             for (int i = 0; i < 2; i++)
@@ -84,6 +87,7 @@ namespace UN5ModdingWorkshop
             main.picR1.Image = CommandIcons[11];
             main.picR1.Click += PicR1_Click;
             main.picR1.DoubleClick += PicR1_Click;
+            mainF.panel2.Resize += Panel2_Resize;
         }
 
         static Dictionary<int, int> charTransformation = new Dictionary<int, int>()
@@ -101,6 +105,11 @@ namespace UN5ModdingWorkshop
             { 0x39, 0x49 },
             { 0x3F, 0x4B }
         };
+
+        private static void Panel2_Resize(object sender, EventArgs e)
+        {
+            ArrangeCharPicBoxes();
+        }
 
         private static void PicR1_Click(object sender, EventArgs e)
         {
@@ -124,39 +133,84 @@ namespace UN5ModdingWorkshop
             for (int i = 0; i < 44; i++)
             {
                 PictureBox pic = Clone(mainF.pictureBox2);
+
                 pic.Image = CharIcons[CharSelID[i]];
-                int rows = 2;  // two rows
-                int spacingX = 38;  // horizontal spacing
-                int spacingY = 46;  // image height + vertical spacing
-
-                int offsetX = pic.Location.X;  // base horizontal position
-                int offsetY = pic.Location.Y;  // base vertical position (bottom row)
-
-                int col = i / rows;      // column increases every pair of images
-                int row = i % rows;      // row 0 or 1, alternating
-
-                // Calculates Y so the top row stays above the bottom row
-                int yPos = (row == 0) ? offsetY : offsetY - spacingY;
-
-                pic.Location = new Point(
-                    offsetX + col * spacingX,
-                    yPos
-                );
-
-                // Add event, character ID, and add to TabPage
                 pic.MouseClick += Pic_Click;
                 pic.Tag = $"Char_{i}";
-                mainF.tabPage1.Controls.Add(pic);
 
-                // If i == Naruto TS, select the character by default
-                if (i == 1) CharSelect(pic);
+                mainF.panel2.Controls.Add(pic);
+
+                if (i == 1)
+                    CharSelect(pic);
+            }
+
+            ArrangeCharPicBoxes();
+        }
+
+        private static void ArrangeCharPicBoxes()
+        {
+            const int rows = 2;
+            const int spacingX = 38;
+            const int spacingY = 46;
+            const int offsetX = 10;
+
+            int iconWidth = mainF.pictureBox2.Width;
+            int availableWidth = mainF.panel2.ClientSize.Width - offsetX;
+
+            // Quantas colunas cabem de fato na largura atual
+            int maxColumns = Math.Max(1, (availableWidth - iconWidth) / spacingX + 1);
+            int maxVisibleItems = maxColumns * rows;
+
+            int offsetY = mainF.panel2.ClientSize.Height - 5;
+
+            int index = 0;
+
+            foreach (Control control in mainF.panel2.Controls)
+            {
+                if (control is PictureBox pic &&
+                    pic != selIcon &&
+                    pic.Tag?.ToString().StartsWith("Char_") == true)
+                {
+                    if (index < maxVisibleItems)
+                    {
+                        int col = index / rows;
+                        int row = index % rows;
+
+                        int xPos = offsetX + col * spacingX;
+                        int yPos = offsetY - pic.Height - (row * spacingY);
+
+                        pic.Location = new Point(xPos, yPos);
+                        pic.Visible = true;
+                    }
+                    else
+                    {
+                        pic.Visible = false; // não cabe, esconde
+                    }
+
+                    index++;
+                }
+            }
+
+            string currentTag = $"Char_{SelectedID}";
+            foreach (Control control in mainF.panel2.Controls)
+            {
+                if (control is PictureBox pic && pic != selIcon && pic.Tag?.ToString() == currentTag)
+                {
+                    selIcon.Location = pic.Location;
+                    selIcon.Size = pic.Size;
+                    selIcon.Visible = pic.Visible;
+                    selIcon.BringToFront();
+                    break;
+                }
             }
         }
 
+
         private static void CreateCommandImages()
         {
-            CCSFile gaugeFile = new CCSFile(File.ReadAllBytes(Path.Combine(GAME.gamePath, "DATA\\ROFS\\CMN\\GAUGE.CCS")), FileVersionEnum.HACK_GU);
-            Bitmap xCommandTexture = GetCCSImage(gaugeFile, "xcommand.bmp");
+            CCS gaugeFile = new CCS();
+            gaugeFile.Read(Path.Combine(GAME.gamePath, "DATA\\ROFS\\CMN\\GAUGE.CCS"));
+            Bitmap xCommandTexture = gaugeFile.GetCCSImage("XCOMMAND.BMP");
 
             //D-Pad
             for (int i = 0; i < 4; i++)
@@ -188,32 +242,54 @@ namespace UN5ModdingWorkshop
         private static void ArrowRightLeftClick(bool direction)
         {
             selIcon.Visible = false;
-            int selTagID = int.Parse(selIcon.Tag.ToString().Split('_')[1]);
-            selIcon.Tag = $"Char_{(direction == true ? (selTagID + 2) : selTagID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2)}";
-            foreach (Control control in mainF.tabPage1.Controls)
+
+            int selTagID = int.Parse(
+                selIcon.Tag.ToString().Split('_')[1]
+            );
+
+            selIcon.Tag = $"Char_{(direction
+                ? (selTagID + 2)
+                : selTagID - 2 + (GAME.charSelCount * 2))
+                % (GAME.charSelCount * 2)}";
+
+            foreach (Control control in mainF.panel2.Controls)
             {
                 PictureBox pic = control as PictureBox;
+
                 if (pic != null && pic.Tag != null)
                 {
                     string tagString = pic.Tag.ToString();
+
                     if (tagString.StartsWith("Char_"))
                     {
                         string[] partes = tagString.Split('_');
-                        if (partes.Length == 2 && int.TryParse(partes[1], out int charID))
+
+                        if (partes.Length == 2 &&
+                            int.TryParse(partes[1], out int charID))
                         {
-                            int newIndex = direction == true ? (charID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2) : (charID + 2) % (GAME.charSelCount * 2);
+                            int newIndex = direction
+                                ? (charID - 2 + (GAME.charSelCount * 2)) % (GAME.charSelCount * 2)
+                                : (charID + 2) % (GAME.charSelCount * 2);
+
                             pic.Tag = $"Char_{newIndex}";
-                            if (selIcon.Tag != null && pic.Tag.ToString() == selIcon.Tag.ToString() && selIcon.Location != pic.Location)
+
+                            if (selIcon.Tag != null &&
+                                pic.Tag.ToString() == selIcon.Tag.ToString() &&
+                                selIcon.Location != pic.Location)
                             {
-                                selIcon.Location = new Point(pic.Location.X, pic.Location.Y);
+                                selIcon.Location = new Point(
+                                    pic.Location.X,
+                                    pic.Location.Y
+                                );
+
                                 CharSelect(selIcon);
                             }
+
                             pic.Image = CharIcons[CharSelID[newIndex]];
                         }
                     }
                 }
             }
-
         }
 
         public static void Pic_Click(object sender, MouseEventArgs e)
@@ -271,17 +347,19 @@ namespace UN5ModdingWorkshop
         private static PictureBox Clone(PictureBox pic)
         {
             PictureBox clonePic = new PictureBox();
+
             clonePic.Size = pic.Size;
             clonePic.SizeMode = pic.SizeMode;
-            clonePic.Location = new Point(pic.Location.X, pic.Location.Y);
+
             return clonePic;
         }
+
         public static void ReadAllCharIcon(string gamePath)
         {
-            Bitmap charselTexture = GetCCSImage(charselFile, "purecharsel10.bmp");
+            Bitmap charselTexture = charselFile.GetCCSImage("PURECHARSEL10.BMP");
             byte[] modData = GAME.isUN6 != true ? 
                              File.ReadAllBytes(GAME.GetELFPathInSystemCNF(gamePath)) : 
-                             File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
+                             File.ReadAllBytes(gamePath + "\\PRG\\DLC.BIN");
 
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
             br.BaseStream.Position = GAME.isUN6 != true ?
@@ -306,7 +384,7 @@ namespace UN5ModdingWorkshop
         {
             byte[] modData = GAME.isUN6 != true ?
                  File.ReadAllBytes(GAME.GetELFPathInSystemCNF(gamePath)) :
-                 File.ReadAllBytes(gamePath + "\\PRG\\MOD.BIN");
+                 File.ReadAllBytes(gamePath + "\\PRG\\DLC.BIN");
 
             using (BinaryReader br = new BinaryReader(new MemoryStream(modData)))
             {
@@ -321,7 +399,7 @@ namespace UN5ModdingWorkshop
                     Bitmap purecharsel;
                     if (!imageCache.TryGetValue(pureIndex, out purecharsel))
                     {
-                        purecharsel = GetCCSImage(charselFile, $"purecharsel{pureIndex:00}.bmp");
+                        purecharsel = charselFile.GetCCSImage($"PURECHARSEL{pureIndex:00}.BMP");
                         imageCache[pureIndex] = purecharsel;
                     }
 
@@ -352,6 +430,7 @@ namespace UN5ModdingWorkshop
         public static List<int> ReadAllCharSelID(string gamePath)
         {
             List<int> listCharselID = new List<int>();
+            GAME.elfPath = GAME.GetELFPathInSystemCNF(gamePath);
             byte[] modData = File.ReadAllBytes(GAME.elfPath);
             BinaryReader br = new BinaryReader(new MemoryStream(modData));
             br.BaseStream.Position = 0x4DD790;

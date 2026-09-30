@@ -14,8 +14,8 @@ namespace WindowsFormsApp1
 {
     public partial class MovesetParameters : Form
     {
+        Attack bkpAttack = new Attack();
         public static int p1IDFromForm1;
-        public Rectangle button;
 
         public MovesetParameters()
         {
@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
             int charID = int.Parse(lblCharID2.Text);
             int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
 
-            PlAnm Anm = PlAnm.Get(charID, selectedAnm);
+            Animation Anm = Animation.Get(charID, selectedAnm);
             int anmObjectAtkPointer = BitConverter.ToInt32(Anm.ObjAtk2, 0);
             string hitBoxBasePos = Util.ReadStringWithOffset(anmObjectAtkPointer, false);
 
@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
             int charID = int.Parse(lblCharID2.Text);
             int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
 
-            PlAnm Anm = PlAnm.Get(charID, selectedAnm);
+            Animation Anm = Animation.Get(charID, selectedAnm);
             int anmObjectAtkPointer = BitConverter.ToInt32(Anm.ObjAtk, 0);
             string hitBoxBasePos = Util.ReadStringWithOffset(anmObjectAtkPointer, false);
 
@@ -72,12 +72,13 @@ namespace WindowsFormsApp1
             {
                 lblSelectedAtk2.Text = listBox1.SelectedIndex.ToString();
 
-                PlAtk.SendTextAtk(charID, this, PlAtk.GetCharAtk(charID, selectedIndex));
+                Attack.SendTextAtk(charID, this, Character.List[charID].Attacks[selectedIndex]);
+                bkpAttack = (Attack)Character.List[charID].Attacks[selectedIndex].Clone();
             }
             else
             {
                 int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
-                PlAnm.SendTextAnm(this, PlAnm.Get(charID, selectedAnm));
+                Animation.SendTextAnm(this, Animation.Get(charID, selectedAnm));
             }
         }
 
@@ -103,18 +104,19 @@ namespace WindowsFormsApp1
             {
                 int charID = int.Parse(lblCharID2.Text);
                 int atkID = int.Parse(lblSelectedAtk2.Text);
-                byte[] resultBytes = PlAtk.UpdateCharAtkPrm(this, charID, atkID);
+                byte[] resultBytes = Attack.UpdateCharAtkPrm(this, charID, atkID);
                 int selectedAtk = listBox1.SelectedIndex;
-                PlAtk.UpdateP1Atk(resultBytes, selectedAtk, charID);
-                PlAtk.SendTextAtk(charID, this, PlAtk.GetCharAtk(charID, selectedAtk));
+                Attack.UpdateP1Atk(resultBytes, selectedAtk, charID);
+                bkpAttack = (Attack)Character.List[charID].Attacks[selectedAtk].Clone();
+                Attack.SendTextAtk(charID, this, Character.List[charID].Attacks[selectedAtk]);
             }
             else
             {
                 int charID = int.Parse(lblCharID2.Text);
-                byte[] resultBytes = PlAnm.UpdateCharAnmPrm(this, charID);
+                byte[] resultBytes = Animation.UpdateCharAnmPrm(this, charID);
                 int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
-                PlAnm.UpdateP1Anm(resultBytes, selectedAnm, charID);
-                PlAnm.SendTextAnm(this, PlAnm.Get(charID, selectedAnm));
+                Animation.UpdateP1Anm(resultBytes, selectedAnm, charID);
+                Animation.SendTextAnm(this, Animation.Get(charID, selectedAnm));
             }
         }
 
@@ -124,8 +126,8 @@ namespace WindowsFormsApp1
             {
                 int charID = int.Parse(lblCharID2.Text);
                 int selectedIndex = listBox1.SelectedIndex;
-                var charAtkPrm = PlAtk.CharAtkPrmBkp[charID][selectedIndex];
-                PlAtk.SendTextAtk(charID, this, charAtkPrm);
+                var charAtkPrm = bkpAttack;
+                Attack.SendTextAtk(charID, this, charAtkPrm);
             }
             else
             {
@@ -133,10 +135,10 @@ namespace WindowsFormsApp1
                 chkHitBoxCharPos2.CheckedChanged -= ChkHitBoxCharPos2_CheckedChanged;
                 int charID = int.Parse(lblCharID2.Text);
                 int selectedAnm = int.Parse(listBox1.SelectedItem.ToString().Split(':')[0]);
-                var charAnmPrm = PlAnm.PlAnmPrmBkp[charID][selectedAnm];
-                PlAnm.PlAnmPrm[charID][selectedAnm].ObjAtk = PlAnm.PlAnmPrmBkp[charID][selectedAnm].ObjAtk;
-                PlAnm.PlAnmPrm[charID][selectedAnm].ObjAtk2 = PlAnm.PlAnmPrmBkp[charID][selectedAnm].ObjAtk2;
-                PlAnm.SendTextAnm(this, charAnmPrm);
+                var charAnmPrm = Animation.PlAnmPrmBkp[charID][selectedAnm];
+                Animation.PlAnmPrm[charID][selectedAnm].ObjAtk = Animation.PlAnmPrmBkp[charID][selectedAnm].ObjAtk;
+                Animation.PlAnmPrm[charID][selectedAnm].ObjAtk2 = Animation.PlAnmPrmBkp[charID][selectedAnm].ObjAtk2;
+                Animation.SendTextAnm(this, charAnmPrm);
                 chkHitBoxCharPos1.CheckedChanged += ChkHitBoxCharPos1_CheckedChanged;
                 chkHitBoxCharPos2.CheckedChanged += ChkHitBoxCharPos2_CheckedChanged;
             }
@@ -147,14 +149,14 @@ namespace WindowsFormsApp1
             if (btnEditAtkParameters.Visible == false)
             {
                 int charID = int.Parse(lblCharID2.Text);
-                byte[] resultBytes = PlAtk.UpdateAllCharAtkPrm(this, charID);
-                PlAtk.WriteELFCharAtk(resultBytes, charID);
+                byte[] resultBytes = Attack.UpdateAllCharAtkPrm(this, charID);
+                Attack.WriteELFCharAtk(resultBytes, charID);
             }
             else
             {
                 int charID = int.Parse(lblCharID2.Text);
-                byte[] resultBytes = PlAnm.UpdateAllCharAnmPrm(this, charID);
-                PlAnm.WriteELFCharAnm(resultBytes, charID);
+                byte[] resultBytes = Animation.UpdateAllCharAnmPrm(charID, new Animation(), true);
+                Animation.WriteELFCharAnm(resultBytes, charID);
             }
         }
 
@@ -174,15 +176,15 @@ namespace WindowsFormsApp1
             int SelectedAtk = int.Parse(lblSelectedAtk2.Text);
             int currentCharID = int.Parse(lblCharID2.Text);
 
-            int AtkAnmBlock = (int)PlAtk.CharAtkPrm[currentCharID][SelectedAtk].AnimationIdx;
+            int AtkAnmBlock = (int)Character.List[currentCharID].Attacks[SelectedAtk].AnimationIdx;
 
-            for (int i = AtkAnmBlock; i < PlGen.List[currentCharID].AnmCount; i++)
+            for (int i = AtkAnmBlock; i < Character.List[currentCharID].AnmCount; i++)
             {
-                int AnmID = PlAnm.Get(currentCharID, i).AnmID;
+                int AnmID = Animation.Get(currentCharID, i).AnmID;
 
                 if (-1 != AnmID)
                 {
-                    listBox1.Items.Add($"{i}: {PlAnm.GetPlAnmName(currentCharID, AnmID)}");
+                    listBox1.Items.Add($"{i}: {Animation.GetPlAnmName(currentCharID, AnmID)}");
                 }
                 else
                 {
@@ -198,7 +200,7 @@ namespace WindowsFormsApp1
             listBox1.Items.Clear();
             int currentCharID = int.Parse(lblCharID2.Text);
             string currentCharName = lblCharName2.Text;
-            PlAtk.AddCharComboList(this, currentCharID, currentCharName);
+            Attack.AddCharComboList(this, currentCharID, currentCharName);
             listBox1.SelectedIndex = int.Parse(lblSelectedAtk2.Text);
         }
 

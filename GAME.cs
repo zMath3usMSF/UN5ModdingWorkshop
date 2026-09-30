@@ -1,4 +1,4 @@
-﻿using CCSFileExplorerWV;
+﻿using ICSharpCode.SharpZipLib.GZip;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -582,7 +582,7 @@ namespace UN5ModdingWorkshop
                         byte[] data = ReadAllBytesBuffered(filePath);
                         string originalSize = "0x" + data.Length.ToString("X8").ToLower();
 
-                        data = FileHelper.zipArray(data, nameNoExt);
+                        data = zipArray(data, nameNoExt);
                         string gzipSize = "0x" + data.Length.ToString("X8").ToLower();
 
                         File.WriteAllBytes(filePath, data);
@@ -621,6 +621,18 @@ namespace UN5ModdingWorkshop
                 File.WriteAllLines(Path.Combine(rofsPath, "gzlist.txt"), output);
             });
         }
+
+        public static byte[] zipArray(byte[] data, string filename)
+        {
+            MemoryStream ms = new MemoryStream();
+            GZipOutputStream gs = new GZipOutputStream(ms);
+            gs.SetLevel(8);
+            gs.FileName = filename + ".tmp";
+            gs.Write(data, 0, data.Length);
+            gs.Close();
+            return ms.ToArray();
+        }
+
         public static byte[] ReadAllBytesBuffered(string path)
         {
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.SequentialScan))

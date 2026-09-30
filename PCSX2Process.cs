@@ -86,17 +86,38 @@ namespace UN5ModdingWorkshop
 
         public static void ReadMainBTLMemory(Main main)
         {
-
-            GAME.gamePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "UN5");
-            //Config.Load(Main.instance);
+            Config.Load(Main.instance);
 
             if (!Directory.Exists(GAME.gamePath))
             {
-                MessageBox.Show("The \"UN5\" game directory was not found on the desktop. If you don't have it yet, extract the game under Game > Extract.",
-                                "Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                return;
+                DialogResult result = MessageBox.Show(
+                    "The \"UN5\" game directory was not found on the desktop.\n\n" +
+                    "Would you like to select the game directory manually?",
+                    "Game Directory Not Found",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    using (OpenFileDialog ofd = new OpenFileDialog())
+                    {
+                        ofd.Title = "Select the UN5 game executable";
+                        ofd.Filter = "Executable Files (*.elf;*.exe)|*.elf;*.exe|All Files (*.*)|*.*";
+                        ofd.CheckFileExists = true;
+
+                        if (ofd.ShowDialog() == DialogResult.OK)
+                        {
+                            GAME.gamePath = Path.GetDirectoryName(ofd.FileName);
+                            GAME.elfPath = GAME.GetELFPathInSystemCNF(GAME.gamePath);
+                            Config.Save();
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }
             }
 
             processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, ID);
@@ -128,6 +149,17 @@ namespace UN5ModdingWorkshop
                 Main.instance.btnEditMovesetParameters.Visible = true;
                 Main.instance.btnEditAwekeningParameters.Visible = true;
                 CharSel.Create(main, GAME.gamePath);
+
+                //List<string> output = new List<string>();
+                //for(int i = 0; i < 0x9F; i++)
+                //{
+                //    string highpolyID = Util.ReadMemoryFixedLenString(Util.ReadProcessMemoryInt32(0x91BA50 + (i * 0xC)), -1, '\0');
+                //    string lowpolyID = Util.ReadMemoryFixedLenString(Util.ReadProcessMemoryInt32(0x91BA50 + (i * 0xC) + 0x4), -1, '\0');
+                //    string name = Util.ReadMemoryFixedLenString(Util.ReadProcessMemoryInt32(0x91BA50 + (i * 0XC) + 0x8), -1, '\0');
+                //    output.Add($"{highpolyID} {lowpolyID} {name}");
+                //}
+
+                //File.WriteAllLines(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "output.txt"), output.ToArray());
             }
             else
             {

@@ -67,7 +67,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -148,16 +148,34 @@
     <Compile Include="AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="VramLayoutAnalyzer.cs" />
     <Compile Include="BTL\BTL.cs" />
     <Compile Include="BTL\CharSel.cs" />
     <Compile Include="BTL\CharSkl.cs" />
+    <Compile Include="CCS\CCS.cs" />
+    <Compile Include="CCS\ccsChunk.cs" />
+    <Compile Include="CCS\ccsClut.cs" />
+    <Compile Include="CCS\CCS Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CCS\CCS Editor.Designer.cs">
+      <DependentUpon>CCS Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CCS\ccsHeader.cs" />
+    <Compile Include="CCS\ccsIndexTable.cs" />
+    <Compile Include="CCS\ccsModel.cs" />
+    <Compile Include="CCS\ccsSetup.cs" />
+    <Compile Include="CCS\ccsStream.cs" />
+    <Compile Include="CCS\ccsTexture.cs" />
     <Compile Include="CheatsMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CheatsMenu.Designer.cs">
       <DependentUpon>CheatsMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="CCS\ColorQunatizer.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="CCS\Filelist.cs" />
     <Compile Include="Forms\AwakeningParameters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,63 +196,10 @@
     <Compile Include="NewChar.Designer.cs">
       <DependentUpon>NewChar.cs</DependentUpon>
     </Compile>
-    <Compile Include="CCSF\CCS\BINHelper.cs" />
-    <Compile Include="CCSF\CCS\Block.cs" />
-    <Compile Include="CCSF\CCS\Block0001.cs" />
-    <Compile Include="CCSF\CCS\Block0002.cs" />
-    <Compile Include="CCSF\CCS\Block0005.cs" />
-    <Compile Include="CCSF\CCS\Block0300.cs" />
-    <Compile Include="CCSF\CCS\Block0400.cs" />
-    <Compile Include="CCSF\CCS\Block0800.cs" />
-    <Compile Include="CCSF\CCS\Block2400.cs" />
-    <Compile Include="CCSF\CCS\BlockDefault.cs" />
-    <Compile Include="CCSF\CCS\CCSFile.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0001.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0002.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0005.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0100.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0102.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0108.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0200.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0300.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0400.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0500.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0502.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0600.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0601.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0603.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0609.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0700.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0800.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0900.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0A00.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0B00.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0C00.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block0E00.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block1100.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block1200.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block1300.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block1400.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block1900.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block1901.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Block2000.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\BlockFF01.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\Color.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\ErrorBlock.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Blocks\StreamHelper.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Tristrip.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Vector2f.cs" />
-    <Compile Include="CCSF\CCS\CCSF\Vector3f.cs" />
-    <Compile Include="CCSF\CCS\CCSF\VertexConnection.cs" />
-    <Compile Include="CCSF\CCS\ColorDef.cs" />
-    <Compile Include="CCSF\CCS\FileEntry.cs" />
-    <Compile Include="CCSF\CCS\FileHelper.cs" />
-    <Compile Include="CCSF\CCS\ObjectEntry.cs" />
     <Compile Include="BTL\PlAwk.cs" />
-    <Compile Include="BTL\PlAnm.cs" />
-    <Compile Include="BTL\PlAtk.cs" />
-    <Compile Include="BTL\PlGen.cs" />
+    <Compile Include="BTL\Animation.cs" />
+    <Compile Include="BTL\Attack.cs" />
+    <Compile Include="BTL\Character.cs" />
     <Compile Include="Forms\JutsuParameters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +207,9 @@
       <DependentUpon>JutsuParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="PCSX2Process.cs" />
+    <Compile Include="CCS\QuantizeOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="BTL\Util.cs" />
     <Compile Include="Forms\UpdateMatch.cs">
@@ -279,6 +247,9 @@
     <Compile Include="TransparentOverlay.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="CCS\CCS Editor.resx">
+      <DependentUpon>CCS Editor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CheatsMenu.resx">
       <DependentUpon>CheatsMenu.cs</DependentUpon>
     </EmbeddedResource>

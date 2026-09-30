@@ -11,6 +11,7 @@ namespace UN5ModdingWorkshop
     public class BTL
     {
         public static int P1ID { get; set; }
+        public static List<string> charIDList = new List<string>();
         public static List<int> charMainAreaOffsets = new List<int>();
         public static List<byte[]> charMainAreaList = new List<byte[]>();
         public static List<string> charNameList = new List<string>();
@@ -31,10 +32,11 @@ namespace UN5ModdingWorkshop
                 #endregion
 
                 #region Read General Char Parameters
-                var ninja = PlGen.Read(charMainAreaBuffer);
-                var clone = ninja.Clone();
-                PlGen.List.Add(ninja);
-                PlGen.ListBkp.Add(clone);
+                var Character = new Character();
+                Character.Read(charMainAreaBuffer);
+                var clone = Character.Clone();
+                Character.List.Add(Character);
+                Character.ListBkp.Add(clone);
                 #endregion
             }
             PlAwk.ReadCharAwkIDList();
@@ -51,10 +53,11 @@ namespace UN5ModdingWorkshop
                     #endregion
 
                     #region Read General Char Parameters
-                    var ninja = PlGen.Read(charMainAreaBuffer);
-                    var clone = (PlGen)ninja.Clone();
-                    PlGen.List.Add(ninja);
-                    PlGen.ListBkp.Add(clone);
+                    var Character = new Character();
+                    Character.Read(charMainAreaBuffer);
+                    var clone = Character.Clone();
+                    Character.List.Add(Character);
+                    Character.ListBkp.Add(clone);
                     #endregion
                 }
             }
@@ -62,22 +65,21 @@ namespace UN5ModdingWorkshop
 
         public static void Clear()
         {
+            BTL.charIDList.Clear();
             BTL.charMainAreaOffsets.Clear();
             BTL.charMainAreaList.Clear();
             BTL.charNameList.Clear();
             BTL.charCCSList.Clear();
             BTL.mapNameList.Clear();
 
-            PlGen.List.Clear();
-            PlGen.ListBkp.Clear();
+            Character.List.Clear();
+            Character.ListBkp.Clear();
 
-            PlAtk.CharAtkPrm.Clear();
-            PlAtk.CharAtkPrmBkp.Clear();
-            PlAtk.comboNameList.Clear();
+            Attack.comboNameList.Clear();
 
-            PlAnm.PlAnmPrm.Clear();
-            PlAnm.PlAnmPrmBkp.Clear();
-            PlAnm.PlAnmListName.Clear();
+            Animation.PlAnmPrm.Clear();
+            Animation.PlAnmPrmBkp.Clear();
+            Animation.PlAnmListName.Clear();
 
             PlAwk.CharAwkPrm.Clear();
             PlAwk.CharAwkPrmBkp.Clear();
@@ -96,7 +98,7 @@ namespace UN5ModdingWorkshop
             }
             if (charCCSList[charIndex] == "")
             {
-                charCCSList[charIndex] = Util.ReadStringWithOffset((int)PlGen.List[charIndex].CCSOffset, false);
+                charCCSList[charIndex] = Character.List[charIndex].CCS;
             }
 
             return charCCSList[charIndex];
